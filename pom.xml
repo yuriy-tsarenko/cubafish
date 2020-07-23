@@ -18,7 +18,7 @@
         <java.version>11</java.version>
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
         <maven.checkstyle.plugin.version>3.0.0</maven.checkstyle.plugin.version>
-        <com.puppycrawl.tools.version>8.10</com.puppycrawl.tools.version>
+        <com.puppycrawl.tools.version>8.29</com.puppycrawl.tools.version>
         <org.flywaydb.version>6.4.0</org.flywaydb.version>
         <org.projectlombok.version>1.18.12</org.projectlombok.version>
         <org.postgresql.version>42.2.12</org.postgresql.version>
