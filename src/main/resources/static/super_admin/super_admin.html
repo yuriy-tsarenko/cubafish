@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>Fishing Market</title>
+    <script src="js/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link href="css/super_admin.css" rel="stylesheet" type="text/css"/>
+    <link rel="icon" type="image/png" href="css/images/siteIcon.png">
+</head>
+
+<body>
+<div id="wrapper">
+    <div id="header">
+        <!--        start div#logo-->
+        <div id="logo">
+            <h1>СИБАС</h1>
+        </div>
+        <!-- end div#logo -->
+        <div id="logoutButton">
+            <button type="submit" v-on:click="created" class="headerButton">Выйти</button>
+            <button type="submit" v-on:click="created" class="headerButton">Регистрация</button>
+        </div>
+    </div>
+    <!-- end div#header -->
+    <div id="appHeaderButtons">
+        <table id="horizontalButton">
+            <tr>
+                <td>
+                    <button type="submit" v-on:click="getSortedProductsByTypeOfPurpose('Карповая ловля')"
+                            class="headerButton">Карповая ловля
+                    </button>
+                </td>
+                <td>
+                    <button type="submit" v-on:click="getSortedProductsByTypeOfPurpose('Спиннинговая ловля')"
+                            class="headerButton">Спиннинговая ловля
+                    </button>
+                </td>
+                <td>
+                    <button type="submit" v-on:click="getSortedProductsByTypeOfPurpose('Фидерная ловля')"
+                            class="headerButton">Фидерная ловля
+                    </button>
+                </td>
+                <td>
+                    <button type="submit" v-on:click="getSortedProductsByTypeOfPurpose('Поплавочная ловля')"
+                            class="headerButton">Поплавочная ловля
+                    </button>
+                </td>
+                <td>
+                    <button type="submit" class="headerButton">Программа лояльности</button>
+                </td>
+                <td>
+                    <button type="submit" class="headerButton">Отзывы</button>
+                </td>
+                <td>
+                    <button type="submit" class="headerButton">Контакты</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="page">
+        <div id="content">
+            <div id="app">
+            </div>
+            <div id="appNewProduct">
+                <table id="fromDb" style="width: 1100px; height: 120px; background: rgba(128, 128, 0, 0.5);">
+                    <tr>
+                        <td height="30px"><h3>Выберите изображение</h3></td>
+                        <td height="30px"><h3>Введите категорию</h3></td>
+                        <td height="30px"><h3>Введите подкатегорию</h3></td>
+                        <td height="30px"><h3>Введите имя бренда</h3></td>
+                        <td height="30px"><h3>Количество товара в наличии</h3></td>
+
+                    </tr>
+                    <tr>
+                        <td style="width: 200px; height: auto">
+                            <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+                        </td>
+                        <td style="width: 200px; height: auto">
+                            <textarea placeholder="Введите категорию" v-model="productCategory"></textarea>
+                        </td>
+                        <td style="width: 200px; height: auto">
+                            <textarea placeholder="Введите подкатегорию" v-model="productSubCategory"></textarea>
+                        </td>
+                        <td style="width: 200px; height: auto">
+                            <textarea placeholder="Введите имя бренда" v-model="productBrand"></textarea>
+                        </td>
+                        <td style="width: 200px; height: auto">
+                            <textarea placeholder="Введите количество единиц" v-model="totalAmount"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="30px"><h3>Введите полное имя товара</h3></td>
+                        <td height="30px"><h3>Введите описание товара</h3></td>
+                        <td height="30px"><h3>Введите тип ловли</h3></td>
+                        <td height="30px"><h3>Цена</h3></td>
+                        <td height="30px"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 200px; height: auto">
+                            <textarea placeholder="Введите полное имя товара" v-model="description"></textarea>
+                        </td>
+                        <td style="width: 200px; height: auto">
+                            <textarea placeholder="Введите описание товара" v-model="specification"></textarea>
+                        </td>
+                        <td style="width: 200px; height: auto">
+                            <textarea placeholder="Введите тип ловли" v-model="typeOfPurpose"></textarea>
+                        </td>
+                        <td style="width: 200px; height: auto">
+                            <textarea placeholder="Цена" v-model="productPrice"></textarea>
+                        </td>
+                        <td style="width: 200px; height: auto"><input type="button" id="superAdminButtonNewProduct"
+                                                                      value="Сохранить" @click="saveProduct">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" height="30px">
+                            <h3>Status: {{dataLoadStatus}}</h3>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!--start div#sidebar-->
+        <div id="sidebar">
+            <div id="appCategory">
+            </div>
+            <div id="appSubCategory">
+            </div>
+            <div id="appProductBrand">
+            </div>
+            <div id="appNewCategory">
+                <table id="fromDbButtons" style="width:230px; height: 60px">
+                    <tr>
+                        <td>
+                            <button type="submit" v-on:click="created" class="menuButton">Все товары</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <script src="js/super_admin.js"></script>
+        </div>
+        <!-- end div#content -->
+        <!-- end div#sidebar -->
+    </div>
+    <!-- end div#page -->
+    <!--    start div#footer-->
+    <div id="footer">
+        <table id="footerTable">
+            <tr>
+                <td><h3>Информация</h3></td>
+                <td><h3>О нас</h3></td>
+                <td><h3>Контакты</h3></td>
+            </tr>
+            <tr>
+                <td>wretgwrgs</td>
+                <td>ergregw4g</td>
+                <td>q3gq3f34q</td>
+            </tr>
+            <tr>
+                <td>wretgwrgs</td>
+                <td>ergregw4g</td>
+                <td>q3gq3f34q</td>
+            </tr>
+            <tr>
+                <td>wretgwrgs</td>
+                <td>ergregw4g</td>
+                <td>q3gq3f34q</td>
+            </tr>
+        </table>
+    </div>
+    <!--    end div#footer-->
+</div>
+<!-- end div#wrapper -->
+</body>
+</html>

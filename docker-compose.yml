@@ -1,0 +1,43 @@
+version: '3'
+services:
+  yumarket_db:
+    container_name: yumarket_db
+    image: postgres:11.5
+    environment:
+      LANG: en_US.utf8
+      POSTGRES_DB: yumarket_db
+      PGDATA: /var/lib/postgresql/data/pgdata/yumarket
+      POSTGRES_USER: yumarket_user
+      POSTGRES_PASSWORD: yumarket_user
+    ports:
+        - 6464:5432
+    networks:
+        - yumarket
+    restart: always
+    volumes:
+      - yumarket-db-data:/var/lib/postgresql/data/pgdata
+
+  app:
+    container_name: yumarket_app
+    build: ./
+    environment:
+      SERVER_PORT: 8080
+      POSTGRES_USERNAME: yumarket_user
+      POSTGRES_PASSWORD: yumarket_user
+      POSTGRES_DB: yumarket_db
+      POSTGRES_HOST: yumarket_db
+      POSTGRES_PORT: 5432
+      FLYWAY_LOCATIONS: classpath:/db/migration/,/db/fixture/
+    ports:
+      - 9080:8080
+    networks:
+      - yumarket
+    restart: always
+    depends_on:
+      - yumarket_db
+networks:
+  yumarket:
+    driver: bridge
+
+volumes:
+  yumarket-db-data:
