@@ -11,7 +11,7 @@
     <groupId>com.yumarket</groupId>
     <artifactId>yumarket</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>yumarket</name>
+    <name>cubafish</name>
     <description>Market project</description>
 
     <properties>
@@ -101,7 +101,7 @@
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId> <!-- or jjwt-gson if Gson is preferred -->
+            <artifactId>jjwt-jackson</artifactId>
             <version>${io.jsonwebtoken.version}</version>
             <scope>runtime</scope>
         </dependency>
@@ -109,6 +109,11 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>29.0-jre</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.3.0</version>
         </dependency>
     </dependencies>
     <build>
@@ -195,6 +200,22 @@
                     <redirectTestOutputToFile>true</redirectTestOutputToFile>
                     <skipTests>true</skipTests>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <attachClasses>true</attachClasses>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>war</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

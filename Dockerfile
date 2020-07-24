@@ -1,6 +1,6 @@
 FROM openjdk:11
 
-COPY ./target/yumarket.jar /application.jar
+COPY ./target/cubafish.jar /application.jar
 
 ENTRYPOINT ["java","-jar","/application.jar"]
 
