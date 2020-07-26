@@ -8,11 +8,11 @@
         <version>2.2.7.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.yumarket</groupId>
-    <artifactId>yumarket</artifactId>
+    <groupId>com.cubafish</groupId>
+    <artifactId>cubafish</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>cubafish</name>
-    <description>Market project</description>
+    <description>online store of fishing accessories</description>
 
     <properties>
         <java.version>11</java.version>
