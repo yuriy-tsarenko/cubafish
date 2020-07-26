@@ -10,7 +10,7 @@ public class IndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         try {
-            request.getRequestDispatcher("/index.html").forward(request, response);
+            request.getRequestDispatcher("//index.html").forward(request, response);
         } catch (ServletException | IOException e) {
             e.printStackTrace();
         }
