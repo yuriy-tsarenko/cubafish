@@ -3,20 +3,24 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-
     <listener>
-        <listener-class>
-           com.cubafish.servlet.CustomServletContextListener
-        </listener-class>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-
+<!--    <context-param>-->
+<!--        <param-name>contextConfigLocation</param-name>-->
+<!--        <param-value>src/main/webapp/WEB-INF/app-context.xml</param-value>-->
+<!--    </context-param>-->
     <servlet>
-        <servlet-name>indexServlet</servlet-name>
-        <servlet-class>com.cubafish.servlet.IndexServlet</servlet-class>
+        <servlet-name>mainDispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+<!--        <init-param>-->
+<!--            <param-name>contextConfigLocation</param-name>-->
+<!--            <param-value></param-value>-->
+<!--        </init-param>-->
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>indexServlet</servlet-name>
+        <servlet-name>mainDispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-
 </web-app>

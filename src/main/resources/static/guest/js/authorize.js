@@ -15,7 +15,10 @@ let appLogin = new Vue({
 
             loginApi.save({}, created).then(response => this.auth = response.headers.get('authorization').toString())
                 .then(this.saveData);
-            window.location = 'http://localhost:8080/super_admin/super_admin.html'
+            setTimeout(function () {
+                alert('вы авторизованы, перенаправление на Ваш аккаунт');
+                window.location = 'http://localhost:8080/super_admin/super_admin.html';
+            }, 1000);
         },
         saveData: function () {
             if (this.auth !== '') {
