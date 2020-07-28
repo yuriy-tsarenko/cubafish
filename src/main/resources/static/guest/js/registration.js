@@ -16,8 +16,7 @@ let appReg = new Vue({
                 email: this.email,
                 userContact: this.userContact
             };
-            registrationApi.save({}, created).then(response => this.responseApi = response.bodyText.toString()
-                    .slice(40, response.bodyText.toString().length - 2));
+            registrationApi.save({}, created).then(response => (this.responseApi = response.data.status));
         }
     }
 });
