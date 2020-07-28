@@ -1,4 +1,4 @@
-const loginApi = Vue.resource('/login');
+const loginApi = Vue.resource('/guest/login');
 let appLogin = new Vue({
     el: '#appLogin',
     data: {
