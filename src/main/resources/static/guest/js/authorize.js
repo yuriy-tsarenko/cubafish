@@ -1,4 +1,4 @@
-const loginApi = Vue.resource('/login');
+const loginApi = Vue.resource('/guest/login');
 let appLogin = new Vue({
     el: '#appLogin',
     data: {
@@ -15,16 +15,20 @@ let appLogin = new Vue({
 
             loginApi.save({}, created).then(response => this.auth = response.headers.get('authorization').toString())
                 .then(this.saveData);
-            setTimeout(function () {
-                alert('вы авторизованы, перенаправление на Ваш аккаунт');
-                window.location = 'http://localhost:8080/super_admin/super_admin.html';
-            }, 1000);
         },
+
         saveData: function () {
             if (this.auth !== '') {
                 localStorage.setItem('CustomHeader', this.auth);
+                setTimeout(function () {
+                    alert('вы авторизованы, перенаправление на Ваш аккаунт');
+                    window.location = 'http://91.235.128.12:8081/super_admin/super_admin.html';
+                }, 1000);
+            } else {
+                setTimeout(function () {
+                    alert('вы не авторизованы, проверте правильность введенных данных');
+                }, 1000);
             }
-
         }
     }
 });

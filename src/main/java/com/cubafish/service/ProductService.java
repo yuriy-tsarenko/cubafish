@@ -329,35 +329,14 @@ public class ProductService {
         return Map.of("productDto", productDto, "status", "success");
     }
 
-    public String copyFileToTarget(String filename) {
-        Path uploadPath = pathFinder.getPath();
-        Path uploadPathFromTarget = pathFinder.getPathFromTarget();
-        Path source = Paths.get(uploadPath.toString().concat(File.separator).concat(filename));
-        Path target = Paths.get(uploadPathFromTarget.toString().concat(File.separator).concat(filename));
-        boolean dir = Files.isDirectory(Paths.get(String.valueOf(uploadPathFromTarget)));
-        if (!dir) {
-            try {
-                Files.createDirectories(Paths.get(String.valueOf(uploadPathFromTarget)));
-            } catch (IOException e) {
-                return "IOException, can not create the directory";
-            }
-        }
-        try {
-            Files.copy(source, target);
-        } catch (IOException e) {
-            return "IOException - try copy file to target";
-        }
-        return "success";
-    }
-
     public String deleteFileIfExists(String path) {
         if (path == null) {
             path = "";
         }
         if (!path.isEmpty()) {
             try {
-                if (Files.deleteIfExists(Paths.get(pathFinder.getPathBeforeDelete().toString().concat(path)))) {
-                    Files.deleteIfExists(Paths.get(pathFinder.getPathBeforeDeleteFromTarget().toString().concat(path)));
+                if (Files.exists(Paths.get(pathFinder.getPathBeforeDelete().toString().concat(path)))) {
+                    Files.deleteIfExists(Paths.get(pathFinder.getPathBeforeDelete().toString().concat(path)));
                 } else {
                     return "File is not find";
                 }

@@ -7,5 +7,7 @@
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"/>
     <bean class="org.springframework.web.servlet.handler.DispatcherServletWebRequest" abstract="true"/>
+    <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
     <bean class="org.springframework.web.servlet.HandlerMapping" abstract="true"/>
+
 </beans>
