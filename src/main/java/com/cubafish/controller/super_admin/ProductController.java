@@ -86,15 +86,15 @@ public class ProductController {
 
     @PostMapping("/create")
     public CustomResponseBody create(
-            @RequestParam String productCategory,
-            @RequestParam String productSubCategory,
-            @RequestParam String productBrand,
-            @RequestParam String typeOfPurpose,
-            @RequestParam String description,
-            @RequestParam String specification,
-            @RequestParam String totalAmount,
-            @RequestParam String productPrice,
-            @RequestParam("file") MultipartFile file) {
+            @RequestParam(required = false, name = "productCategory") String productCategory,
+            @RequestParam(required = false, name = "productSubCategory") String productSubCategory,
+            @RequestParam(required = false, name = "productBrand") String productBrand,
+            @RequestParam(required = false, name = "typeOfPurpose") String typeOfPurpose,
+            @RequestParam(required = false, name = "description") String description,
+            @RequestParam(required = false, name = "specification") String specification,
+            @RequestParam(required = false, name = "totalAmount") String totalAmount,
+            @RequestParam(required = false, name = "productPrice") String productPrice,
+            @RequestParam(required = false, name = "file") MultipartFile file) {
         String status = productService.productDataValidation(productCategory, productSubCategory, productBrand,
                 typeOfPurpose, description, specification, totalAmount, productPrice, file);
         if (status.equals("success")) {
@@ -110,10 +110,7 @@ public class ProductController {
                 dtoWithReceivedData = (ProductDto) responseFromSetterTextAndNumericData.get("productDto");
                 status = (String) responseFromSetterTextAndNumericData.get("status");
                 if (status.equals("success")) {
-                    status = productService.copyFileToTarget(fileName);
-                    if (status.equals("success")) {
-                        productRepository.save(productService.create(dtoWithReceivedData));
-                    }
+                    productRepository.save(productService.create(dtoWithReceivedData));
                 }
             }
         }
@@ -134,16 +131,15 @@ public class ProductController {
     @PutMapping()
     public CustomResponseBody update(
             @RequestParam Long id,
-            @RequestParam String productCategory,
-            @RequestParam String productSubCategory,
-            @RequestParam String productBrand,
-            @RequestParam String typeOfPurpose,
-            @RequestParam String description,
-            @RequestParam String specification,
-            @RequestParam String totalAmount,
-            @RequestParam String productPrice,
-            @RequestParam("file") MultipartFile file
-    ) {
+            @RequestParam(required = false, name = "productCategory") String productCategory,
+            @RequestParam(required = false, name = "productSubCategory") String productSubCategory,
+            @RequestParam(required = false, name = "productBrand") String productBrand,
+            @RequestParam(required = false, name = "typeOfPurpose") String typeOfPurpose,
+            @RequestParam(required = false, name = "description") String description,
+            @RequestParam(required = false, name = "specification") String specification,
+            @RequestParam(required = false, name = "totalAmount") String totalAmount,
+            @RequestParam(required = false, name = "productPrice") String productPrice,
+            @RequestParam(required = false, name = "file") MultipartFile file) {
         String status = productService.productDataValidation(productCategory, productSubCategory, productBrand,
                 typeOfPurpose, description, specification, totalAmount, productPrice, file);
         if (status.equals("success")) {
@@ -159,9 +155,7 @@ public class ProductController {
                 ProductDto dtoWithReceivedData = (ProductDto) responseFromImageLoader.get("productDto");
                 status = (String) responseFromImageLoader.get("status");
                 String fileName = (String) responseFromImageLoader.get("fileName");
-                if (status.equals("success")) {
-                    status = productService.copyFileToTarget(fileName);
-                }
+
                 if (status.equals("success") || status.equals("try to set the old image")) {
                     Map<String, Object> responseFromUpdateExitingProduct = productService
                             .compensationOfMissingData(id, productCategory, productSubCategory,

@@ -272,15 +272,15 @@ let appNewProduct = new Vue({
         },
         saveProduct: function () {
             let formData = new FormData();
-            formData.append('file', this.file);
             formData.append('productCategory', this.productCategory);
             formData.append('productSubCategory', this.productSubCategory);
             formData.append('productBrand', this.productBrand);
-            formData.append('totalAmount', this.totalAmount);
+            formData.append('typeOfPurpose', this.typeOfPurpose);
             formData.append('description', this.description);
             formData.append('specification', this.specification);
-            formData.append('typeOfPurpose', this.typeOfPurpose);
+            formData.append('totalAmount', this.totalAmount);
             formData.append('productPrice', this.productPrice);
+            formData.append('file', this.file);
 
             axios.post('/super_admin_auth/products/create',
                 formData,
