@@ -165,19 +165,18 @@ public class ProductService {
         return "success";
     }
 
-    public Map<String, Object> imageLoader(MultipartFile file) {
+    public Map<String, Object> imageLoader(MultipartFile file, String uploadPath) {
         ProductDto productDto = new ProductDto();
         String uuidFile = UUID.randomUUID().toString();
-        Path uploadPath = pathFinder.getPath();
-        Path downloadPath = pathFinder.getDownloadPath();
+        Path downloadPath = pathFinder.getDownloadPath(uploadPath);
 
         if (!file.isEmpty() && ((Objects.requireNonNull(file.getOriginalFilename()).endsWith("jpg")
                 || Objects.requireNonNull(file.getOriginalFilename()).endsWith("jpeg")
                 || Objects.requireNonNull(file.getOriginalFilename()).endsWith("png"))) && file.getSize() <= fileSize) {
-            boolean dir = Files.isDirectory(Paths.get(String.valueOf(uploadPath)));
+            boolean dir = Files.isDirectory(Paths.get(uploadPath));
             if (!dir) {
                 try {
-                    Files.createDirectories(Paths.get(String.valueOf(uploadPath)));
+                    Files.createDirectories(Paths.get(uploadPath));
                 } catch (IOException e) {
                     return Map.of("productDto", productDto, "status",
                             "IOException, can not create the directory");
@@ -185,14 +184,14 @@ public class ProductService {
             }
             String fileName = uuidFile.concat("-").concat(file.getOriginalFilename());
             try {
-                file.transferTo(new File(uploadPath.toString().concat(File.separator).concat(fileName)));
+                file.transferTo(new File(uploadPath.concat(File.separator).concat(fileName)));
             } catch (IOException e) {
                 return Map.of("productDto", productDto, "status",
                         "IOException, can not transfer file to the directory");
             }
             String productImageName = downloadPath.toString().concat(File.separator).concat(fileName);
             if (productImageName.length() > 300) {
-                deleteFileIfExists(productImageName);
+                deleteFileIfExists(productImageName, uploadPath);
                 return Map.of("productDto", productDto, "fileName", fileName, "status",
                         "please reduce the length of the file name");
             } else {
@@ -329,14 +328,16 @@ public class ProductService {
         return Map.of("productDto", productDto, "status", "success");
     }
 
-    public String deleteFileIfExists(String path) {
+    public String deleteFileIfExists(String path, String absolutePathToUploadDir) {
         if (path == null) {
             path = "";
         }
         if (!path.isEmpty()) {
             try {
-                if (Files.exists(Paths.get(pathFinder.getPathBeforeDelete().toString().concat(path)))) {
-                    Files.deleteIfExists(Paths.get(pathFinder.getPathBeforeDelete().toString().concat(path)));
+                if (Files.exists(Paths.get(pathFinder.getPathBeforeDelete(absolutePathToUploadDir)
+                        .toString().concat(path)))) {
+                    Files.deleteIfExists(Paths.get(pathFinder.getPathBeforeDelete(absolutePathToUploadDir)
+                            .toString().concat(path)));
                 } else {
                     return "File is not find";
                 }

@@ -8,6 +8,7 @@ import com.cubafish.utils.CustomRequestBody;
 import com.cubafish.utils.CustomResponseBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -28,6 +30,9 @@ import java.util.Objects;
 @RequestMapping(ProductController.BASE_PATH)
 @RequiredArgsConstructor
 public class ProductController {
+
+    @Value("${upload.path}")
+    private String uploadPath;
 
     public static final String BASE_PATH = "/super_admin_auth/products";
     private final ProductService productService;
@@ -86,6 +91,7 @@ public class ProductController {
 
     @PostMapping("/create")
     public CustomResponseBody create(
+            HttpServletRequest request,
             @RequestParam(required = false, name = "productCategory") String productCategory,
             @RequestParam(required = false, name = "productSubCategory") String productSubCategory,
             @RequestParam(required = false, name = "productBrand") String productBrand,
@@ -95,13 +101,13 @@ public class ProductController {
             @RequestParam(required = false, name = "totalAmount") String totalAmount,
             @RequestParam(required = false, name = "productPrice") String productPrice,
             @RequestParam(required = false, name = "file") MultipartFile file) {
+        String uploadPathToDirectory = request.getServletContext().getRealPath(uploadPath);
         String status = productService.productDataValidation(productCategory, productSubCategory, productBrand,
                 typeOfPurpose, description, specification, totalAmount, productPrice, file);
         if (status.equals("success")) {
-            Map<String, Object> responseFromImageLoader = productService.imageLoader(file);
+            Map<String, Object> responseFromImageLoader = productService.imageLoader(file, uploadPathToDirectory);
             ProductDto dtoWithReceivedData = (ProductDto) responseFromImageLoader.get("productDto");
             status = (String) responseFromImageLoader.get("status");
-            String fileName = (String) responseFromImageLoader.get("fileName");
             if (status.equals("success")) {
                 Map<String, Object> responseFromSetterTextAndNumericData = productService
                         .setTextAndNumericDataBeforeCreate(productCategory, productSubCategory, productBrand,
@@ -118,8 +124,11 @@ public class ProductController {
     }
 
     @PostMapping("/delete_product_image")
-    public CustomResponseBody delete(@RequestParam String path) {
-        String status = productService.deleteFileIfExists(path);
+    public CustomResponseBody delete(
+            HttpServletRequest request,
+            @RequestParam String path) {
+        String absolutePathToUploadDir = request.getServletContext().getRealPath(uploadPath);
+        String status = productService.deleteFileIfExists(path, absolutePathToUploadDir);
         return new CustomResponseBody(1L, "image deleting status", status, "no data");
     }
 
@@ -128,9 +137,10 @@ public class ProductController {
         productRepository.delete(product);
     }
 
-    @PutMapping()
+    @PostMapping("/update")
     public CustomResponseBody update(
-            @RequestParam Long id,
+            HttpServletRequest request,
+            @RequestParam(required = false, name = "id") Long id,
             @RequestParam(required = false, name = "productCategory") String productCategory,
             @RequestParam(required = false, name = "productSubCategory") String productSubCategory,
             @RequestParam(required = false, name = "productBrand") String productBrand,
@@ -140,6 +150,8 @@ public class ProductController {
             @RequestParam(required = false, name = "totalAmount") String totalAmount,
             @RequestParam(required = false, name = "productPrice") String productPrice,
             @RequestParam(required = false, name = "file") MultipartFile file) {
+        String uploadPathToDirectory = request.getServletContext().getRealPath(uploadPath);
+        System.out.println(uploadPathToDirectory);
         String status = productService.productDataValidation(productCategory, productSubCategory, productBrand,
                 typeOfPurpose, description, specification, totalAmount, productPrice, file);
         if (status.equals("success")) {
@@ -147,11 +159,11 @@ public class ProductController {
             Product productFromDb = (Product) responseFromDb.get("product");
             status = (String) responseFromDb.get("status");
             if (status.equals("success") && !Objects.requireNonNull(file.getOriginalFilename()).equals("no_image")) {
-                status = productService.deleteFileIfExists(productFromDb.getProductImageName());
+                status = productService.deleteFileIfExists(productFromDb.getProductImageName(), uploadPathToDirectory);
             }
             if (status.equals("File is not find") || status.equals("File not deleted, no path to file")
                     || status.equals("success")) {
-                Map<String, Object> responseFromImageLoader = productService.imageLoader(file);
+                Map<String, Object> responseFromImageLoader = productService.imageLoader(file, uploadPathToDirectory);
                 ProductDto dtoWithReceivedData = (ProductDto) responseFromImageLoader.get("productDto");
                 status = (String) responseFromImageLoader.get("status");
                 String fileName = (String) responseFromImageLoader.get("fileName");

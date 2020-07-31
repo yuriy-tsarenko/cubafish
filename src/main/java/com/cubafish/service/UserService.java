@@ -44,6 +44,10 @@ public class UserService implements UserDetailsService {
         return userMapper.mapDtoToEntity(userDto);
     }
 
+    public Boolean existsByRole(String role) {
+        return userRepository.existsByUserRole(role);
+    }
+
     public String userValidation(UserDto userDto) {
         // checking user name
         String userName = userDto.getUsername();
@@ -118,6 +122,6 @@ public class UserService implements UserDetailsService {
                 return "your telephone number should start with: +";
             }
         }
-        return "registration complete";
+        return "validation complete";
     }
 }
