@@ -19,8 +19,13 @@
         </div>
         <!-- end div#logo -->
         <div id="appLogoutButtons">
-            <button type="submit" v-on:click="logoutUserAction" class="headerButton">Выйти</button>
-            <button type="submit" v-on:click="registrationUserAction" class="headerButton">Регистрация</button>
+            <table><tr>
+                <td><button type="submit" class="logoutButton">Программа лояльности</button></td>
+                <td><button type="submit" class="logoutButton">Отзывы</button></td>
+                <td><button type="submit" class="logoutButton">Контакты</button></td>
+                <td><button type="submit" v-on:click="registrationUserAction" class="logoutButton">Регистрация</button></td>
+                <td><button type="submit" v-on:click="logoutUserAction" class="logoutButton">Выйти</button></td>
+            </tr></table>
         </div>
     </div>
     <!-- end div#header -->
@@ -48,13 +53,13 @@
                     </button>
                 </td>
                 <td>
-                    <button type="submit" class="headerButton">Программа лояльности</button>
+                    <button type="submit" class="headerButton">Все для монтажа</button>
                 </td>
                 <td>
-                    <button type="submit" class="headerButton">Отзывы</button>
+                    <button type="submit" class="headerButton">Туризм</button>
                 </td>
                 <td>
-                    <button type="submit" class="headerButton">Контакты</button>
+                    <button type="submit" class="headerButton">Прикормки</button>
                 </td>
             </tr>
         </table>

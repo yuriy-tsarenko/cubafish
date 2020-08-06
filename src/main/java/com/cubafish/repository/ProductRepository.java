@@ -22,4 +22,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByProductBrandAndProductSubCategory(String brand, String subcategory);
 
     List<Product> findByTypeOfPurpose(String typeOfPurpose);
+
+    List<Product> findByDescription(String description);
+
 }

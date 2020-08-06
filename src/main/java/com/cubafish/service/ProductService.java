@@ -8,9 +8,11 @@ import com.cubafish.utils.CustomRequestBody;
 import com.cubafish.utils.CustomResponseBody;
 import com.cubafish.utils.PathFinder;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -31,11 +33,14 @@ import java.util.UUID;
 @Data
 public class ProductService {
 
+    @Value("${file.size}")
+    private Integer fileSize;
+
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
     private final PathFinder pathFinder;
     private String productSubCategory;
-    private final Integer fileSize = 3670016;
+
 
     public List<ProductDto> findAll() {
         List<ProductDto> productDtos = productMapper.mapEntitiesToDtos(productRepository.findAll());
@@ -53,6 +58,7 @@ public class ProductService {
     public List<ProductDto> findByProductCategory(CustomRequestBody customRequestBody) {
         List<ProductDto> productDto = productMapper.mapEntitiesToDtos(productRepository
                 .findByProductCategory(customRequestBody.getCommunicationKey()));
+        productDto.sort(new SortProductsById());
         return productDto;
     }
 
@@ -60,26 +66,52 @@ public class ProductService {
         productSubCategory = customRequestBody.getCommunicationKey();
         List<ProductDto> productDto = productMapper.mapEntitiesToDtos(productRepository
                 .findByProductSubCategory(productSubCategory));
+        productDto.sort(new SortProductsById());
         return productDto;
     }
 
     public List<ProductDto> findByProductBrandAndProductSubCategory(CustomRequestBody customRequestBody) {
         List<ProductDto> productDto = productMapper.mapEntitiesToDtos(productRepository
                 .findByProductBrandAndProductSubCategory(customRequestBody.getCommunicationKey(), productSubCategory));
+        productDto.sort(new SortProductsById());
         return productDto;
     }
 
     public List<ProductDto> findProductsByTypeOfPurpose(CustomRequestBody customRequestBody) {
         List<ProductDto> productDto = productMapper.mapEntitiesToDtos(productRepository
                 .findByTypeOfPurpose(customRequestBody.getCommunicationKey()));
+        productDto.sort(new SortProductsById());
         return productDto;
     }
 
     public List<ProductDto> findByProductBrandAll(CustomRequestBody customRequestBody) {
         List<ProductDto> productDto = productMapper.mapEntitiesToDtos(productRepository
                 .findByProductBrand(customRequestBody.getCommunicationKey()));
+        productDto.sort(new SortProductsById());
         return productDto;
     }
+
+    public List<ProductDto> findByProductDescription(CustomRequestBody customRequestBody) {
+        List<ProductDto> productDto = productMapper.mapEntitiesToDtos(productRepository
+                .findByDescription(customRequestBody.getCommunicationKey()));
+        return productDto;
+    }
+
+    public CustomResponseBody findMaximalIdValue(CustomRequestBody customRequestBody) {
+        if (customRequestBody.getCommunicationKey().equals("give me the argument for basket engine")) {
+            List<ProductDto> productDtos = productMapper.mapEntitiesToDtos(productRepository.findAll());
+            Long maxIdValue = null;
+            try {
+                maxIdValue = productDtos.get(productDtos.size() - 1).getId();
+            } catch (NullPointerException | IndexOutOfBoundsException e) {
+                e.printStackTrace();
+            }
+            return new CustomResponseBody(1L, "required argument", "success", String.valueOf(maxIdValue));
+        }
+        return new CustomResponseBody(1L, "required argument",
+                "did not accept the correct key", null);
+    }
+
 
     public Product create(ProductDto productDto) {
         return productMapper.mapDtoToEntity(productDto);
@@ -165,18 +197,19 @@ public class ProductService {
         return "success";
     }
 
-    public Map<String, Object> imageLoader(MultipartFile file, String uploadPath) {
+    public Map<String, Object> imageLoader(MultipartFile file, ServletContext pathFromHttpContext) {
         ProductDto productDto = new ProductDto();
         String uuidFile = UUID.randomUUID().toString();
-        Path downloadPath = pathFinder.getDownloadPath(uploadPath);
+        Path finalUploadPath = pathFinder.getUploadPath(pathFromHttpContext);
+        Path downloadPath = pathFinder.getDownloadPath();
 
         if (!file.isEmpty() && ((Objects.requireNonNull(file.getOriginalFilename()).endsWith("jpg")
                 || Objects.requireNonNull(file.getOriginalFilename()).endsWith("jpeg")
                 || Objects.requireNonNull(file.getOriginalFilename()).endsWith("png"))) && file.getSize() <= fileSize) {
-            boolean dir = Files.isDirectory(Paths.get(uploadPath));
+            boolean dir = Files.isDirectory(Paths.get(String.valueOf(finalUploadPath)));
             if (!dir) {
                 try {
-                    Files.createDirectories(Paths.get(uploadPath));
+                    Files.createDirectories(Paths.get(String.valueOf(finalUploadPath)));
                 } catch (IOException e) {
                     return Map.of("productDto", productDto, "status",
                             "IOException, can not create the directory");
@@ -184,14 +217,14 @@ public class ProductService {
             }
             String fileName = uuidFile.concat("-").concat(file.getOriginalFilename());
             try {
-                file.transferTo(new File(uploadPath.concat(File.separator).concat(fileName)));
+                file.transferTo(new File(String.valueOf(finalUploadPath).concat(File.separator).concat(fileName)));
             } catch (IOException e) {
                 return Map.of("productDto", productDto, "status",
                         "IOException, can not transfer file to the directory");
             }
             String productImageName = downloadPath.toString().concat(File.separator).concat(fileName);
-            if (productImageName.length() > 300) {
-                deleteFileIfExists(productImageName, uploadPath);
+            if (productImageName.length() > 255) {
+                deleteFileIfExists(pathFromHttpContext, productImageName);
                 return Map.of("productDto", productDto, "fileName", fileName, "status",
                         "please reduce the length of the file name");
             } else {
@@ -328,16 +361,15 @@ public class ProductService {
         return Map.of("productDto", productDto, "status", "success");
     }
 
-    public String deleteFileIfExists(String path, String absolutePathToUploadDir) {
+    public String deleteFileIfExists(ServletContext pathFromHttpContext, String path) {
         if (path == null) {
             path = "";
         }
         if (!path.isEmpty()) {
             try {
-                if (Files.exists(Paths.get(pathFinder.getPathBeforeDelete(absolutePathToUploadDir)
-                        .toString().concat(path)))) {
-                    Files.deleteIfExists(Paths.get(pathFinder.getPathBeforeDelete(absolutePathToUploadDir)
-                            .toString().concat(path)));
+                if (Files.exists(Paths.get(pathFinder.getPathBeforeDelete(pathFromHttpContext, path).toString()))) {
+                    Files.deleteIfExists(Paths.get(pathFinder
+                            .getPathBeforeDelete(pathFromHttpContext, path).toString()));
                 } else {
                     return "File is not find";
                 }

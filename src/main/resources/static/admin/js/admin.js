@@ -280,6 +280,11 @@ let appNewProduct = new Vue({
             formData.append('totalAmount', this.totalAmount);
             formData.append('productPrice', this.productPrice);
             formData.append('file', this.file);
+            if (this.file == null) {
+                this.file = new Blob([], {type: 'image/png'})
+                formData.delete('file');
+                formData.append('file', this.file, 'no_image')
+            }
 
             axios.post('/admin_auth/products/create',
                 formData,
@@ -387,7 +392,7 @@ Vue.component('newProductCategories-list', {
             }, 500);
         } else {
             setTimeout(function () {
-                window.location = 'http://91.235.128.12:8081/admin/admin.html';
+                window.location = 'http://91.235.128.12:8081/admin/authorize.html';
             }, 200);
         }
     }

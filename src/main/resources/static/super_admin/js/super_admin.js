@@ -281,6 +281,11 @@ let appNewProduct = new Vue({
             formData.append('totalAmount', this.totalAmount);
             formData.append('productPrice', this.productPrice);
             formData.append('file', this.file);
+            if (this.file == null) {
+                this.file = new Blob([], {type: 'image/png'})
+                formData.delete('file');
+                formData.append('file', this.file, 'no_image')
+            }
 
             axios.post('/super_admin_auth/products/create',
                 formData,
@@ -557,7 +562,7 @@ let appLogoutButtons = new Vue({
             if (auth == null){
                 setTimeout(function () {
                     alert('Завершение работы администратора');
-                    window.location = 'http://91.235.128.12:8081/admin/authorize.html';
+                    window.location = 'http://91.235.128.12:8081/guest/authorize.html';
                 }, 500);
             } else {
                 alert('Некоректное завершение работы, попробуйте еще раз или обратитесь к супер админу');
