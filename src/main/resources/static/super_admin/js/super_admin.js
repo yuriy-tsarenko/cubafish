@@ -120,19 +120,19 @@ Vue.component('newProduct-row', {
             formData.append('productCategory', this.productCategory);
             formData.append('productSubCategory', this.productSubCategory);
             formData.append('productBrand', this.productBrand);
-            formData.append('totalAmount', this.totalAmount);
+            formData.append('typeOfPurpose', this.typeOfPurpose);
             formData.append('description', this.description);
             formData.append('specification', this.specification);
-            formData.append('typeOfPurpose', this.typeOfPurpose);
+            formData.append('totalAmount', this.totalAmount);
             formData.append('productPrice', this.productPrice);
+            formData.append('file', this.file);
             if (this.file == null) {
-                formData.append('file', new Blob([],
-                    {type: 'image/png'}), 'no_image')
-            } else {
-                formData.append('file', this.file);
+                this.file = new Blob([], {type: 'image/png'})
+                formData.delete('file');
+                formData.append('file',this.file, 'no_image')
             }
 
-            axios.put('/super_admin_auth/products',
+            axios.post('/super_admin_auth/products/update',
                 formData,
                 {
                     headers: {
@@ -281,6 +281,11 @@ let appNewProduct = new Vue({
             formData.append('totalAmount', this.totalAmount);
             formData.append('productPrice', this.productPrice);
             formData.append('file', this.file);
+            if (this.file == null) {
+                this.file = new Blob([], {type: 'image/png'})
+                formData.delete('file');
+                formData.append('file', this.file, 'no_image')
+            }
 
             axios.post('/super_admin_auth/products/create',
                 formData,
@@ -377,11 +382,20 @@ Vue.component('newProductCategories-list', {
         ':key="newProductCategory.id" :newProductCategory="newProductCategory"/>' +
         '</div>',
     created: function () {
-        productCategoryApi.get().then(result =>
-            result.json().then(data =>
-                data.forEach(newProductCategory => this.newProductCategories.push(newProductCategory))
-            )
-        );
+        let auth = localStorage.getItem('CustomHeader');
+        if (auth !== null) {
+            setTimeout(function () {
+                appCategory.newProductCategories = appCategory.newProductCategories.splice(0, 0);
+                productCategoryApi.get().then(result =>
+                    result.json().then(data =>
+                        data.forEach(newProductCategory => appCategory.newProductCategories.push(newProductCategory))
+                    ));
+            }, 500);
+        } else {
+            setTimeout(function () {
+                window.location = 'http://91.235.128.12:8081/guest/authorize.html';
+            }, 200);
+        }
     }
 });
 
@@ -535,6 +549,27 @@ let appHeaderButtons = new Vue({
                     data.forEach(productBrand => app.newProducts.push(productBrand))
                 )
             );
+        }
+    }
+})
+
+let appLogoutButtons = new Vue({
+    el: '#appLogoutButtons',
+    methods: {
+        logoutUserAction: function () {
+            localStorage.removeItem('CustomHeader');
+            let auth = localStorage.getItem('CustomHeader')
+            if (auth == null){
+                setTimeout(function () {
+                    alert('Завершение работы администратора');
+                    window.location = 'http://91.235.128.12:8081/guest/authorize.html';
+                }, 500);
+            } else {
+                alert('Некоректное завершение работы, попробуйте еще раз или обратитесь к супер админу');
+            }
+        },
+        registrationUserAction: function () {
+            window.location = 'http://91.235.128.12:8081/admin/registration.html';
         }
     }
 })

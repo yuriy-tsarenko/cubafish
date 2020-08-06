@@ -1,0 +1,625 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0px;
+    background: #0F0A1D;
+    text-align: justify;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-style: italic;
+}
+
+h1, h3 {
+    color: #FFFFFF;
+}
+
+h2, h4 {
+    color: #FFFFFF;
+}
+
+h1 {
+}
+
+h2 {
+}
+
+h3 {
+}
+
+p, blockquote, ul, ol {
+    margin-bottom: 20px;
+    line-height: 2em;
+}
+
+
+/* Wrapper */
+
+#wrapper {
+}
+
+/* Header */
+
+#header {
+    width: 1514px;
+    height: 350px;
+    margin: 0 auto;
+    background: url(images/img01.jpg) no-repeat left top;
+    background-size: 100%;
+}
+
+/* Logo */
+
+#logo {
+    float: left;
+    width: 270px;
+    height: 200px;
+    margin: 0;
+    padding-left: 30px;
+    text-align: center;
+    background: url(images/logo.png) no-repeat left top;
+    background-size: 50%;
+}
+
+#logo h1 {
+    margin: 0;
+    padding: 10px 0px 0px 0px;
+    font: normal 46px Georgia, "Times New Roman", Times, serif;
+    text-decoration: none;
+    color: #459700;
+}
+
+#logo h2 {
+    margin: -2px 0 0 0;
+    padding: 0;
+    letter-spacing: 2px;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: italic;
+    color: #FFFFFF;
+}
+
+#appLogoutButtons {
+    float: right;
+    width: 1100px;
+    height: 41px;
+    margin: 0;
+}
+
+.logoutButton {
+    width: 214px;
+    height: 41px;
+    z-index: 1;
+    background: rgb(0, 74, 113);
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    font-style: italic;
+    color: #FFFFFF;
+    border-top: 0;
+    border-left: 2px solid;
+    border-right: 2px solid;
+    border-bottom: 2px solid;
+    border-color: #FFFFFF;
+    border-radius: 4px;
+}
+
+.logoutButton:hover {
+    background: #FA8258;
+    tansition: all .3s linear;
+    -webkit-transition: all .3s linear;
+    -moz-transition: all .3s linear;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 14px;
+    font-style: italic;
+    color: #000000;
+    border-top: 0;
+    border-left: 2px solid;
+    border-right: 0;
+    border-bottom: 2px solid;
+    border-color: #000000;
+    border-radius: 4px;
+}
+
+.logoutButton:active {
+    background: #808000;
+    tansition: all .1s linear;
+    -webkit-transition: all .1s linear;
+    -moz-transition: all .1s linear;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 11px;
+    font-style: italic;
+    color: #FFFFFF;
+    border-top: 0;
+    border-left: 2px solid;
+    border-right: 0;
+    border-bottom: 2px solid;
+    border-color: #FFFFFF;
+    border-radius: 4px;
+}
+
+/* Menu */
+
+#appHeaderButtons {
+    width: 1514px;
+    height: 41px;
+    margin: 0 auto;
+    padding: 0px 0px 0px 0px;
+    background: #808000;
+}
+
+.headerButton {
+    width: 214px;
+    height: 41px;
+    z-index: 1;
+    background: #808000;
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    font-style: italic;
+    color: #FFFFFF;
+    border-top: 0;
+    border-left: 2px solid;
+    border-right: 2px solid;
+    border-bottom: 2px solid;
+    border-color: #FFFFFF;
+    border-radius: 4px;
+}
+
+.headerButton:hover {
+    background: #FA8258;
+    tansition: all .3s linear;
+    -webkit-transition: all .3s linear;
+    -moz-transition: all .3s linear;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 14px;
+    font-style: italic;
+    color: #000000;
+    border-top: 0;
+    border-left: 2px solid;
+    border-right: 0;
+    border-bottom: 2px solid;
+    border-color: #000000;
+    border-radius: 4px;
+}
+
+.headerButton:active {
+    background: rgb(0, 74, 113);
+    tansition: all .1s linear;
+    -webkit-transition: all .1s linear;
+    -moz-transition: all .1s linear;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 11px;
+    font-style: italic;
+    color: #FFFFFF;
+    border-top: 0;
+    border-left: 2px solid;
+    border-right: 0;
+    border-bottom: 2px solid;
+    border-color: #FFFFFF;
+    border-radius: 4px;
+}
+
+/* Page */
+
+#page {
+    width: 1458px;
+    height: 1250px;
+    margin: 0 auto;
+    padding: 0 28px;
+    background: #ffffff url(images/img05.jpg) no-repeat left top;
+    background-size: cover;
+}
+
+/* Content */
+
+#content {
+    float: right;
+    width: 1100px;
+    height: 1200px;
+    padding-top: 30px;
+    overflow: auto;
+
+}
+
+#content::-webkit-scrollbar {
+    width: 0;
+}
+
+/* Sidebar */
+
+/*getFromDb*/
+#fromDb {
+    border-collapse: collapse;
+    border: 1px none white;
+    border-bottom-style: solid;
+    margin-bottom: 10px;
+    background: rgba(128, 128, 0, 0.5);
+}
+
+#fromDbButtons {
+    border-collapse: collapse;
+    border: 1px none white;
+    border-bottom-style: solid;
+    margin-bottom: 10px;
+}
+
+#fromDbButtonsSubCategory {
+    border-collapse: collapse;
+    border: 1px none white;
+    border-bottom-style: solid;
+    margin-bottom: 10px;
+}
+
+#cellStyle {
+    text-align: center;
+    vertical-align: top;
+}
+
+#cellStyleDescription {
+    text-align: left;
+    vertical-align: top;
+}
+
+#cellStyleSpecification {
+    text-align: left;
+    vertical-align: top;
+}
+
+/*getFromDb*/
+
+#app {
+    float: left;
+    width: auto;
+}
+
+#sidebar {
+    float: left;
+    width: 275px;
+    height: 1200px;
+    margin: 20px 0px;
+    padding: 10px 0px 30px 30px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    overflow: auto;
+
+}
+
+#sidebar::-webkit-scrollbar {
+    width: 0;
+}
+
+#sidebar ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    line-height: normal;
+}
+
+#sidebar li {
+    margin-bottom: 1px;
+}
+
+#sidebar li ul {
+    margin: 0px;
+    padding: 0px 0px 40px 27px;
+}
+
+#sidebar li li {
+    margin: 0;
+    padding: 9px 0px;
+    border: none;
+    background: none;
+}
+
+#sidebar h2 {
+    margin: 0px;
+    padding: 0px 0px 10px 0px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: italic;
+    color: #FFFFFF;
+}
+
+#sidebar h3 {
+    font-size: 77%;
+    color: #110404;
+}
+
+#sidebar p {
+    margin: 0;
+    line-height: normal;
+    color: #D4C792;
+}
+
+#sidebar a {
+    border: none;
+    text-decoration: none;
+    color: #7D807A;
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+
+td {
+    text-align: center;
+}
+
+.menuButton {
+    width: 270px;
+    height: 60px;
+    z-index: 1;
+    background: #808000;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 20px;
+    font-style: italic;
+    color: #FFFFFF;
+    border-top: 0;
+    border-left: 2px solid;
+    border-right: 0;
+    border-bottom: 2px solid;
+    border-color: #FFFFFF;
+    border-radius: 4px;
+}
+
+.menuButton:hover {
+    background: #FA8258;
+    tansition: all .3s linear;
+    -webkit-transition: all .3s linear;
+    -moz-transition: all .3s linear;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 20px;
+    font-style: italic;
+    color: #000000;
+    border-top: 0;
+    border-left: 2px solid;
+    border-right: 0;
+    border-bottom: 2px solid;
+    border-color: #000000;
+    border-radius: 4px;
+}
+
+.menuButton:active {
+    background: rgb(0, 74, 113);
+    tansition: all .1s linear;
+    -webkit-transition: all .1s linear;
+    -moz-transition: all .1s linear;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 16px;
+    font-style: italic;
+    color: #FFFFFF;
+    border-top: 0;
+    border-left: 2px solid;
+    border-right: 0;
+    border-bottom: 2px solid;
+    border-color: #FFFFFF;
+    border-radius: 4px;
+}
+
+.subMenuButton {
+    width: 225px;
+    height: 45px;
+    z-index: 1;
+    background: rgb(0, 74, 113);
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    font-style: italic;
+    color: #FFFFFF;
+    border-top: 0;
+    border-left: 2px solid;
+    border-right: 0;
+    border-bottom: 2px solid;
+    border-color: #FFFFFF;
+    border-radius: 4px;
+}
+
+.subMenuButton:hover {
+    background: #FA8258;
+    tansition: all .3s linear;
+    -webkit-transition: all .3s linear;
+    -moz-transition: all .3s linear;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 14px;
+    font-style: italic;
+    color: #000000;
+    border-top: 0;
+    border-left: 2px solid;
+    border-right: 0;
+    border-bottom: 2px solid;
+    border-color: #000000;
+    border-radius: 4px;
+}
+
+.subMenuButton:active {
+    background: #808000;
+    tansition: all .1s linear;
+    -webkit-transition: all .1s linear;
+    -moz-transition: all .1s linear;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 11px;
+    font-style: italic;
+    color: #FFFFFF;
+    border-top: 0;
+    border-left: 2px solid;
+    border-right: 0;
+    border-bottom: 2px solid;
+    border-color: #FFFFFF;
+    border-radius: 4px;
+}
+
+.brandMenuButton {
+    /* position:absolute;
+    left:332px;
+    top:274px; */
+    width: 225px;
+    height: 45px;
+    z-index: 1;
+    background: rgb(210, 133, 0);
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    font-style: italic;
+    color: #000000;
+    border-top: 0;
+    border-left: 2px solid;
+    border-right: 0;
+    border-bottom: 2px solid;
+    border-color: #FFFFFF;
+    border-radius: 4px;
+}
+
+.brandMenuButton:hover {
+    background: #FA8258;
+    tansition: all .3s linear;
+    -webkit-transition: all .3s linear;
+    -moz-transition: all .3s linear;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 14px;
+    font-style: italic;
+    color: #000000;
+    border-top: 0;
+    border-left: 2px solid;
+    border-right: 0;
+    border-bottom: 2px solid;
+    border-color: #000000;
+    border-radius: 4px;
+}
+
+.brandMenuButton:active {
+    background: #808000;
+    tansition: all .1s linear;
+    -webkit-transition: all .1s linear;
+    -moz-transition: all .1s linear;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 11px;
+    font-style: italic;
+    color: #FFFFFF;
+    border-top: 0;
+    border-left: 2px solid;
+    border-right: 0;
+    border-bottom: 2px solid;
+    border-color: #FFFFFF;
+    border-radius: 4px;
+}
+
+#superAdminButton {
+    width: 85px;
+    height: 50px;
+}
+
+#superAdminButtonProductTemplate {
+    position: relative;
+    top: 18px;
+    bottom: auto;
+    right: auto;
+    left: auto;
+    transform: rotate(90deg);
+    width: 85px;
+    height: 50px;
+}
+
+#superAdminButtonNewProduct {
+    width: 85px;
+    height: 50px;
+}
+
+#superAdminButtonSubCategory {
+    width: 50px;
+    height: 30px;
+}
+
+#appNewCategory {
+    position: relative;
+    top: 30px;
+    background: rgba(128, 128, 0, 0.5);
+}
+
+.productValue {
+    position: relative;
+    width: auto;
+    height: auto;
+    margin: auto auto 5px 10px;
+    word-wrap: break-word;
+}
+
+#productValue1 {
+    width: 100px;
+    height: 170px;
+    word-wrap: break-word;
+}
+
+#productValue2 {
+    width: 100px;
+    height: 170px;
+    word-wrap: break-word;
+}
+
+#productValue3 {
+    width: 150px;
+    height: 170px;
+    word-wrap: break-word;
+}
+
+#productValue4 {
+    width: 340px;
+    height: 170px;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+#productValue5 {
+    width: 100px;
+    height: 170px;
+    word-wrap: break-word;
+}
+
+#horizontalButton {
+    position: relative;
+    left: 2px;
+    right: auto;
+    top: 0;
+    bottom: auto;
+}
+
+/*footer*/
+
+#footer {
+    position: relative;
+    top: 0;
+    width: 1458px;
+    height: 300px;
+    margin: 0 auto;
+    padding: 0 28px;
+    background: url(images/img07.jpg) no-repeat left top;
+    background-size: cover;
+}
+
+#footerTable {
+    position: relative;
+    top: auto;
+    bottom: 20px;
+    left: auto;
+    right: auto;
+    width: 1450px;
+    height: 200px;
+    margin: 0 auto;
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    font-style: italic;
+    color: #FFFFFF;
+    text-align: left;
+}
+
+/*footer*/

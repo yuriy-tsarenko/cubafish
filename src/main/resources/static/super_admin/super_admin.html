@@ -15,12 +15,17 @@
     <div id="header">
         <!--        start div#logo-->
         <div id="logo">
-            <h1>СИБАС</h1>
+            <h1>CubaFish</h1>
         </div>
         <!-- end div#logo -->
-        <div id="logoutButton">
-            <button type="submit" v-on:click="created" class="headerButton">Выйти</button>
-            <button type="submit" v-on:click="created" class="headerButton">Регистрация</button>
+        <div id="appLogoutButtons">
+            <table><tr>
+                <td><button type="submit" class="logoutButton">Программа лояльности</button></td>
+                <td><button type="submit" class="logoutButton">Отзывы</button></td>
+                <td><button type="submit" class="logoutButton">Контакты</button></td>
+                <td><button type="submit" v-on:click="registrationUserAction" class="logoutButton">Регистрация</button></td>
+                <td><button type="submit" v-on:click="logoutUserAction" class="logoutButton">Выйти</button></td>
+            </tr></table>
         </div>
     </div>
     <!-- end div#header -->
@@ -48,13 +53,13 @@
                     </button>
                 </td>
                 <td>
-                    <button type="submit" class="headerButton">Программа лояльности</button>
+                    <button type="submit" class="headerButton">Все для монтажа</button>
                 </td>
                 <td>
-                    <button type="submit" class="headerButton">Отзывы</button>
+                    <button type="submit" class="headerButton">Туризм</button>
                 </td>
                 <td>
-                    <button type="submit" class="headerButton">Контакты</button>
+                    <button type="submit" class="headerButton">Прикормки</button>
                 </td>
             </tr>
         </table>
@@ -154,19 +159,19 @@
                 <td><h3>Контакты</h3></td>
             </tr>
             <tr>
-                <td>wretgwrgs</td>
-                <td>ergregw4g</td>
-                <td>q3gq3f34q</td>
+                <td>Отзывы</td>
+                <td>Пользовательское соглашение</td>
+                <td></td>
             </tr>
             <tr>
-                <td>wretgwrgs</td>
-                <td>ergregw4g</td>
-                <td>q3gq3f34q</td>
+                <td>Найти магазин на карте</td>
+                <td></td>
+                <td></td>
             </tr>
             <tr>
-                <td>wretgwrgs</td>
-                <td>ergregw4g</td>
-                <td>q3gq3f34q</td>
+                <td>+380989900429</td>
+                <td>klovlvov@gmail.com</td>
+                <td></td>
             </tr>
         </table>
     </div>
