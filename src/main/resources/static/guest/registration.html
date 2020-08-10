@@ -5,49 +5,75 @@
     <title>Registration</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
-    <link href="css/form.css" rel="stylesheet" type="text/css" />
+    <link href="css/form.css" rel="stylesheet" type="text/css"/>
 </head>
 <body id="body">
 <div id="appReg">
-    <form action="authorize.html">
-        <button id="outFromForm">Click here to login</button>
-    </form>
-        <table>
-            <tr>
-                <td><h1>Registration Form</h1></td>
-            </tr>
-            <tr>
-                <td width="300px" height="40px">
-                    <h2>{{responseApi}}</h2>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input  v-model="username" name="username" type="text" id="username" placeholder="Enter user name"/></td>
-            </tr>
-            <tr>
-                <td>
-                    <input  v-model="password" name="password" type="password" id="password" placeholder="Enter password"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input  v-model="email" name="email" type="email" id="email" placeholder="Enter email"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input  v-model="userContact" name="userContact" type="text" id="contact"
-                           placeholder="Enter telephone like +38(***)*** ** **"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <button v-on:click="saveUser" id="inForm">Done</button>
-                </td>
-            </tr>
-        </table>
+
+    <table style="width: 300px; height: auto">
+        <tr>
+            <td colspan="3"><h1>Регистрация</h1></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input v-model="username" name="username" type="text" id="usernameReg" placeholder="Введите логин"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input v-model="password" name="password" type="password" id="passwordReg"
+                       placeholder="Введите пароль"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: auto; height: auto">
+                <input v-model="passwordAgain" name="password" type="password" id="passwordAgain"
+                       placeholder="Повторите пароль"/>
+            </td>
+            <td style="width: 20px;height: auto">
+                <img v-if="((password===passwordAgain)&&(passwordAgain!==''))" class="statusIcon"
+                     src="css/images/credentialGood.png"
+                     alt="credentialStatus"/>
+                <img v-if="((password!==passwordAgain)&&(passwordAgain!==''))" class="statusIcon"
+                     src="css/images/close2.png"
+                     alt="credentialStatus"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input v-model="email" name="email" type="email" id="emailReg" placeholder="Введите e-mail адресс"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input v-model="userContact" name="userContact" type="text" id="contactReg"
+                       placeholder="Введите номер телефона +38(***)*** ** **"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <label class="container">Я принимаю условия пользовательского соглашения
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button v-on:click="saveUser" id="inForm">ЗАРЕГИСТРИРОВАТСЯ</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p id="textMove">Уже есть аккаунт?&nbsp/</p>
+            </td>
+            <td>
+                <form action="authorize.html">
+                    <button id="outFromForm">Вход</button>
+                </form>
+            </td>
+    </table>
 </div>
-<script src="js/registration.js"></script>
+<script src="../admin/js/registration.js"></script>
 </body>
 </html>

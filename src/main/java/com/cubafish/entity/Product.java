@@ -35,4 +35,10 @@ public class Product {
     private BigDecimal productPrice;
     @Column(name = "product_image_name")
     private  String productImageName;
+    @Column(name = "product_image_right_name")
+    private String productImageRightName;
+    @Column(name = "product_image_left_name")
+    private String productImageLeftName;
+    @Column(name = "product_image_back_name")
+    private String productImageBackName;
 }

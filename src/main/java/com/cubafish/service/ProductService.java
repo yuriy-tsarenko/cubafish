@@ -133,50 +133,58 @@ public class ProductService {
         return getUniqueProductBrands(productDtos);
     }
 
-    public String productDataValidation(String productCategory, String productSubCategory, String productBrand,
-                                        String typeOfPurpose, String description, String specification,
-                                        String totalAmount, String productPrice, MultipartFile file) {
-
-        if (file == null) {
-            return "the application did not accept any product files";
+    public Map<String, Object> productDataValidation(String productCategory, String productSubCategory,
+                                                     String productBrand, String typeOfPurpose, String description,
+                                                     String specification, String totalAmount, String productPrice,
+                                                     MultipartFile file, MultipartFile fileRightSide,
+                                                     MultipartFile fileLeftSide, MultipartFile fileBackSide) {
+        ProductDto productDto = new ProductDto();
+        if ((file == null) || (fileRightSide == null) || (fileLeftSide == null) || (fileBackSide == null)) {
+            return Map.of("productDto", productDto, "status", "the application did not accept any product files");
+        } else if ((file.getSize() > fileSize) || (fileRightSide.getSize() > fileSize)
+                || (fileLeftSide.getSize() > fileSize) || (fileBackSide.getSize() > fileSize)) {
+            return Map.of("productDto", productDto, "status", "the file does not meet the requirements:"
+                    + " size: less then 3.5MB, type: jpg/jpeg/png");
         } else if (productCategory == null) {
-            return "the application did not accept any product category";
+            return Map.of("productDto", productDto, "status", "the application did not accept any product category");
         } else if (productCategory.length() > 50) {
-            return "the category have more than 50 characters";
+            return Map.of("productDto", productDto, "status", "the category have more than 50 characters");
         } else if (productSubCategory == null) {
-            return "the application did not accept any product subcategory";
+            return Map.of("productDto", productDto, "status", "the application did not accept any product subcategory");
         } else if (productSubCategory.length() > 50) {
-            return "the subcategory have more than 50 characters";
+            return Map.of("productDto", productDto, "status", "the subcategory have more than 50 characters");
         } else if (productBrand == null) {
-            return "the application did not accept any product brand";
+            return Map.of("productDto", productDto, "status", "the application did not accept any product brand");
         } else if (productBrand.length() > 50) {
-            return "the product brand have more than 50 characters";
+            return Map.of("productDto", productDto, "status", "the product brand have more than 50 characters");
         } else if (typeOfPurpose == null) {
-            return "the application did not accept any type of purpose";
+            return Map.of("productDto", productDto, "status", "the application did not accept any type of purpose");
         } else if (typeOfPurpose.length() > 50) {
-            return "the type of purpose have more than 50 characters";
+            return Map.of("productDto", productDto, "status", "the type of purpose have more than 50 characters");
         } else if (description == null) {
-            return "the application did not accept any product description";
-        } else if (description.length() > 100) {
-            return "the description have more than 100 characters";
+            return Map.of("productDto", productDto, "status", "the application did not accept any product description");
+        } else if (description.length() > 150) {
+            return Map.of("productDto", productDto, "status", "the description have more than 100 characters");
         } else if (specification == null) {
-            return "the application did not accept any product specification";
-        } else if (specification.length() > 400) {
-            return "the specification have more than 400 characters";
+            return Map.of("productDto", productDto, "status",
+                    "the application did not accept any product specification");
+        } else if (specification.length() > 255) {
+            return Map.of("productDto", productDto, "status", "the specification have more than 400 characters");
         } else if (totalAmount == null) {
-            return "the application did not accept any amount of products";
+            return Map.of("productDto", productDto, "status", "the application did not accept any amount of products");
         } else if (!totalAmount.isEmpty()) {
             if (totalAmount.contains(",") || totalAmount.contains(".")) {
-                return "the amount of products can not have <<,>> or <<.>>";
+                return Map.of("productDto", productDto, "status", "the amount of products can not have <<,>> or <<.>>");
             } else {
                 try {
                     Integer.valueOf(totalAmount);
                 } catch (NumberFormatException e) {
-                    return "the amount of products should have a numeric value";
+                    return Map.of("productDto", productDto, "status",
+                            "the amount of products should have a numeric value");
                 }
             }
         } else if (productPrice == null) {
-            return "the application did not accept any product price";
+            return Map.of("productDto", productDto, "status", "the application did not accept any product price");
         } else if (!productPrice.isEmpty()) {
             if (productPrice.contains(",")) {
                 String[] massive = productPrice.split(",");
@@ -184,25 +192,27 @@ public class ProductService {
                 try {
                     new BigDecimal(validPrice);
                 } catch (NumberFormatException e) {
-                    return "product price should have a numeric value";
+                    return Map.of("productDto", productDto, "status", "product price should have a numeric value");
                 }
             } else {
                 try {
                     new BigDecimal(productPrice);
                 } catch (NumberFormatException e) {
-                    return "product price should have a numeric value";
+                    return Map.of("productDto", productDto, "status", "product price should have a numeric value");
                 }
             }
         }
-        return "success";
+        return Map.of("productDto", productDto, "status", "success");
     }
 
-    public Map<String, Object> imageLoader(MultipartFile file, ServletContext pathFromHttpContext) {
-        ProductDto productDto = new ProductDto();
+    public Map<String, Object> imageLoader(MultipartFile file,
+                                           ServletContext pathFromHttpContext,
+                                           ProductDto productDto, int updateStep) {
+
         String uuidFile = UUID.randomUUID().toString();
         Path finalUploadPath = pathFinder.getUploadPath(pathFromHttpContext);
         Path downloadPath = pathFinder.getDownloadPath();
-
+        String fileName;
         if (!file.isEmpty() && ((Objects.requireNonNull(file.getOriginalFilename()).endsWith("jpg")
                 || Objects.requireNonNull(file.getOriginalFilename()).endsWith("jpeg")
                 || Objects.requireNonNull(file.getOriginalFilename()).endsWith("png"))) && file.getSize() <= fileSize) {
@@ -212,31 +222,64 @@ public class ProductService {
                     Files.createDirectories(Paths.get(String.valueOf(finalUploadPath)));
                 } catch (IOException e) {
                     return Map.of("productDto", productDto, "status",
-                            "IOException, can not create the directory");
+                            "IOException, can not create the directory", "update step", updateStep);
                 }
             }
-            String fileName = uuidFile.concat("-").concat(file.getOriginalFilename());
+            fileName = uuidFile.concat("-").concat(file.getOriginalFilename());
             try {
                 file.transferTo(new File(String.valueOf(finalUploadPath).concat(File.separator).concat(fileName)));
             } catch (IOException e) {
                 return Map.of("productDto", productDto, "status",
-                        "IOException, can not transfer file to the directory");
+                        "IOException, can not transfer file to the directory", "update step", updateStep);
             }
-            String productImageName = downloadPath.toString().concat(File.separator).concat(fileName);
-            if (productImageName.length() > 255) {
-                deleteFileIfExists(pathFromHttpContext, productImageName);
+            String imageName = downloadPath.toString().concat(File.separator).concat(fileName);
+            if (imageName.length() > 255) {
+                deleteFileIfExists(pathFromHttpContext, imageName);
                 return Map.of("productDto", productDto, "fileName", fileName, "status",
-                        "please reduce the length of the file name");
+                        "please reduce the length of the file name", "update step", updateStep);
             } else {
-                productDto.setProductImageName(productImageName);
+                if (updateStep == 1) {
+                    productDto.setProductImageName(imageName);
+                    updateStep = updateStep + 1;
+                } else if (updateStep == 2) {
+                    updateStep = updateStep + 1;
+                    productDto.setProductImageRightName(imageName);
+                } else if (updateStep == 3) {
+                    productDto.setProductImageLeftName(imageName);
+                    updateStep = updateStep + 1;
+                } else if (updateStep == 4) {
+                    productDto.setProductImageBackName(imageName);
+                }
             }
-            return Map.of("productDto", productDto, "fileName", fileName, "status", "success");
+
+            return Map.of("productDto", productDto, "fileName", fileName,
+                    "status", "success", "update step", updateStep);
         } else if (Objects.requireNonNull(file.getOriginalFilename()).equals("no_image")) {
-            return Map.of("productDto", productDto, "fileName", "no_image", "status",
-                    "try to set the old image");
+
+            if (productDto.getProductImageRightName() == null) {
+                updateStep = updateStep + 1;
+                productDto.setProductImageRightName(null);
+                return Map.of("productDto", productDto, "fileName", "no_image", "status",
+                        "not required param, setted null to the field", "update step", updateStep);
+            } else if (productDto.getProductImageLeftName() == null) {
+                updateStep = updateStep + 1;
+                productDto.setProductImageLeftName(null);
+                return Map.of("productDto", productDto, "fileName", "no_image", "status",
+                        "not required param, setted null to the field", "update step", updateStep);
+            } else if (productDto.getProductImageBackName() == null) {
+                updateStep = updateStep + 1;
+                productDto.setProductImageBackName(null);
+                return Map.of("productDto", productDto, "fileName", "no_image", "status",
+                        "not required param, setted null to the field", "update step", updateStep);
+            } else {
+                updateStep = updateStep + 1;
+                return Map.of("productDto", productDto, "fileName", "no_image", "status",
+                        "try to set the old image", "update step", updateStep);
+            }
+
         } else {
             return Map.of("productDto", productDto, "status", "the file does not meet the requirements:"
-                    + " size: less then 3.5MB, type: jpg/jpeg/png");
+                    + " size: less then 3.5MB, type: jpg/jpeg/png", "update step", updateStep);
         }
     }
 
@@ -291,6 +334,16 @@ public class ProductService {
             if (productDto.getProductImageName() == null) {
                 productDto.setProductImageName(exiting.getProductImageName());
             }
+            if (productDto.getProductImageRightName() == null) {
+                productDto.setProductImageRightName(exiting.getProductImageRightName());
+            }
+            if (productDto.getProductImageLeftName() == null) {
+                productDto.setProductImageLeftName(exiting.getProductImageLeftName());
+            }
+            if (productDto.getProductImageBackName() == null) {
+                productDto.setProductImageBackName(exiting.getProductImageBackName());
+            }
+
             if (productPrice.isEmpty()) {
                 productDto.setProductPrice(exiting.getProductPrice());
             } else if (productPrice.contains(",")) {

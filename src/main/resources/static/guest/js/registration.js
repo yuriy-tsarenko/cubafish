@@ -4,9 +4,11 @@ let appReg = new Vue({
     data: {
         username: '',
         password: '',
+        passwordAgain: '',
         email: '',
         userContact: '',
-        responseApi: ''
+        responseApi: '',
+        showMarker: false
     },
     methods: {
         saveUser: function () {
@@ -16,7 +18,15 @@ let appReg = new Vue({
                 email: this.email,
                 userContact: this.userContact
             };
-            registrationApi.save({}, created).then(response => (this.responseApi = response.data.status));
+            if (this.password === this.passwordAgain) {
+                registrationApi.save({}, created).then(response => (this.responseApi = response.data.status));
+            } else {
+                alert('поля "введите пароль" и "повторите пароль" не совпадают');
+            }
+            if (this.responseApi !== ''){
+                alert(this.responseApi);
+            }
+
         }
     }
 });

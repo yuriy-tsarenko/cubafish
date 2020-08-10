@@ -30,27 +30,13 @@ h3 {
 }
 
 p, blockquote, ul, ol {
-    margin-bottom: 20px;
-    line-height: 2em;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    line-height: 1.1em;
 }
 
-
-/* Wrapper */
-
-#wrapper {
-}
-
-/* Header */
-
-/*#header {*/
-/*    width: 1514px;*/
-/*    height: 350px;*/
-/*    margin: 0 auto;*/
-/*    background: url(images/img01.jpg) no-repeat left top;*/
-/*    background-size: 100%;*/
-/*}*/
 header {
-    min-width: 2680px;
+    min-width: 2500px;
     max-width: 100%;
     height: 200px;
     background-color: white;
@@ -65,7 +51,7 @@ header {
 }
 
 .wrapper {
-    width: 2050px;
+    width: 1900px;
     margin: 0 auto;
     background-color: #ffffff;
 }
@@ -79,7 +65,7 @@ header {
 #appLogoutButtons {
     position: relative;
     bottom: 100px;
-    left: 450px;
+    left: 370px;
 }
 
 .menu {
@@ -111,12 +97,12 @@ header {
     height: 20px;
     border-radius: 40px;
     padding: 10px;
-    left: 1550px;
+    left: 1450px;
     bottom: 135px;
 }
 
 .search-btn {
-position: relative;
+    position: relative;
     left: 245px;
     top: 0;
     bottom: 50px;
@@ -170,7 +156,7 @@ position: relative;
     top: auto;
     bottom: 185px;
     right: auto;
-    left: 1900px;
+    left: 1800px;
     width: 75px;
     height: 65px;
 }
@@ -178,7 +164,7 @@ position: relative;
 /* Menu */
 
 #appHeaderButtons {
-    width: 2050px;
+    width: 1900px;
     height: 41px;
     margin: 0 auto;
     padding: 0px 0px 0px 0px;
@@ -187,14 +173,14 @@ position: relative;
 
 #moveBackground {
     position: relative;
-    min-width: 2680px;
+    min-width: 2500px;
     max-width: 100%;
     height: 41px;
     background-color: #585801;
 }
 
 .headerButton {
-    width: 510px;
+    width: 378px;
     height: 40px;
     z-index: 1;
     background: #585801;
@@ -249,7 +235,7 @@ position: relative;
 #pageWrapper {
     margin: 0 auto;
     position: relative;
-    min-width: 2680px;
+    min-width: 2500px;
     max-width: 100%;
     height: auto;
     background-color: #d0d0d0;
@@ -257,10 +243,9 @@ position: relative;
 
 #page {
     position: relative;
-    width: 2050px;
-    height: 3035px;
+    width: 1500px;
+    height: 2700px;
     margin: 0 auto;
-    background: #d0d0d0;
     background-size: cover;
 }
 
@@ -271,7 +256,7 @@ position: relative;
     top: 20px;
     right: 40px;
     float: right;
-    width: 1450px;
+    width: 1000px;
     height: 99%;
     overflow: auto;
 }
@@ -286,9 +271,15 @@ position: relative;
 #fromDb {
     border-collapse: collapse;
     border: 1px solid #949393;
+    margin-top: 10px;
+    background: white;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
+}
+
+#detailsTable {
     margin-bottom: 10px;
     background: white;
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.25);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
 }
 
 #fromDbButtons {
@@ -317,7 +308,7 @@ position: relative;
 
 #cellStyleSpecification {
     text-align: left;
-    vertical-align: center;
+    vertical-align: top;
 }
 
 /*getFromDb*/
@@ -330,7 +321,7 @@ position: relative;
 #sidebar {
     position: relative;
     top: 20px;
-    left: 70px;
+    left: 50px;
     width: 370px;
     height: 99%;
     overflow: auto;
@@ -408,7 +399,7 @@ td {
     z-index: 1;
     background: #585801;
     font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 20px;
+    font-size: 24px;
     font-style: italic;
     color: #FFFFFF;
     border-top: 0;
@@ -460,7 +451,7 @@ td {
     background: rgb(0, 74, 113);
     font-family: Geneva, Arial, Helvetica, sans-serif;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 17px;
     font-style: italic;
     color: #FFFFFF;
     border-top: 0;
@@ -512,7 +503,7 @@ td {
     background: rgb(210, 133, 0);
     font-family: Geneva, Arial, Helvetica, sans-serif;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 17px;
     font-style: italic;
     color: #000000;
     border-top: 0;
@@ -590,12 +581,12 @@ td {
 }
 
 .productValue {
-    margin: auto auto 5px 10px;
+    margin: auto auto auto 10px;
 }
 
 #productValue1 {
     position: relative;
-    width: 380px;
+    width: 435px;
     height: 200px;
     word-wrap: break-word;
     font-family: Gill Sans, sans-serif;
@@ -606,22 +597,24 @@ td {
 
 #productValue2 {
     position: relative;
-    width: 480px;
-    height: 200px;
+    margin: 0 auto;
+    width: 400px;
+    height: 240px;
     word-wrap: break-word;
     font-family: Gill Sans, sans-serif;
     font-size: 20px;
     font-style: normal;
+    text-align: left;
     color: #000000;
 }
 
 #productValue3 {
     position: relative;
-    width: 270px;
+    width: 300px;
     height: 50px;
     word-wrap: break-word;
     font-family: Gill Sans, sans-serif;
-    font-size: 23px;
+    font-size: 26px;
     font-style: normal;
     color: #000000;
 }
@@ -630,10 +623,10 @@ td {
     position: relative;
     top: 10px;
     left: 10px;
-    width: 270px;
+    width: 300px;
     height: 50px;
     font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 20px;
+    font-size: 25px;
     font-style: italic;
     color: #585801;
 }
@@ -642,10 +635,10 @@ td {
     position: relative;
     top: 10px;
     left: 10px;
-    width: 270px;
+    width: 300px;
     height: 50px;
     font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 20px;
+    font-size: 25px;
     font-style: italic;
     color: #c30303;
 }
@@ -659,17 +652,17 @@ td {
     width: 200px;
     height: 70px;
     z-index: 1;
-    background: transparent;
+    background: #585801;
     font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 20px;
+    font-size: 24px;
     font-style: normal;
-    color: #585801;
+    color: #ffffff;
     border: 5px solid #585801;
     border-radius: 20px;
 }
 
 .bueButton:hover {
-    background: rgba(165, 165, 0, 0.7);
+    background: transparent;
     tansition: all .3s linear;
     -webkit-transition: all .3s linear;
     -moz-transition: all .3s linear;
@@ -682,15 +675,15 @@ td {
 }
 
 .bueButton:active {
-    background: transparent;
+    background: #585801;
     tansition: all .1s linear;
     -webkit-transition: all .1s linear;
     -moz-transition: all .1s linear;
     font-family: Georgia, "Times New Roman", Times, serif;
     font-size: 16px;
     font-style: normal;
-    color: #000000;
-    border: 5px solid #7a0000;
+    color: #ffffff;
+    border: 5px solid #585801;
     border-radius: 20px;
 }
 
@@ -714,65 +707,65 @@ td {
 
 #bigPhoto {
     position: relative;
-    width: 800px;
-    height: 800px;
+    width: 900px;
+    height: 900px;
     border: none;
+}
+
+#bigPhotoButtonMove {
+    position: relative;
+    left: 430px;
+    bottom: 0;
+    top: auto;
+    right: auto;
 }
 
 .bigPhotoButton {
     position: relative;
-    float: right;
-    top: auto;
-    left: auto;
-    right: auto;
-    bottom: auto;
-    width: 100px;
-    height: 50px;
-    background: #6b2020;
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 20px;
-    font-style: italic;
-    color: #FFFFFF;
+    width: 30px;
+    height: 30px;
+    background-image: url(images/close.png);
+    background-size: 30px 30px;
     border-top: 0;
-    border-left: 2px solid;
+    border-left: 0;
     border-right: 0;
-    border-bottom: 2px solid;
-    border-color: #FFFFFF;
-    border-radius: 4px;
+    border-bottom: 0;
+    border-radius: 10px;
 }
 
 .bigPhotoButton:hover {
-    background: rgb(0, 74, 113);
+    background: url(images/close2.png);
+    background-size: 30px 30px;
     tansition: all .3s linear;
     -webkit-transition: all .3s linear;
     -moz-transition: all .3s linear;
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 20px;
-    font-style: italic;
-    color: #000000;
     border-top: 0;
-    border-left: 2px solid;
+    border-left: 0;
     border-right: 0;
-    border-bottom: 2px solid;
-    border-color: #000000;
-    border-radius: 4px;
+    border-bottom: 0;
+    border-radius: 10px;
 }
 
 .bigPhotoButton:active {
-    background: #c9b500;
+    background: url(images/close.png);
+    background-size: 30px 30px;
     tansition: all .1s linear;
     -webkit-transition: all .1s linear;
     -moz-transition: all .1s linear;
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 16px;
-    font-style: italic;
-    color: #FFFFFF;
     border-top: 0;
-    border-left: 2px solid;
+    border-left: 0;
     border-right: 0;
-    border-bottom: 2px solid;
-    border-color: #FFFFFF;
-    border-radius: 4px;
+    border-bottom: 0;
+    border-radius: 10px;
+}
+
+#bigPhotoButtonDiv {
+    position: relative;
+    float: right;
+    top: 2px;
+    bottom: 0;
+    left: 845px;
+    right: 2px;
 }
 
 #appShowBasket {
@@ -793,6 +786,47 @@ td {
     top: 25%;
 }
 
+.detailsBtnColor {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #565601;
+}
+
+.detailsBtnColor:hover {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #737300;
+}
+
+.btn {
+    position: relative;
+    margin: 0 auto;
+    height: 25px;
+    width: 50px;
+    border: none;
+    background: url(images/arrowIcon.png);
+    background-size: 50px 25px;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+
+}
+
+.btnUp {
+    position: relative;
+    margin: 0 auto;
+    height: 25px;
+    width: 50px;
+    border: none;
+    background: url(images/arrowIconUp.png);
+    background-size: 50px 25px;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+
+}
 #summaryTable {
     background-color: #585801;
     font-family: Georgia, "Times New Roman", Times, serif;
@@ -956,7 +990,7 @@ footer nav a:hover {
 
 footer {
     position: relative;
-    min-width: 2680px;
+    min-width: 2500px;
     max-width: 100%;
     height: auto;
     background-color: #585801;
@@ -966,10 +1000,10 @@ footer {
 
 #wrapperFooter {
     position: relative;
-    width: 2050px;
+    width: 1900px;
     height: 300px;
     margin: 0 auto;
-    background-color: #585801;
+
 }
 
 #logoFooter {

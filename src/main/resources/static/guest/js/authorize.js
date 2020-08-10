@@ -18,16 +18,16 @@ let appLogin = new Vue({
         },
 
         saveData: function () {
-            if (this.auth !== '') {
+            if (this.auth !== '' || status.ok) {
                 localStorage.setItem('CustomHeader', this.auth);
                 setTimeout(function () {
                     alert('вы авторизованы, перенаправление на Ваш аккаунт');
-                    window.location = 'http://91.235.128.12:8081/super_admin/super_admin.html';
+                    window.location = 'http://91.235.128.12:8081/user/user.html';
                 }, 1000);
             } else {
                 setTimeout(function () {
                     alert('вы не авторизованы, проверте правильность введенных данных');
-                }, 1000);
+                }, 500);
             }
         }
     }
