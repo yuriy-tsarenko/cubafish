@@ -18,7 +18,7 @@ let appLogin = new Vue({
         },
 
         saveData: function () {
-            if (this.auth !== '') {
+            if (this.auth !== '' || status.ok) {
                 localStorage.setItem('CustomHeader', this.auth);
                 setTimeout(function () {
                     alert('вы авторизованы, перенаправление на Ваш аккаунт');
@@ -27,7 +27,7 @@ let appLogin = new Vue({
             } else {
                 setTimeout(function () {
                     alert('вы не авторизованы, проверте правильность введенных данных');
-                }, 1000);
+                }, 500);
             }
         }
     }

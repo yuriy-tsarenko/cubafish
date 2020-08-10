@@ -20,4 +20,7 @@ public class ProductDto {
     private Integer totalAmount;
     private BigDecimal productPrice;
     private String productImageName;
+    private String productImageRightName;
+    private String productImageLeftName;
+    private String productImageBackName;
 }

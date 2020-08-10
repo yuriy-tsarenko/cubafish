@@ -5,8 +5,7 @@
 }
 
 body {
-    margin: 0px;
-    background: #0F0A1D;
+    background: #ffffff;
     text-align: justify;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 13px;
@@ -17,7 +16,7 @@ h1, h3 {
     color: #FFFFFF;
 }
 
-h2, h4 {
+h2, h4, h5 {
     color: #FFFFFF;
 }
 
@@ -31,198 +30,235 @@ h3 {
 }
 
 p, blockquote, ul, ol {
-    margin-bottom: 20px;
-    line-height: 2em;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    line-height: 1.1em;
 }
 
-
-/* Wrapper */
-
-#wrapper {
+header {
+    min-width: 2500px;
+    max-width: 100%;
+    height: 200px;
+    background-color: white;
 }
 
-/* Header */
+.logo {
+    position: relative;
+    right: auto;
+    top: 20px;
+    left: 10px;
+    bottom: auto;
+}
 
-#header {
-    width: 1514px;
-    height: 350px;
+.wrapper {
+    width: 1900px;
     margin: 0 auto;
-    background: url(images/img01.jpg) no-repeat left top;
-    background-size: 100%;
+    background-color: #ffffff;
+}
+
+/*.row {*/
+/*    !*display: flex;*!*/
+/*    flex-wrap: wrap;*/
+/*}*/
+
+
+#appLogoutButtons {
+    position: relative;
+    bottom: 100px;
+    left: 370px;
+}
+
+.menu {
+    width: 1100px;
+    align-self: center;
+    text-align: center;
+}
+
+.menu__item {
+    color: #393900;
+    font-family: Arial;
+    font-size: 25px;
+    line-height: 1;
+    font-weight: 820;
+    display: inline-block;
+    margin-right: 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.menu__item:last-child {
+    margin-right: 0;
+}
+
+.search-box {
+    position: relative;
+    background-color: #585801;
+    width: 300px;
+    height: 20px;
+    border-radius: 40px;
+    padding: 10px;
+    left: 1450px;
+    bottom: 135px;
+}
+
+.search-btn {
+    position: relative;
+    left: 245px;
+    top: 0;
+    bottom: 50px;
+    justify-content: center;
+    align-items: center;
+    color: #000000;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.search-txt {
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0;
+    color: #fff;
+    font-size: 16px;
+    /*transition: .4s;*/
+    /*line-height: 40px;*/
+    width: 240px;
+}
+
+.search-box:hover .search-txt {
+    width: 240px;
+    padding: 0px;
+}
+
+.search-box:hover .search-btn {
+    background-color: #3e3e00;
+}
+
+.placeholder {
+    background-color: white;
+}
+
+#searchImage {
+    position: relative;
+    right: 0;
+    left: 270px;
+    bottom: 15px;
 }
 
 /* Logo */
 
-#logo {
-    float: left;
-    width: 270px;
-    height: 200px;
-    margin: 0;
-    padding-left: 30px;
-    text-align: center;
-    background: url(images/logo.png) no-repeat left top;
-    background-size: 50%;
-}
 
-#logo h1 {
-    margin: 0;
-    padding: 10px 0px 0px 0px;
-    font: normal 46px Georgia, "Times New Roman", Times, serif;
-    text-decoration: none;
-    color: #459700;
-}
-
-#logo h2 {
-    margin: -2px 0 0 0;
-    padding: 0;
-    letter-spacing: 2px;
-    font-size: 12px;
-    font-weight: normal;
-    font-style: italic;
-    color: #FFFFFF;
-}
-
-#appLogoutButtons {
-    float: right;
-    width: 1100px;
-    height: 41px;
-    margin: 0;
-}
-
-.logoutButton {
-    width: 214px;
-    height: 41px;
-    z-index: 1;
-    background: rgb(0, 74, 113);
-    font-family: Geneva, Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    font-size: 15px;
-    font-style: italic;
-    color: #FFFFFF;
-    border-top: 0;
-    border-left: 2px solid;
-    border-right: 2px solid;
-    border-bottom: 2px solid;
-    border-color: #FFFFFF;
-    border-radius: 4px;
-}
-
-.logoutButton:hover {
-    background: #FA8258;
-    tansition: all .3s linear;
-    -webkit-transition: all .3s linear;
-    -moz-transition: all .3s linear;
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 14px;
-    font-style: italic;
-    color: #000000;
-    border-top: 0;
-    border-left: 2px solid;
-    border-right: 0;
-    border-bottom: 2px solid;
-    border-color: #000000;
-    border-radius: 4px;
-}
-
-.logoutButton:active {
-    background: #808000;
-    tansition: all .1s linear;
-    -webkit-transition: all .1s linear;
-    -moz-transition: all .1s linear;
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 11px;
-    font-style: italic;
-    color: #FFFFFF;
-    border-top: 0;
-    border-left: 2px solid;
-    border-right: 0;
-    border-bottom: 2px solid;
-    border-color: #FFFFFF;
-    border-radius: 4px;
+#basketImage {
+    position: relative;
+    top: auto;
+    bottom: 185px;
+    right: auto;
+    left: 1800px;
+    width: 75px;
+    height: 65px;
 }
 
 /* Menu */
 
 #appHeaderButtons {
-    width: 1514px;
+    width: 1900px;
     height: 41px;
     margin: 0 auto;
     padding: 0px 0px 0px 0px;
-    background: #808000;
+    background: #585801;
+}
+
+#moveBackground {
+    position: relative;
+    min-width: 2500px;
+    max-width: 100%;
+    height: 41px;
+    background-color: #585801;
 }
 
 .headerButton {
-    width: 214px;
-    height: 41px;
+    width: 378px;
+    height: 40px;
     z-index: 1;
-    background: #808000;
+    background: #585801;
     font-family: Geneva, Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-size: 15px;
     font-style: italic;
     color: #FFFFFF;
     border-top: 0;
-    border-left: 2px solid;
-    border-right: 2px solid;
-    border-bottom: 2px solid;
-    border-color: #FFFFFF;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-color: #585801;
     border-radius: 4px;
 }
 
 .headerButton:hover {
-    background: #FA8258;
+    background: #8c8c01;
     tansition: all .3s linear;
     -webkit-transition: all .3s linear;
     -moz-transition: all .3s linear;
     font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 14px;
+    font-size: 12px;
     font-style: italic;
     color: #000000;
     border-top: 0;
-    border-left: 2px solid;
+    border-left: 0;
     border-right: 0;
-    border-bottom: 2px solid;
-    border-color: #000000;
+    border-bottom: 0;
+    border-color: #585801;
     border-radius: 4px;
 }
 
 .headerButton:active {
-    background: rgb(0, 74, 113);
+    background: #585801;
     tansition: all .1s linear;
     -webkit-transition: all .1s linear;
     -moz-transition: all .1s linear;
     font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 11px;
+    font-size: 14px;
     font-style: italic;
     color: #FFFFFF;
     border-top: 0;
-    border-left: 2px solid;
+    border-left: 0;
     border-right: 0;
-    border-bottom: 2px solid;
-    border-color: #FFFFFF;
+    border-bottom: 0;
+    border-color: #585801;
     border-radius: 4px;
 }
 
 /* Page */
+#pageWrapper {
+    margin: 0 auto;
+    position: relative;
+    min-width: 2500px;
+    max-width: 100%;
+    height: auto;
+    background-color: #d0d0d0;
+}
 
 #page {
-    width: 1458px;
-    height: 1250px;
+    position: relative;
+    width: 1500px;
+    height: 2700px;
     margin: 0 auto;
-    padding: 0 28px;
-    background: #ffffff url(images/img05.jpg) no-repeat left top;
     background-size: cover;
 }
 
 /* Content */
 
 #content {
+    position: relative;
+    top: 20px;
+    right: 40px;
     float: right;
-    width: 1100px;
-    height: 1200px;
-    padding-top: 30px;
+    width: 1000px;
+    height: 99%;
     overflow: auto;
-
 }
 
 #content::-webkit-scrollbar {
@@ -234,10 +270,16 @@ p, blockquote, ul, ol {
 /*getFromDb*/
 #fromDb {
     border-collapse: collapse;
-    border: 1px none white;
-    border-bottom-style: solid;
+    border: 1px solid #949393;
+    margin-top: 10px;
+    background: white;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
+}
+
+#detailsTable {
     margin-bottom: 10px;
-    background: rgba(128, 128, 0, 0.5);
+    background: white;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
 }
 
 #fromDbButtons {
@@ -261,7 +303,7 @@ p, blockquote, ul, ol {
 
 #cellStyleDescription {
     text-align: left;
-    vertical-align: top;
+    vertical-align: center;
 }
 
 #cellStyleSpecification {
@@ -277,16 +319,12 @@ p, blockquote, ul, ol {
 }
 
 #sidebar {
-    float: left;
-    width: 275px;
-    height: 1200px;
-    margin: 20px 0px;
-    padding: 10px 0px 30px 30px;
     position: relative;
-    top: 0px;
-    left: 0px;
+    top: 20px;
+    left: 50px;
+    width: 370px;
+    height: 99%;
     overflow: auto;
-
 }
 
 #sidebar::-webkit-scrollbar {
@@ -323,7 +361,7 @@ p, blockquote, ul, ol {
     font-size: 18px;
     font-weight: normal;
     font-style: italic;
-    color: #FFFFFF;
+    color: #020202;
 }
 
 #sidebar h3 {
@@ -356,12 +394,12 @@ td {
 }
 
 .menuButton {
-    width: 270px;
-    height: 60px;
+    width: 320px;
+    height: 80px;
     z-index: 1;
-    background: #808000;
+    background: #585801;
     font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 20px;
+    font-size: 24px;
     font-style: italic;
     color: #FFFFFF;
     border-top: 0;
@@ -373,24 +411,24 @@ td {
 }
 
 .menuButton:hover {
-    background: #FA8258;
+    background: #8c8c01;
     tansition: all .3s linear;
     -webkit-transition: all .3s linear;
     -moz-transition: all .3s linear;
     font-family: Georgia, "Times New Roman", Times, serif;
     font-size: 20px;
     font-style: italic;
-    color: #000000;
+    color: #ffffff;
     border-top: 0;
     border-left: 2px solid;
     border-right: 0;
     border-bottom: 2px solid;
-    border-color: #000000;
+    border-color: #8c8c01;
     border-radius: 4px;
 }
 
 .menuButton:active {
-    background: rgb(0, 74, 113);
+    background: #585801;
     tansition: all .1s linear;
     -webkit-transition: all .1s linear;
     -moz-transition: all .1s linear;
@@ -402,18 +440,18 @@ td {
     border-left: 2px solid;
     border-right: 0;
     border-bottom: 2px solid;
-    border-color: #FFFFFF;
+    border-color: #585801;
     border-radius: 4px;
 }
 
 .subMenuButton {
-    width: 225px;
-    height: 45px;
+    width: 300px;
+    height: 60px;
     z-index: 1;
     background: rgb(0, 74, 113);
     font-family: Geneva, Arial, Helvetica, sans-serif;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 17px;
     font-style: italic;
     color: #FFFFFF;
     border-top: 0;
@@ -442,7 +480,7 @@ td {
 }
 
 .subMenuButton:active {
-    background: #808000;
+    background: #3e3e00;
     tansition: all .1s linear;
     -webkit-transition: all .1s linear;
     -moz-transition: all .1s linear;
@@ -459,16 +497,13 @@ td {
 }
 
 .brandMenuButton {
-    /* position:absolute;
-    left:332px;
-    top:274px; */
-    width: 225px;
-    height: 45px;
+    width: 250px;
+    height: 50px;
     z-index: 1;
     background: rgb(210, 133, 0);
     font-family: Geneva, Arial, Helvetica, sans-serif;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 17px;
     font-style: italic;
     color: #000000;
     border-top: 0;
@@ -497,7 +532,7 @@ td {
 }
 
 .brandMenuButton:active {
-    background: #808000;
+    background: #3e3e00;
     tansition: all .1s linear;
     -webkit-transition: all .1s linear;
     -moz-transition: all .1s linear;
@@ -520,10 +555,8 @@ td {
 
 #superAdminButtonProductTemplate {
     position: relative;
-    top: 18px;
-    bottom: auto;
-    right: auto;
-    left: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
     transform: rotate(90deg);
     width: 85px;
     height: 50px;
@@ -546,42 +579,375 @@ td {
 }
 
 .productValue {
+    margin: auto auto auto 10px;
+}
+
+#file {
     position: relative;
-    width: auto;
+    width: 225px;
     height: auto;
-    margin: auto auto 5px 10px;
-    word-wrap: break-word;
 }
 
 #productValue1 {
-    width: 100px;
-    height: 170px;
+    position: relative;
+    width: 250px;
+    height: 125px;
     word-wrap: break-word;
+    font-family: Gill Sans, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    color: #000000;
 }
 
 #productValue2 {
-    width: 100px;
-    height: 170px;
+    position: relative;
+    margin: 0 auto;
+    width: 400px;
+    height: 240px;
     word-wrap: break-word;
+    font-family: Gill Sans, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    text-align: left;
+    color: #000000;
 }
 
 #productValue3 {
-    width: 150px;
-    height: 170px;
+    position: relative;
+    width: 200px;
+    height: 125px;
     word-wrap: break-word;
+    font-family: Gill Sans, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    color: #000000;
 }
 
-#productValue4 {
-    width: 340px;
-    height: 170px;
-    word-wrap: break-word;
+#available {
+    position: relative;
+    top: 10px;
+    left: 10px;
+    width: 300px;
+    height: 50px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 25px;
+    font-style: italic;
+    color: #585801;
+}
+
+#notAvailable {
+    position: relative;
+    top: 10px;
+    left: 10px;
+    width: 300px;
+    height: 50px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 25px;
+    font-style: italic;
+    color: #c30303;
+}
+
+.bueButton {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: 7px;
+    bottom: 10px;
+    width: 200px;
+    height: 70px;
+    z-index: 1;
+    background: #585801;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 24px;
+    font-style: normal;
+    color: #ffffff;
+    border: 5px solid #585801;
+    border-radius: 20px;
+}
+
+.bueButton:hover {
+    background: transparent;
+    tansition: all .3s linear;
+    -webkit-transition: all .3s linear;
+    -moz-transition: all .3s linear;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 20px;
+    font-style: normal;
+    color: #000000;
+    border: 5px solid #585801;
+    border-radius: 20px;
+}
+
+.bueButton:active {
+    background: #585801;
+    tansition: all .1s linear;
+    -webkit-transition: all .1s linear;
+    -moz-transition: all .1s linear;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 16px;
+    font-style: normal;
+    color: #ffffff;
+    border: 5px solid #585801;
+    border-radius: 20px;
+}
+
+#window {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 998;
+    background-color: rgba(26, 26, 26, 0.5);
+}
+
+#insideWindow {
+    position: relative;
+    margin: 0 auto;
+    width: 800px;
+    height: 800px;
+    top: 20%;
+}
+
+#bigPhoto {
+    position: relative;
+    width: 900px;
+    height: 900px;
+    border: none;
+}
+
+#bigPhotoButtonMove {
+    position: relative;
+    left: 430px;
+    bottom: 0;
+    top: auto;
+    right: auto;
+}
+
+.bigPhotoButton {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    background-image: url(images/close.png);
+    background-size: 30px 30px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 10px;
+}
+
+.bigPhotoButton:hover {
+    background: url(images/close2.png);
+    background-size: 30px 30px;
+    tansition: all .3s linear;
+    -webkit-transition: all .3s linear;
+    -moz-transition: all .3s linear;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 10px;
+}
+
+.bigPhotoButton:active {
+    background: url(images/close.png);
+    background-size: 30px 30px;
+    tansition: all .1s linear;
+    -webkit-transition: all .1s linear;
+    -moz-transition: all .1s linear;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 10px;
+}
+
+#bigPhotoButtonDiv {
+    position: relative;
+    float: right;
+    top: 2px;
+    bottom: 0;
+    left: 845px;
+    right: 2px;
+}
+
+#appShowBasket {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 900;
+    background-color: rgba(26, 26, 26, 0.5);
+}
+
+#insideWindowBasket {
+    position: relative;
+    margin: 0 auto;
+    width: 400px;
+    height: 100px;
+    top: 25%;
+}
+
+.detailsBtnColor {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #565601;
+}
+
+.detailsBtnColor:hover {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #737300;
+}
+
+.btn {
+    position: relative;
+    margin: 0 auto;
+    height: 25px;
+    width: 50px;
+    border: none;
+    background: url(images/arrowIcon.png);
+    background-size: 50px 25px;
+    cursor: pointer;
+    outline: none;
     overflow: hidden;
+
 }
 
-#productValue5 {
-    width: 100px;
-    height: 170px;
+.btnUp {
+    position: relative;
+    margin: 0 auto;
+    height: 25px;
+    width: 50px;
+    border: none;
+    background: url(images/arrowIconUp.png);
+    background-size: 50px 25px;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+
+}
+
+#summaryTable {
+    background-color: #585801;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 20px;
+    font-style: italic;
+    color: #ffffff;
+    border-collapse: collapse;
+    border: 1px none black;
+    border-bottom-style: solid;
+    position: relative;
+    width: 400px;
+    height: 100px;
+}
+
+#productBasketValue1 {
+    position: relative;
+    width: 170px;
+    height: auto;
     word-wrap: break-word;
+}
+
+#productBasketValue2 {
+    position: relative;
+    width: 230px;
+    height: auto;
+    word-wrap: break-word;
+}
+
+#productBasketValue3 {
+    position: relative;
+    width: 120px;
+    height: 30px;
+    word-wrap: break-word;
+}
+
+#availableInBasket {
+    position: relative;
+
+    width: 70px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 16px;
+    font-style: italic;
+    color: #FFFFFF;
+}
+
+#notAvailableInBasket {
+    position: relative;
+    width: 70px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 16px;
+    font-style: italic;
+    color: #fabc00;
+}
+
+#summaryDiv {
+    position: inherit;
+    margin: 0 auto;
+    width: 800px;
+    height: 300px;
+    top: 20%;
+}
+
+.summaryTableButton {
+    position: relative;
+    float: right;
+    top: auto;
+    left: auto;
+    right: 75px;
+    bottom: 5px;
+    width: 250px;
+    height: 70px;
+    background: #6b2020;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 20px;
+    font-style: italic;
+    color: #FFFFFF;
+    border-top: 0;
+    border-left: 2px solid;
+    border-right: 0;
+    border-bottom: 2px solid;
+    border-color: #FFFFFF;
+    border-radius: 4px;
+}
+
+.summaryTableButton:hover {
+    background: rgb(0, 74, 113);
+    tansition: all .3s linear;
+    -webkit-transition: all .3s linear;
+    -moz-transition: all .3s linear;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 20px;
+    font-style: italic;
+    color: #000000;
+    border-top: 0;
+    border-left: 2px solid;
+    border-right: 0;
+    border-bottom: 2px solid;
+    border-color: #000000;
+    border-radius: 4px;
+}
+
+.summaryTableButton:active {
+    background: #c9b500;
+    tansition: all .1s linear;
+    -webkit-transition: all .1s linear;
+    -moz-transition: all .1s linear;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 16px;
+    font-style: italic;
+    color: #FFFFFF;
+    border-top: 0;
+    border-left: 2px solid;
+    border-right: 0;
+    border-bottom: 2px solid;
+    border-color: #FFFFFF;
+    border-radius: 4px;
 }
 
 #horizontalButton {
@@ -594,32 +960,58 @@ td {
 
 /*footer*/
 
-#footer {
+
+footer p {
+    color: white;
+    font-size: small;
+}
+
+footer a {
+    color: white;
+    font-size: 14px;
+    /*margin-left: 10px;*/
+
+}
+
+nav {
+    font-size: 30px;
+}
+
+footer nav a:hover {
+    border-bottom: 1px solid white;
+}
+
+.social {
+    height: 30px;
+}
+
+.social img {
+    width: 30px;
+}
+
+.social img:hover {
+    background: #494949;
+}
+
+footer {
     position: relative;
-    top: 0;
-    width: 1458px;
+    min-width: 2500px;
+    max-width: 100%;
+    height: auto;
+    background-color: #585801;
+    text-align: center;
+
+}
+
+#wrapperFooter {
+    position: relative;
+    width: 1900px;
     height: 300px;
     margin: 0 auto;
-    padding: 0 28px;
-    background: url(images/img07.jpg) no-repeat left top;
-    background-size: cover;
+
 }
 
-#footerTable {
+#logoFooter {
     position: relative;
-    top: auto;
-    bottom: 20px;
-    left: auto;
-    right: auto;
-    width: 1450px;
-    height: 200px;
     margin: 0 auto;
-    font-family: Geneva, Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    font-size: 15px;
-    font-style: italic;
-    color: #FFFFFF;
-    text-align: left;
 }
-
-/*footer*/

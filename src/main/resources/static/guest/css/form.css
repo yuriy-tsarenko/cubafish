@@ -1,48 +1,265 @@
 body {
-	margin: 0px;
-	background: #0F0A1D;
-}
-#outFromForm {
-	width: 140px;
-	height: 30px;
+    /*margin: 0 auto;*/
+    background: rgb(193, 193, 0);
+    background: radial-gradient(circle, rgba(193, 193, 0, 1) 0%, rgba(88, 88, 1, 1) 100%);
 }
 
+#appLogin {
+}
+
+#outFromForm {
+    position: relative;
+    bottom: 0;
+    right: 95px;
+    background: none;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    border-bottom: none;
+    font-family: Arial, sans-serif;
+    font-style: inherit;
+    color: black;
+    width: 140px;
+    height: 30px;
+}
+
+#outFromForm:hover {
+    color: darkslateblue;
+    text-decoration: underline;
+}
+
+
 #inForm {
-	width: 100px;
-	height: 50px;
+    position: relative;
+    right: 10px;
+    top: 10px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3), -2px -2px 2px rgba(255, 255, 255, 0.5);
+    background: linear-gradient(45deg, #1a5800, #179400);
+    border-radius: 0px;
+    border: 0 solid;
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+    font-style: inherit;
+    color: white;
+    width: 305px;
+    height: 43px;
 }
 
 table {
-	border: 1px solid #000000;
-	background: #808000;
-	width: 450px;
-	height: 400px;
-	alignment: center;
+    margin: 10% auto;
+    border-radius: 4px;
+    border: 1px solid #2b2b2b;
+    background: white;
+    width: 450px;
+    height: 570px;
+    alignment: center;
 }
 
 input {
-	align-content: center;
-	width: 300px;
-	height: 40px;
+    border-radius: 0px;
+    align-content: center;
+    width: 300px;
+    height: 40px;
 }
 
 td {
-	text-align: center;
-	width: 300px;
-	height: 40px;
+    color: black;
+    text-align: center;
+    border-radius: 2px;
 }
 
-div {
-	margin: 200px auto 0;
-	width: 500px;
-	height: 430px;
-	top: 100px;
-}
+/*div {*/
+/*	margin: 200px auto 0;*/
+/*	width: 500px;*/
+/*	height: 430px;*/
+/*	top: 100px;*/
+/*}*/
 
 h2 {
-	/*font-family: Georgia, "Times New Roman", Times, serif;*/
-	font-family: "Arial Black",serif;
-	font-size: 16px;
-	font-style: italic;
-	color: #c40000;
+    /*font-family: Georgia, "Times New Roman", Times, serif;*/
+    font-family: "Arial Black", serif;
+    font-size: 16px;
+    font-style: italic;
+    color: #c40000;
+}
+
+h1 {
+    font-family: Arial, sans-serif;
+    font-style: inherit;
+    top: 20px;
+    color: black;
+}
+
+#username {
+    background: none;
+    border-radius: 0px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 3px solid grey;
+}
+
+#usernameReg {
+    position: relative;
+    right: 13px;
+    background: none;
+    border-radius: 0px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 3px solid grey;
+}
+
+#password {
+    background: none;
+    border-radius: 0px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 3px solid grey;
+}
+
+#passwordReg {
+    position: relative;
+    right: 13px;
+    background: none;
+    border-radius: 0px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 3px solid grey;
+}
+
+#passwordAgain {
+    position: relative;
+    left: 59px;
+    background: none;
+    border-radius: 0px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 3px solid grey;
+}
+
+#inForm:hover {
+    background: green;
+    transition: all 500ms ease;
+
+}
+
+#email {
+    background: none;
+    border-radius: 0px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 3px solid grey;
+}
+
+#contact {
+    background: none;
+    border-radius: 0px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 3px solid grey;
+}
+
+#emailReg {
+    position: relative;
+    right: 13px;
+    background: none;
+    border-radius: 0px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 3px solid grey;
+}
+
+#contactReg {
+    position: relative;
+    right: 13px;
+    background: none;
+    border-radius: 0px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 3px solid grey;
+}
+
+#textMove {
+    position: relative;
+    left: 45px;
+}
+
+.container {
+    position: relative;
+    top: 10px;
+    bottom: auto;
+    left: 5px;
+    width: 360px;
+    display: block;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    font-style: inherit;
+    user-select: none;
+}
+
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    left: 30px;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+.statusIcon {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    top: 10px;
+    left: 5px;
+    right: 0;
+    border-radius: 5%;
+}
+
+.container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+.container input:checked ~ .checkmark {
+    background-color: #757500;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 }

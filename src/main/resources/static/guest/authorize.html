@@ -6,32 +6,36 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
     <link href="css/form.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="css/images/siteIcon.png">
 </head>
-<body id="body">
+<body>
 <div id="appLogin">
-    <form action="registration.html">
-        <button id="outFromForm">Click here to register</button>
-    </form>
     <table>
         <tr>
-            <td><h1>Fishing Market</h1></td>
+            <td colspan="2"><h1>Вход</h1></td>
         </tr>
+
         <tr>
-            <td width="300px" height="40px">
+            <td colspan="2">
+                <input  v-model="username" name="username" type="text" id="username" placeholder="Введите логин"/>
             </td>
         </tr>
         <tr>
-            <td>
-                <input  v-model="username" name="username" type="text" id="username" placeholder="Enter user name"/></td>
-        </tr>
-        <tr>
-            <td>
-                <input  v-model="password" name="password" type="password" id="password" placeholder="Enter password"/>
+            <td colspan="2">
+                <input  v-model="password" name="password" type="password" id="password" placeholder="Введите пароль"/>
             </td>
         </tr>
         <tr>
-            <td>
-                <button v-on:click="authorisation" id="inForm">Login</button>
+            <td colspan="2">
+                <button v-on:click="authorisation" id="inForm">ВОЙТИ</button>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: right; width: 260px; vertical-align: top; ">
+                <p>Вы не зарегистрированы?/</p>
+            </td>
+            <td style="text-align: left; width: 190px;">
+                <a style="position: relative; bottom: 30px" href="registration.html">Создать аккаунт</a>
             </td>
         </tr>
     </table>
