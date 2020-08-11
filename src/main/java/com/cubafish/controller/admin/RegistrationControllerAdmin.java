@@ -45,7 +45,7 @@ public class RegistrationControllerAdmin {
             userRepository.save(userService.create(userDto));
             status = "registration complete";
         }
-        return new CustomResponseBody(1L, "registration status:", status, "no data");
+        return new CustomResponseBody(1L, "registration status:", status, "no data", "step", 1);
     }
 }
 

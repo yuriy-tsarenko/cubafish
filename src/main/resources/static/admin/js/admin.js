@@ -70,7 +70,7 @@ Vue.component('newProduct-row', {
     },
     template:
         '<div>' +
-        '<table id="fromDb" style="width:1000px; height: 250px" >' +
+        '<table id="fromDb" style="width:1000px; height: 270px" >' +
         '<tr>' +
         '<td id="cellStyle" hidden><p>{{this.id=newProduct.id}}</p></td>' +
         '<td id="cellStyle" hidden><p>{{this.productImageName=newProduct.productImageName}}</p></td>' +
@@ -86,7 +86,7 @@ Vue.component('newProduct-row', {
         '<td style="height: 30px"><p>Полное имя товара</p></td>' +
         '<td style="height: 30px"><p>Тип ловли</p></td>' +
         '<td style="height: 30px"><p>Бренд</p></td>' +
-        '<td rowspan="4" style="width:50px;height:auto">' +
+        '<td rowspan="5" style="width:70px;height:auto">' +
         '<input id="superAdminButtonProductTemplate" type="button" value="Изменить" v-on:click="hiddenFlag">' +
         '<input id="superAdminButtonProductTemplate" type="button" value="Создать" v-on:click="hiddenFlagForCreate">' +
         '<input id="superAdminButtonProductTemplate" type="button" value="Удалить" v-on:click="deleteProduct">' +
@@ -94,16 +94,16 @@ Vue.component('newProduct-row', {
         '</tr>' +
 
         '<tr>' +
-        '<td rowspan="3" style="alignment:center;vertical-align:center; width=200px; height: 250px">' +
-        '<img v-on:click="hiddenFlagBigPhoto" style="width: 200px; height: 200px; border-radius:30%" :src="newProduct.productImageName" alt="photo"/>' +
+        '<td rowspan="3" style="alignment:center;vertical-align:center; width=250px; height: 200px">' +
+        '<img v-on:click="hiddenFlagBigPhoto" style="width: 195px; height: 250px; border-radius:30%" :src="newProduct.productImageName" alt="photo"/>' +
         '</td>' +
-        '<td rowspan="1"  id="cellStyleDescription" style="width:250px; height: auto">' +
+        '<td id="cellStyleDescription" style="width:250px; height: auto">' +
         '<div class="productValue" id="productValue1"><p>{{newProduct.description}}</p></div>' +
         '</td>' +
-        '<td rowspan="1"  id="cellStyle" style="width:200px; height: auto">' +
+        '<td id="cellStyle" style="width:220px; height: auto">' +
         '<div class="productValue" id="productValue3"><p>{{newProduct.typeOfPurpose}}</p></div>' +
         '</td>' +
-        '<td rowspan="1"  id="cellStyle" style="width:200px; height: auto">' +
+        '<td  id="cellStyle" style="width:220px; height: auto">' +
         '<div class="productValue" id="productValue3"><p>{{newProduct.productBrand}}</p></div>' +
         '</td>' +
         '</tr>'+
@@ -122,15 +122,23 @@ Vue.component('newProduct-row', {
         '</tr>' +
 
         '<tr>'+
-        '<td  id="cellStyle" style="width:250px; height: auto">' +
+        '<td rowspan="2"  id="cellStyle" style="width:250px; height: auto">' +
         '<div class="productValue" id="productValue1"><p>{{newProduct.productCategory}}</p></div>' +
         '</td>' +
-        '<td  id="cellStyle" style="width:200px; height: auto">' +
+        '<td rowspan="2" id="cellStyle" style="width:220px; height: auto">' +
         '<div class="productValue" id="productValue3"><p>{{newProduct.productSubCategory}}</p></div>' +
         '</td>' +
-        '<td  id="cellStyle" style="width:200px; height: auto">' +
+        '<td rowspan="2" id="cellStyle" style="width:220px; height: auto">' +
         '<div class="productValue" id="productValue3"><p>В наличии: {{newProduct.totalAmount}} ед.</p>' +
         '</br><p>{{newProduct.productPrice}} грн</p></div>' +
+        '</td>' +
+        '</tr>'+
+
+        '<tr>' +
+        '<td id="cellStyle" style="width:250px; height: 65px">' +
+        '<img v-if="productImageRightName!=null" v-on:click="hiddenFlagRightSide" style="width: 65px;height: 65px; border-radius:5%" :src="newProduct.productImageRightName" alt="photo"/>' +
+        '<img v-if="productImageLeftName!=null" v-on:click="hiddenFlagLeftSide" style="width: 65px;height: 65px; border-radius:5%" :src="newProduct.productImageLeftName" alt="photo"/>' +
+        '<img v-if="productImageBackName!=null" v-on:click="hiddenFlagBackSide" style="width: 65px;height: 65px; border-radius:5%" :src="newProduct.productImageBackName" alt="photo"/>' +
         '</td>' +
         '</tr>'+
         '<tr>' +
@@ -216,12 +224,8 @@ Vue.component('newProduct-row', {
         '<transition name="fade">' +
         '<table v-if="showDetails" id="detailsTable" style="width:1000px; height: 270px">' +
         '<tr>' +
-        '<td rowspan="2" style="width:auto; height: auto">' +
-        '<img v-if="productImageRightName!=null" v-on:click="hiddenFlagRightSide" style="width: 180px;height: 180px; border-radius:5%" :src="newProduct.productImageRightName" alt="photo"/>' +
-        '<img v-if="productImageLeftName!=null" v-on:click="hiddenFlagLeftSide" style="width: 180px;height: 180px; border-radius:5%" :src="newProduct.productImageLeftName" alt="photo"/>' +
-        '<img v-if="productImageBackName!=null" v-on:click="hiddenFlagBackSide" style="width: 180px;height: 180px; border-radius:5%" :src="newProduct.productImageBackName" alt="photo"/>' +
+        '<td id="cellStyle" style="height: 30px; width: 900px"><p>Описание</p>' +
         '</td>' +
-        '<td style="height: 30px; width: auto"><p>Описание</p></td>' +
         '</tr>'+
         '<tr>'+
         '<td>' +
@@ -229,7 +233,7 @@ Vue.component('newProduct-row', {
         '</td>' +
         '</tr>' +
         '<tr>' +
-        '<td colspan="2" style="height: 30px">' +
+        '<td style="height: 30px">' +
         '<div class="detailsBtnColor" v-on:click="hiddenFlagDetails"><input class="btnUp" type="button"></div>' +
         '</td>' +
         '</tr>' +
@@ -363,52 +367,51 @@ Vue.component('newProduct-row', {
         handleFourthFileUpload() {
             this.fileBackSide = this.$refs.fileBackSide.files[0];
         },
-
         handleFileUploadForCreate() {
-            this.file = this.$refs.fileForCreate.files[0];
+            this.fileForCreate = this.$refs.fileForCreate.files[0];
         },
         handleSecondFileUploadForCreate() {
-            this.fileRightSide = this.$refs.fileRightSideForCreate.files[0];
+            this.fileRightSideForCreate = this.$refs.fileRightSideForCreate.files[0];
         },
         handleThirdFileUploadForCreate() {
-            this.fileLeftSide = this.$refs.fileLeftSideForCreate.files[0];
+            this.fileLeftSideForCreate = this.$refs.fileLeftSideForCreate.files[0];
         },
         handleFourthFileUploadForCreate() {
-            this.fileBackSide = this.$refs.fileBackSideForCreate.files[0];
+            this.fileBackSideForCreate = this.$refs.fileBackSideForCreate.files[0];
         },
         saveProduct: function () {
             let formData = new FormData();
-            formData.append('productCategory', this.productCategory);
-            formData.append('productSubCategory', this.productSubCategory);
-            formData.append('productBrand', this.productBrand);
-            formData.append('typeOfPurpose', this.typeOfPurpose);
-            formData.append('description', this.description);
-            formData.append('specification', this.specification);
-            formData.append('totalAmount', this.totalAmount);
-            formData.append('productPrice', this.productPrice);
-            formData.append('file', this.file);
-            formData.append('fileRightSide', this.fileRightSide);
-            formData.append('fileLeftSide', this.fileLeftSide);
-            formData.append('fileBackSide', this.fileBackSide);
-            if (this.file === null) {
+            formData.append('productCategory', this.productCategoryForCreate);
+            formData.append('productSubCategory', this.productSubCategoryForCreate);
+            formData.append('productBrand', this.productBrandForCreate);
+            formData.append('typeOfPurpose', this.typeOfPurposeForCreate);
+            formData.append('description', this.descriptionForCreate);
+            formData.append('specification', this.specificationForCreate);
+            formData.append('totalAmount', this.totalAmountForCreate);
+            formData.append('productPrice', this.productPriceForCreate);
+            formData.append('file', this.fileForCreate);
+            formData.append('fileRightSide', this.fileRightSideForCreate);
+            formData.append('fileLeftSide', this.fileLeftSideForCreate);
+            formData.append('fileBackSide', this.fileBackSideForCreate);
+            if (this.fileForCreate === null) {
                 formData.delete('file');
-                this.file = new Blob([], {type: 'image/png'})
-                formData.append('file', this.file, 'no_image')
+                this.fileForCreate = new Blob([], {type: 'image/png'})
+                formData.append('file', this.fileForCreate, 'no_image')
             }
-            if (this.fileRightSide === null) {
+            if (this.fileRightSideForCreate === null) {
                 formData.delete('fileRightSide');
-                this.fileRightSide = new Blob([], {type: 'image/png'})
-                formData.append('fileRightSide', this.fileRightSide, 'no_image')
+                this.fileRightSideForCreate = new Blob([], {type: 'image/png'})
+                formData.append('fileRightSide', this.fileRightSideForCreate, 'no_image')
             }
-            if (this.fileLeftSide === null) {
+            if (this.fileLeftSideForCreate === null) {
                 formData.delete('fileLeftSide');
-                this.fileLeftSide = new Blob([], {type: 'image/png'})
-                formData.append('fileLeftSide', this.fileLeftSide, 'no_image')
+                this.fileLeftSideForCreate = new Blob([], {type: 'image/png'})
+                formData.append('fileLeftSide', this.fileLeftSideForCreate, 'no_image')
             }
-            if (this.fileBackSide === null) {
+            if (this.fileBackSideForCreate === null) {
                 formData.delete('fileBackSide');
-                this.fileBackSide = new Blob([], {type: 'image/png'})
-                formData.append('fileBackSide', this.fileBackSide, 'no_image')
+                this.fileBackSideForCreate = new Blob([], {type: 'image/png'})
+                formData.append('fileBackSide', this.fileBackSideForCreate, 'no_image')
             }
 
             axios.post('/admin_auth/products/create',
@@ -559,17 +562,17 @@ Vue.component('newProduct-row', {
             if (this.productImageRightName === null) {
                 formDataPath.delete('pathImageRight');
                 this.productImageRightName = 'no_path';
-                formDataPath.append('pathImage', this.productImageRightName);
+                formDataPath.append('pathImageRight', this.productImageRightName);
             }
             if (this.productImageLeftName === null) {
                 formDataPath.delete('pathImageLeft');
-                this.productImageBackName = 'no_path';
-                formDataPath.append('pathImage', this.productImageLeftName);
+                this.productImageLeftName = 'no_path';
+                formDataPath.append('pathImageLeft', this.productImageLeftName);
             }
             if (this.productImageBackName === null) {
                 formDataPath.delete('pathImageBack');
                 this.productImageBackName = 'no_path';
-                formDataPath.append('pathImage', this.productImageBackName);
+                formDataPath.append('pathImageBack', this.productImageBackName);
             }
             axios.post('/admin_auth/products/delete_product_image',
                 formDataPath,

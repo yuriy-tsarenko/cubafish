@@ -107,8 +107,9 @@ Vue.component('newProduct-row', {
         '<td hidden><p>{{this.productImageLeftName=newProduct.productImageLeftName}}</p></td>' +
         '<td hidden><p>{{this.productImageBackName=newProduct.productImageBackName}}</p></td>' +
         '</tr>' +
+
         '<tr>' +
-        '<td rowspan="3" style="alignment:center;vertical-align:center;width:250px">' +
+        '<td rowspan="2" style="alignment:center;vertical-align:center;width:250px">' +
         '<img v-on:click="hiddenFlag" style="width: 250px; height: 250px; border-radius:15%" :src="newProduct.productImageName" alt="photo"/>' +
         '</td>' +
         '<td rowspan="3" id="cellStyleDescription" style="width:450px; height:auto">' +
@@ -119,15 +120,24 @@ Vue.component('newProduct-row', {
         '<div v-if="this.totalAmount==0" id="notAvailable"><p>Нет в наличии</p></div>' +
         '</td>' +
         '</tr>' +
+
         '<tr>' +
         '<td id="cellStyle" style="width:300px; height: auto">' +
         '<div class="productValue" id="productValue3"><p>{{newProduct.productPrice}} грн</p></br></div></td>' +
         '</tr>' +
+
         '<tr>' +
+        '<td id="cellStyle" style="width:249px; height: auto">' +
+        '<img v-if="productImageRightName!=null" v-on:click="hiddenFlagRightSide" style="width: 83px;height: 83px; border-radius:5%" :src="newProduct.productImageRightName" alt="photo"/>' +
+        '<img v-if="productImageLeftName!=null" v-on:click="hiddenFlagLeftSide" style="width: 83px;height: 83px; border-radius:5%" :src="newProduct.productImageLeftName" alt="photo"/>' +
+        '<img v-if="productImageBackName!=null" v-on:click="hiddenFlagBackSide" style="width: 83px;height: 83px; border-radius:5%" :src="newProduct.productImageBackName" alt="photo"/>' +
+        '</td>' +
+
         '<td id="cellStyle" style="width:300px; height: auto" >' +
         '<input class="bueButton" type="button" value="Купить" v-on:click="hiddenFlagForBasket">' +
         '</td>' +
         '</tr>' +
+
         '<tr>' +
         '<td colspan="4" id="cellStyle" style="width:1000px; height: 25px" >' +
         '<div class="detailsBtnColor" v-if="showDetailsButton" v-on:click="hiddenFlagDetails"><input class="btn" type="button"></div>' +
@@ -160,20 +170,19 @@ Vue.component('newProduct-row', {
         '<transition name="fade">' +
         '<table v-if="showDetails" id="detailsTable" style="width:1000px; height: 270px">' +
         '<tr>' +
-        '<td style="width:auto; height: auto">' +
-        '<img v-if="productImageRightName!=null" v-on:click="hiddenFlagRightSide" style="width: 180px;height: 180px; border-radius:5%" :src="newProduct.productImageRightName" alt="photo"/>' +
-        '<img v-if="productImageLeftName!=null" v-on:click="hiddenFlagLeftSide" style="width: 180px;height: 180px; border-radius:5%" :src="newProduct.productImageLeftName" alt="photo"/>' +
-        '<img v-if="productImageBackName!=null" v-on:click="hiddenFlagBackSide" style="width: 180px;height: 180px; border-radius:5%" :src="newProduct.productImageBackName" alt="photo"/>' +
-        '</td>'+
-        '<td>'+
+        '<td id="cellStyle" style="height: 30px; width: 900px"><p>Описание</p>' +
+        '</td>' +
+        '</tr>'+
+        '<tr>'+
+        '<td>' +
         '<div id="productValue2"><br/><p>{{newProduct.specification}}</p></div>' +
-        '</td>'+
+        '</td>' +
         '</tr>' +
         '<tr>' +
-        '<td colspan="2" style="height: 30px">' +
+        '<td style="height: 30px">' +
         '<div class="detailsBtnColor" v-on:click="hiddenFlagDetails"><input class="btnUp" type="button"></div>' +
-        '</td>'+
-        '</tr>'+
+        '</td>' +
+        '</tr>' +
         '</table>' +
         '</transition>' +
         '</div>',

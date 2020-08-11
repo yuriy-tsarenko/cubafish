@@ -106,10 +106,10 @@ public class ProductService {
             } catch (NullPointerException | IndexOutOfBoundsException e) {
                 e.printStackTrace();
             }
-            return new CustomResponseBody(1L, "required argument", "success", String.valueOf(maxIdValue));
+            return new CustomResponseBody(1L, "required argument", "success", String.valueOf(maxIdValue), "step", 1);
         }
         return new CustomResponseBody(1L, "required argument",
-                "did not accept the correct key", null);
+                "did not accept the correct key", null, "step", 1);
     }
 
 
@@ -163,13 +163,13 @@ public class ProductService {
             return Map.of("productDto", productDto, "status", "the type of purpose have more than 50 characters");
         } else if (description == null) {
             return Map.of("productDto", productDto, "status", "the application did not accept any product description");
-        } else if (description.length() > 150) {
-            return Map.of("productDto", productDto, "status", "the description have more than 100 characters");
+        } else if (description.length() > 200) {
+            return Map.of("productDto", productDto, "status", "the description have more than 200 characters");
         } else if (specification == null) {
             return Map.of("productDto", productDto, "status",
                     "the application did not accept any product specification");
-        } else if (specification.length() > 255) {
-            return Map.of("productDto", productDto, "status", "the specification have more than 400 characters");
+        } else if (specification.length() > 1000) {
+            return Map.of("productDto", productDto, "status", "the specification have more than 1000 characters");
         } else if (totalAmount == null) {
             return Map.of("productDto", productDto, "status", "the application did not accept any amount of products");
         } else if (!totalAmount.isEmpty()) {
@@ -447,7 +447,7 @@ public class ProductService {
         List<CustomResponseBody> list = new ArrayList<>(uniqueItems.size());
         for (String item : uniqueItems) {
             id += 1L;
-            list.add(new CustomResponseBody(id, "productCategoriesForMenu", "success", item));
+            list.add(new CustomResponseBody(id, "productCategoriesForMenu", "success", item, "step", 1));
         }
         return list;
     }
@@ -464,7 +464,7 @@ public class ProductService {
         List<CustomResponseBody> list = new ArrayList<>(uniqueItems.size());
         for (String item : uniqueItems) {
             id += 1L;
-            list.add(new CustomResponseBody(id, "productSubCategoriesForMenu", "success", item));
+            list.add(new CustomResponseBody(id, "productSubCategoriesForMenu", "success", item, "step", 1));
         }
         return list;
     }
@@ -481,7 +481,7 @@ public class ProductService {
         List<CustomResponseBody> list = new ArrayList<>(uniqueItems.size());
         for (String item : uniqueItems) {
             id += 1L;
-            list.add(new CustomResponseBody(id, "productBrandsForMenu", "success", item));
+            list.add(new CustomResponseBody(id, "productBrandsForMenu", "success", item, "step", 1));
         }
         return list;
     }

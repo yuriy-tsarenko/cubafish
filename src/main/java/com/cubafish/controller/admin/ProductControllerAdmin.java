@@ -112,26 +112,26 @@ public class ProductControllerAdmin {
                     .imageLoader(file, servletContext, dto, updateStepForImageLoader);
             ProductDto dtoWithFirstFile = (ProductDto) responseFromImageLoader.get("productDto");
             status = (String) responseFromImageLoader.get("status");
-            int secondStep = (int) responseFromImageLoader.get("update step");
+            updateStepForImageLoader = (int) responseFromImageLoader.get("update step");
             if (status.equals("try to set the old image")) {
                 status = "Upload the image please";
             }
-            if (status.equals("success")) {
+            if (status.equals("success") || status.equals("not required param, setted null to the field")) {
                 Map<String, Object> responseImageLoaderTryToUploadSecondFile = productService
-                        .imageLoader(fileRightSide, servletContext, dtoWithFirstFile, secondStep);
+                        .imageLoader(fileRightSide, servletContext, dtoWithFirstFile, updateStepForImageLoader);
                 ProductDto dtoWithSecondFile = (ProductDto) responseImageLoaderTryToUploadSecondFile.get("productDto");
                 status = (String) responseImageLoaderTryToUploadSecondFile.get("status");
-                int thirdStep = (int) responseImageLoaderTryToUploadSecondFile.get("update step");
+                updateStepForImageLoader = (int) responseImageLoaderTryToUploadSecondFile.get("update step");
                 if (status.equals("success") || status.equals("not required param, setted null to the field")) {
                     Map<String, Object> responseImageLoaderTryToUploadThirdFile = productService
-                            .imageLoader(fileLeftSide, servletContext, dtoWithSecondFile, thirdStep);
+                            .imageLoader(fileLeftSide, servletContext, dtoWithSecondFile, updateStepForImageLoader);
                     ProductDto dtoWithThirdFile =
                             (ProductDto) responseImageLoaderTryToUploadThirdFile.get("productDto");
                     status = (String) responseImageLoaderTryToUploadThirdFile.get("status");
-                    int fourthStep = (int) responseImageLoaderTryToUploadThirdFile.get("update step");
+                    updateStepForImageLoader = (int) responseImageLoaderTryToUploadThirdFile.get("update step");
                     if (status.equals("success") || status.equals("not required param, setted null to the field")) {
                         Map<String, Object> responseImageLoaderTryToUploadFourthFile = productService
-                                .imageLoader(fileBackSide, servletContext, dtoWithThirdFile, fourthStep);
+                                .imageLoader(fileBackSide, servletContext, dtoWithThirdFile, updateStepForImageLoader);
                         ProductDto dtoWithFourthFile =
                                 (ProductDto) responseImageLoaderTryToUploadFourthFile.get("productDto");
                         status = (String) responseImageLoaderTryToUploadFourthFile.get("status");
@@ -153,7 +153,7 @@ public class ProductControllerAdmin {
                 }
             }
         }
-        return new CustomResponseBody(1L, "data load", status, "no data");
+        return new CustomResponseBody(1L, "data load", status, "no data", "create step", updateStepForImageLoader);
     }
 
     @PostMapping("/delete_product_image")
@@ -178,7 +178,7 @@ public class ProductControllerAdmin {
         if (!pathImageBack.equals("no_path")) {
             status = productService.deleteFileIfExists(absolutePathToUploadDir, pathImageBack);
         }
-        return new CustomResponseBody(1L, "image deleting status", status, "no data");
+        return new CustomResponseBody(1L, "image deleting status", status, "no data", "step", 1);
     }
 
     @DeleteMapping("{id}")
@@ -219,7 +219,7 @@ public class ProductControllerAdmin {
                         dto, updateStepForImageLoader);
                 ProductDto dtoWithFirstFile = (ProductDto) responseFromImageLoader.get("productDto");
                 status = (String) responseFromImageLoader.get("status");
-                int secondStep = (int) responseFromImageLoader.get("update step");
+                updateStepForImageLoader = (int) responseFromImageLoader.get("update step");
                 if ((status.equals("success")
                         && !Objects.requireNonNull(file.getOriginalFilename()).equals("no_image"))) {
                     status = productService.deleteFileIfExists(servletContext, productFromDb.getProductImageName());
@@ -229,12 +229,12 @@ public class ProductControllerAdmin {
                         || status.equals("File not deleted, no path to file")
                         || status.equals("not required param, setted null to the field"))
                         || Objects.requireNonNull(fileRightSide.getOriginalFilename()).equals("no_image")) {
-                    Map<String, Object> responseImageLoaderTryToUploadSecondFile =
-                            productService.imageLoader(fileRightSide, servletContext, dtoWithFirstFile, secondStep);
+                    Map<String, Object> responseImageLoaderTryToUploadSecondFile = productService
+                            .imageLoader(fileRightSide, servletContext, dtoWithFirstFile, updateStepForImageLoader);
                     ProductDto dtoWithSecondFile =
                             (ProductDto) responseImageLoaderTryToUploadSecondFile.get("productDto");
                     status = (String) responseImageLoaderTryToUploadSecondFile.get("status");
-                    int thirdStep = (int) responseImageLoaderTryToUploadSecondFile.get("update step");
+                    updateStepForImageLoader = (int) responseImageLoaderTryToUploadSecondFile.get("update step");
                     if ((status.equals("success")
                             && !Objects.requireNonNull(fileRightSide.getOriginalFilename()).equals("no_image"))) {
                         status = productService
@@ -245,12 +245,12 @@ public class ProductControllerAdmin {
                             || status.equals("File not deleted, no path to file")
                             || status.equals("not required param, setted null to the field"))
                             || Objects.requireNonNull(fileLeftSide.getOriginalFilename()).equals("no_image")) {
-                        Map<String, Object> responseImageLoaderTryToUploadThirdFile =
-                                productService.imageLoader(fileLeftSide, servletContext, dtoWithSecondFile, thirdStep);
+                        Map<String, Object> responseImageLoaderTryToUploadThirdFile = productService
+                                .imageLoader(fileLeftSide, servletContext, dtoWithSecondFile, updateStepForImageLoader);
                         ProductDto dtoWithThirdFile =
                                 (ProductDto) responseImageLoaderTryToUploadThirdFile.get("productDto");
                         status = (String) responseImageLoaderTryToUploadThirdFile.get("status");
-                        int fourthStep = (int) responseImageLoaderTryToUploadThirdFile.get("update step");
+                        updateStepForImageLoader = (int) responseImageLoaderTryToUploadThirdFile.get("update step");
                         if ((status.equals("success")
                                 && !Objects.requireNonNull(fileLeftSide.getOriginalFilename()).equals("no_image"))) {
                             status = productService
@@ -263,7 +263,7 @@ public class ProductControllerAdmin {
                                 || Objects.requireNonNull(fileBackSide.getOriginalFilename()).equals("no_image")) {
                             Map<String, Object> responseImageLoaderTryToUploadFourthFile =
                                     productService.imageLoader(fileBackSide, servletContext,
-                                            dtoWithThirdFile, fourthStep);
+                                            dtoWithThirdFile, updateStepForImageLoader);
                             ProductDto dtoWithFourthFile =
                                     (ProductDto) responseImageLoaderTryToUploadFourthFile.get("productDto");
                             status = (String) responseImageLoaderTryToUploadFourthFile.get("status");
@@ -275,7 +275,8 @@ public class ProductControllerAdmin {
                             }
 
                             if (status.equals("success") || status.equals("try to set the old image")
-                                    || status.equals("not required param, setted null to the field")) {
+                                    || status.equals("not required param, setted null to the field")
+                                    || status.equals("File not deleted, no path to file")) {
                                 Map<String, Object> responseFromUpdateExitingProduct = productService
                                         .compensationOfMissingData(id, productCategory, productSubCategory,
                                                 productBrand, typeOfPurpose, description, specification,
@@ -292,9 +293,11 @@ public class ProductControllerAdmin {
                         }
                     }
                 }
-                return new CustomResponseBody(1L, "update status", status, "no data");
+                return new CustomResponseBody(1L, "update status", status, "no data",
+                        "update step", updateStepForImageLoader);
             }
         }
-        return new CustomResponseBody(1L, "update status", status, "no data");
+        return new CustomResponseBody(1L, "update status", status, "no data",
+                "update step",  updateStepForImageLoader);
     }
 }
