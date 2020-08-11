@@ -39,7 +39,7 @@ public class RegistrationController {
             userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
             userRepository.save(userService.create(userDto));
         }
-        return new CustomResponseBody(1L,"registration status:", status, "no data");
+        return new CustomResponseBody(1L,"registration status:", status, "no data", "step", 1);
     }
 }
 
