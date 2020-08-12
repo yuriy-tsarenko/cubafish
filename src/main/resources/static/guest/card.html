@@ -38,7 +38,7 @@
                     <option>Оплата при получении</option>
                     <option>ПриватБанк</option>
                 </select>
-                <!--                <span>{{paymentType}}</span>-->
+
                 <div id="typeDelivery">Способ доставки:</div>
                 <select v-model="deliveryType" id="selectorStyle2">
                     <option disabled value="">Выберите один из вариантов</option>
@@ -46,23 +46,22 @@
                     <option>Укр Пошта</option>
                     <option>Курьером</option>
                 </select>
-                <!--                <span>{{deliveryType}}</span>-->
-            </div>
+
             <div id="aboutRecipient">Информация о получателе:</div>
 
-            <input v-model="username" name="username" type="text" id="firstnameUser" placeholder="Введите ваше имя"/>
+            <input  name="firstnameUser" type="text" id="firstnameUser" placeholder="Введите ваше имя"/>
 
-            <input v-model="username" name="username" type="text" id="lastnameUser" placeholder="Введите вашу фамилию"/>
+            <input  name="lastnameUser" type="text" id="lastnameUser" placeholder="Введите вашу фамилию"/>
 
-            <input v-model="username" name="username" type="text" id="surnameUser" placeholder="Введите ваше отчество"/>
+            <input  name="surnameUser" type="text" id="surnameUser" placeholder="Введите ваше отчество"/>
 
             <div id="aboutEmail">Email:</div>
 
-            <input v-model="username" name="username" type="text" id="emailNameUser" placeholder="Введите ваш e-mail"/>
+            <input  name="emailNameUser" type="text" id="emailNameUser" placeholder="Введите ваш e-mail"/>
 
             <div id="aboutPhoneNumber">Номер телефона:</div>
 
-            <input v-model="username" name="username" type="text" id="PhoneNameUser"
+            <input  name="PhoneNameUser" type="text" id="PhoneNameUser"
                    placeholder="Введите ваш номер телефона"/>
 
             <div id="checkMarkContainer">
@@ -74,7 +73,7 @@
             <div id="buttonForBuy">
                 <button class="btn">Оформить заказ</button>
             </div>
-
+            </div>
         </div>
         <!--start div#sidebar-->
         <div id="sidebar">

@@ -309,7 +309,7 @@ header {
 
 #cellStyle {
     text-align: center;
-    vertical-align: top;
+    vertical-align: center;
 }
 
 #cellStyleDescription {
@@ -382,18 +382,6 @@ header {
 #sidebar h3 {
     font-size: 77%;
     color: #110404;
-}
-
-#sidebar p {
-    margin: 0;
-    line-height: normal;
-    color: #D4C792;
-}
-
-#sidebar a {
-    border: none;
-    text-decoration: none;
-    color: #7D807A;
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -916,27 +904,18 @@ td {
 #productBasketValue3 {
     position: relative;
     width: 120px;
-    height: 30px;
+    height: auto;
     word-wrap: break-word;
 }
 
 #availableInBasket {
     position: relative;
-
     width: 70px;
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 16px;
-    font-style: italic;
-    color: #FFFFFF;
 }
 
 #notAvailableInBasket {
     position: relative;
     width: 70px;
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 16px;
-    font-style: italic;
-    color: #fabc00;
 }
 
 #summaryDiv {
@@ -1309,7 +1288,7 @@ footer {
     height: 100%;
     top: 0;
     left: -110%;
-    z-index: -1;
+    z-index: 1;
     transform: skewX(25deg);
     transition: .5s ease;
     opacity: .1;
@@ -1345,11 +1324,67 @@ footer {
 
 #basketItems {
     position: relative;
+    overflow-y: auto;
     margin: auto;
     width: 600px;
     height: 900px;
     top: 30px;
-    background-color: #8c8c01;
+}
+
+#basketTable {
+
+}
+
+.counterButton {
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 30px;
+    height: 30px;
+}
+
+.deleteButton {
+    position: relative;
+    top: 10px;
+    width: 20px;
+    height: 20px;
+    background-image: url(images/close.png);
+    background-size: 20px 20px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 10px;
+}
+
+.deleteButton:hover {
+    background: url(images/close2.png);
+    background-size: 20px 20px;
+    tansition: all .3s linear;
+    -webkit-transition: all .3s linear;
+    -moz-transition: all .3s linear;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 10px;
+}
+
+.deleteButton:active {
+    background: url(images/close.png);
+    background-size: 20px 20px;
+    tansition: all .1s linear;
+    -webkit-transition: all .1s linear;
+    -moz-transition: all .1s linear;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 10px;
+}
+
+#basketItems::-webkit-scrollbar {
+    width: 0;
 }
 
 #summaryText {
