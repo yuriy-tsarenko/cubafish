@@ -18,12 +18,18 @@ let appShowBasket = new Vue({
             maxId: ''
         },
         methods: {
-            hiddenFlagForBasket: function () {
+            hiddenFlagForBasketReceiver: function () {
+                let basketItem = {
+                    id: '',
+                    key: '',
+                    status: '',
+                    communicationData: ''
+                };
                 if (this.show === false) {
                     this.show = true
                     if (this.show === true) {
                         let amount;
-                        if (localStorage.getItem('TotalAmount') == null) {
+                        if (localStorage.getItem('TotalAmount') === null) {
                             amount = 0;
                         } else {
                             amount = Number(localStorage.getItem('TotalAmount'));
@@ -38,21 +44,14 @@ let appShowBasket = new Vue({
                 }
                 setTimeout(function () {
 
-                    let basketItem = {
-                        id: '',
-                        key: '',
-                        status: '',
-                        communicationData: ''
-                    };
                     let sortingTag = {
                         key: 'required argument',
                         communicationKey: 'give me the argument for basket engine',
-                    }
+                    };
                     productAPIId.save({}, sortingTag)
-                        .then(response => this.maxId = response.data.communicationData);
-
-                    localStorage.setItem('ID', String(this.maxId));
+                        .then(response => localStorage.setItem('ID', String(this.maxId = response.data.communicationData)));
                 }, 700);
+
             }
         }
     })
@@ -91,9 +90,11 @@ Vue.component('newProduct-row', {
             specification: '',
             typeOfPurpose: '',
             productPrice: '',
+            productImageName: '',
             productImageRightName: '',
             productImageLeftName: '',
-            productImageBackName: ''
+            productImageBackName: '',
+            productPriceForBasket: ''
         }
     },
     template:
@@ -106,6 +107,8 @@ Vue.component('newProduct-row', {
         '<td hidden><p>{{this.productImageRightName=newProduct.productImageRightName}}</p></td>' +
         '<td hidden><p>{{this.productImageLeftName=newProduct.productImageLeftName}}</p></td>' +
         '<td hidden><p>{{this.productImageBackName=newProduct.productImageBackName}}</p></td>' +
+        '<td hidden><p>{{this.productPriceForBasket=newProduct.productPrice}}</p></td>' +
+        '<td hidden><p>{{this.productImageName=newProduct.productImageName}}</p></td>' +
         '</tr>' +
 
         '<tr>' +
@@ -172,8 +175,8 @@ Vue.component('newProduct-row', {
         '<tr>' +
         '<td id="cellStyle" style="height: 30px; width: 900px"><p>Описание</p>' +
         '</td>' +
-        '</tr>'+
-        '<tr>'+
+        '</tr>' +
+        '<tr>' +
         '<td>' +
         '<div id="productValue2"><br/><p>{{newProduct.specification}}</p></div>' +
         '</td>' +
@@ -237,8 +240,23 @@ Vue.component('newProduct-row', {
         },
         hiddenFlagForBasket: function () {
             let key = this.id;
-            localStorage.setItem(key, this.descriptionForRequest);
-            appShowBasket.hiddenFlagForBasket();
+            let productItem = {
+                description: this.descriptionForRequest,
+                productPrice: this.productPriceForBasket,
+                totalAmount: this.totalAmount,
+                productImageName: this.productImageName
+            }
+            let basketItems = [];
+            if ((this.totalAmount !== 0) && (localStorage.getItem(key) === null)) {
+                basketItems.push(productItem);
+                localStorage.setItem(key, JSON.stringify(basketItems));
+                appShowBasket.hiddenFlagForBasketReceiver();
+            } else if (localStorage.getItem(key) !== null) {
+                alert('Товар уже в корзине');
+            } else {
+                alert('Товара нет в наличии');
+            }
+
         }
     }
 });
