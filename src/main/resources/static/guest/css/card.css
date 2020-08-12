@@ -9,12 +9,7 @@ body {
     text-align: justify;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 13px;
-    font-style: italic;
-        /*-webkit-transform:scale(1.2);*/
-    /*-moz-transform:scale(1.2);*/
-    /*-ms-transform:scale(1.2);*/
-    /*-o-transform:scale(1.2);*/
-    /*transform:scale(1.2);*/
+    /*font-style: italic;*/
 }
 
 h1, h3 {
@@ -40,19 +35,26 @@ p, blockquote, ul, ol {
     line-height: 1.1em;
 }
 
+
+/* Wrapper */
+
+/* Header */
+
+
 header {
+    border: 1px solid #154a00;
     min-width: 2500px;
     max-width: 100%;
     height: 200px;
     background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Параметры тени */
+    padding: 10px;
 }
 
 .logo {
     position: relative;
-    right: auto;
     top: 20px;
-    left: 10px;
-    bottom: auto;
+    left: 680px;
 }
 
 .wrapper {
@@ -169,20 +171,18 @@ header {
 /* Menu */
 
 #appHeaderButtons {
-    width: 1900px;
-    height: 41px;
     margin: 0 auto;
     padding: 0px 0px 0px 0px;
-    background: #585801;
+    background: white;
 }
 
-#moveBackground {
-    position: relative;
-    min-width: 2500px;
-    max-width: 100%;
-    height: 41px;
-    background-color: #585801;
-}
+/*#moveBackground {*/
+/*    position: relative;*/
+/*    min-width: 2500px;*/
+/*    max-width: 100%;*/
+/*    height: 41px;*/
+/*    background-color: #585801;*/
+/*}*/
 
 .headerButton {
     width: 378px;
@@ -257,20 +257,26 @@ header {
 /* Content */
 
 #content {
+    border-radius: 10px;
+    background-color: white;
     position: relative;
-    top: 20px;
+    top: 30px;
     right: 40px;
     float: right;
-    width: 1000px;
-    height: 99%;
+    width: 750px;
+    height: 40%;
     overflow: auto;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.5); /* Параметры тени */
+    padding: 10px;
 }
 
 #content::-webkit-scrollbar {
     width: 0;
 }
 
+
 /* Sidebar */
+
 
 /*getFromDb*/
 #fromDb {
@@ -303,7 +309,7 @@ header {
 
 #cellStyle {
     text-align: center;
-    vertical-align: top;
+    vertical-align: center;
 }
 
 #cellStyleDescription {
@@ -324,12 +330,16 @@ header {
 }
 
 #sidebar {
+    top: 30px;
     position: relative;
-    top: 20px;
-    left: 50px;
-    width: 370px;
-    height: 99%;
+    left: 20px;
+    width: 630px;
+    height: 40%;
     overflow: auto;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.5); /* Параметры тени */
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #ffffff;
 }
 
 #sidebar::-webkit-scrollbar {
@@ -372,18 +382,6 @@ header {
 #sidebar h3 {
     font-size: 77%;
     color: #110404;
-}
-
-#sidebar p {
-    margin: 0;
-    line-height: normal;
-    color: #D4C792;
-}
-
-#sidebar a {
-    border: none;
-    text-decoration: none;
-    color: #7D807A;
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -603,7 +601,7 @@ td {
 #productValue2 {
     position: relative;
     margin: 0 auto;
-    width: 900px;
+    width: 400px;
     height: 240px;
     word-wrap: break-word;
     font-family: Gill Sans, sans-serif;
@@ -832,6 +830,49 @@ td {
     overflow: hidden;
 
 }
+
+
+/*.detailsButton {*/
+/*    position: relative;*/
+/*    top: auto;*/
+/*    left: 0;*/
+/*    right: auto;*/
+/*    bottom: auto;*/
+/*    width: 1005px;*/
+/*    height: 20px;*/
+/*    z-index: 1;*/
+/*    background: -webkit-linear-gradient(top, #f8f8f8 0, #c8cbcd 100%);*/
+/*    font-family: Georgia, "Times New Roman", Times, serif;*/
+/*    font-size: 18px;*/
+/*    font-style: normal;*/
+/*    color: #000000;*/
+/*    border: 0;*/
+/*}*/
+
+/*.detailsButton:hover {*/
+/*    background: -webkit-linear-gradient(top, #b1b1b1 0, #4f4f4f 100%);*/
+/*    tansition: all .3s linear;*/
+/*    -webkit-transition: all .3s linear;*/
+/*    -moz-transition: all .3s linear;*/
+/*    font-family: Georgia, "Times New Roman", Times, serif;*/
+/*    font-size: 20px;*/
+/*    font-style: normal;*/
+/*    color: #ffffff;*/
+/*    border: 0;*/
+/*}*/
+
+/*.detailsButton:active {*/
+/*    background: -webkit-linear-gradient(top, #f8f8f8 0, #c8cbcd 100%);*/
+/*    tansition: all .1s linear;*/
+/*    -webkit-transition: all .1s linear;*/
+/*    -moz-transition: all .1s linear;*/
+/*    font-family: Georgia, "Times New Roman", Times, serif;*/
+/*    font-size: 16px;*/
+/*    font-style: normal;*/
+/*    color: #ffffff;*/
+/*    border: 0;*/
+/*}*/
+
 #summaryTable {
     background-color: #585801;
     font-family: Georgia, "Times New Roman", Times, serif;
@@ -848,7 +889,7 @@ td {
 
 #productBasketValue1 {
     position: relative;
-    width: 170px;
+    width: 200px;
     height: auto;
     word-wrap: break-word;
 }
@@ -863,27 +904,18 @@ td {
 #productBasketValue3 {
     position: relative;
     width: 120px;
-    height: 30px;
+    height: auto;
     word-wrap: break-word;
 }
 
 #availableInBasket {
     position: relative;
-
     width: 70px;
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 16px;
-    font-style: italic;
-    color: #FFFFFF;
 }
 
 #notAvailableInBasket {
     position: relative;
     width: 70px;
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 16px;
-    font-style: italic;
-    color: #fabc00;
 }
 
 #summaryDiv {
@@ -1015,3 +1047,352 @@ footer {
     position: relative;
     margin: 0 auto;
 }
+
+
+#sidetext {
+    position: relative;
+    top: 0;
+    left: 0;
+    font-size: 30px;
+}
+
+#texttotal {
+    font-size: 25px;
+    position: relative;
+    top: 320px;
+    color: black;
+    font-family: Arial, sans, serif;
+}
+
+#selectorStyle {
+    position: relative;
+    left: 35px;
+    top: 115px;
+    width: 700px;
+    height: 40px;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+
+
+#appSelectorText {
+    position: relative;
+    left: 35px;
+    top: 100px;
+    font-size: 17px;
+    font-family: Arial, sans, serif;
+}
+
+#typeDelivery {
+    position: relative;
+    left: 35px;
+    top: 145px;
+    font-size: 17px;
+    font-family: Arial, sans, serif;
+}
+
+#selectorStyle2 {
+    position: relative;
+    left: 35px;
+    top: 160px;
+    width: 700px;
+    height: 40px;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+
+#aboutRecipient {
+    position: relative;
+    left: 35px;
+    top: 195px;
+    font-size: 20px;
+    font-family: Arial, sans, serif;
+}
+
+#firstnameUser {
+    position: relative;
+    left: 35px;
+    top: 210px;
+    width: 700px;
+    height: 40px;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+
+#lastnameUser {
+    position: relative;
+    left: 35px;
+    top: 240px;
+    width: 700px;
+    height: 40px;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+
+#surnameUser {
+    position: relative;
+    left: 35px;
+    top: 270px;
+    width: 700px;
+    height: 40px;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+
+#aboutEmail {
+    position: relative;
+    left: 35px;
+    top: 305px;
+    font-size: 20px;
+    font-family: Arial, sans, serif;
+}
+
+#emailNameUser {
+    position: relative;
+    top: 320px;
+    left: 35px;
+    width: 700px;
+    height: 40px;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+
+#aboutPhoneNumber {
+    position: relative;
+    top: 355px;
+    left: 35px;
+    font-size: 20px;
+    font-family: Arial, sans, serif;
+}
+
+#PhoneNameUser {
+    position: relative;
+    top: 370px;
+    left: 35px;
+    width: 700px;
+    height: 40px;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+
+#checkMarkContainer {
+    position: relative;
+    left: 50px;
+    top: 500px;
+}
+
+
+#textForm {
+    position: relative;
+    left: 550px;
+    top: 10px;
+    font-size: 35px;
+    font-family: Arial, sans, serif;
+    color: black;
+}
+
+.container {
+    position: relative;
+    top: 0px;
+    bottom: auto;
+    left: 2px;
+    width: 360px;
+    display: block;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+    font-style: inherit;
+    user-select: none;
+}
+
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    left: 0px;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+.statusIcon {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    top: 10px;
+    left: 5px;
+    right: 0;
+    border-radius: 5%;
+}
+
+.container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+.container input:checked ~ .checkmark {
+    background-color: #757500;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.btn {
+    width: 600px;
+    height: 50px;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 20px;
+    border-radius: 10px;
+    border: none;
+    padding: 20px 60px;
+    background: linear-gradient(90deg, #6e6e00, #454500);
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+}
+
+.btn:before, .btn:after {
+    background: #000;
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: -110%;
+    z-index: 1;
+    transform: skewX(25deg);
+    transition: .5s ease;
+    opacity: .1;
+}
+
+.btn:hover:before {
+    left: -10%;
+    transition: .3s ease;
+}
+
+.btn:hover:after {
+    left: -20%;
+}
+
+.btn:active:before {
+    left: -100%;
+}
+
+.btn:active:after {
+    left: -90%;
+}
+
+#buttonForBuy {
+    left: 90px;
+    position: relative;
+    top: 560px;
+}
+
+#line {
+    position: relative;
+    top: 50px;
+}
+
+#basketItems {
+    position: relative;
+    overflow-y: auto;
+    margin: auto;
+    width: 600px;
+    height: 900px;
+    top: 30px;
+}
+
+#basketTable {
+
+}
+
+.counterButton {
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 30px;
+    height: 30px;
+}
+
+.deleteButton {
+    position: relative;
+    top: 10px;
+    width: 20px;
+    height: 20px;
+    background-image: url(images/close.png);
+    background-size: 20px 20px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 10px;
+}
+
+.deleteButton:hover {
+    background: url(images/close2.png);
+    background-size: 20px 20px;
+    tansition: all .3s linear;
+    -webkit-transition: all .3s linear;
+    -moz-transition: all .3s linear;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 10px;
+}
+
+.deleteButton:active {
+    background: url(images/close.png);
+    background-size: 20px 20px;
+    tansition: all .1s linear;
+    -webkit-transition: all .1s linear;
+    -moz-transition: all .1s linear;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 10px;
+}
+
+#basketItems::-webkit-scrollbar {
+    width: 0;
+}
+
+#summaryText {
+    position: relative;
+    top: 80px;
+    left: 0;
+    font-size: 30px;
+}
+
+
+
