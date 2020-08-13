@@ -15,8 +15,14 @@ let appSelector = new Vue({
     el: '#appSelector',
     data: {
         paymentType: '',
-        deliveryType: ''
-
+        deliveryType: '',
+        totalProductPrice: '',
+        firstnameUser: '',
+        lastnameUser: '',
+        surnameUser: '',
+        emailNameUser: '',
+        phoneNameUser: '',
+        confirmBooking: ''
     }
 });
 
@@ -36,8 +42,9 @@ Vue.component('productItem-row', {
             specification: '',
             typeOfPurpose: '',
             productPrice: '',
+            summaryPrice: 0,
             productImageName: '',
-            counter: 1
+            count: 1
         }
     },
     template:
@@ -58,14 +65,15 @@ Vue.component('productItem-row', {
         '<div class="productValue" id="productBasketValue1"><p>{{productItem.description}}</p></div>' +
         '</td>' +
         '<td id="cellStyle" style="width:100px; height:auto">' +
-        '<div v-if="this.totalAmount>0" id="availableInBasket"><p>{{counter}}</p></div>' +
+        '<div v-if="this.totalAmount>0" id="availableInBasket"><p>{{count}}</p></div>' +
         '<div v-if="this.totalAmount==0" id="notAvailableInBasket"><p>Нет в наличии</p></div>' +
         '<td id="cellStyle" style="width:60px; height: auto">' +
-        '<input class="counterButton" type="button" value="+" v-on:click="counter+=1" >' +
-        '<input class="counterButton" type="button" value="-" v-on:click="counter-=1" >' +
+        '<input class="counterButton" type="button" value="+" v-on:click="counterPlus" >' +
+        '<input class="counterButton" type="button" value="-" v-on:click="counterMinus" >' +
         '</td>' +
         '<td id="cellStyle" style="width:100px; height: auto">' +
-        '<div class="productValue" id="productBasketValue3"><p>{{productItem.productPrice}} грн</p>' +
+        '<div class="productValue" id="productBasketValue3"><p v-if="summaryPrice!==0">{{summaryPrice}} грн</p>' +
+        '<p v-if="summaryPrice===0">{{productItem.productPrice}} грн</p>' +
         '</div>' +
         '</td>' +
         '<td style="width:60px; height: auto">' +
@@ -89,8 +97,73 @@ Vue.component('productItem-row', {
                 appBasket.productItems.push(productFromNewSet);
             }
             localStorage.removeItem(String(this.key));
-            let basketTotalAmount = (Number(localStorage.getItem('TotalAmount')))-1;
-            localStorage.setItem('TotalAmount',String(basketTotalAmount));
+            let basketTotalAmount = (Number(localStorage.getItem('TotalAmount'))) - 1;
+            localStorage.setItem('TotalAmount', String(basketTotalAmount));
+        },
+        counterPlus: function () {
+            if ((this.count >= 1) && (this.totalAmount > 0)) {
+                let productItem = {
+                    description: '',
+                    productPrice: '',
+                    totalAmount: '',
+                    productImageName: ''
+                };
+                let items = new Set(JSON.parse(localStorage.getItem(String(this.key))));
+                for (let productFromBasket of items) {
+                    if (Number(productFromBasket.totalAmount) > Number('0')) {
+                        let fixedValue = this.productPrice;
+                        if (this.summaryPrice === 0) {
+                            this.summaryPrice = Number(fixedValue);
+                        }
+                        let temporaryValue = this.summaryPrice;
+                        this.summaryPrice = (Number(fixedValue) + temporaryValue);
+
+                        productItem = {
+                            description: productFromBasket.description,
+                            productPrice: this.summaryPrice,
+                            totalAmount: Number(productFromBasket.totalAmount) - Number('1'),
+                            productImageName: productFromBasket.productImageName
+                        };
+                        this.count++;
+                        alert(String(productItem.totalAmount));
+                        let basketItems = [];
+                        basketItems.push(productItem);
+
+                        localStorage.setItem(String(this.key), JSON.stringify(basketItems));
+
+                    }
+                }
+            }
+        },
+        counterMinus: function () {
+            if ((this.count > 1)) {
+                this.count--;
+
+                let productItem = {
+                    description: '',
+                    productPrice: '',
+                    totalAmount: '',
+                    productImageName: ''
+                };
+                let items = new Set(JSON.parse(localStorage.getItem(String(this.key))));
+                for (let productFromBasket of items) {
+                    let fixedValue = this.productPrice;
+
+                    let temporaryValue = this.summaryPrice;
+                    this.summaryPrice = (Number(temporaryValue) - fixedValue);
+                    productItem = {
+                        description: productFromBasket.description,
+                        productPrice: this.summaryPrice,
+                        totalAmount: Number(productFromBasket.totalAmount) + Number('1'),
+                        productImageName: productFromBasket.productImageName
+                    };
+                    alert(String(productItem.totalAmount));
+                    let basketItems = [];
+                    basketItems.push(productItem);
+                    localStorage.setItem(String(this.key), JSON.stringify(basketItems));
+                }
+
+            }
         }
     }
 });
@@ -126,6 +199,8 @@ Vue.component('productItems-list', {
                         };
                         this.productItems.push(productItem);
                         itemId++;
+                        appSelector.totalProductPrice = (Number(appSelector.totalProductPrice))
+                            + (Number(productItem.productPrice));
                     }
                 }
             }

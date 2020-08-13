@@ -1175,13 +1175,6 @@ footer {
     border-radius: 10px;
 }
 
-#checkMarkContainer {
-    position: relative;
-    left: 50px;
-    top: 500px;
-}
-
-
 #textForm {
     position: relative;
     left: 550px;
@@ -1193,9 +1186,7 @@ footer {
 
 .container {
     position: relative;
-    top: 0px;
     bottom: auto;
-    left: 2px;
     width: 360px;
     display: block;
     padding-left: 35px;
@@ -1205,6 +1196,9 @@ footer {
     font-family: Arial, sans-serif;
     font-style: inherit;
     user-select: none;
+    left: 50px;
+    top: 500px;
+
 }
 
 .container input {

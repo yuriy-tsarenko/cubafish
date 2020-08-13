@@ -27,11 +27,12 @@
 </div>
 <!-- end div#header -->
 <div id="pageWrapper">
-    <div id="page">
-        <div id="textForm">Оформление заказа</div>
-        <div id="content">
-            <div id="appSelectorText">Способ оплаты:</div>
-            <div id="appSelector">
+    <div id="appSelector">
+        <div id="page">
+            <div id="textForm">Оформление заказа</div>
+            <div id="content">
+                <div id="appSelectorText">Способ оплаты:</div>
+
                 <select v-model="paymentType" id="selectorStyle">
                     <option disabled value="">Выберите один из вариантов</option>
                     <option>Наличными</option>
@@ -47,48 +48,53 @@
                     <option>Курьером</option>
                 </select>
 
-            <div id="aboutRecipient">Информация о получателе:</div>
+                <div id="aboutRecipient">Информация о получателе:</div>
 
-            <input  name="firstnameUser" type="text" id="firstnameUser" placeholder="Введите ваше имя"/>
+                <input v-model="firstnameUser" name="firstnameUser" type="text" id="firstnameUser"
+                       placeholder="Введите ваше имя"/>
 
-            <input  name="lastnameUser" type="text" id="lastnameUser" placeholder="Введите вашу фамилию"/>
+                <input v-model="lastnameUser" name="lastnameUser" type="text" id="lastnameUser"
+                       placeholder="Введите вашу фамилию"/>
 
-            <input  name="surnameUser" type="text" id="surnameUser" placeholder="Введите ваше отчество"/>
+                <input v-model="surnameUser" name="surnameUser" type="text" id="surnameUser"
+                       placeholder="Введите ваше отчество"/>
 
-            <div id="aboutEmail">Email:</div>
+                <div id="aboutEmail">Email:</div>
 
-            <input  name="emailNameUser" type="text" id="emailNameUser" placeholder="Введите ваш e-mail"/>
+                <input v-model="emailNameUser" name="emailNameUser" type="text" id="emailNameUser"
+                       placeholder="Введите ваш e-mail"/>
 
-            <div id="aboutPhoneNumber">Номер телефона:</div>
+                <div id="aboutPhoneNumber">Номер телефона:</div>
 
-            <input  name="PhoneNameUser" type="text" id="PhoneNameUser"
-                   placeholder="Введите ваш номер телефона"/>
+                <input v-model="phoneNameUser" name="phoneNameUser" type="text" id="PhoneNameUser"
+                       placeholder="Введите ваш номер телефона"/>
 
-            <div id="checkMarkContainer">
                 <label class="container">Я подтверждаю заказ
-                    <input type="checkbox" checked="checked">
+                    <input v-model="confirmBooking" type="checkbox" id="confirmBooking"
+                           value="Користувач підтвердив замовлення">
                     <span class="checkmark"></span>
                 </label>
-            </div>
-            <div id="buttonForBuy">
-                <button class="btn">Оформить заказ</button>
-            </div>
-            </div>
-        </div>
-        <!--start div#sidebar-->
-        <div id="sidebar">
-            <div id="sidetext">Ваш заказ:</div>
-            <div id="basketItems">
-                <div id="appBasket"></div>
-            </div>
-            <hr id="line">
-            <div id="summaryText">Всего:</div>
+                <div id="buttonForBuy">
+                    <button class="btn">Оформить заказ</button>
+                </div>
 
+            </div>
+            <!--start div#sidebar-->
+            <div id="sidebar">
+                <div id="sidetext">Ваш заказ:</div>
+                <div id="basketItems">
+                    <div id="appBasket"></div>
+                </div>
+                <hr id="line">
+                <div id="summaryText">Всего: {{totalProductPrice}} грн</div>
+
+            </div>
         </div>
-        <script src="js/card.js"></script>
+
         <!-- end div#content -->
         <!-- end div#sidebar -->
     </div>
+    <script src="js/card.js"></script>
 </div>
 <!-- end div#page -->
 <!-- end div#wrapper -->
