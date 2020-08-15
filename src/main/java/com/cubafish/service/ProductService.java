@@ -283,10 +283,10 @@ public class ProductService {
         }
     }
 
-    public Map<String, Object> compensationOfMissingData(Long id, String productCategory, String productSubCategory,
-                                                         String productBrand, String typeOfPurpose, String description,
-                                                         String specification, String totalAmount, String productPrice,
-                                                         Product exiting, ProductDto productDto) {
+    public Map<String, Object> compensationOfMissingData(
+            Long id, String productCategory, String productSubCategory, String productBrand, String typeOfPurpose,
+            String description, String specification, String totalAmount, String productPrice, Product exiting,
+            ProductDto productDto) {
 
         if (id != null) {
             productDto.setId(id);
@@ -368,11 +368,9 @@ public class ProductService {
         }
     }
 
-    public Map<String, Object> setTextAndNumericDataBeforeCreate(String productCategory, String productSubCategory,
-                                                                 String productBrand, String typeOfPurpose,
-                                                                 String description, String specification,
-                                                                 String totalAmount, String productPrice,
-                                                                 ProductDto productDto) {
+    public Map<String, Object> setTextAndNumericDataBeforeCreate(
+            String productCategory, String productSubCategory, String productBrand, String typeOfPurpose,
+            String description, String specification, String totalAmount, String productPrice, ProductDto productDto) {
         productDto.setProductCategory(productCategory.trim());
         productDto.setProductSubCategory(productSubCategory.trim());
         productDto.setProductBrand(productBrand.trim());
@@ -396,16 +394,16 @@ public class ProductService {
         } else if (productPrice.contains(",")) {
             String[] massive = productPrice.split(",");
             String validPrice = massive[0].concat(".").concat(massive[1]);
-            BigDecimal convertToBigDecimal = new BigDecimal(validPrice);
             try {
+                BigDecimal convertToBigDecimal = new BigDecimal(validPrice);
                 productDto.setProductPrice(convertToBigDecimal);
             } catch (NumberFormatException e) {
                 return Map.of("productDto", productDto, "status",
                         "product price should have a numeric value");
             }
         } else {
-            BigDecimal convertToBigDecimal = new BigDecimal(productPrice);
             try {
+                BigDecimal convertToBigDecimal = new BigDecimal(productPrice);
                 productDto.setProductPrice(convertToBigDecimal);
             } catch (NumberFormatException e) {
                 return Map.of("productDto", productDto, "status", "product price should have a numeric value");

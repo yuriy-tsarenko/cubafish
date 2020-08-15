@@ -15,7 +15,7 @@ let basketImage = new Vue({
     el: '#basketImage',
     methods: {
         activeImageAction: function () {
-            window.location = 'http://91.235.128.12:8081/admin/booking_db.html';
+            window.location = 'http://91.235.128.12:8081/admin/admin_booking_manager.html';
         }
     }
 });
@@ -149,7 +149,7 @@ Vue.component('newProduct-row', {
         '</table>' +
 
         '<transition name="fade">' +
-        '<table v-if="show" style="width:1000px; height: auto; background: rgba(0,74,113,1.0)">' +
+        '<table v-if="show" style="width:1000px; height: auto; background: rgb(255,255,255)">' +
         '<tr>' +
         '<td style="height: 30px"><h4>Основное изображение</h4></td>' +
         '<td style="height: 30px"><h4>Вид справа</h4></td>' +

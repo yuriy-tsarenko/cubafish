@@ -29,8 +29,8 @@
 <div id="pageWrapper">
     <div id="appSelector">
         <div id="page">
-            <div id="textForm">Оформление заказа</div>
             <div id="content">
+                <div id="textForm">Оформление заказа:</div>
                 <div id="appSelectorText">Способ оплаты:</div>
 
                 <select v-model="paymentType" id="selectorStyle">
@@ -43,12 +43,21 @@
                 <div id="typeDelivery">Способ доставки:</div>
                 <select v-model="deliveryType" id="selectorStyle2">
                     <option disabled value="">Выберите один из вариантов</option>
-                    <option>Нова Пошта</option>
-                    <option>Укр Пошта</option>
+                    <option>Новая Почта</option>
+                    <option>Укр Почта</option>
                     <option>Курьером</option>
                 </select>
 
                 <div id="aboutRecipient">Информация о получателе:</div>
+
+                <input v-model="regionUser" name="regionUser" type="text" id="regionUser"
+                       placeholder="Введите область"/>
+
+                <input v-model="cityUser" name="cityUser" type="text" id="cityUser"
+                       placeholder="Введите город"/>
+
+                <input v-model="addressUser" name="addressUser" type="text" id="addressUser"
+                       placeholder="Введите адрес доставки"/>
 
                 <input v-model="firstnameUser" name="firstnameUser" type="text" id="firstnameUser"
                        placeholder="Введите ваше имя"/>
@@ -69,19 +78,18 @@
                 <input v-model="phoneNameUser" name="phoneNameUser" type="text" id="PhoneNameUser"
                        placeholder="Введите ваш номер телефона"/>
 
-                <label class="container">Я подтверждаю заказ
+                <label class="container"><p>Я подтверждаю заказ и согласен с условиями <a href="#">пользовательского соглашения</a>.</p>
                     <input v-model="confirmBooking" type="checkbox" id="confirmBooking"
                            value="Користувач підтвердив замовлення">
                     <span class="checkmark"></span>
                 </label>
-                <div id="buttonForBuy">
-                    <button class="btn">Оформить заказ</button>
-                </div>
+
+                    <button class="bookingMakerBtn" v-on:click="bookingMaker">ОФОРМИТЬ ЗАКАЗ</button>
 
             </div>
             <!--start div#sidebar-->
             <div id="sidebar">
-                <div id="sidetext">Ваш заказ:</div>
+                <div id="sideText">Ваш заказ:</div>
                 <div id="basketItems">
                     <div id="appBasket"></div>
                 </div>
@@ -101,14 +109,11 @@
 <footer>
     <div id="wrapperFooter">
         <nav>
-            <a href="index.html">HOME</a>
-            <a href="project.html">PROJECT</a>
-            <a href="blog.html">BLOG</a>
-            <a href="contact.html">CONTACT</a>
-            <a href="about.html">ABOUT</a>
-            <a href="services.html">SERVICES</a>
-            <a href="location.html">LOCATION</a>
-
+            <a href="#">Программа лояльности</a>
+            <a href="#">Отзывы</a>
+            <a href="#"> Контакты</a>
+            <a href="#">Найти на карте</a>
+            <a href="#">О нас</a>
         </nav>
         <div id="logoFooter">
             <a href="index.html"><img style="width: 700px; height: auto; margin: 0 auto; position: relative"
@@ -121,7 +126,7 @@
             <a href="#"><img src="css/images/Twitter.png" alt=""></a>
 
         </div>
-        <p>Copyright. 2020</p>
+        <p>CUBAFISH. 2020</p>
     </div>
 </footer>
 </body>

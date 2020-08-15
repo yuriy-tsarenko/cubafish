@@ -264,7 +264,7 @@ header {
     right: 40px;
     float: right;
     width: 750px;
-    height: 40%;
+    height: 1100px;
     overflow: auto;
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.5); /* Параметры тени */
     padding: 10px;
@@ -334,8 +334,7 @@ header {
     position: relative;
     left: 20px;
     width: 630px;
-    height: 40%;
-    overflow: auto;
+    height: 1100px;
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.5); /* Параметры тени */
     padding: 10px;
     border-radius: 15px;
@@ -1049,7 +1048,7 @@ footer {
 }
 
 
-#sidetext {
+#sideText {
     position: relative;
     top: 0;
     left: 0;
@@ -1067,7 +1066,7 @@ footer {
 #selectorStyle {
     position: relative;
     left: 35px;
-    top: 115px;
+    top: 20px;
     width: 700px;
     height: 40px;
     border: 1px solid grey;
@@ -1078,7 +1077,7 @@ footer {
 #appSelectorText {
     position: relative;
     left: 35px;
-    top: 100px;
+    top: 15px;
     font-size: 17px;
     font-family: Arial, sans, serif;
 }
@@ -1086,7 +1085,7 @@ footer {
 #typeDelivery {
     position: relative;
     left: 35px;
-    top: 145px;
+    top: 30px;
     font-size: 17px;
     font-family: Arial, sans, serif;
 }
@@ -1094,7 +1093,7 @@ footer {
 #selectorStyle2 {
     position: relative;
     left: 35px;
-    top: 160px;
+    top: 35px;
     width: 700px;
     height: 40px;
     border: 1px solid grey;
@@ -1104,15 +1103,45 @@ footer {
 #aboutRecipient {
     position: relative;
     left: 35px;
-    top: 195px;
+    top: 60px;
     font-size: 20px;
     font-family: Arial, sans, serif;
+}
+
+#regionUser {
+    position: relative;
+    left: 35px;
+    top: 80px;
+    width: 700px;
+    height: 40px;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+
+#cityUser {
+    position: relative;
+    left: 35px;
+    top: 110px;
+    width: 700px;
+    height: 40px;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+
+#addressUser {
+    position: relative;
+    left: 35px;
+    top: 140px;
+    width: 700px;
+    height: 40px;
+    border: 1px solid grey;
+    border-radius: 10px;
 }
 
 #firstnameUser {
     position: relative;
     left: 35px;
-    top: 210px;
+    top: 170px;
     width: 700px;
     height: 40px;
     border: 1px solid grey;
@@ -1122,7 +1151,7 @@ footer {
 #lastnameUser {
     position: relative;
     left: 35px;
-    top: 240px;
+    top: 200px;
     width: 700px;
     height: 40px;
     border: 1px solid grey;
@@ -1132,7 +1161,7 @@ footer {
 #surnameUser {
     position: relative;
     left: 35px;
-    top: 270px;
+    top: 230px;
     width: 700px;
     height: 40px;
     border: 1px solid grey;
@@ -1142,14 +1171,14 @@ footer {
 #aboutEmail {
     position: relative;
     left: 35px;
-    top: 305px;
+    top: 260px;
     font-size: 20px;
     font-family: Arial, sans, serif;
 }
 
 #emailNameUser {
     position: relative;
-    top: 320px;
+    top: 275px;
     left: 35px;
     width: 700px;
     height: 40px;
@@ -1159,7 +1188,7 @@ footer {
 
 #aboutPhoneNumber {
     position: relative;
-    top: 355px;
+    top: 290px;
     left: 35px;
     font-size: 20px;
     font-family: Arial, sans, serif;
@@ -1167,7 +1196,7 @@ footer {
 
 #PhoneNameUser {
     position: relative;
-    top: 370px;
+    top: 300px;
     left: 35px;
     width: 700px;
     height: 40px;
@@ -1177,8 +1206,8 @@ footer {
 
 #textForm {
     position: relative;
-    left: 550px;
-    top: 10px;
+    top: 0;
+    left: 0;
     font-size: 35px;
     font-family: Arial, sans, serif;
     color: black;
@@ -1187,7 +1216,7 @@ footer {
 .container {
     position: relative;
     bottom: auto;
-    width: 360px;
+    width: 480px;
     display: block;
     padding-left: 35px;
     margin-bottom: 12px;
@@ -1196,8 +1225,8 @@ footer {
     font-family: Arial, sans-serif;
     font-style: inherit;
     user-select: none;
-    left: 50px;
-    top: 500px;
+    left: 40px;
+    top: 320px;
 
 }
 
@@ -1211,7 +1240,8 @@ footer {
 
 .checkmark {
     position: absolute;
-    left: 0px;
+    bottom: 20px;
+    left: 0;
     height: 25px;
     width: 25px;
     background-color: #eee;
@@ -1257,59 +1287,6 @@ footer {
     transform: rotate(45deg);
 }
 
-.btn {
-    width: 600px;
-    height: 50px;
-    color: #fff;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 20px;
-    border-radius: 10px;
-    border: none;
-    padding: 20px 60px;
-    background: linear-gradient(90deg, #6e6e00, #454500);
-    cursor: pointer;
-    outline: none;
-    overflow: hidden;
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-}
-
-.btn:before, .btn:after {
-    background: #000;
-    position: absolute;
-    content: '';
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: -110%;
-    z-index: 1;
-    transform: skewX(25deg);
-    transition: .5s ease;
-    opacity: .1;
-}
-
-.btn:hover:before {
-    left: -10%;
-    transition: .3s ease;
-}
-
-.btn:hover:after {
-    left: -20%;
-}
-
-.btn:active:before {
-    left: -100%;
-}
-
-.btn:active:after {
-    left: -90%;
-}
-
-#buttonForBuy {
-    left: 90px;
-    position: relative;
-    top: 560px;
-}
 
 #line {
     position: relative;
@@ -1325,21 +1302,50 @@ footer {
     top: 30px;
 }
 
+#basketItems::-webkit-scrollbar {
+    width: 0;
+}
+
 #basketTable {
 
 }
 
 .counterButton {
     position: relative;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    width: 30px;
-    height: 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-right: 2px;
+    width: 20px;
+    height: 20px;
+    background-image: url(images/plus.png);
+    background-size: 20px 20px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 10px;
+}
+
+.counterButtonMinus {
+    position: relative;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 2px;
+    width: 20px;
+    height: 20px;
+    background-image: url(images/minus.png);
+    background-size: 20px 20px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 10px;
 }
 
 .deleteButton {
     position: relative;
-    top: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     width: 20px;
     height: 20px;
     background-image: url(images/close.png);
@@ -1377,15 +1383,58 @@ footer {
     border-radius: 10px;
 }
 
-#basketItems::-webkit-scrollbar {
-    width: 0;
-}
 
 #summaryText {
     position: relative;
     top: 80px;
     left: 0;
     font-size: 30px;
+}
+
+.bookingMakerBtn {
+    position: relative;
+    top: 340px;
+    left: 120px;
+    right: auto;
+    bottom: 10px;
+    width: 500px;
+    height: 70px;
+    z-index: 1;
+    background: #585801;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 24px;
+    font-style: normal;
+    color: #ffffff;
+    border: none;
+    border-radius: 15px;
+}
+
+.bookingMakerBtn:hover {
+    background: rgb(172, 172, 0);
+    background: linear-gradient(180deg, rgba(172, 172, 0, 1) 0%, rgba(88, 88, 1, 1) 100%);
+    tansition: all .3s linear;
+    -webkit-transition: all .3s linear;
+    -moz-transition: all .3s linear;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 24px;
+    font-style: normal;
+    color: #ffffff;
+    border: none;
+}
+
+.bookingMakerBtn:active {
+    background: rgb(128, 128, 5);
+    tansition: all .50ms linear;
+    -webkit-transition: all .50ms linear;
+    -moz-transition: all .50ms linear;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 24px;
+    font-style: normal;
+    color: #ffffff;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
 }
 
 
