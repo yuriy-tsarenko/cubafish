@@ -62,15 +62,15 @@
                 <input v-model="firstnameUser" name="firstnameUser" type="text" id="firstnameUser"
                        placeholder="Введите ваше имя"/>
 
-                <input v-model="lastnameUser" name="lastnameUser" type="text" id="lastnameUser"
+                <input v-model="middleNameUser" name="lastnameUser" type="text" id="lastnameUser"
                        placeholder="Введите вашу фамилию"/>
 
-                <input v-model="surnameUser" name="surnameUser" type="text" id="surnameUser"
+                <input v-model="lastNameUser" name="surnameUser" type="text" id="surnameUser"
                        placeholder="Введите ваше отчество"/>
 
                 <div id="aboutEmail">Email:</div>
 
-                <input v-model="emailNameUser" name="emailNameUser" type="text" id="emailNameUser"
+                <input v-model="emailNameUser" name="emailNameUser" type="email" id="emailNameUser"
                        placeholder="Введите ваш e-mail"/>
 
                 <div id="aboutPhoneNumber">Номер телефона:</div>
@@ -98,11 +98,10 @@
 
             </div>
         </div>
-
+    </div>
         <!-- end div#content -->
         <!-- end div#sidebar -->
-    </div>
-    <script src="js/card.js"></script>
+
 </div>
 <!-- end div#page -->
 <!-- end div#wrapper -->
@@ -129,5 +128,6 @@
         <p>CUBAFISH. 2020</p>
     </div>
 </footer>
+<script src="js/card.js"></script>
 </body>
 </html>

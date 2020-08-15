@@ -242,9 +242,17 @@ header {
     background-color: #e0e0e0;
 }
 
-#page {
+#page_manager {
     position: relative;
     width: 1750px;
+    height: 2700px;
+    margin: 0 auto;
+    background-size: cover;
+}
+
+#page {
+    position: relative;
+    width: 1500px;
     height: 2700px;
     margin: 0 auto;
     background-size: cover;
@@ -562,13 +570,22 @@ td {
 
 #superAdminButtonProductTemplate {
     position: relative;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    transform: rotate(90deg);
+    width: 85px;
+    height: 50px;
+}
+
+#superAdminButtonProductTemplateManager {
+    position: relative;
     bottom: 35px;
     transform: rotate(90deg);
     width: 110px;
     height: 50px;
 }
 
-#superAdminButtonProductTemplate2 {
+#superAdminButtonProductTemplateManager2{
     position: relative;
     top: 35px;
     transform: rotate(90deg);

@@ -5,6 +5,7 @@ let appSelector = new Vue({
     el: '#appSelector',
     data: {
         totalProductPrice: 0,
+        dataLoadStatus:'',
         firstnameUser: '',
         middleNameUser: '',
         lastNameUser: '',
@@ -12,6 +13,7 @@ let appSelector = new Vue({
         phoneNameUser: '',
         confirmBooking: '',
         totalItemsAmount:'',
+        bookingItems:[],
         paymentType: '',
         deliveryType: '',
         regionUser:'',
@@ -21,8 +23,8 @@ let appSelector = new Vue({
     },
     methods: {
         bookingMaker: function () {
-            let setOfProducts = new Set();
             this.maxId = localStorage.getItem('ID');
+            this.totalItemsAmount = localStorage.getItem('TotalAmount');
             if (this.maxId !== null) {
                 let maxValue = Number(this.maxId)
                 let itemId = 0;
@@ -31,7 +33,7 @@ let appSelector = new Vue({
                     if (item !== null) {
                         let items = new Set(JSON.parse(localStorage.getItem(String(i))));
                         for (let productFromBasket of items) {
-                            let productItem = {
+                            let bookingItem = {
                                 id: itemId,
                                 key: i,
                                 description: productFromBasket.description,
@@ -39,7 +41,7 @@ let appSelector = new Vue({
                                 totalAmount: productFromBasket.totalAmount,
                                 productImageName: productFromBasket.productImageName
                             };
-                            setOfProducts.push(productItem);
+                            this.bookingItems.push(bookingItem);
                             itemId++;
                         }
                     }
@@ -60,7 +62,7 @@ let appSelector = new Vue({
             formData.append('regionUser', this.regionUser);
             formData.append('cityUser', this.cityUser);
             formData.append('addressUser', this.addressUser);
-            formData.append('setOfProducts', JSON.stringify(setOfProducts));
+            formData.append('bookingItems', this.bookingItems);
 
             axios.post('/guest/booking/create',
                 formData,

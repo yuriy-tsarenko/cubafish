@@ -46,8 +46,8 @@ Vue.component('newBooking-row', {
         '    <td style="height: 30px"><p>Фамилия</p></td>' +
 
         '    <td rowspan="8" style="width:70px;height:auto">' +
-        '        <input id="superAdminButtonProductTemplate" type="button" value="Изменить" v-on:click="hiddenFlag">' +
-        '        <input id="superAdminButtonProductTemplate2" type="button" value="Заказ оформлен">' +
+        '        <input id="superAdminButtonProductTemplateManager" type="button" value="Изменить" v-on:click="hiddenFlag">' +
+        '        <input id="superAdminButtonProductTemplateManager2" type="button" value="Заказ оформлен">' +
         '    </td>' +
         '</tr>' +
 

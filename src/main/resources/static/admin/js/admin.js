@@ -149,7 +149,7 @@ Vue.component('newProduct-row', {
         '</table>' +
 
         '<transition name="fade">' +
-        '<table v-if="show" style="width:1000px; height: auto; background: rgb(255,255,255)">' +
+        '<table v-if="show" style="width:1000px; height: auto; background: rgb(208,208,208); border-right: black">' +
         '<tr>' +
         '<td style="height: 30px"><h4>Основное изображение</h4></td>' +
         '<td style="height: 30px"><h4>Вид справа</h4></td>' +
@@ -241,7 +241,7 @@ Vue.component('newProduct-row', {
         '</transition>' +
 
         '<transition name="fade">' +
-        '<table v-if="showCreateProduct" style="width:1000px; height: auto; background: #585801">' +
+        '<table v-if="showCreateProduct" class="tableCreate">' +
         '<tr>' +
         '<td style="height: 30px"><h4>Основное изображение</h4></td>' +
         '<td style="height: 30px"><h4>Вид справа</h4></td>' +
