@@ -8,7 +8,9 @@ import lombok.Data;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
@@ -165,18 +167,18 @@ public class BookingListService {
         bookingListDto.setRegion(region.trim());
         bookingListDto.setCity(city.trim());
         bookingListDto.setAddress(address.trim());
-        Date date = new Date();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd/hh:mm");
-        bookingListDto.setDateOfBooking(java.sql.Date.valueOf(dateFormat.format(date)));
+        Date currentDate = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        bookingListDto.setDateOfBooking(dateFormat.format(currentDate));
 
         StringBuilder itemsBuilder = new StringBuilder();
         for (BookingItem item : bookingItems) {
             itemsBuilder.append(item.getDescription());
-            itemsBuilder.append("-");
+            itemsBuilder.append(" -- ");
             itemsBuilder.append(item.getTotalAmount());
-            itemsBuilder.append("-");
+            itemsBuilder.append(" -- ");
             itemsBuilder.append(item.getProductPrice());
-            itemsBuilder.append("*");
+            itemsBuilder.append(" *** ");
         }
 
         bookingListDto.setBookingItems(itemsBuilder.toString());
@@ -189,7 +191,7 @@ public class BookingListService {
                 Integer totalAmountConverted = Integer.valueOf(totalAmount.trim());
                 bookingListDto.setTotalAmount(totalAmountConverted);
             } catch (NumberFormatException e) {
-                return Map.of("productDto", bookingListDto,
+                return Map.of("bookingListDto", bookingListDto,
                         "status", "the amount of products should have a numeric value");
             }
         }
@@ -203,7 +205,7 @@ public class BookingListService {
                 BigDecimal convertToBigDecimal = new BigDecimal(validPrice);
                 bookingListDto.setTotalPrice(convertToBigDecimal);
             } catch (NumberFormatException e) {
-                return Map.of("productDto", bookingListDto, "status",
+                return Map.of("bookingListDto", bookingListDto, "status",
                         "product price should have a numeric value");
             }
         } else {
@@ -211,11 +213,11 @@ public class BookingListService {
                 BigDecimal convertToBigDecimal = new BigDecimal(totalPrice);
                 bookingListDto.setTotalPrice(convertToBigDecimal);
             } catch (NumberFormatException e) {
-                return Map.of("productDto", bookingListDto,
+                return Map.of("bookingListDto", bookingListDto,
                         "status", "product price should have a numeric value");
             }
         }
-        return Map.of("productDto", bookingListDto, "status", "success");
+        return Map.of("bookingListDto", bookingListDto, "status", "success");
     }
 
     static class SortBookingListDtoById implements Comparator<BookingListDto> {

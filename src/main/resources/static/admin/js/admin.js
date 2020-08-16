@@ -87,9 +87,9 @@ Vue.component('newProduct-row', {
         '<td style="height: 30px"><p>Тип ловли</p></td>' +
         '<td style="height: 30px"><p>Бренд</p></td>' +
         '<td rowspan="5" style="width:70px;height:auto">' +
-        '<input id="superAdminButtonProductTemplate" type="button" value="Изменить" v-on:click="hiddenFlag">' +
-        '<input id="superAdminButtonProductTemplate" type="button" value="Создать" v-on:click="hiddenFlagForCreate">' +
-        '<input id="superAdminButtonProductTemplate" type="button" value="Удалить" v-on:click="deleteProduct">' +
+        '<input id="superAdminButtonEdit" type="button" value="Изменить" v-on:click="hiddenFlag">' +
+        '<input id="superAdminButtonDelete" type="button" value="Создать" v-on:click="hiddenFlagForCreate">' +
+        '<input id="superAdminButtonCreate" type="button" value="Удалить" v-on:click="deleteProduct">' +
         '</td>'+
         '</tr>' +
 
@@ -168,7 +168,7 @@ Vue.component('newProduct-row', {
         '<td style="height: 30px"><h4>Введите полное имя товара</h4></td>' +
         '<td style="height: 30px"><h4>Введите описание товара</h4></td>' +
         '<td style="height: 30px"><h4>Введите тип ловли</h4></td>' +
-        '<td style="height: 30px"><h4>Введите имя бренда</h4></td>' +
+        '<td colspan="2" style="height: 30px"><h4>Введите имя бренда</h4></td>' +
         '</tr>' +
 
         '<tr>' +
@@ -260,7 +260,7 @@ Vue.component('newProduct-row', {
         '<td style="height: 30px"><h4>Введите полное имя товара</h4></td>' +
         '<td style="height: 30px"><h4>Введите описание товара</h4></td>' +
         '<td style="height: 30px"><h4>Введите тип ловли</h4></td>' +
-        '<td style="height: 30px"><h4>Введите имя бренда</h4></td>' +
+        '<td colspan="2" style="height: 30px"><h4>Введите имя бренда</h4></td>' +
         '</tr>' +
 
         '<tr>' +

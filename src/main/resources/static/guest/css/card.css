@@ -1265,11 +1265,11 @@ footer {
     background-color: #757500;
 }
 
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
+/*.checkmark:after {*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    display: none;*/
+/*}*/
 
 .container input:checked ~ .checkmark:after {
     display: block;

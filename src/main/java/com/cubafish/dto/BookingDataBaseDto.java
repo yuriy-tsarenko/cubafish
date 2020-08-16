@@ -5,14 +5,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookingDataBaseDto {
     private Long id;
-    private Date dateOfBooking;
+    private String dateOfBooking;
     private String firstName;
     private String middleName;
     private String lastName;

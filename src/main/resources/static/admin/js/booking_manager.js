@@ -25,7 +25,7 @@ Vue.component('newBooking-row', {
             email: '',
             contact: '',
             deliveryType: '',
-            paymentType:'',
+            paymentType: '',
             region: '',
             city: '',
             address: '',
@@ -40,12 +40,12 @@ Vue.component('newBooking-row', {
         '</tr>' +
         '' +
         '<tr>' +
-        '    <td style="height: 30px"><p>Дата/время заказа</p></td>' +
-        '    <td style="height: 30px"><p>Имя</p></td>' +
-        '    <td style="height: 30px"><p>Отчество</p></td>' +
-        '    <td style="height: 30px"><p>Фамилия</p></td>' +
+        '    <td style="height: 30px"><p>Дата/время заказа:</p></td>' +
+        '    <td style="height: 30px"><p>Имя:</p></td>' +
+        '    <td style="height: 30px"><p>Отчество:</p></td>' +
+        '    <td style="height: 30px"><p>Фамилия:</p></td>' +
 
-        '    <td rowspan="8" style="width:70px;height:auto">' +
+        '    <td rowspan="7" style="width:70px;height:auto">' +
         '        <input id="superAdminButtonProductTemplateManager" type="button" value="Изменить" v-on:click="hiddenFlag">' +
         '        <input id="superAdminButtonProductTemplateManager2" type="button" value="Заказ оформлен">' +
         '    </td>' +
@@ -59,24 +59,24 @@ Vue.component('newBooking-row', {
         '</tr>' +
 
         '<tr>' +
-        '    <td style="height: 30px"><p>E-mail</p></td>' +
-        '    <td style="height: 30px"><p>Номер телефона</p></td>' +
-        '    <td style="height: 30px"><p>Общая сума</p></td>' +
-        '    <td style="height: 30px"><p>Общее количество</p></td>' +
+        '    <td style="height: 30px"><p>E-mail:</p></td>' +
+        '    <td style="height: 30px"><p>Номер телефона:</p></td>' +
+        '    <td style="height: 30px"><p>Общая сума:</p></td>' +
+        '    <td style="height: 30px"><p>Общее количество:</p></td>' +
         '</tr>' +
 
         '<tr>' +
         '    <td style="height: 30px"><p>{{newBooking.email}}</p></td>' +
         '    <td style="height: 30px"><p>{{newBooking.contact}}</p></td>' +
-        '    <td style="height: 30px"><p>{{newBooking.totalPrice}}</p></td>' +
+        '    <td style="height: 30px"><p>{{newBooking.totalPrice}} грн</p></td>' +
         '    <td style="height: 30px"><p>{{newBooking.totalAmount}}</p></td>' +
         '</tr>' +
 
         '<tr>' +
-        '    <td style="height: 30px"><p>Способ доставки</p></td>' +
-        '    <td style="height: 30px"><p>Соглашение пользователя</p></td>' +
-        '    <td style="height: 30px"><p>Область</p></td>' +
-        '    <td style="height: 30px"><p>Адрес</p></td>' +
+        '    <td style="height: 30px"><p>Способ доставки:</p></td>' +
+        '    <td style="height: 30px"><p>Соглашение пользователя:</p></td>' +
+        '    <td style="height: 30px"><p>Область:</p></td>' +
+        '    <td style="height: 30px"><p>Адрес:</p></td>' +
         '</tr>' +
 
         '<tr>' +
@@ -87,8 +87,8 @@ Vue.component('newBooking-row', {
         '</tr>' +
 
         '<tr>' +
-        '    <td style="height: 30px"><p>Способ оплаты</p></td>' +
-        '    <td style="height: 30px"><p>Город</p></td>' +
+        '    <td style="height: 30px"><p>Способ оплаты:</p></td>' +
+        '    <td style="height: 30px"><p>Город:</p></td>' +
         '</tr>' +
 
         '<tr>' +
@@ -98,7 +98,7 @@ Vue.component('newBooking-row', {
         '<tr>' +
         '    <td colspan="5" id="cellStyle" style="width:1000px; height: 25px">' +
         '        <div class="detailsBtnColor" v-if="showDetailsButton" v-on:click="hiddenFlagDetails">' +
-        '<input class="btn" type="button">' +
+        '<button class="btn" type="button"></button>' +
         '        </div>' +
         '    </td>' +
         '</tr>' +
@@ -144,7 +144,7 @@ Vue.component('newBooking-row', {
         '</tr>' +
         '<tr>' +
         '<td style="height: 30px">' +
-        '<div class="detailsBtnColor" v-on:click="hiddenFlagDetails"><input class="btnUp" type="button"></div>' +
+        '<div class="detailsBtnColor" v-on:click="hiddenFlagDetails"><button class="btnUp" type="button"></button></div>' +
         '</td>' +
         '</tr>' +
         '</table>' +

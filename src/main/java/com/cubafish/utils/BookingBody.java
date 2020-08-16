@@ -1,29 +1,27 @@
-package com.cubafish.dto;
+package com.cubafish.utils;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.math.BigDecimal;
+import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
-@NoArgsConstructor
-public class BookingListDto {
-    private Long id;
-    private String dateOfBooking;
+public class BookingBody {
     private String firstName;
     private String middleName;
     private String lastName;
     private String email;
     private String contact;
     private String userConfirmation;
-    private BigDecimal totalPrice;
-    private Integer totalAmount;
+    private String totalPrice;
+    private String totalAmount;
     private String paymentType;
     private String deliveryType;
     private String region;
     private String city;
     private String address;
-    private String bookingItems;
+    private List<BookingItem> bookingItems;
 }

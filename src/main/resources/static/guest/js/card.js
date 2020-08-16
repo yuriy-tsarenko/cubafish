@@ -1,3 +1,4 @@
+const bookingAPISave = Vue.resource('/guest/booking/create');
 Vue.http.headers.common['Authorization'] = localStorage.getItem('CustomHeader');
 axios.defaults.headers.common['Authorization'] = localStorage.getItem('CustomHeader');
 
@@ -5,20 +6,20 @@ let appSelector = new Vue({
     el: '#appSelector',
     data: {
         totalProductPrice: 0,
-        dataLoadStatus:'',
+        dataLoadStatus: '',
         firstnameUser: '',
         middleNameUser: '',
         lastNameUser: '',
         emailNameUser: '',
         phoneNameUser: '',
         confirmBooking: '',
-        totalItemsAmount:'',
-        bookingItems:[],
+        totalItemsAmount: '',
+        bookingItems: [],
         paymentType: '',
         deliveryType: '',
-        regionUser:'',
-        cityUser:'',
-        addressUser:'',
+        regionUser: '',
+        cityUser: '',
+        addressUser: '',
         maxId: ''
     },
     methods: {
@@ -48,30 +49,24 @@ let appSelector = new Vue({
                 }
             }
 
-            let formData = new FormData();
-            formData.append('firstnameUser', this.firstnameUser);
-            formData.append('middleNameUser', this.middleNameUser);
-            formData.append('lastNameUser', this.lastNameUser);
-            formData.append('emailNameUser', this.emailNameUser);
-            formData.append('phoneNameUser', this.phoneNameUser);
-            formData.append('confirmBooking', this.confirmBooking);
-            formData.append('totalProductPrice', this.totalProductPrice);
-            formData.append('totalItemsAmount', this.totalItemsAmount);
-            formData.append('paymentType', this.paymentType);
-            formData.append('deliveryType', this.deliveryType);
-            formData.append('regionUser', this.regionUser);
-            formData.append('cityUser', this.cityUser);
-            formData.append('addressUser', this.addressUser);
-            formData.append('bookingItems', this.bookingItems);
+            let bookingBody = {
+                firstName: this.firstnameUser,
+                middleName: this.middleNameUser,
+                lastName: this.lastNameUser,
+                email: this.emailNameUser,
+                contact: this.phoneNameUser,
+                userConfirmation: this.confirmBooking,
+                totalPrice: this.totalProductPrice,
+                totalAmount: this.totalItemsAmount,
+                paymentType: this.paymentType,
+                deliveryType: this.deliveryType,
+                region: this.regionUser,
+                city: this.cityUser,
+                address: this.addressUser,
+                bookingItems: this.bookingItems
+            }
 
-            axios.post('/guest/booking/create',
-                formData,
-                {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                }
-            ).then(response => (this.dataLoadStatus = response.data.status));
+            bookingAPISave.save({},bookingBody).then(response => (this.dataLoadStatus = response.data.status));
         }
     }
 });

@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.math.BigDecimal;
-import java.sql.Date;
 
 @Entity
 @Table(name = "booking_list")
@@ -20,7 +19,7 @@ public class BookingList {
     private Long id;
 
     @Column(name = "date_of_booking")
-    private Date dateOfBooking;
+    private String dateOfBooking;
 
     @Column(name = "first_name")
     private String firstName;
