@@ -91,6 +91,12 @@
                         ЗИМНЯЯ ЛОВЛЯ
                     </button>
                 </td>
+                <td>
+                    <button type="submit"
+                            class="headerButton" v-on:click="getSortedProductsByTypeOfPurpose('Туризм')">
+                        ТУРИЗМ
+                    </button>
+                </td>
             </tr>
         </table>
     </div>
@@ -120,6 +126,9 @@
         </div>
         <!--start div#sidebar-->
         <div id="sidebar">
+            <div id="appCatalog">
+                <button type="submit" v-on:click="getSortedProducts" class="menuButton">Каталог</button>
+            </div>
             <div id="appCategory">
             </div>
             <div id="appSubCategory">

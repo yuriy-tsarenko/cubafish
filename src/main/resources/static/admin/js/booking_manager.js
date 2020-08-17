@@ -76,8 +76,8 @@ Vue.component('productItem-row', {
         '<div v-if="this.totalAmount>0" id="availableInBasket"><p>{{count}}</p></div>' +
         '<div v-if="this.totalAmount==0" id="notAvailableInBasket"><p>Нет в наличии</p></div>' +
         '<td id="cellStyle" style="width:60px; height: auto">' +
-        '<input class="counterButton" type="button" v-on:click="counterPlus" >' +
-        '<input class="counterButtonMinus" type="button" v-on:click="counterMinus" >' +
+        '<button class="counterButton" type="button" v-on:click="counterPlus" ></button>' +
+        '<button class="counterButtonMinus" type="button" v-on:click="counterMinus" ></button>' +
         '</td>' +
         '<td id="cellStyle" style="width:100px; height: auto">' +
         '<div class="productValue" id="productBasketValue3"><p v-if="summaryPrice!==0">{{summaryPrice}} грн</p>' +
@@ -85,7 +85,7 @@ Vue.component('productItem-row', {
         '</div>' +
         '</td>' +
         '<td style="width:60px; height: auto">' +
-        '<input class="deleteButton" type="button" v-on:click="deleteItem" >' +
+        '<button class="deleteButton" type="button" v-on:click="deleteItem"></button>' +
         '</td>' +
         '</tr>' +
         '</table>' +
@@ -268,16 +268,17 @@ Vue.component('newBooking-row', {
         '    <td style="height: 30px"><p>Фамилия:</p></td>' +
 
         '    <td rowspan="7" style="width:70px;height:auto">' +
-        '        <input id="superAdminButtonProductTemplateManager" type="button" value="Изменить" v-on:click="hiddenFlag">' +
-        '        <input id="superAdminButtonProductTemplateManager2" type="button" value="Заказ оформлен">' +
+        '        <input class="adminButtonTemplate" type="button" value="Изменить" v-on:click="hiddenFlag">' +
+        '        <input class="adminButtonTemplate" type="button" value="Подтвердить">' +
+        '        <input class="adminButtonTemplate" type="button" value="Отменить">' +
         '    </td>' +
         '</tr>' +
 
         '<tr>' +
-        '    <td style="height: 30px"><p>{{newBooking.dateOfBooking}}</p></td>' +
-        '    <td style="height: 30px"><p>{{newBooking.firstName}}</p></td>' +
-        '    <td style="height: 30px"><p>{{newBooking.middleName}}</p></td>' +
-        '    <td style="height: 30px"><p>{{newBooking.lastName}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBooking.dateOfBooking}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBooking.firstName}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBooking.middleName}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBooking.lastName}}</p></td>' +
         '</tr>' +
 
         '<tr>' +
@@ -288,10 +289,10 @@ Vue.component('newBooking-row', {
         '</tr>' +
 
         '<tr>' +
-        '    <td style="height: 30px"><p>{{newBooking.email}}</p></td>' +
-        '    <td style="height: 30px"><p>{{newBooking.contact}}</p></td>' +
-        '    <td style="height: 30px"><p>{{newBooking.totalPrice}} грн</p></td>' +
-        '    <td style="height: 30px"><p>{{newBooking.totalAmount}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBooking.email}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBooking.contact}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBooking.totalPrice}} грн</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBooking.totalAmount}}</p></td>' +
         '</tr>' +
 
         '<tr>' +
@@ -302,10 +303,10 @@ Vue.component('newBooking-row', {
         '</tr>' +
 
         '<tr>' +
-        '    <td style="height: 30px"><p>{{newBooking.deliveryType}}</p></td>' +
-        '    <td rowspan="3" style="height: 30px"><p>{{newBooking.userConfirmation}}</p></td>' +
-        '    <td style="height: 30px"><p>{{newBooking.region}}</p></td>' +
-        '    <td rowspan="3" style="height: 30px"><p>{{newBooking.address}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBooking.deliveryType}}</p></td>' +
+        '    <td rowspan="3" style="height: auto"><p class="managerTextStyle">{{newBooking.userConfirmation}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBooking.region}}</p></td>' +
+        '    <td rowspan="3" style="height: auto; width: 220px"><p class="managerTextStyle">{{newBooking.address}}</p></td>' +
         '</tr>' +
 
         '<tr>' +
@@ -314,8 +315,8 @@ Vue.component('newBooking-row', {
         '</tr>' +
 
         '<tr>' +
-        '    <td style="height: 30px"><p>{{newBooking.paymentType}}</p></td>' +
-        '    <td style="height: 30px"><p>{{newBooking.city}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBooking.paymentType}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBooking.city}}</p></td>' +
         '</tr>' +
         '<tr>' +
         '    <td colspan="5" id="cellStyle" style="width:1000px; height: 25px">' +
@@ -325,33 +326,6 @@ Vue.component('newBooking-row', {
         '    </td>' +
         '</tr>' +
         '</table>' +
-
-        ' <transition name="fade">' +
-        ' <table v-if="show" style="width:1000px; height: 300px; background: rgb(221,221,221); border: 2px solid #4f4f01">' +
-        ' <tr>' +
-        '        <td style="width:335px;height: auto"><textarea placeholder="Введите Имя" v-model="firstName"></textarea></td>' +
-        '        <td style="width:335px;height: auto"><textarea placeholder="Введите Фамилию" v-model="middleName"></textarea></td>' +
-        '        <td style="width:335px;height: auto"><textarea placeholder="Введите Отчество" v-model="lastName"></textarea></td>' +
-        ' </tr>' +
-        ' <tr>' +
-        '         <td style="width:335px;height: auto"><textarea placeholder="Введите E-mail" v-model="email"></textarea></td>' +
-        '         <td style="width:335px;height: auto"><textarea placeholder="Номер телефона +38" v-model="contact"></textarea></td>' +
-        '         <td style="width:335px;height: auto"><textarea placeholder="Введите город" v-model="city"></textarea></td>' +
-        ' </tr>' +
-        ' <tr>' +
-        '         <td style="width:335px;height: auto"><textarea placeholder="Способ доставки" v-model="deliveryType"></textarea></td>' +
-        '         <td rowspan="2" style="width:335px;height: auto"><textarea placeholder="Введите адрес" v-model="address"></textarea></td>' +
-        '         <td style="width:335px;height: auto"><textarea placeholder="Введите область" v-model="region"></textarea></td>' +
-        ' </tr>' +
-        ' <tr>' +
-        '         <td style="width:335px;height: auto"><textarea placeholder="Введите способ оплаты" v-model="paymentType"></textarea></td>' +
-        '         <td style="width:auto; height: auto"><input id="superAdminBooking" type="button" value="Сохранить" @click="editProduct"></td>' +
-        ' </tr>' +
-        ' <tr>' +
-        '         <td colspan="3"  style="width:auto; height: 30px"><p>{{editStatus}}</p></td>' +
-        ' </tr>' +
-        ' </table>' +
-        ' </transition>' +
 
         '<transition name="fade">' +
         '<table v-if="showDetails" id="detailsTable" style="width:1000px; height: 270px">' +
@@ -372,6 +346,32 @@ Vue.component('newBooking-row', {
         '</table>' +
         '</transition>' +
 
+        ' <transition name="fade">' +
+        ' <table v-if="show" style="width:1000px; height: 300px; background: rgb(221,221,221); border: 2px solid #4f4f01">' +
+        ' <tr>' +
+        '        <td style="width:335px;height: auto"><textarea placeholder="Введите Имя" v-model="firstName"></textarea></td>' +
+        '        <td style="width:335px;height: auto"><textarea placeholder="Введите Фамилию" v-model="middleName"></textarea></td>' +
+        '        <td style="width:335px;height: auto"><textarea placeholder="Введите Отчество" v-model="lastName"></textarea></td>' +
+        ' </tr>' +
+        ' <tr>' +
+        '         <td style="width:335px;height: auto"><textarea placeholder="Введите E-mail" v-model="email"></textarea></td>' +
+        '         <td style="width:335px;height: auto"><textarea placeholder="Номер телефона +38" v-model="contact"></textarea></td>' +
+        '         <td style="width:335px;height: auto"><textarea placeholder="Введите город" v-model="city"></textarea></td>' +
+        ' </tr>' +
+        ' <tr>' +
+        '         <td style="width:335px;height: auto"><textarea placeholder="Способ доставки" v-model="deliveryType"></textarea></td>' +
+        '         <td rowspan="2" style="width:335px;height: auto"><textarea placeholder="Введите адрес" v-model="address"></textarea></td>' +
+        '         <td style="width:335px;height: auto"><textarea placeholder="Введите область" v-model="region"></textarea></td>' +
+        ' </tr>' +
+        ' <tr>' +
+        '         <td style="width:335px;height: auto"><textarea placeholder="Введите способ оплаты" v-model="paymentType"></textarea></td>' +
+        '         <td style="width:auto; height: auto"><input id="superAdminBooking" type="button" value="Сохранить" v-on:click="editBooking"></td>' +
+        ' </tr>' +
+        ' <tr>' +
+        '         <td colspan="3"  style="width:auto; height: 30px"><p>{{editStatus}}</p></td>' +
+        ' </tr>' +
+        ' </table>' +
+        ' </transition>' +
         '</div>',
     methods: {
         hiddenFlag: function () {
@@ -382,7 +382,7 @@ Vue.component('newBooking-row', {
             }
         },
         hiddenFlagDetails: function () {
-            if (!(this.showDetails === true) && (this.showDetailsButton === true)) {
+            if ((this.showDetails === false) && (this.showDetailsButton === true)) {
                 this.showDetails = true;
                 this.showDetailsButton = false;
             } else {
@@ -408,30 +408,30 @@ Vue.component('newBooking-row', {
             formData.append('fileBackSide', this.fileBackSide);
 
 
-            axios.post('/guest/booking/edit',
-                formData,
-                {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                }
-            ).then(response => (this.editStatus = response.data.status));
+            // axios.post('/guest/booking/edit',
+            //     formData,
+            //     {
+            //         headers: {
+            //             'Content-Type': 'multipart/form-data'
+            //         }
+            //     }
+            // ).then(response => (this.editStatus = response.data.status));
 
-            this.productCategory = ''
-            this.productSubCategory = ''
-            this.productBrand = ''
-            this.description = ''
-            this.specification = ''
-            this.productPrice = ''
-            this.file = null
-            this.fileRightSide = null
-            this.fileLeftSide = null
-            this.fileBackSide = null
-
-            let sortingTag = {
-                key: 'sorting tag',
-                communicationKey: this.productSubCategoryForRequest
-            }
+            // this.productCategory = ''
+            // this.productSubCategory = ''
+            // this.productBrand = ''
+            // this.description = ''
+            // this.specification = ''
+            // this.productPrice = ''
+            // this.file = null
+            // this.fileRightSide = null
+            // this.fileLeftSide = null
+            // this.fileBackSide = null
+            //
+            // let sortingTag = {
+            //     key: 'sorting tag',
+            //     communicationKey: this.productSubCategoryForRequest
+            // }
 
         }
     }

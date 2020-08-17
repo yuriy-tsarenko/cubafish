@@ -498,6 +498,16 @@ let appLogoutButtons = new Vue({
     }
 });
 
+let appCatalog = new Vue({
+    el: '#appCatalog',
+    data:{
+
+    },
+    methods:{
+
+    }
+});
+
 
 
 

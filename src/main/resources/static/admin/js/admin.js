@@ -87,9 +87,9 @@ Vue.component('newProduct-row', {
         '<td style="height: 30px"><p>Тип ловли</p></td>' +
         '<td style="height: 30px"><p>Бренд</p></td>' +
         '<td rowspan="5" style="width:70px;height:auto">' +
-        '<input id="superAdminButtonEdit" type="button" value="Изменить" v-on:click="hiddenFlag">' +
-        '<input id="superAdminButtonDelete" type="button" value="Создать" v-on:click="hiddenFlagForCreate">' +
-        '<input id="superAdminButtonCreate" type="button" value="Удалить" v-on:click="deleteProduct">' +
+        '<input class="adminButtonTemplate" type="button" value="Изменить" v-on:click="hiddenFlag">' +
+        '<input class="adminButtonTemplate" type="button" value="Создать" v-on:click="hiddenFlagForCreate">' +
+        '<input class="adminButtonTemplate" type="button" value="Удалить" v-on:click="deleteProduct">' +
         '</td>'+
         '</tr>' +
 
@@ -107,12 +107,6 @@ Vue.component('newProduct-row', {
         '<div class="productValue" id="productValue3"><p>{{newProduct.productBrand}}</p></div>' +
         '</td>' +
         '</tr>'+
-
-        // '<tr>' +
-        // '<td rowspan="2" style="width:50px;height: auto">' +
-        // '<input id="superAdminButtonProductTemplate" type="button" value="Создать" v-on:click="hiddenFlagForCreate">' +
-        // '</td>'+
-        // '</tr>'+
 
         '<tr>' +
         '<td style="height: 30px"><p>Категория</p></td>' +
@@ -174,7 +168,16 @@ Vue.component('newProduct-row', {
         '<tr>' +
         '<td style="width:225px;height: auto"><textarea  placeholder="Введите полное имя товара" v-model="description"></textarea></td>' +
         '<td style="width:225px;height: auto"><textarea  placeholder="Введите описание товара" v-model="specification"></textarea></td>' +
-        '<td style="width:225px;height: auto"><textarea  placeholder="Введите тип ловли" v-model="typeOfPurpose"></textarea></td>' +
+        '<td style="width:225px;height: auto">' +
+        ' <select v-model="typeOfPurpose" id="selectorStyle">' +
+        ' <option disabled value="">Выберите один из вариантов</option>' +
+        ' <option>Карповая ловля</option>' +
+        ' <option>Спининговая ловля</option>' +
+        ' <option>Фидерная ловля</option>' +
+        ' <option>Поплавочная ловля</option>' +
+        ' <option>Туризм</option>' +
+        ' </select>' +
+        '</td>' +
         '<td colspan="2" style="width:225px;height: auto"><textarea placeholder="Введите имя бренда" v-model="productBrand"></textarea></td>' +
 
         '</tr>' +
@@ -266,7 +269,16 @@ Vue.component('newProduct-row', {
         '<tr>' +
         '<td style="width:225px;height: auto"><textarea  placeholder="Введите полное имя товара" v-model="descriptionForCreate"></textarea></td>' +
         '<td style="width:225px;height: auto"><textarea  placeholder="Введите описание товара" v-model="specificationForCreate"></textarea></td>' +
-        '<td style="width:225px;height: auto"><textarea  placeholder="Введите тип ловли" v-model="typeOfPurposeForCreate"></textarea></td>' +
+        '<td style="width:225px;height: auto">' +
+        ' <select v-model="typeOfPurpose" id="selectorStyle">' +
+        ' <option disabled value="">Выберите один из вариантов</option>' +
+        ' <option>Карповая ловля</option>' +
+        ' <option>Спининговая ловля</option>' +
+        ' <option>Фидерная ловля</option>' +
+        ' <option>Поплавочная ловля</option>' +
+        ' <option>Туризм</option>' +
+        ' </select>' +
+        '</td>' +
         '<td colspan="2" style="width:225px;height: auto"><textarea placeholder="Введите имя бренда" v-model="productBrandForCreate"></textarea></td>' +
 
         '</tr>' +

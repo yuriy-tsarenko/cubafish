@@ -185,7 +185,7 @@ header {
 }
 
 .headerButton {
-    width: 378px;
+    width: 314px;
     height: 40px;
     z-index: 1;
     background: #585801;
@@ -330,6 +330,7 @@ header {
     width: 370px;
     height: 99%;
     overflow: auto;
+    background-color: #8c8c01;
 }
 
 #sidebar::-webkit-scrollbar {

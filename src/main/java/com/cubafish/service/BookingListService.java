@@ -77,39 +77,39 @@ public class BookingListService {
         } else if (userConfirmation == null) {
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the application did not accept user confirmation");
-        } else if (userConfirmation.length() > 200) {
+        } else if (userConfirmation.length() > 250) {
             return Map.of("bookingListDto", bookingListDto, "status",
-                    "the field user confirmation have more than 200 characters");
+                    "the field user confirmation have more than 250 characters");
         } else if (paymentType == null) {
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the application did not accept payment type");
-        } else if (paymentType.length() > 50) {
+        } else if (paymentType.length() > 100) {
             return Map.of("bookingListDto", bookingListDto, "status",
-                    "the field payment type have more than 50 characters");
+                    "the field payment type have more than 100 characters");
         } else if (deliveryType == null) {
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the application did not accept delivery type");
-        } else if (deliveryType.length() > 50) {
+        } else if (deliveryType.length() > 100) {
             return Map.of("bookingListDto", bookingListDto, "status",
-                    "the field delivery type have more than 50 characters");
+                    "the field delivery type have more than 100 characters");
         } else if (region == null) {
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the application did not accept field region");
-        } else if (region.length() > 200) {
+        } else if (region.length() > 250) {
             return Map.of("bookingListDto", bookingListDto, "status",
-                    "the field region have more than 200 characters");
+                    "the field region have more than 250 characters");
         } else if (city == null) {
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the application did not accept field city");
-        } else if (city.length() > 200) {
+        } else if (city.length() > 250) {
             return Map.of("bookingListDto", bookingListDto, "status",
-                    "the field city have more than 200 characters");
+                    "the field city have more than 250 characters");
         } else if (address == null) {
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the application did not accept field address");
-        } else if (address.length() > 50) {
+        } else if (address.length() > 250) {
             return Map.of("bookingListDto", bookingListDto, "status",
-                    "the field address type confirmation have more than 200 characters");
+                    "the field address have more than 250 characters");
         } else if (bookingItems == null) {
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the application did not accept booking items");

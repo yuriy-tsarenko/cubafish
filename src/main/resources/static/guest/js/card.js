@@ -59,46 +59,55 @@ let appSelector = new Vue({
                 }
             }
 
-            let bookingBody = {
-                firstName: this.firstnameUser,
-                middleName: this.middleNameUser,
-                lastName: this.lastNameUser,
-                email: this.emailNameUser,
-                contact: this.phoneNameUser,
-                userConfirmation: this.confirmBooking,
-                totalPrice: this.totalProductPrice,
-                totalAmount: this.totalItemsAmount,
-                paymentType: this.paymentType,
-                deliveryType: this.deliveryType,
-                region: this.regionUser,
-                city: this.cityUser,
-                address: this.addressUser,
-                bookingItems: this.bookingItems
-            }
-            if ((bookingBody.firstName !== '') && (bookingBody.lastName !== '')
-                && (bookingBody.contact !== '') && (bookingBody.address !== '')) {
-                bookingAPISave.save({}, bookingBody).then(response => (this.dataLoadStatus = response.data.status));
-                this.firstnameUser = ''
-                this.middleNameUser = ''
-                this.lastNameUser = ''
-                this.emailNameUser = ''
-                this.phoneNameUser = ''
-                this.confirmBooking = ''
-                this.totalProductPrice = ''
-                this.totalItemsAmount = ''
-                this.paymentType = ''
-                this.deliveryType = ''
-                this.regionUser = ''
-                this.cityUser = ''
-                this.addressUser = ''
-                this.bookingItems = []
-                appBasket.productItems = appBasket.productItems.splice(0, 0);
-                setTimeout(function () {
+            if (this.confirmBooking === true) {
+                this.confirmBooking = 'Пользователь подтвердил заказ';
+                let bookingBody = {
+                    firstName: this.firstnameUser,
+                    middleName: this.middleNameUser,
+                    lastName: this.lastNameUser,
+                    email: this.emailNameUser,
+                    contact: this.phoneNameUser,
+                    userConfirmation: this.confirmBooking,
+                    totalPrice: this.totalProductPrice,
+                    totalAmount: this.totalItemsAmount,
+                    paymentType: this.paymentType,
+                    deliveryType: this.deliveryType,
+                    region: this.regionUser,
+                    city: this.cityUser,
+                    address: this.addressUser,
+                    bookingItems: this.bookingItems
+                }
+                if ((bookingBody.firstName !== '') && (bookingBody.lastName !== '')
+                    && (bookingBody.contact !== '') && (bookingBody.address !== '')
+                    && (bookingBody.userConfirmation !== '') && (bookingBody.deliveryType !== '')
+                    && (bookingBody.paymentType !== '') && (bookingBody.region !== '')
+                    && (bookingBody.city !== '') && (bookingBody.bookingItems !== [])) {
+                    bookingAPISave.save({}, bookingBody).then(response => (this.dataLoadStatus = response.data.status));
+                    this.firstnameUser = ''
+                    this.middleNameUser = ''
+                    this.lastNameUser = ''
+                    this.emailNameUser = ''
+                    this.phoneNameUser = ''
+                    this.confirmBooking = ''
+                    this.totalProductPrice = ''
+                    this.totalItemsAmount = ''
+                    this.paymentType = ''
+                    this.deliveryType = ''
+                    this.regionUser = ''
+                    this.cityUser = ''
+                    this.addressUser = ''
+                    this.bookingItems = []
+                    appBasket.productItems = appBasket.productItems.splice(0, 0);
+                    setTimeout(function () {
                         appShowStatus.show = true;
-                }, 200);
+                    }, 200);
+                } else {
+                    alert('заполните все обязательные поля');
+                }
             } else {
-                alert('заполните все обязательные поля');
+                alert('Для завершения оформления заказа подтвердите его пожалуйста')
             }
+
         }
     }
 });
