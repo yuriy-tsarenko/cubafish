@@ -166,19 +166,25 @@ public class ProductControllerAdmin {
     ) {
         ServletContext absolutePathToUploadDir = request.getServletContext();
         String status = null;
+        int step = 0;
         if (!pathImage.equals("no_path")) {
             status = productService.deleteFileIfExists(absolutePathToUploadDir, pathImage);
+            step++;
         }
         if (!pathImageRight.equals("no_path")) {
             status = productService.deleteFileIfExists(absolutePathToUploadDir, pathImageRight);
+            step++;
         }
         if (!pathImageLeft.equals("no_path")) {
             status = productService.deleteFileIfExists(absolutePathToUploadDir, pathImageLeft);
+            step++;
         }
         if (!pathImageBack.equals("no_path")) {
             status = productService.deleteFileIfExists(absolutePathToUploadDir, pathImageBack);
+            step++;
         }
-        return new CustomResponseBody(1L, "image deleting status", status, "no data", "step", 1);
+        return new CustomResponseBody(1L, "image deleting status", status, "no data",
+                "try to delete file", step);
     }
 
     @DeleteMapping("{id}")

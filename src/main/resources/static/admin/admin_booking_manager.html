@@ -7,6 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link href="css/admin.css" rel="stylesheet" type="text/css"/>
+    <link href="css/card.css" rel="stylesheet" type="text/css"/>
     <link rel="icon" type="image/png" href="css/images/siteIcon.png">
 </head>
 
@@ -25,7 +26,7 @@
                 <a href="#" class="menu__item">Контакты</a>
                 <a href="http://91.235.128.12:8081/admin/registration.html" class="menu__item">Регистрация</a>
                 <!-- change address-->
-                <a v-on:click="logoutUserAction" class="menu__item">Завершить работу</a>
+                <a href="#" v-on:click="logoutUserAction" class="menu__item">Завершить работу</a>
             </nav>
         </div>
 
@@ -37,9 +38,7 @@
             <table style="width: auto; height: auto">
                 <tr>
                     <td>
-                        <div><img v-on:click="activeImageAction"
-                                  style="width: 75px; height: 65px; border-radius:5%"
-                                  src="css/images/shopping-cart.png"
+                        <div><img style="width: 75px; height: 65px; border-radius:5%" src="css/images/shopping-cart.png"
                                   alt="basketImage"/>
                         </div>
 
@@ -57,32 +56,32 @@
             <tr>
                 <td>
                     <button type="submit"
-                            class="headerButton" v-on:click="getSortedProductsByTypeOfPurpose('Карповая ловля')">
-                        КАРПОВАЯ ЛОВЛЯ
+                            class="headerButton" >
+                        ЗАКАЗЫ В ОЖИДАНИИ
                     </button>
                 </td>
                 <td>
                     <button type="submit"
-                            class="headerButton" v-on:click="getSortedProductsByTypeOfPurpose('Фидерная ловля')">
-                        СПИННИНГОВАЯ ЛОВЛЯ
+                            class="headerButton" >
+                        БАЗА ВСЕХ ЗАКАЗОВ
                     </button>
                 </td>
                 <td>
                     <button type="submit"
-                            class="headerButton"
-                            v-on:click="getSortedProductsByTypeOfPurpose('Спиннинговая ловля')">ФИДЕРНАЯ ЛОВЛЯ
+                            class="headerButton">
+                        СТАТИСТИКА
                     </button>
                 </td>
                 <td>
                     <button type="submit"
-                            class="headerButton" v-on:click="getSortedProductsByTypeOfPurpose('Поплавочная ловля')">
-                        ПОПЛАВОЧНАЯ ЛОВЛЯ
+                            class="headerButton" >
+                        ПОЛЬЗОВАТЕЛИ
                     </button>
                 </td>
                 <td>
                     <button type="submit"
-                            class="headerButton" v-on:click="getSortedProductsByTypeOfPurpose('Зимняя ловля')">
-                        ЗИМНЯЯ ЛОВЛЯ
+                            class="headerButton" >
+                        БОНУСНАЯ СИСТЕМА
                     </button>
                 </td>
             </tr>
@@ -91,21 +90,23 @@
 </div>
 <!-- end div#header -->
 <div id="pageWrapper">
-    <div id="page">
+    <div id="page_manager">
         <div id="content">
-            <div id="app">
+            <div id="appBookingManager">
             </div>
         </div>
         <!--start div#sidebar-->
-        <div id="sidebar">
-            <div id="appCategory">
+        <div id="basketBar">
+            <div id="appSelector">
+            <div id="sideText">Заказ:</div>
+            <div id="basketItems">
+                <div id="appBasket"></div>
             </div>
-            <div id="appSubCategory">
+            <hr id="line">
+            <div id="summaryText">Всего: {{totalProductPrice}} грн</div>
             </div>
-            <div id="appProductBrand">
-            </div>
-            <script src="js/admin.js"></script>
         </div>
+      <script src="js/booking_manager.js"></script>
         <!-- end div#content -->
         <!-- end div#sidebar -->
     </div>
@@ -122,7 +123,7 @@
             <a href="#">О нас</a>
         </nav>
         <div id="logoFooter">
-            <a href="../index.html"><img style="width: 700px; height: auto" src="css/images/logo6.png" alt=""></a>
+            <a href="#"><img style="width: 700px; height: auto" src="css/images/logo6.png" alt=""></a>
 
         </div>
         <div class="social">
