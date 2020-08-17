@@ -7,6 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link href="css/admin.css" rel="stylesheet" type="text/css"/>
+    <link href="css/card.css" rel="stylesheet" type="text/css"/>
     <link rel="icon" type="image/png" href="css/images/siteIcon.png">
 </head>
 
@@ -96,13 +97,14 @@
         </div>
         <!--start div#sidebar-->
         <div id="basketBar">
+            <div id="appSelector">
             <div id="sideText">Заказ:</div>
             <div id="basketItems">
                 <div id="appBasket"></div>
             </div>
             <hr id="line">
             <div id="summaryText">Всего: {{totalProductPrice}} грн</div>
-
+            </div>
         </div>
       <script src="js/booking_manager.js"></script>
         <!-- end div#content -->

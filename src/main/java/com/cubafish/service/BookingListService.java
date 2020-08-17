@@ -5,12 +5,11 @@ import com.cubafish.mapper.BookingListMapper;
 import com.cubafish.repository.BookingListRepository;
 import com.cubafish.utils.BookingItem;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
@@ -20,8 +19,16 @@ import java.util.Map;
 @Service
 @Data
 public class BookingListService {
+
+    @Value("${product.currency}")
+    private String currency;
+
+    @Value("${product.value-type}")
+    private String valueType;
+
     private final BookingListRepository bookingDataBaseRepository;
     private final BookingListMapper bookingDataBaseMapper;
+
 
     public List<BookingListDto> findAll() {
         List<BookingListDto> bookingListDtos = bookingDataBaseMapper
@@ -175,9 +182,11 @@ public class BookingListService {
         for (BookingItem item : bookingItems) {
             itemsBuilder.append(item.getDescription());
             itemsBuilder.append(" -- ");
-            itemsBuilder.append(item.getTotalAmount());
+            itemsBuilder.append(item.getItemAmount());
+            itemsBuilder.append(valueType);
             itemsBuilder.append(" -- ");
             itemsBuilder.append(item.getProductPrice());
+            itemsBuilder.append(currency);
             itemsBuilder.append(" *** ");
         }
 

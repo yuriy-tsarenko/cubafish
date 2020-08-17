@@ -14,4 +14,5 @@ public class BookingItem {
     private String productImageName;
     private String productPrice;
     private String totalAmount;
+    private String itemAmount;
 }

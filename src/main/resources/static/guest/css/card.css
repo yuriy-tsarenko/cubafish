@@ -830,48 +830,6 @@ td {
 
 }
 
-
-/*.detailsButton {*/
-/*    position: relative;*/
-/*    top: auto;*/
-/*    left: 0;*/
-/*    right: auto;*/
-/*    bottom: auto;*/
-/*    width: 1005px;*/
-/*    height: 20px;*/
-/*    z-index: 1;*/
-/*    background: -webkit-linear-gradient(top, #f8f8f8 0, #c8cbcd 100%);*/
-/*    font-family: Georgia, "Times New Roman", Times, serif;*/
-/*    font-size: 18px;*/
-/*    font-style: normal;*/
-/*    color: #000000;*/
-/*    border: 0;*/
-/*}*/
-
-/*.detailsButton:hover {*/
-/*    background: -webkit-linear-gradient(top, #b1b1b1 0, #4f4f4f 100%);*/
-/*    tansition: all .3s linear;*/
-/*    -webkit-transition: all .3s linear;*/
-/*    -moz-transition: all .3s linear;*/
-/*    font-family: Georgia, "Times New Roman", Times, serif;*/
-/*    font-size: 20px;*/
-/*    font-style: normal;*/
-/*    color: #ffffff;*/
-/*    border: 0;*/
-/*}*/
-
-/*.detailsButton:active {*/
-/*    background: -webkit-linear-gradient(top, #f8f8f8 0, #c8cbcd 100%);*/
-/*    tansition: all .1s linear;*/
-/*    -webkit-transition: all .1s linear;*/
-/*    -moz-transition: all .1s linear;*/
-/*    font-family: Georgia, "Times New Roman", Times, serif;*/
-/*    font-size: 16px;*/
-/*    font-style: normal;*/
-/*    color: #ffffff;*/
-/*    border: 0;*/
-/*}*/
-
 #summaryTable {
     background-color: #585801;
     font-family: Georgia, "Times New Roman", Times, serif;
@@ -1265,11 +1223,11 @@ footer {
     background-color: #757500;
 }
 
-/*.checkmark:after {*/
-/*    content: "";*/
-/*    position: absolute;*/
-/*    display: none;*/
-/*}*/
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
 
 .container input:checked ~ .checkmark:after {
     display: block;
@@ -1437,5 +1395,18 @@ footer {
     border-bottom: 0;
 }
 
+#insideWindowBasket {
+    position: relative;
+    margin: 0 auto;
+    width: 400px;
+    height: 100px;
+    top: 25%;
+}
 
-
+#summaryDiv {
+    position: inherit;
+    margin: 0 auto;
+    width: 800px;
+    height: 300px;
+    top: 20%;
+}

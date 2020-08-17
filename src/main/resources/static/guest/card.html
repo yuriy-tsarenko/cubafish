@@ -27,6 +27,21 @@
 </div>
 <!-- end div#header -->
 <div id="pageWrapper">
+    <transition name="fade">
+        <div v-if="show" id="appShowStatus" v-on:click="show=false">
+            <div id="insideWindowBasket" v-on:click="show=false">
+                <div id="summaryDiv" v-on:click="show=false">
+                    <table id="summaryTable">
+                        <tr>
+                            <td style="border-collapse: collapse;border: 1px none black;border-bottom-style: solid; width: 800px; height: auto">
+                                <p>Ваш заказ успешно оформлен</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </transition>
     <div id="appSelector">
         <div id="page">
             <div id="content">

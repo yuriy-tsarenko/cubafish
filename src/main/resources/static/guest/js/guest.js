@@ -54,8 +54,7 @@ let appShowBasket = new Vue({
 
             }
         }
-    })
-;
+    });
 
 let basketImage = new Vue({
     el: '#basketImage',
@@ -86,6 +85,7 @@ Vue.component('newProduct-row', {
             productSubCategory: '',
             productBrand: '',
             totalAmount: '',
+            itemAmount: 1,
             descriptionForRequest: '',
             specification: '',
             typeOfPurpose: '',
@@ -244,6 +244,7 @@ Vue.component('newProduct-row', {
                 description: this.descriptionForRequest,
                 productPrice: this.productPriceForBasket,
                 totalAmount: this.totalAmount,
+                itemAmount: this.itemAmount,
                 productImageName: this.productImageName
             }
             let basketItems = [];

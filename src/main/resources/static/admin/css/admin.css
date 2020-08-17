@@ -570,8 +570,8 @@ td {
 
 #superAdminButtonEdit {
     position: relative;
-    top: 5px;
-    left: 0;
+    margin-top: 15px;
+    margin-bottom: 15px;
     transform: rotate(90deg);
     width: 85px;
     height: 50px;
@@ -579,8 +579,8 @@ td {
 
 #superAdminButtonDelete {
     position: relative;
-    top: 5px;
-    left: 0;
+    margin-top: 15px;
+    margin-bottom: 15px;
     transform: rotate(90deg);
     width: 85px;
     height: 50px;
@@ -588,8 +588,8 @@ td {
 
 #superAdminButtonCreate {
     position: relative;
-    top: 5px;
-    left: 0;
+    margin-top: 15px;
+    margin-bottom: 15px;
     transform: rotate(90deg);
     width: 85px;
     height: 50px;
@@ -597,7 +597,7 @@ td {
 
 #superAdminButtonProductTemplateManager {
     position: relative;
-    bottom: 35px;
+    margin-left: 15px;
     transform: rotate(90deg);
     width: 110px;
     height: 50px;

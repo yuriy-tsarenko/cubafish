@@ -2,6 +2,13 @@ const bookingAPISave = Vue.resource('/guest/booking/create');
 Vue.http.headers.common['Authorization'] = localStorage.getItem('CustomHeader');
 axios.defaults.headers.common['Authorization'] = localStorage.getItem('CustomHeader');
 
+let appShowStatus = new Vue({
+    el: '#appShowStatus',
+    data: {
+        show: false,
+    }
+});
+
 let appSelector = new Vue({
     el: '#appSelector',
     data: {
@@ -33,6 +40,8 @@ let appSelector = new Vue({
                     let item = localStorage.getItem(String(i));
                     if (item !== null) {
                         let items = new Set(JSON.parse(localStorage.getItem(String(i))));
+                        localStorage.removeItem(String(i));
+                        localStorage.removeItem('TotalAmount');
                         for (let productFromBasket of items) {
                             let bookingItem = {
                                 id: itemId,
@@ -40,6 +49,7 @@ let appSelector = new Vue({
                                 description: productFromBasket.description,
                                 productPrice: productFromBasket.productPrice,
                                 totalAmount: productFromBasket.totalAmount,
+                                itemAmount: productFromBasket.itemAmount,
                                 productImageName: productFromBasket.productImageName
                             };
                             this.bookingItems.push(bookingItem);
@@ -65,8 +75,30 @@ let appSelector = new Vue({
                 address: this.addressUser,
                 bookingItems: this.bookingItems
             }
-
-            bookingAPISave.save({},bookingBody).then(response => (this.dataLoadStatus = response.data.status));
+            if ((bookingBody.firstName !== '') && (bookingBody.lastName !== '')
+                && (bookingBody.contact !== '') && (bookingBody.address !== '')) {
+                bookingAPISave.save({}, bookingBody).then(response => (this.dataLoadStatus = response.data.status));
+                this.firstnameUser = ''
+                this.middleNameUser = ''
+                this.lastNameUser = ''
+                this.emailNameUser = ''
+                this.phoneNameUser = ''
+                this.confirmBooking = ''
+                this.totalProductPrice = ''
+                this.totalItemsAmount = ''
+                this.paymentType = ''
+                this.deliveryType = ''
+                this.regionUser = ''
+                this.cityUser = ''
+                this.addressUser = ''
+                this.bookingItems = []
+                appBasket.productItems = appBasket.productItems.splice(0, 0);
+                setTimeout(function () {
+                        appShowStatus.show = true;
+                }, 200);
+            } else {
+                alert('заполните все обязательные поля');
+            }
         }
     }
 });
@@ -173,6 +205,7 @@ Vue.component('productItem-row', {
                             description: productFromBasket.description,
                             productPrice: this.summaryPrice,
                             totalAmount: Number(productFromBasket.totalAmount) - Number('1'),
+                            itemAmount: Number(productFromBasket.itemAmount) + Number('1'),
                             productImageName: productFromBasket.productImageName
                         };
                         this.count++;
@@ -180,7 +213,7 @@ Vue.component('productItem-row', {
                         basketItems.push(productItem);
 
                         localStorage.setItem(String(this.key), JSON.stringify(basketItems));
-                        appSelector.totalProductPrice = appSelector.totalProductPrice + Number(fixedValue);
+                        appSelector.totalProductPrice = Number(appSelector.totalProductPrice) + Number(fixedValue);
                     }
                 }
             }
@@ -205,12 +238,13 @@ Vue.component('productItem-row', {
                         description: productFromBasket.description,
                         productPrice: this.summaryPrice,
                         totalAmount: Number(productFromBasket.totalAmount) + Number('1'),
+                        itemAmount: Number(productFromBasket.itemAmount) - Number('1'),
                         productImageName: productFromBasket.productImageName
                     };
                     let basketItems = [];
                     basketItems.push(productItem);
                     localStorage.setItem(String(this.key), JSON.stringify(basketItems));
-                    appSelector.totalProductPrice = appSelector.totalProductPrice - Number(fixedValue);
+                    appSelector.totalProductPrice = Number(appSelector.totalProductPrice) - Number(fixedValue);
                 }
 
             }
