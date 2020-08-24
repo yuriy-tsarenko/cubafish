@@ -101,6 +101,7 @@ public class ProductService {
         if (customRequestBody.getCommunicationKey().equals("give me the argument for basket engine")) {
             List<ProductDto> productDtos = productMapper.mapEntitiesToDtos(productRepository.findAll());
             Long maxIdValue = null;
+            productDtos.sort(new SortProductsById());
             try {
                 maxIdValue = productDtos.get(productDtos.size() - 1).getId();
             } catch (NullPointerException | IndexOutOfBoundsException e) {

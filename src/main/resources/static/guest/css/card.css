@@ -264,7 +264,7 @@ header {
     right: 40px;
     float: right;
     width: 750px;
-    height: 1100px;
+    height: 1240px;
     overflow: auto;
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.5); /* Параметры тени */
     padding: 10px;
@@ -334,7 +334,7 @@ header {
     position: relative;
     left: 20px;
     width: 630px;
-    height: 1100px;
+    height: 630px;
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.5); /* Параметры тени */
     padding: 10px;
     border-radius: 15px;
@@ -770,7 +770,7 @@ td {
     right: 2px;
 }
 
-#appShowBasket {
+#appShowStatus {
     position: fixed;
     left: 0;
     top: 0;
@@ -1021,17 +1021,6 @@ footer {
     font-family: Arial, sans, serif;
 }
 
-#selectorStyle {
-    position: relative;
-    left: 35px;
-    top: 20px;
-    width: 700px;
-    height: 40px;
-    border: 1px solid grey;
-    border-radius: 10px;
-}
-
-
 #appSelectorText {
     position: relative;
     left: 35px;
@@ -1043,110 +1032,233 @@ footer {
 #typeDelivery {
     position: relative;
     left: 35px;
-    top: 30px;
+    top: 0;
     font-size: 17px;
     font-family: Arial, sans, serif;
 }
 
-#selectorStyle2 {
+#selectorStyle {
     position: relative;
-    left: 35px;
-    top: 35px;
+    left: 15px;
+    top: 0;
     width: 700px;
     height: 40px;
     border: 1px solid grey;
     border-radius: 10px;
+    z-index: 2;
+}
+
+#selectorStyleMove {
+    position: relative;
+    left: 20px;
+    top: 20px;
+}
+
+#necessaryFieldSelectorStyle {
+    position: relative;
+    bottom: 36px;
+    left: 0;
+    font-size: 30px;
+    font-family: Arial, sans, serif;
+    color: #c40000;
+}
+
+#selectorStyle2 {
+    position: relative;
+    left: 15px;
+    top: 0;
+    width: 700px;
+    height: 40px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    z-index: 2;
+}
+
+#selectorStyle2Move {
+    position: relative;
+    left: 20px;
+    top: 5px;
+}
+
+#necessaryFieldSelectorStyle2 {
+    position: relative;
+    bottom: 36px;
+    left: 0;
+    font-size: 30px;
+    font-family: Arial, sans, serif;
+    color: #c40000;
 }
 
 #aboutRecipient {
     position: relative;
     left: 35px;
-    top: 60px;
+    top: 0;
     font-size: 20px;
     font-family: Arial, sans, serif;
 }
 
+#necessaryField {
+    position: relative;
+    bottom: 36px;
+    left: 0;
+    font-size: 30px;
+    font-family: Arial, sans, serif;
+    color: #c40000;
+}
+
 #regionUser {
     position: relative;
-    left: 35px;
-    top: 80px;
-    width: 700px;
+    left: 15px;
+    width: 678px;
     height: 40px;
     border: 1px solid grey;
     border-radius: 10px;
+    z-index: 2;
+}
+
+#regionUserMove {
+    position: relative;
+    left: 20px;
+    top: 5px;
 }
 
 #cityUser {
     position: relative;
-    left: 35px;
-    top: 110px;
-    width: 700px;
+    left: 15px;
+    top: 0;
+    width: 678px;
     height: 40px;
     border: 1px solid grey;
     border-radius: 10px;
+    z-index: 2;
+}
+
+#cityUserMove {
+    position: relative;
+    left: 20px;
+    top: 0;
+}
+
+#necessaryFieldCityUser {
+    position: relative;
+    bottom: 36px;
+    left: 0;
+    font-size: 30px;
+    font-family: Arial, sans, serif;
+    color: #c40000;
 }
 
 #addressUser {
     position: relative;
-    left: 35px;
-    top: 140px;
-    width: 700px;
+    left: 15px;
+    top: 0;
+    width: 678px;
     height: 40px;
     border: 1px solid grey;
     border-radius: 10px;
+    z-index: 2;
+}
+
+#addressUserMove {
+    position: relative;
+    left: 20px;
+    top: 0;
+}
+
+#necessaryFieldAddressUser {
+    position: relative;
+    bottom: 36px;
+    left: 0;
+    font-size: 30px;
+    font-family: Arial, sans, serif;
+    color: #c40000;
 }
 
 #firstnameUser {
     position: relative;
-    left: 35px;
-    top: 170px;
-    width: 700px;
+    left: 15px;
+    top: 0;
+    width: 678px;
     height: 40px;
     border: 1px solid grey;
     border-radius: 10px;
+    z-index: 2;
+}
+
+#firstnameUserMove {
+    position: relative;
+    left: 20px;
+    top: 0;
+}
+
+#necessaryFieldFirstnameUser {
+    position: relative;
+    bottom: 36px;
+    left: 0;
+    font-size: 30px;
+    font-family: Arial, sans, serif;
+    color: #c40000;
 }
 
 #lastnameUser {
     position: relative;
     left: 35px;
-    top: 200px;
-    width: 700px;
+    top: 0;
+    width: 678px;
     height: 40px;
     border: 1px solid grey;
     border-radius: 10px;
+    z-index: 2;
 }
 
 #surnameUser {
     position: relative;
-    left: 35px;
-    top: 230px;
-    width: 700px;
+    left: 15px;
+    top: 0;
+    width: 678px;
     height: 40px;
     border: 1px solid grey;
     border-radius: 10px;
+    z-index: 2;
+}
+
+#lastNameUserMove {
+    position: relative;
+    left: 20px;
+    top: 40px;
+}
+
+#necessaryFieldLastNameUser {
+    position: relative;
+    bottom: 36px;
+    left: 0;
+    font-size: 30px;
+    font-family: Arial, sans, serif;
+    color: #c40000;
 }
 
 #aboutEmail {
     position: relative;
     left: 35px;
-    top: 260px;
+    top: 35px;
     font-size: 20px;
     font-family: Arial, sans, serif;
 }
 
 #emailNameUser {
     position: relative;
-    top: 275px;
+    top: 40px;
     left: 35px;
-    width: 700px;
+    width: 678px;
     height: 40px;
     border: 1px solid grey;
     border-radius: 10px;
+    z-index: 2;
 }
 
 #aboutPhoneNumber {
     position: relative;
-    top: 290px;
+    top: 55px;
     left: 35px;
     font-size: 20px;
     font-family: Arial, sans, serif;
@@ -1154,12 +1266,66 @@ footer {
 
 #PhoneNameUser {
     position: relative;
-    top: 300px;
-    left: 35px;
-    width: 700px;
+    top: 0;
+    left: 15px;
+    width: 678px;
     height: 40px;
     border: 1px solid grey;
     border-radius: 10px;
+    z-index: 2;
+}
+
+#phoneNameUserMove {
+    position: relative;
+    left: 20px;
+    top: 60px;
+}
+
+#necessaryFieldPhoneNameUser {
+    position: relative;
+    bottom: 36px;
+    left: 0;
+    font-size: 30px;
+    font-family: Arial, sans, serif;
+    color: #c40000;
+}
+
+#bookingComments {
+    position: relative;
+    top: 0;
+    left: 15px;
+    width: 678px;
+    height: 70px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    z-index: 2;
+}
+
+#bookingCommentMove {
+    position: relative;
+    left: 20px;
+    top: 40px;
+}
+
+#aboutBookingComment {
+    position: relative;
+    word-wrap: break-word;
+    top: 35px;
+    left: 35px;
+    font-size: 20px;
+    font-family: Arial, sans, serif;
+}
+
+input {
+    padding: 0 10px;
+}
+
+textarea {
+    padding: 0 10px;
+}
+
+select {
+    padding: 0 10px;
 }
 
 #textForm {
@@ -1174,6 +1340,8 @@ footer {
 .container {
     position: relative;
     bottom: auto;
+    left: 40px;
+    top: 45px;
     width: 480px;
     display: block;
     padding-left: 35px;
@@ -1183,9 +1351,6 @@ footer {
     font-family: Arial, sans-serif;
     font-style: inherit;
     user-select: none;
-    left: 40px;
-    top: 320px;
-
 }
 
 .container input {
@@ -1256,7 +1421,7 @@ footer {
     overflow-y: auto;
     margin: auto;
     width: 600px;
-    height: 900px;
+    height: 450px;
     top: 30px;
 }
 
@@ -1351,7 +1516,7 @@ footer {
 
 .bookingMakerBtn {
     position: relative;
-    top: 340px;
+    top: 45px;
     left: 120px;
     right: auto;
     bottom: 10px;

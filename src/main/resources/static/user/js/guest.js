@@ -66,7 +66,7 @@ let basketImage = new Vue({
     },
     methods: {
         activeImageAction: function () {
-            window.location = 'http://91.235.128.12:8081/guest/card.html';
+            window.location = 'card.html';
         }
     }
 });

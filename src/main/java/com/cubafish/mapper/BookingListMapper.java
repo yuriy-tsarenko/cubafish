@@ -11,4 +11,6 @@ public interface BookingListMapper {
     List<BookingListDto> mapEntitiesToDtos(List<BookingList> bookingLists);
 
     BookingList mapDtoToEntity(BookingListDto bookingListDto);
+
+    BookingListDto mapEntityToDto(BookingList bookingList);
 }

@@ -1,6 +1,7 @@
 package com.cubafish.service;
 
 import com.cubafish.dto.BookingDataBaseDto;
+import com.cubafish.dto.BookingItemDto;
 import com.cubafish.mapper.BookingDataBaseMapper;
 import com.cubafish.repository.BookingDataBaseRepository;
 import lombok.Data;

@@ -26,16 +26,22 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "user_name")
     private String username;
+
     @Column(name = "password")
     private String password;
+
     @Column(name = "email")
     private String email;
+
     @Column(name = "contact")
     private String userContact;
+
     @Column(name = "active")
     private boolean isActive;
+
     @Column(name = "user_role")
     private String userRole;
 

@@ -43,7 +43,7 @@ public class BookingDataBase {
     private BigDecimal totalPrice;
 
     @Column(name = "total_amount")
-    private Long totalAmount;
+    private Integer totalAmount;
 
     @Column(name = "payment_type")
     private String paymentType;
