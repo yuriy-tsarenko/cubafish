@@ -264,7 +264,7 @@ header {
     right: 40px;
     float: right;
     width: 750px;
-    height: 1100px;
+    height: 1240px;
     overflow: auto;
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.5); /* Параметры тени */
     padding: 10px;
@@ -334,7 +334,7 @@ header {
     position: relative;
     left: 20px;
     width: 630px;
-    height: 1100px;
+    height: 630px;
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.5); /* Параметры тени */
     padding: 10px;
     border-radius: 15px;
@@ -1109,7 +1109,7 @@ footer {
 #regionUser {
     position: relative;
     left: 15px;
-    width: 700px;
+    width: 678px;
     height: 40px;
     border: 1px solid grey;
     border-radius: 10px;
@@ -1126,7 +1126,7 @@ footer {
     position: relative;
     left: 15px;
     top: 0;
-    width: 700px;
+    width: 678px;
     height: 40px;
     border: 1px solid grey;
     border-radius: 10px;
@@ -1152,7 +1152,7 @@ footer {
     position: relative;
     left: 15px;
     top: 0;
-    width: 700px;
+    width: 678px;
     height: 40px;
     border: 1px solid grey;
     border-radius: 10px;
@@ -1178,7 +1178,7 @@ footer {
     position: relative;
     left: 15px;
     top: 0;
-    width: 700px;
+    width: 678px;
     height: 40px;
     border: 1px solid grey;
     border-radius: 10px;
@@ -1204,7 +1204,7 @@ footer {
     position: relative;
     left: 35px;
     top: 0;
-    width: 700px;
+    width: 678px;
     height: 40px;
     border: 1px solid grey;
     border-radius: 10px;
@@ -1215,7 +1215,7 @@ footer {
     position: relative;
     left: 15px;
     top: 0;
-    width: 700px;
+    width: 678px;
     height: 40px;
     border: 1px solid grey;
     border-radius: 10px;
@@ -1249,7 +1249,7 @@ footer {
     position: relative;
     top: 40px;
     left: 35px;
-    width: 700px;
+    width: 678px;
     height: 40px;
     border: 1px solid grey;
     border-radius: 10px;
@@ -1268,7 +1268,7 @@ footer {
     position: relative;
     top: 0;
     left: 15px;
-    width: 700px;
+    width: 678px;
     height: 40px;
     border: 1px solid grey;
     border-radius: 10px;
@@ -1288,6 +1288,44 @@ footer {
     font-size: 30px;
     font-family: Arial, sans, serif;
     color: #c40000;
+}
+
+#bookingComments {
+    position: relative;
+    top: 0;
+    left: 15px;
+    width: 678px;
+    height: 70px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    z-index: 2;
+}
+
+#bookingCommentMove {
+    position: relative;
+    left: 20px;
+    top: 40px;
+}
+
+#aboutBookingComment {
+    position: relative;
+    word-wrap: break-word;
+    top: 35px;
+    left: 35px;
+    font-size: 20px;
+    font-family: Arial, sans, serif;
+}
+
+input {
+    padding: 0 10px;
+}
+
+textarea {
+    padding: 0 10px;
+}
+
+select {
+    padding: 0 10px;
 }
 
 #textForm {
@@ -1383,7 +1421,7 @@ footer {
     overflow-y: auto;
     margin: auto;
     width: 600px;
-    height: 900px;
+    height: 450px;
     top: 30px;
 }
 

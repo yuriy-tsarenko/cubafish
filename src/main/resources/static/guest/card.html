@@ -109,6 +109,12 @@
                        placeholder="Введите ваш номер телефона"/>
                     <p id="necessaryFieldPhoneNameUser">*</p>
                 </div>
+
+                <div id="aboutBookingComment">Комментарий к заказу:</div>
+                <div id="bookingCommentMove">
+                    <textarea v-model="bookingComments" name="bookingComments"  id="bookingComments"
+                              placeholder="Хочу отправить Укрпочтой, например "></textarea>
+                </div>
                 <label class="container"><p>Я подтверждаю заказ и согласен с условиями <a href="#">пользовательского соглашения</a>.</p>
                     <input v-model="confirmBooking" type="checkbox" id="confirmBooking"
                            value="Пользователь подтвердил заказ">

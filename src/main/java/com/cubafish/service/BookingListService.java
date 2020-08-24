@@ -1,9 +1,11 @@
 package com.cubafish.service;
 
+import com.cubafish.dto.BookingItemDto;
 import com.cubafish.dto.BookingListDto;
+import com.cubafish.entity.BookingList;
 import com.cubafish.mapper.BookingListMapper;
 import com.cubafish.repository.BookingListRepository;
-import com.cubafish.utils.BookingItem;
+import com.cubafish.utils.BookingListResponseBody;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -26,22 +28,32 @@ public class BookingListService {
     @Value("${product.value-type}")
     private String valueType;
 
-    private final BookingListRepository bookingDataBaseRepository;
-    private final BookingListMapper bookingDataBaseMapper;
+    private final BookingListRepository bookingListRepository;
+    private final BookingListMapper bookingListMapper;
+    private final BookingItemService bookingItemService;
 
 
-    public List<BookingListDto> findAll() {
-        List<BookingListDto> bookingListDtos = bookingDataBaseMapper
-                .mapEntitiesToDtos(bookingDataBaseRepository.findAll());
+    public List<BookingListResponseBody> findAll() {
+        List<BookingListDto> bookingListDtos = bookingListMapper
+                .mapEntitiesToDtos(bookingListRepository.findAll());
         bookingListDtos.sort(new SortBookingListDtoById());
-        return bookingListDtos;
+        return bookingItemService.mapBookingListDtosToBookingListResponseBodies(bookingListDtos);
+    }
+
+    public Map<String, Object> findById(Long id) {
+        BookingList bookingList = bookingListRepository.findBookingListById(id);
+        return Map.of("bookingList", bookingList, "status", "success");
+    }
+
+    public BookingList create(BookingListDto bookingListDto) {
+        return bookingListMapper.mapDtoToEntity(bookingListDto);
     }
 
     public Map<String, Object> bookingListDataValidation(
             String firstName, String middleName, String lastName, String email,
             String contact, String userConfirmation, String totalPrice,
             String totalAmount, String paymentType, String deliveryType,
-            String region, String city, String address, List<BookingItem> bookingItems
+            String region, String city, String address, String bookingComments, List<BookingItemDto> bookingItems
     ) {
         BookingListDto bookingListDto = new BookingListDto();
         if (firstName == null) {
@@ -110,6 +122,12 @@ public class BookingListService {
         } else if (address.length() > 250) {
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the field address have more than 250 characters");
+        } else if (bookingComments == null) {
+            return Map.of("bookingListDto", bookingListDto, "status",
+                    "the application did not accept field booking comments");
+        } else if (bookingComments.length() > 400) {
+            return Map.of("bookingListDto", bookingListDto, "status",
+                    "the field booking comments have more than 400 characters");
         } else if (bookingItems == null) {
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the application did not accept booking items");
@@ -160,7 +178,7 @@ public class BookingListService {
             String firstName, String middleName, String lastName, String email,
             String contact, String userConfirmation, String totalPrice,
             String totalAmount, String paymentType, String deliveryType,
-            String region, String city, String address, List<BookingItem> bookingItems,
+            String region, String city, String address, String bookingComments, List<BookingItemDto> bookingItems,
             BookingListDto bookingListDto) {
 
         bookingListDto.setFirstName(firstName.trim());
@@ -174,23 +192,20 @@ public class BookingListService {
         bookingListDto.setRegion(region.trim());
         bookingListDto.setCity(city.trim());
         bookingListDto.setAddress(address.trim());
+        bookingListDto.setBookingComments(bookingComments.trim());
         Date currentDate = new Date();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         bookingListDto.setDateOfBooking(dateFormat.format(currentDate));
 
-        StringBuilder itemsBuilder = new StringBuilder();
-        for (BookingItem item : bookingItems) {
-            itemsBuilder.append(item.getDescription());
-            itemsBuilder.append(" -- ");
-            itemsBuilder.append(item.getItemAmount());
-            itemsBuilder.append(valueType);
-            itemsBuilder.append(" -- ");
-            itemsBuilder.append(item.getProductPrice());
-            itemsBuilder.append(currency);
-            itemsBuilder.append(" *** ");
+        Map<String, Object> responseFromItemService = bookingItemService.saveItemsFromList(bookingItems);
+        String bookingItemStringForDb = (String) responseFromItemService.get("result");
+        String status = (String) responseFromItemService.get("status");
+        if (status.equals("success")) {
+            bookingListDto.setBookingItems(bookingItemStringForDb);
+        } else {
+            return Map.of("bookingListDto", bookingListDto,
+                    "status", status);
         }
-
-        bookingListDto.setBookingItems(itemsBuilder.toString());
 
 
         if (totalAmount.isEmpty()) {
@@ -227,6 +242,124 @@ public class BookingListService {
             }
         }
         return Map.of("bookingListDto", bookingListDto, "status", "success");
+    }
+
+    public Map<String, Object> compensationOfMissingData(
+            Long id, String firstName, String middleName, String lastName, String email,
+            String contact, String totalPrice, String totalAmount, String paymentType, String deliveryType,
+            String region, String city, String address, String bookingComments, List<BookingItemDto> bookingItems,
+            BookingListDto bookingListDto, BookingList exiting) {
+
+        if (id != null) {
+            bookingListDto.setId(id);
+            if (firstName.isEmpty()) {
+                bookingListDto.setFirstName(exiting.getFirstName());
+            } else {
+                bookingListDto.setFirstName(firstName.trim());
+            }
+            if (middleName.isEmpty()) {
+                bookingListDto.setMiddleName(exiting.getMiddleName());
+            } else {
+                bookingListDto.setMiddleName(middleName.trim());
+            }
+            if (lastName.isEmpty()) {
+                bookingListDto.setLastName(exiting.getLastName());
+            } else {
+                bookingListDto.setLastName(lastName.trim());
+            }
+            if (email.isEmpty()) {
+                bookingListDto.setEmail(exiting.getEmail());
+            } else {
+                bookingListDto.setEmail(email.trim());
+            }
+            if (contact.isEmpty()) {
+                bookingListDto.setContact(exiting.getContact());
+            } else {
+                bookingListDto.setContact(contact.trim());
+            }
+
+            if (totalAmount.isEmpty()) {
+                bookingListDto.setTotalAmount(exiting.getTotalAmount());
+            } else {
+                try {
+                    Integer totalAmountConverted = Integer.valueOf(totalAmount.trim());
+                    bookingListDto.setTotalAmount(totalAmountConverted);
+                } catch (NumberFormatException e) {
+                    return Map.of("bookingListDto", bookingListDto, "status",
+                            "the amount of product items should have a numeric value");
+                }
+            }
+
+            if (totalPrice.isEmpty()) {
+                bookingListDto.setTotalPrice(exiting.getTotalPrice());
+            } else if (totalPrice.contains(",")) {
+                String[] massive = totalPrice.split(",");
+                String validPrice = massive[0].concat(".").concat(massive[1]);
+                BigDecimal convertToBigDecimal = new BigDecimal(validPrice);
+                try {
+                    bookingListDto.setTotalPrice(convertToBigDecimal);
+                } catch (NumberFormatException e) {
+                    return Map.of("bookingListDto", bookingListDto,
+                            "status", "total price should have a numeric value");
+                }
+            } else {
+                try {
+                    bookingListDto.setTotalPrice(new BigDecimal(totalPrice));
+                } catch (NumberFormatException e) {
+                    return Map.of("bookingListDto", bookingListDto,
+                            "status", "total price should have a numeric value");
+                }
+            }
+
+            if (paymentType.isEmpty()) {
+                bookingListDto.setPaymentType(exiting.getPaymentType());
+            } else {
+                bookingListDto.setPaymentType(paymentType.trim());
+            }
+            if (deliveryType.isEmpty()) {
+                bookingListDto.setDeliveryType(exiting.getDeliveryType());
+            } else {
+                bookingListDto.setDeliveryType(deliveryType.trim());
+            }
+            if (region.isEmpty()) {
+                bookingListDto.setRegion(exiting.getRegion());
+            } else {
+                bookingListDto.setRegion(region.trim());
+            }
+            if (city.isEmpty()) {
+                bookingListDto.setCity(exiting.getCity());
+            } else {
+                bookingListDto.setCity(city.trim());
+            }
+            if (address.isEmpty()) {
+                bookingListDto.setAddress(exiting.getAddress());
+            } else {
+                bookingListDto.setAddress(address.trim());
+            }
+            if (bookingComments.isEmpty()) {
+                bookingListDto.setBookingComments(exiting.getBookingComments());
+            } else {
+                bookingListDto.setBookingComments(bookingComments.trim());
+            }
+            if (bookingItems.isEmpty()) {
+                bookingListDto.setBookingItems(exiting.getBookingItems());
+            } else {
+                Map<String, Object> responseFromUpdateExitingItemsFromList = bookingItemService
+                        .updateExitingItemsFromList(exiting.getBookingItems(), bookingItems);
+                String bookingItemStringForDb = (String) responseFromUpdateExitingItemsFromList.get("result");
+                String status = (String) responseFromUpdateExitingItemsFromList.get("status");
+                if (status.equals("success")) {
+                    bookingListDto.setBookingItems(bookingItemStringForDb);
+                } else {
+                    return Map.of("bookingListDto", bookingListDto,
+                            "status", status);
+                }
+            }
+
+            return Map.of("bookingListDto", bookingListDto, "status", "success");
+        } else {
+            return Map.of("bookingListDto", bookingListDto, "status", "ID of edited booking list not received!");
+        }
     }
 
     static class SortBookingListDtoById implements Comparator<BookingListDto> {

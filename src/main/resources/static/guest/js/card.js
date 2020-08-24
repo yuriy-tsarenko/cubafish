@@ -27,6 +27,7 @@ let appSelector = new Vue({
         regionUser: '',
         cityUser: '',
         addressUser: '',
+        bookingComments: '',
         maxId: ''
     },
     methods: {
@@ -34,7 +35,7 @@ let appSelector = new Vue({
             this.maxId = localStorage.getItem('ID');
             this.totalItemsAmount = localStorage.getItem('TotalAmount');
             if (this.maxId !== null) {
-                let maxValue = Number(this.maxId)
+                let maxValue = Number(this.maxId);
                 let itemId = 0;
                 for (let i = 0; i <= maxValue; i++) {
                     let item = localStorage.getItem(String(i));
@@ -75,6 +76,7 @@ let appSelector = new Vue({
                     region: this.regionUser,
                     city: this.cityUser,
                     address: this.addressUser,
+                    bookingComments: this.bookingComments,
                     bookingItems: this.bookingItems
                 }
                 if ((bookingBody.firstName !== '') && (bookingBody.lastName !== '')
@@ -82,25 +84,29 @@ let appSelector = new Vue({
                     && (bookingBody.userConfirmation !== '') && (bookingBody.deliveryType !== '')
                     && (bookingBody.paymentType !== '') && (bookingBody.region !== '')
                     && (bookingBody.city !== '') && (bookingBody.bookingItems !== [])) {
-                    bookingAPISave.save({}, bookingBody).then(response => (this.dataLoadStatus = response.data.status));
-                    this.firstnameUser = ''
-                    this.middleNameUser = ''
-                    this.lastNameUser = ''
-                    this.emailNameUser = ''
-                    this.phoneNameUser = ''
-                    this.confirmBooking = ''
-                    this.totalProductPrice = ''
-                    this.totalItemsAmount = ''
-                    this.paymentType = ''
-                    this.deliveryType = ''
-                    this.regionUser = ''
-                    this.cityUser = ''
-                    this.addressUser = ''
-                    this.bookingItems = []
-                    appBasket.productItems = appBasket.productItems.splice(0, 0);
-                    setTimeout(function () {
-                        appShowStatus.show = true;
-                    }, 200);
+                    if (bookingBody.bookingComments.toString().length < 400) {
+                        bookingAPISave.save({}, bookingBody).then(response => (this.dataLoadStatus = response.data.status));
+                        this.firstnameUser = ''
+                        this.middleNameUser = ''
+                        this.lastNameUser = ''
+                        this.emailNameUser = ''
+                        this.phoneNameUser = ''
+                        this.confirmBooking = ''
+                        this.totalProductPrice = ''
+                        this.totalItemsAmount = ''
+                        this.paymentType = ''
+                        this.deliveryType = ''
+                        this.regionUser = ''
+                        this.cityUser = ''
+                        this.addressUser = ''
+                        this.bookingItems = []
+                        appBasket.productItems = appBasket.productItems.splice(0, 0);
+                        setTimeout(function () {
+                            appShowStatus.show = true;
+                        }, 200);
+                    } else {
+                        alert('Коментарий к заказу имеет больше 400 символов')
+                    }
                 } else {
                     alert('заполните все обязательные поля');
                 }

@@ -104,6 +104,19 @@
         </div>
         <!--start div#sidebar-->
         <div id="sidebar">
+            <div id="appCatalog">
+                <div v-if="hamburgerBtn" class="hamburgerBtn" v-on:click="createCategories">
+                    <img src="css/images/hamburgerButton.png" style="width: 30px; height: 24px; vertical-align: middle;
+                    margin-left: 10px; margin-right: 10px;margin-bottom: 7px">
+                    Каталог
+                </div>
+                <div v-if="hamburgerBtnActive" class="hamburgerBtn" v-on:click="hamburgerBtnHiddenFlag">
+                    <img src="css/images/hamburgerButton.png" style="width: 30px; height: 24px; vertical-align: middle;
+                    margin-left: 10px; margin-right: 10px;margin-bottom: 7px">
+                    Назад
+                </div>
+            </div>
+            <hr id="menuLine">
             <div id="appCategory">
             </div>
             <div id="appSubCategory">

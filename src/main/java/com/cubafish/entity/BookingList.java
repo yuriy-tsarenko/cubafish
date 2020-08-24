@@ -60,6 +60,9 @@ public class BookingList {
     @Column(name = "address")
     private String address;
 
+    @Column(name = "booking_comments")
+    private String bookingComments;
+
     @Column(name = "booking_items")
     private String bookingItems;
 }

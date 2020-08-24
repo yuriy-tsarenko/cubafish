@@ -15,7 +15,7 @@ let basketImage = new Vue({
     el: '#basketImage',
     methods: {
         activeImageAction: function () {
-            window.location = 'http://91.235.128.12:8081/admin/admin_booking_manager.html';
+            window.location = 'admin_booking_manager.html';
         }
     }
 });
@@ -90,7 +90,7 @@ Vue.component('newProduct-row', {
         '<input class="adminButtonTemplate" type="button" value="Изменить" v-on:click="hiddenFlag">' +
         '<input class="adminButtonTemplate" type="button" value="Создать" v-on:click="hiddenFlagForCreate">' +
         '<input class="adminButtonTemplate" type="button" value="Удалить" v-on:click="deleteProduct">' +
-        '</td>'+
+        '</td>' +
         '</tr>' +
 
         '<tr>' +
@@ -106,7 +106,7 @@ Vue.component('newProduct-row', {
         '<td  id="cellStyle" style="width:220px; height: auto">' +
         '<div class="productValue" id="productValue3"><p>{{newProduct.productBrand}}</p></div>' +
         '</td>' +
-        '</tr>'+
+        '</tr>' +
 
         '<tr>' +
         '<td style="height: 30px"><p>Категория</p></td>' +
@@ -115,7 +115,7 @@ Vue.component('newProduct-row', {
         '<td style="height: 30px"></td>' +
         '</tr>' +
 
-        '<tr>'+
+        '<tr>' +
         '<td rowspan="2"  id="cellStyle" style="width:250px; height: auto">' +
         '<div class="productValue" id="productValue1"><p>{{newProduct.productCategory}}</p></div>' +
         '</td>' +
@@ -126,7 +126,7 @@ Vue.component('newProduct-row', {
         '<div class="productValue" id="productValue3"><p>В наличии: {{newProduct.totalAmount}} ед.</p>' +
         '</br><p>{{newProduct.productPrice}} грн</p></div>' +
         '</td>' +
-        '</tr>'+
+        '</tr>' +
 
         '<tr>' +
         '<td id="cellStyle" style="width:250px; height: 65px">' +
@@ -134,10 +134,10 @@ Vue.component('newProduct-row', {
         '<img v-if="productImageLeftName!=null" v-on:click="hiddenFlagLeftSide" style="width: 65px;height: 65px; border-radius:5%" :src="newProduct.productImageLeftName" alt="photo"/>' +
         '<img v-if="productImageBackName!=null" v-on:click="hiddenFlagBackSide" style="width: 65px;height: 65px; border-radius:5%" :src="newProduct.productImageBackName" alt="photo"/>' +
         '</td>' +
-        '</tr>'+
+        '</tr>' +
         '<tr>' +
         '<td colspan="5" id="cellStyle" style="width:1000px; height: 25px" >' +
-        '<div class="detailsBtnColor" v-if="showDetailsButton" v-on:click="hiddenFlagDetails"><input class="btn" type="button"></div>' +
+        '<div class="detailsBtnColor" v-if="showDetailsButton" v-on:click="hiddenFlagDetails"><button class="btn" type="button"></button></div>' +
         '</td>' +
         '</tr>' +
         '</table>' +
@@ -208,7 +208,7 @@ Vue.component('newProduct-row', {
         '<table id="bigPhoto">' +
         '<tr>' +
         '<td style="width: 900px; height: 30px">' +
-        '<div id="bigPhotoButtonMove"><input class="bigPhotoButton" type="button" v-on:click="this.show=!this.show"></div>' +
+        '<div id="bigPhotoButtonMove"><button class="bigPhotoButton" type="button" v-on:click="this.show=!this.show"></button></div>' +
         '</td>' +
         '</tr>' +
         '<tr>' +
@@ -229,15 +229,15 @@ Vue.component('newProduct-row', {
         '<tr>' +
         '<td id="cellStyle" style="height: 30px; width: 900px"><p>Описание</p>' +
         '</td>' +
-        '</tr>'+
-        '<tr>'+
+        '</tr>' +
+        '<tr>' +
         '<td>' +
         '<div id="productValue2"><br/><p>{{newProduct.specification}}</p></div>' +
         '</td>' +
         '</tr>' +
         '<tr>' +
         '<td style="height: 30px">' +
-        '<div class="detailsBtnColor" v-on:click="hiddenFlagDetails"><input class="btnUp" type="button"></div>' +
+        '<div class="detailsBtnColor" v-on:click="hiddenFlagDetails"><button class="btnUp" type="button"></button></div>' +
         '</td>' +
         '</tr>' +
         '</table>' +
@@ -270,7 +270,7 @@ Vue.component('newProduct-row', {
         '<td style="width:225px;height: auto"><textarea  placeholder="Введите полное имя товара" v-model="descriptionForCreate"></textarea></td>' +
         '<td style="width:225px;height: auto"><textarea  placeholder="Введите описание товара" v-model="specificationForCreate"></textarea></td>' +
         '<td style="width:225px;height: auto">' +
-        ' <select v-model="typeOfPurpose" id="selectorStyle">' +
+        ' <select v-model="typeOfPurposeForCreate" id="selectorStyle">' +
         ' <option disabled value="">Выберите один из вариантов</option>' +
         ' <option>Карповая ловля</option>' +
         ' <option>Спининговая ловля</option>' +
@@ -646,11 +646,17 @@ Vue.component('newProducts-list', {
         '<newProduct-row v-for="newProduct in newProducts" :key="newProduct.id" :newProduct="newProduct"/>' +
         '</div>',
     created: function () {
-        productAPI.get().then(result =>
-            result.json().then(data =>
-                data.forEach(newProduct => this.newProducts.push(newProduct))
-            )
-        );
+        let auth = localStorage.getItem('CustomHeader');
+        if (auth !== null) {
+            productAPI.get().then(result =>
+                result.json().then(data =>
+                    data.forEach(newProduct => this.newProducts.push(newProduct))
+                )
+            );
+        } else {
+            window.location = 'authorize.html';
+        }
+
     }
 });
 
@@ -672,14 +678,18 @@ Vue.component('newProductCategory-row', {
     },
     template:
         '<div>' +
-        '<table style="width:270px; height: 60px" >' +
+        '<table style="width:350px; height: 80px" >' +
         '<tr>' +
         '<td hidden><h3>{{this.categoryNameForRequest=newProductCategory.communicationData}}</h3>' +
         '</td>' +
         '</tr>' +
-        '<td style="width:270px; height: auto" colspan="2">' +
-        '<button type="submit" v-on:click="getSortedProducts" class="menuButton">' +
-        '{{newProductCategory.communicationData}}</button></td>' +
+        '<td style="width:350px; height: auto">' +
+        ' <div class="catalogBtn" v-on:click="getSortedProducts">' +
+        '<img src="css/images/catalogButton.png" style="width: 30px; height: 24px; vertical-align: middle;' +
+        'margin-left: 10px; margin-right: 10px;margin-bottom: 7px" alt="catalogIcon">' +
+        ' {{newProductCategory.communicationData}}' +
+        '</div>' +
+        '</td>' +
         '</tr>' +
         '</table>' +
         '</div>',
@@ -699,12 +709,17 @@ Vue.component('newProductCategory-row', {
             setTimeout(function () {
                 appProductBrand.productBrands = appProductBrand.productBrands.splice(0, 0);
                 appSubCategory.newProductSubCategories = appSubCategory.newProductSubCategories.splice(0, 0);
+                appCategory.newProductCategories = appCategory.newProductCategories.splice(0, 0);
                 productCategoryApiGetSubCategories.save({}, sortingTag).then(result =>
                     result.json().then(data =>
                         data.forEach(newProductCategory =>
                             appSubCategory.newProductSubCategories.push(newProductCategory))
                     ));
-            }, 700);
+
+                appCatalog.hamburgerBtn = false;
+                appCatalog.hamburgerBtnActive = true;
+
+            }, 400);
         },
     }
 });
@@ -714,23 +729,7 @@ Vue.component('newProductCategories-list', {
     template: '<div>' +
         '<newProductCategory-row v-for="newProductCategory in newProductCategories" ' +
         ':key="newProductCategory.id" :newProductCategory="newProductCategory"/>' +
-        '</div>',
-    created: function () {
-        let auth = localStorage.getItem('CustomHeader');
-        if (auth !== null) {
-            setTimeout(function () {
-                appCategory.newProductCategories = appCategory.newProductCategories.splice(0, 0);
-                productCategoryApi.get().then(result =>
-                    result.json().then(data =>
-                        data.forEach(newProductCategory => appCategory.newProductCategories.push(newProductCategory))
-                    ));
-            }, 500);
-        } else {
-            setTimeout(function () {
-                window.location = 'http://91.235.128.12:8081/admin/authorize.html';
-            }, 200);
-        }
-    }
+        '</div>'
 });
 
 let appCategory = new Vue({
@@ -741,21 +740,6 @@ let appCategory = new Vue({
     }
 });
 
-// let appNewCategory = new Vue({
-//     props: ['newProducts'],
-//     el: '#appNewCategory',
-//     methods: {
-//         created: function () {
-//             app.newProducts = app.newProducts.splice(0, 0);
-//             productAPI.get().then(result =>
-//                 result.json().then(data =>
-//                     data.forEach(newProduct => app.newProducts.push(newProduct))
-//                 )
-//             );
-//         }
-//     }
-// });
-
 Vue.component('newProductSubCategory-row', {
     props: ['newProductSubCategory'],
     data: function () {
@@ -765,14 +749,18 @@ Vue.component('newProductSubCategory-row', {
     },
     template:
         '<div>' +
-        '<table style="width:270px; height: 60px; position: relative; top: 10px" >' +
+        '<table style="width:320px; height: 80px; position: relative; top: 10px" >' +
         '<tr>' +
         '<td hidden><h3>{{this.subCategoryNameForRequest=newProductSubCategory.communicationData}}</h3></td>' +
         '</tr>' +
         '<tr>' +
-        '<td style="width:270px; height: auto" colspan="2">' +
-        '<button type="submit" v-on:click="getSortedProducts" class="subMenuButton">' +
-        '{{newProductSubCategory.communicationData}}</button></td>' +
+        '<td style="width:350px; height: auto">' +
+        ' <div class="catalogBtn" v-on:click="getSortedProducts">' +
+        '<img src="css/images/catalogButton.png" style="width: 30px; height: 24px; vertical-align: middle;' +
+        'margin-left: 10px; margin-right: 10px;margin-bottom: 7px" alt="catalogIcon">' +
+        ' {{newProductSubCategory.communicationData}}' +
+        '</div>' +
+        '</td>' +
         '</tr>' +
         '</table>' +
         '</div>',
@@ -795,7 +783,7 @@ Vue.component('newProductSubCategory-row', {
                         data.forEach(newProductSubCategory => appProductBrand.productBrands.push(newProductSubCategory))
                     )
                 );
-            }, 700);
+            }, 400);
         }
     }
 });
@@ -825,14 +813,17 @@ Vue.component('productBrand-row', {
     },
     template:
         '<div>' +
-        '<table style="width:270px; height: 60px; position: relative; top: 10px" >' +
+        '<table style="width:350px; height: 70px; position: relative; top: 10px" >' +
         '<tr>' +
         '<td hidden><h3>{{this.productBrandForRequest=productBrand.communicationData}}</h3></td>' +
         '</tr>' +
         '<tr>' +
-        '<td style="width:270px; height: auto" colspan="2">' +
-        '<button type="submit" v-on:click="getSortedProducts" class="brandMenuButton">' +
-        '{{productBrand.communicationData}}</button>' +
+        '<td style="width:350px; height: auto">' +
+        ' <div class="catalogBtn" v-on:click="getSortedProducts">' +
+        '<img src="css/images/catalogButton2.png" style="width: 30px; height: 24px; vertical-align: middle;' +
+        'margin-left: 10px; margin-right: 10px;margin-bottom: 7px" alt="catalogIcon">' +
+        ' {{productBrand.communicationData}}' +
+        '</div>' +
         '</td>' +
         '</tr>' +
         '</table>' +
@@ -896,15 +887,47 @@ let appLogoutButtons = new Vue({
             if (auth == null) {
                 setTimeout(function () {
                     alert('Завершение работы администратора');
-                    window.location = 'http://91.235.128.12:8081/admin/authorize.html';
+                    window.location = 'authorize.html';
                 }, 500);
             } else {
                 alert('Некоректное завершение работы, попробуйте еще раз или обратитесь к супер админу');
             }
         },
         registrationUserAction: function () {
-            window.location = 'http://91.235.128.12:8081/admin/registration.html';
+            window.location = 'registration.html';
         }
     }
-})
+});
+
+let appCatalog = new Vue({
+    el: '#appCatalog',
+    data: {
+        hamburgerBtn: true,
+        hamburgerBtnActive: false
+    },
+    methods: {
+        createCategories: function () {
+            setTimeout(function () {
+                appCategory.newProductCategories = appCategory.newProductCategories.splice(0, 0);
+                appSubCategory.newProductSubCategories = appSubCategory.newProductSubCategories.splice(0, 0);
+                appProductBrand.productBrands = appProductBrand.productBrands.splice(0, 0);
+                productCategoryApi.get().then(result =>
+                    result.json().then(data =>
+                        data.forEach(newProductCategory => appCategory.newProductCategories.push(newProductCategory))
+                    ));
+            }, 400);
+        },
+        hamburgerBtnHiddenFlag: function () {
+            if (this.hamburgerBtn === true) {
+                this.hamburgerBtnActive = true;
+                this.hamburgerBtn = false;
+            } else {
+                this.hamburgerBtnActive = false;
+                this.hamburgerBtn = true;
+            }
+            this.createCategories();
+        }
+    }
+});
+
 

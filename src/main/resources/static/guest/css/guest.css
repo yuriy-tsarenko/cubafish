@@ -10,7 +10,7 @@ body {
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 13px;
     font-style: italic;
-        /*-webkit-transform:scale(1.2);*/
+    /*-webkit-transform:scale(1.2);*/
     /*-moz-transform:scale(1.2);*/
     /*-ms-transform:scale(1.2);*/
     /*-o-transform:scale(1.2);*/
@@ -330,7 +330,6 @@ header {
     width: 370px;
     height: 99%;
     overflow: auto;
-    background-color: #8c8c01;
 }
 
 #sidebar::-webkit-scrollbar {
@@ -399,160 +398,7 @@ td {
     text-align: center;
 }
 
-.menuButton {
-    width: 320px;
-    height: 80px;
-    z-index: 1;
-    background: #585801;
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 24px;
-    font-style: italic;
-    color: #FFFFFF;
-    border-top: 0;
-    border-left: 2px solid;
-    border-right: 0;
-    border-bottom: 2px solid;
-    border-color: #FFFFFF;
-    border-radius: 4px;
-}
 
-.menuButton:hover {
-    background: #8c8c01;
-    tansition: all .3s linear;
-    -webkit-transition: all .3s linear;
-    -moz-transition: all .3s linear;
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 20px;
-    font-style: italic;
-    color: #ffffff;
-    border-top: 0;
-    border-left: 2px solid;
-    border-right: 0;
-    border-bottom: 2px solid;
-    border-color: #8c8c01;
-    border-radius: 4px;
-}
-
-.menuButton:active {
-    background: #585801;
-    tansition: all .1s linear;
-    -webkit-transition: all .1s linear;
-    -moz-transition: all .1s linear;
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 16px;
-    font-style: italic;
-    color: #FFFFFF;
-    border-top: 0;
-    border-left: 2px solid;
-    border-right: 0;
-    border-bottom: 2px solid;
-    border-color: #585801;
-    border-radius: 4px;
-}
-
-.subMenuButton {
-    width: 300px;
-    height: 60px;
-    z-index: 1;
-    background: rgb(0, 74, 113);
-    font-family: Geneva, Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    font-size: 17px;
-    font-style: italic;
-    color: #FFFFFF;
-    border-top: 0;
-    border-left: 2px solid;
-    border-right: 0;
-    border-bottom: 2px solid;
-    border-color: #FFFFFF;
-    border-radius: 4px;
-}
-
-.subMenuButton:hover {
-    background: #FA8258;
-    tansition: all .3s linear;
-    -webkit-transition: all .3s linear;
-    -moz-transition: all .3s linear;
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 14px;
-    font-style: italic;
-    color: #000000;
-    border-top: 0;
-    border-left: 2px solid;
-    border-right: 0;
-    border-bottom: 2px solid;
-    border-color: #000000;
-    border-radius: 4px;
-}
-
-.subMenuButton:active {
-    background: #3e3e00;
-    tansition: all .1s linear;
-    -webkit-transition: all .1s linear;
-    -moz-transition: all .1s linear;
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 11px;
-    font-style: italic;
-    color: #FFFFFF;
-    border-top: 0;
-    border-left: 2px solid;
-    border-right: 0;
-    border-bottom: 2px solid;
-    border-color: #FFFFFF;
-    border-radius: 4px;
-}
-
-.brandMenuButton {
-    width: 250px;
-    height: 50px;
-    z-index: 1;
-    background: rgb(210, 133, 0);
-    font-family: Geneva, Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    font-size: 17px;
-    font-style: italic;
-    color: #000000;
-    border-top: 0;
-    border-left: 2px solid;
-    border-right: 0;
-    border-bottom: 2px solid;
-    border-color: #FFFFFF;
-    border-radius: 4px;
-}
-
-.brandMenuButton:hover {
-    background: #FA8258;
-    tansition: all .3s linear;
-    -webkit-transition: all .3s linear;
-    -moz-transition: all .3s linear;
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 14px;
-    font-style: italic;
-    color: #000000;
-    border-top: 0;
-    border-left: 2px solid;
-    border-right: 0;
-    border-bottom: 2px solid;
-    border-color: #000000;
-    border-radius: 4px;
-}
-
-.brandMenuButton:active {
-    background: #3e3e00;
-    tansition: all .1s linear;
-    -webkit-transition: all .1s linear;
-    -moz-transition: all .1s linear;
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 11px;
-    font-style: italic;
-    color: #FFFFFF;
-    border-top: 0;
-    border-left: 2px solid;
-    border-right: 0;
-    border-bottom: 2px solid;
-    border-color: #FFFFFF;
-    border-radius: 4px;
-}
 
 #superAdminButton {
     width: 85px;
@@ -1016,4 +862,44 @@ footer {
 #logoFooter {
     position: relative;
     margin: 0 auto;
+}
+
+.hamburgerBtn {
+    font-family: Arial, sans, serif;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    color: #393900;
+    line-height: 1;
+    user-select: none;
+    cursor: pointer;
+}
+
+.catalogBtn {
+    position: relative;
+    width: 345px;
+    height: auto;
+    font-family: Arial, sans, serif;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    color: #393900;
+    line-height: 1;
+    text-align: left;
+    user-select: none;
+    cursor: pointer;
+}
+
+.catalogBtn:hover {
+    border-bottom: #393900 2px solid;
+}
+
+#menuLine {
+    position: relative;
+    left: 10px;
+    width: 310px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    background-color: #393900;
+    border-color: #393900;
 }

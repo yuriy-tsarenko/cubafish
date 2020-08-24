@@ -1,5 +1,6 @@
 package com.cubafish.utils;
 
+import com.cubafish.dto.BookingItemDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,5 +24,6 @@ public class BookingBody {
     private String region;
     private String city;
     private String address;
-    private List<BookingItem> bookingItems;
+    private String bookingComments;
+    private List<BookingItemDto> bookingItems;
 }
