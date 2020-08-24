@@ -12,49 +12,49 @@ Vue.http.headers.common['Authorization'] = localStorage.getItem('CustomHeader');
 axios.defaults.headers.common['Authorization'] = localStorage.getItem('CustomHeader');
 
 let appShowBasket = new Vue({
-        el: '#appShowBasket',
-        data: {
-            show: false,
-            maxId: ''
-        },
-        methods: {
-            hiddenFlagForBasketReceiver: function () {
-                let basketItem = {
-                    id: '',
-                    key: '',
-                    status: '',
-                    communicationData: ''
-                };
-                if (this.show === false) {
-                    this.show = true
-                    if (this.show === true) {
-                        let amount;
-                        if (localStorage.getItem('TotalAmount') === null) {
-                            amount = 0;
-                        } else {
-                            amount = Number(localStorage.getItem('TotalAmount'));
-                        }
-                        amount++;
-                        localStorage.setItem('TotalAmount', String(amount));
-                        basketImage.basketItemsAmount = localStorage.getItem('TotalAmount');
-                        basketImage.basketItemsCount = true;
+    el: '#appShowBasket',
+    data: {
+        show: false,
+        maxId: ''
+    },
+    methods: {
+        hiddenFlagForBasketReceiver: function () {
+            let basketItem = {
+                id: '',
+                key: '',
+                status: '',
+                communicationData: ''
+            };
+            if (this.show === false) {
+                this.show = true
+                if (this.show === true) {
+                    let amount;
+                    if (localStorage.getItem('TotalAmount') === null) {
+                        amount = 0;
+                    } else {
+                        amount = Number(localStorage.getItem('TotalAmount'));
                     }
-                } else {
-                    this.show = false;
+                    amount++;
+                    localStorage.setItem('TotalAmount', String(amount));
+                    basketImage.basketItemsAmount = localStorage.getItem('TotalAmount');
+                    basketImage.basketItemsCount = true;
                 }
-                setTimeout(function () {
-
-                    let sortingTag = {
-                        key: 'required argument',
-                        communicationKey: 'give me the argument for basket engine',
-                    };
-                    productAPIId.save({}, sortingTag)
-                        .then(response => localStorage.setItem('ID', String(this.maxId = response.data.communicationData)));
-                }, 700);
-
+            } else {
+                this.show = false;
             }
+            setTimeout(function () {
+
+                let sortingTag = {
+                    key: 'required argument',
+                    communicationKey: 'give me the argument for basket engine',
+                };
+                productAPIId.save({}, sortingTag)
+                    .then(response => localStorage.setItem('ID', String(this.maxId = response.data.communicationData)));
+            }, 700);
+
         }
-    });
+    }
+});
 
 let basketImage = new Vue({
     el: '#basketImage',
@@ -64,7 +64,7 @@ let basketImage = new Vue({
     },
     methods: {
         activeImageAction: function () {
-            window.location = 'http://91.235.128.12:8081/guest/card.html';
+            window.location = 'card.html';
         }
     }
 });
@@ -293,14 +293,18 @@ Vue.component('newProductCategory-row', {
     },
     template:
         '<div>' +
-        '<table style="width:320px; height: 80px" >' +
+        '<table style="width:350px; height: 80px" >' +
         '<tr>' +
         '<td hidden><h3>{{this.categoryNameForRequest=newProductCategory.communicationData}}</h3>' +
         '</td>' +
         '</tr>' +
-        '<td style="width:270px; height: auto" colspan="2">' +
-        '<button type="submit" v-on:click="getSortedProducts" class="menuButton">' +
-        '{{newProductCategory.communicationData}}</button></td>' +
+        '<td style="width:350px; height: auto">' +
+        ' <div class="catalogBtn" v-on:click="getSortedProducts">'+
+        '<img src="css/images/catalogButton.png" style="width: 30px; height: 24px; vertical-align: middle;'+
+        'margin-left: 10px; margin-right: 10px;margin-bottom: 7px" alt="catalogIcon">'+
+        ' {{newProductCategory.communicationData}}'+
+        '</div>'+
+        '</td>' +
         '</tr>' +
         '</table>' +
         '</div>',
@@ -320,12 +324,17 @@ Vue.component('newProductCategory-row', {
             setTimeout(function () {
                 appProductBrand.productBrands = appProductBrand.productBrands.splice(0, 0);
                 appSubCategory.newProductSubCategories = appSubCategory.newProductSubCategories.splice(0, 0);
+                appCategory.newProductCategories = appCategory.newProductCategories.splice(0, 0);
                 productCategoryApiGetSubCategories.save({}, sortingTag).then(result =>
                     result.json().then(data =>
                         data.forEach(newProductCategory =>
                             appSubCategory.newProductSubCategories.push(newProductCategory))
                     ));
-            }, 700);
+
+                appCatalog.hamburgerBtn = false;
+                appCatalog.hamburgerBtnActive = true;
+
+            }, 400);
         },
     }
 });
@@ -335,16 +344,7 @@ Vue.component('newProductCategories-list', {
     template: '<div>' +
         '<newProductCategory-row v-for="newProductCategory in newProductCategories" ' +
         ':key="newProductCategory.id" :newProductCategory="newProductCategory"/>' +
-        '</div>',
-    created: function () {
-        setTimeout(function () {
-            appCategory.newProductCategories = appCategory.newProductCategories.splice(0, 0);
-            productCategoryApi.get().then(result =>
-                result.json().then(data =>
-                    data.forEach(newProductCategory => appCategory.newProductCategories.push(newProductCategory))
-                ));
-        }, 500);
-    }
+        '</div>'
 });
 
 let appCategory = new Vue({
@@ -369,9 +369,13 @@ Vue.component('newProductSubCategory-row', {
         '<td hidden><h3>{{this.subCategoryNameForRequest=newProductSubCategory.communicationData}}</h3></td>' +
         '</tr>' +
         '<tr>' +
-        '<td style="width:270px; height: auto" colspan="2">' +
-        '<button type="submit" v-on:click="getSortedProducts" class="subMenuButton">' +
-        '{{newProductSubCategory.communicationData}}</button></td>' +
+        '<td style="width:350px; height: auto">' +
+        ' <div class="catalogBtn" v-on:click="getSortedProducts">'+
+        '<img src="css/images/catalogButton.png" style="width: 30px; height: 24px; vertical-align: middle;'+
+        'margin-left: 10px; margin-right: 10px;margin-bottom: 7px" alt="catalogIcon">'+
+        ' {{newProductSubCategory.communicationData}}'+
+        '</div>'+
+        '</td>' +
         '</tr>' +
         '</table>' +
         '</div>',
@@ -394,7 +398,7 @@ Vue.component('newProductSubCategory-row', {
                         data.forEach(newProductSubCategory => appProductBrand.productBrands.push(newProductSubCategory))
                     )
                 );
-            }, 700);
+            }, 400);
         }
     }
 });
@@ -424,14 +428,17 @@ Vue.component('productBrand-row', {
     },
     template:
         '<div>' +
-        '<table style="width:320px; height: 70px; position: relative; top: 10px" >' +
+        '<table style="width:350px; height: 70px; position: relative; top: 10px" >' +
         '<tr>' +
         '<td hidden><h3>{{this.productBrandForRequest=productBrand.communicationData}}</h3></td>' +
         '</tr>' +
         '<tr>' +
-        '<td style="width:270px; height: auto" colspan="2">' +
-        '<button type="submit" v-on:click="getSortedProducts" class="brandMenuButton">' +
-        '{{productBrand.communicationData}}</button>' +
+        '<td style="width:350px; height: auto">' +
+        ' <div class="catalogBtn" v-on:click="getSortedProducts">'+
+        '<img src="css/images/catalogButton2.png" style="width: 30px; height: 24px; vertical-align: middle;'+
+        'margin-left: 10px; margin-right: 10px;margin-bottom: 7px" alt="catalogIcon">'+
+        ' {{productBrand.communicationData}}'+
+        '</div>'+
         '</td>' +
         '</tr>' +
         '</table>' +
@@ -490,10 +497,41 @@ let appLogoutButtons = new Vue({
     el: '#appLogoutButtons',
     methods: {
         loginUserAction: function () {
-            window.location = 'http://91.235.128.12:8081/guest/authorize.html';
+            window.location = 'authorize.html';
         },
         registrationUserAction: function () {
-            window.location = 'http://91.235.128.12:8081/guest/registration.html';
+            window.location = 'registration.html';
+        }
+    }
+});
+
+let appCatalog = new Vue({
+    el: '#appCatalog',
+    data: {
+        hamburgerBtn: true,
+        hamburgerBtnActive: false
+    },
+    methods: {
+        createCategories: function () {
+            setTimeout(function () {
+                appCategory.newProductCategories = appCategory.newProductCategories.splice(0, 0);
+                appSubCategory.newProductSubCategories = appSubCategory.newProductSubCategories.splice(0, 0);
+                appProductBrand.productBrands = appProductBrand.productBrands.splice(0, 0);
+                productCategoryApi.get().then(result =>
+                    result.json().then(data =>
+                        data.forEach(newProductCategory => appCategory.newProductCategories.push(newProductCategory))
+                    ));
+            }, 400);
+        },
+        hamburgerBtnHiddenFlag: function () {
+            if (this.hamburgerBtn === true) {
+                this.hamburgerBtnActive = true;
+                this.hamburgerBtn = false;
+            } else {
+                this.hamburgerBtnActive = false;
+                this.hamburgerBtn = true;
+            }
+            this.createCategories();
         }
     }
 });

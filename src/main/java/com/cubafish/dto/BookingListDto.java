@@ -25,5 +25,6 @@ public class BookingListDto {
     private String region;
     private String city;
     private String address;
+    private String bookingComments;
     private String bookingItems;
 }

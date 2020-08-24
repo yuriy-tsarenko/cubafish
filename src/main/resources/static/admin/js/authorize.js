@@ -22,7 +22,7 @@ let appLogin = new Vue({
                 localStorage.setItem('CustomHeader', this.auth);
                 setTimeout(function () {
                     alert('вы авторизованы, перенаправление на Ваш аккаунт');
-                    window.location = 'http://91.235.128.12:8081/admin/admin.html';
+                    window.location = 'admin.html';
                 }, 1000);
             } else {
                 setTimeout(function () {

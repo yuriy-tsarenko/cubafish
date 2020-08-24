@@ -7,13 +7,11 @@ import com.cubafish.service.BookingListService;
 import com.cubafish.utils.BookingBody;
 import com.cubafish.utils.CustomResponseBody;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -26,21 +24,16 @@ public class BookingController {
     private final BookingListRepository bookingListRepository;
     private final BookingListMapper bookingListMapper;
 
-    @GetMapping("/all")
-    public List<BookingListDto> findAll() {
-        return bookingListService.findAll();
-    }
-
     @PostMapping("/create")
     public CustomResponseBody create(@RequestBody BookingBody bookingBody) {
-        Map<String, Object> responseFromProductDataValidation = bookingListService.bookingListDataValidation(
+        Map<String, Object> responseFromDataValidation = bookingListService.bookingListDataValidation(
                 bookingBody.getFirstName(), bookingBody.getMiddleName(), bookingBody.getLastName(),
                 bookingBody.getEmail(), bookingBody.getContact(), bookingBody.getUserConfirmation(),
                 bookingBody.getTotalPrice(), bookingBody.getTotalAmount(), bookingBody.getPaymentType(),
                 bookingBody.getDeliveryType(), bookingBody.getRegion(), bookingBody.getCity(), bookingBody.getAddress(),
-                bookingBody.getBookingItems());
-        String status = (String) responseFromProductDataValidation.get("status");
-        BookingListDto bookingListDto = (BookingListDto) responseFromProductDataValidation.get("bookingListDto");
+                bookingBody.getBookingComments(), bookingBody.getBookingItems());
+        String status = (String) responseFromDataValidation.get("status");
+        BookingListDto bookingListDto = (BookingListDto) responseFromDataValidation.get("bookingListDto");
         int step = 0;
         if (status.equals("success")) {
             Map<String, Object> responseFromSetTextAndNumericData =
@@ -49,7 +42,8 @@ public class BookingController {
                             bookingBody.getEmail(), bookingBody.getContact(), bookingBody.getUserConfirmation(),
                             bookingBody.getTotalPrice(), bookingBody.getTotalAmount(), bookingBody.getPaymentType(),
                             bookingBody.getDeliveryType(), bookingBody.getRegion(), bookingBody.getCity(),
-                            bookingBody.getAddress(), bookingBody.getBookingItems(), bookingListDto);
+                            bookingBody.getAddress(), bookingBody.getBookingComments(), bookingBody.getBookingItems(),
+                            bookingListDto);
             status = (String) responseFromSetTextAndNumericData.get("status");
             BookingListDto bookingListDtoWithReceivedData =
                     (BookingListDto) responseFromSetTextAndNumericData.get("bookingListDto");

@@ -1,4 +1,5 @@
-const bookingAPI = Vue.resource('/guest/booking/all');
+const bookingAPI = Vue.resource('/admin_auth/booking/all');
+const bookingAPIEdit = Vue.resource('/admin_auth/booking/update');
 Vue.http.headers.common['Authorization'] = localStorage.getItem('CustomHeader');
 axios.defaults.headers.common['Authorization'] = localStorage.getItem('CustomHeader');
 
@@ -6,7 +7,7 @@ let basketImage = new Vue({
     el: '#basketImage',
     methods: {
         activeImageAction: function () {
-            window.location = 'http://91.235.128.12:8081/admin/admin_booking_manager.html';
+            window.location = 'admin_booking_manager.html';
         }
     }
 });
@@ -45,7 +46,9 @@ Vue.component('productItem-row', {
             productBrand: '',
             productSubCategoryForRequest: '',
             productBrandForRequest: '',
-            totalAmount: '',
+            totalAmount: 0,
+            itemAmount: 0,
+            itemAmountFlag: true,
             description: '',
             specification: '',
             typeOfPurpose: '',
@@ -61,6 +64,7 @@ Vue.component('productItem-row', {
         'font-family: Arial, sans-serif;font-style: normal;color: black;">' +
         '<tr>' +
         '<td hidden><h3>{{this.totalAmount=productItem.totalAmount}}</h3></td>' +
+        '<td hidden><h3>{{this.itemAmount=productItem.itemAmount}}</h3></td>' +
         '<td hidden><h3>{{this.productPrice=productItem.productPrice}}</h3></td>' +
         '<td hidden><h3>{{this.id=productItem.id}}</h3></td>' +
         '<td hidden><h3>{{this.key=productItem.key}}</h3></td>' +
@@ -73,11 +77,12 @@ Vue.component('productItem-row', {
         '<div class="productValue" id="productBasketValue1"><p>{{productItem.description}}</p></div>' +
         '</td>' +
         '<td id="cellStyle" style="width:100px; height:auto">' +
-        '<div v-if="this.totalAmount>0" id="availableInBasket"><p>{{count}}</p></div>' +
-        '<div v-if="this.totalAmount==0" id="notAvailableInBasket"><p>Нет в наличии</p></div>' +
+        '<div v-if="(this.totalAmount>=0)&&(this.itemAmountFlag===false)" id="availableInBasket"><p>{{count}}</p></div>' +
+        '<div v-if="(this.totalAmount>=0)&&(this.itemAmountFlag===true)" id="availableInBasket"><p>{{itemAmount}}</p></div>' +
+        '</td>' +
         '<td id="cellStyle" style="width:60px; height: auto">' +
-        '<input class="counterButton" type="button" v-on:click="counterPlus" >' +
-        '<input class="counterButtonMinus" type="button" v-on:click="counterMinus" >' +
+        '<button class="counterButton" type="button" v-on:click="counterPlus" ></button>' +
+        '<button class="counterButtonMinus" type="button" v-on:click="counterMinus" ></button>' +
         '</td>' +
         '<td id="cellStyle" style="width:100px; height: auto">' +
         '<div class="productValue" id="productBasketValue3"><p v-if="summaryPrice!==0">{{summaryPrice}} грн</p>' +
@@ -85,7 +90,7 @@ Vue.component('productItem-row', {
         '</div>' +
         '</td>' +
         '<td style="width:60px; height: auto">' +
-        '<input class="deleteButton" type="button" v-on:click="deleteItem" >' +
+        '<button class="deleteButton" type="button" v-on:click="deleteItem"></button>' +
         '</td>' +
         '</tr>' +
         '</table>' +
@@ -115,7 +120,8 @@ Vue.component('productItem-row', {
             appSelector.totalProductPrice = appSelector.totalProductPrice - temporaryValue;
         },
         counterPlus: function () {
-            if ((this.count >= 1) && (this.totalAmount > 0)) {
+            if ((this.count >= 1) && (this.totalAmount >= 0)) {
+
                 let productItem = {
                     description: '',
                     productPrice: '',
@@ -123,15 +129,18 @@ Vue.component('productItem-row', {
                     productImageName: ''
                 };
                 let items = new Set(JSON.parse(localStorage.getItem(String(this.key))));
+                if ((Number(this.itemAmount) > Number(this.count)) && (this.itemAmountFlag === true)) {
+                    this.count = Number(this.itemAmount);
+                }
                 for (let productFromBasket of items) {
                     if (Number(productFromBasket.totalAmount) > Number('0')) {
-                        let fixedValue = this.productPrice;
+                        let fixedValue = Number(this.productPrice) / Number(this.itemAmount);
                         if (this.summaryPrice === 0) {
-                            this.summaryPrice = Number(fixedValue);
+                            this.summaryPrice = Number(this.productPrice);
                         }
                         let temporaryValue = this.summaryPrice;
-                        this.summaryPrice = (Number(fixedValue) + temporaryValue);
-
+                        this.summaryPrice =
+                            (Number(fixedValue.toFixed(1)) + Number(temporaryValue.toFixed(1)));
                         productItem = {
                             description: productFromBasket.description,
                             productPrice: this.summaryPrice,
@@ -144,15 +153,19 @@ Vue.component('productItem-row', {
                         basketItems.push(productItem);
 
                         localStorage.setItem(String(this.key), JSON.stringify(basketItems));
-                        appSelector.totalProductPrice = appSelector.totalProductPrice + Number(fixedValue);
+                        appSelector.totalProductPrice =
+                            (Number((appSelector.totalProductPrice).toFixed(1)) + Number(fixedValue));
+                        this.itemAmountFlag = false;
                     }
                 }
             }
         },
         counterMinus: function () {
+            if (Number(this.itemAmount) > Number(this.count) && (this.itemAmountFlag === true)) {
+                this.count = Number(this.itemAmount);
+            }
             if ((this.count > 1)) {
-                this.count--;
-
+                this.itemAmountFlag = false;
                 let productItem = {
                     description: '',
                     productPrice: '',
@@ -161,21 +174,30 @@ Vue.component('productItem-row', {
                 };
                 let items = new Set(JSON.parse(localStorage.getItem(String(this.key))));
                 for (let productFromBasket of items) {
-                    let fixedValue = this.productPrice;
+                    if (Number(productFromBasket.totalAmount) >= Number('0')) {
+                        let fixedValue = Number(this.productPrice) / Number(this.itemAmount);
+                        if (this.summaryPrice === 0) {
+                            this.summaryPrice = Number(this.productPrice);
+                        }
+                        let temporaryValue = this.summaryPrice;
+                        this.summaryPrice =
+                            (Number(temporaryValue.toFixed(1)) - Number(fixedValue.toFixed(1)));
 
-                    let temporaryValue = this.summaryPrice;
-                    this.summaryPrice = (Number(temporaryValue) - fixedValue);
-                    productItem = {
-                        description: productFromBasket.description,
-                        productPrice: this.summaryPrice,
-                        totalAmount: Number(productFromBasket.totalAmount) + Number('1'),
-                        itemAmount: Number(productFromBasket.itemAmount) - Number('1'),
-                        productImageName: productFromBasket.productImageName
-                    };
-                    let basketItems = [];
-                    basketItems.push(productItem);
-                    localStorage.setItem(String(this.key), JSON.stringify(basketItems));
-                    appSelector.totalProductPrice = appSelector.totalProductPrice - Number(fixedValue);
+                        productItem = {
+                            description: productFromBasket.description,
+                            productPrice: this.summaryPrice,
+                            totalAmount: Number(productFromBasket.totalAmount) + Number('1'),
+                            itemAmount: Number(productFromBasket.itemAmount) - Number('1'),
+                            productImageName: productFromBasket.productImageName
+                        };
+                        let basketItems = [];
+                        basketItems.push(productItem);
+                        localStorage.setItem(String(this.key), JSON.stringify(basketItems));
+                        appSelector.totalProductPrice =
+                            (Number((appSelector.totalProductPrice).toFixed(1)) - Number(fixedValue));
+                        this.totalAmount = Number(productItem.totalAmount);
+                        this.count--;
+                    }
                 }
 
             }
@@ -197,7 +219,7 @@ Vue.component('productItems-list', {
 
         this.maxId = localStorage.getItem('ID');
         if (this.maxId !== null) {
-            let maxValue = Number(this.maxId)
+            let maxValue = Number(this.maxId);
             let itemId = 0;
             for (let i = 0; i <= maxValue; i++) {
                 let item = localStorage.getItem(String(i));
@@ -210,6 +232,7 @@ Vue.component('productItems-list', {
                             description: productFromBasket.description,
                             productPrice: productFromBasket.productPrice,
                             totalAmount: productFromBasket.totalAmount,
+                            itemAmount: productFromBasket.itemAmount,
                             productImageName: productFromBasket.productImageName
                         };
                         this.productItems.push(productItem);
@@ -240,6 +263,7 @@ Vue.component('newBooking-row', {
             show: false,
             showDetails: false,
             showDetailsButton: true,
+            flagForBasketMaker: false,
             id: '',
             firstName: '',
             middleName: '',
@@ -251,7 +275,9 @@ Vue.component('newBooking-row', {
             region: '',
             city: '',
             address: '',
-            editStatus: ''
+            editStatus: '',
+            bookingItemsForEdit: [],
+            bookingItemsFromDb: []
         }
     },
     template:
@@ -259,6 +285,7 @@ Vue.component('newBooking-row', {
         '<table id="fromDb" style="width:1000px; height: 300px">' +
         '<tr>' +
         '    <td id="cellStyle" hidden><p>{{this.id=newBooking.id}}</p></td>' +
+        '    <td id="cellStyle" hidden><p>{{this.bookingItemsFromDb=newBooking.bookingItems}}</p></td>' +
         '</tr>' +
         '' +
         '<tr>' +
@@ -268,30 +295,32 @@ Vue.component('newBooking-row', {
         '    <td style="height: 30px"><p>Фамилия:</p></td>' +
 
         '    <td rowspan="7" style="width:70px;height:auto">' +
-        '        <input id="superAdminButtonProductTemplateManager" type="button" value="Изменить" v-on:click="hiddenFlag">' +
-        '        <input id="superAdminButtonProductTemplateManager2" type="button" value="Заказ оформлен">' +
+        '        <input class="adminButtonTemplate" type="button" value="Изменить" v-on:click="hiddenFlag">' +
+        '        <input class="adminButtonTemplate" type="button" value="Подтвердить">' +
+        '        <input class="adminButtonTemplate" type="button" value="Отменить">' +
         '    </td>' +
         '</tr>' +
 
         '<tr>' +
-        '    <td style="height: 30px"><p>{{newBooking.dateOfBooking}}</p></td>' +
-        '    <td style="height: 30px"><p>{{newBooking.firstName}}</p></td>' +
-        '    <td style="height: 30px"><p>{{newBooking.middleName}}</p></td>' +
-        '    <td style="height: 30px"><p>{{newBooking.lastName}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBooking.dateOfBooking}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBooking.firstName}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBooking.middleName}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBooking.lastName}}</p></td>' +
         '</tr>' +
 
         '<tr>' +
         '    <td style="height: 30px"><p>E-mail:</p></td>' +
         '    <td style="height: 30px"><p>Номер телефона:</p></td>' +
         '    <td style="height: 30px"><p>Общая сума:</p></td>' +
-        '    <td style="height: 30px"><p>Общее количество:</p></td>' +
+        '    <td style="height: 30px"><p>Корзина пользователя:</p></td>' +
         '</tr>' +
 
         '<tr>' +
-        '    <td style="height: 30px"><p>{{newBooking.email}}</p></td>' +
-        '    <td style="height: 30px"><p>{{newBooking.contact}}</p></td>' +
-        '    <td style="height: 30px"><p>{{newBooking.totalPrice}} грн</p></td>' +
-        '    <td style="height: 30px"><p>{{newBooking.totalAmount}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBooking.email}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBooking.contact}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBooking.totalPrice}} грн</p></td>' +
+        '    <td style="height: auto"><div id="basketManager" v-on:click="basketMaker"><div id="countManager">{{newBooking.totalAmount}}</div>' +
+        '</div></td>' +
         '</tr>' +
 
         '<tr>' +
@@ -302,10 +331,10 @@ Vue.component('newBooking-row', {
         '</tr>' +
 
         '<tr>' +
-        '    <td style="height: 30px"><p>{{newBooking.deliveryType}}</p></td>' +
-        '    <td rowspan="3" style="height: 30px"><p>{{newBooking.userConfirmation}}</p></td>' +
-        '    <td style="height: 30px"><p>{{newBooking.region}}</p></td>' +
-        '    <td rowspan="3" style="height: 30px"><p>{{newBooking.address}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBooking.deliveryType}}</p></td>' +
+        '    <td rowspan="3" style="height: auto"><p class="managerTextStyle">{{newBooking.userConfirmation}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBooking.region}}</p></td>' +
+        '    <td rowspan="3" style="height: auto; width: 220px"><p class="managerTextStyle">{{newBooking.address}}</p></td>' +
         '</tr>' +
 
         '<tr>' +
@@ -314,8 +343,8 @@ Vue.component('newBooking-row', {
         '</tr>' +
 
         '<tr>' +
-        '    <td style="height: 30px"><p>{{newBooking.paymentType}}</p></td>' +
-        '    <td style="height: 30px"><p>{{newBooking.city}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBooking.paymentType}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBooking.city}}</p></td>' +
         '</tr>' +
         '<tr>' +
         '    <td colspan="5" id="cellStyle" style="width:1000px; height: 25px">' +
@@ -326,12 +355,31 @@ Vue.component('newBooking-row', {
         '</tr>' +
         '</table>' +
 
+        '<transition name="fade">' +
+        '<table v-if="showDetails" id="detailsTable" style="width:1000px; height: 270px">' +
+        '<tr>' +
+        '<td id="cellStyle" style="height: 30px; width: 900px"><p>Коментарий к заказу:</p>' +
+        '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>' +
+        '<div id="productValue2"><br/><p>{{newBooking.bookingComments}}</p></div>' +
+        '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td style="height: 30px">' +
+        '<div class="detailsBtnColor" v-on:click="hiddenFlagDetails"><button class="btnUp" type="button"></button></div>' +
+        '</td>' +
+        '</tr>' +
+        '</table>' +
+        '</transition>' +
+
         ' <transition name="fade">' +
         ' <table v-if="show" style="width:1000px; height: 300px; background: rgb(221,221,221); border: 2px solid #4f4f01">' +
         ' <tr>' +
         '        <td style="width:335px;height: auto"><textarea placeholder="Введите Имя" v-model="firstName"></textarea></td>' +
-        '        <td style="width:335px;height: auto"><textarea placeholder="Введите Фамилию" v-model="middleName"></textarea></td>' +
-        '        <td style="width:335px;height: auto"><textarea placeholder="Введите Отчество" v-model="lastName"></textarea></td>' +
+        '        <td style="width:335px;height: auto"><textarea placeholder="Введите Фамилию" v-model="lastName"></textarea></td>' +
+        '        <td style="width:335px;height: auto"><textarea placeholder="Введите Отчество" v-model="middleName"></textarea></td>' +
         ' </tr>' +
         ' <tr>' +
         '         <td style="width:335px;height: auto"><textarea placeholder="Введите E-mail" v-model="email"></textarea></td>' +
@@ -345,44 +393,72 @@ Vue.component('newBooking-row', {
         ' </tr>' +
         ' <tr>' +
         '         <td style="width:335px;height: auto"><textarea placeholder="Введите способ оплаты" v-model="paymentType"></textarea></td>' +
-        '         <td style="width:auto; height: auto"><input id="superAdminBooking" type="button" value="Сохранить" @click="editProduct"></td>' +
+        '         <td style="width:auto; height: auto"><input id="superAdminBooking" type="button" value="Сохранить" v-on:click="editBooking"></td>' +
         ' </tr>' +
         ' <tr>' +
         '         <td colspan="3"  style="width:auto; height: 30px"><p>{{editStatus}}</p></td>' +
         ' </tr>' +
         ' </table>' +
         ' </transition>' +
-
-        '<transition name="fade">' +
-        '<table v-if="showDetails" id="detailsTable" style="width:1000px; height: 270px">' +
-        '<tr>' +
-        '<td id="cellStyle" style="height: 30px; width: 900px"><p>Наименование товаров</p>' +
-        '</td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td>' +
-        '<div id="productValue2"><br/><p>{{newBooking.bookingItems}}</p></div>' +
-        '</td>' +
-        '</tr>' +
-        '<tr>' +
-        '<td style="height: 30px">' +
-        '<div class="detailsBtnColor" v-on:click="hiddenFlagDetails"><button class="btnUp" type="button"></button></div>' +
-        '</td>' +
-        '</tr>' +
-        '</table>' +
-        '</transition>' +
-
         '</div>',
     methods: {
+        basketMaker: function () {
+            if (this.flagForBasketMaker === false) {
+                this.flagForBasketMaker = true;
+                let idKey = 1;
+                let totalAmount = 0;
+                for (let productFromBasket of this.bookingItemsFromDb) {
+                    let productItem = {
+                        id: productFromBasket.id,
+                        key: productFromBasket.key,
+                        description: productFromBasket.description,
+                        productPrice: productFromBasket.productPrice,
+                        totalAmount: productFromBasket.totalAmount,
+                        itemAmount: productFromBasket.itemAmount,
+                        productImageName: productFromBasket.productImageName
+                    }
+                    let itemsReadyForParse = [];
+                    itemsReadyForParse.push(productItem);
+                    localStorage.setItem(String(productItem.key), JSON.stringify(itemsReadyForParse));
+                    if (productItem.key > idKey) {
+                        idKey = productItem.key;
+                    }
+                    appBasket.productItems.push(productItem);
+                    appSelector.totalProductPrice = (Number(appSelector.totalProductPrice))
+                        + (Number(productItem.productPrice));
+                    totalAmount++;
+                }
+                if (localStorage.getItem('ID') === null) {
+                    localStorage.setItem('ID', String(idKey));
+                }
+
+                localStorage.setItem("TotalAmount", String(totalAmount));
+            } else {
+                let maxId = Number(localStorage.getItem('ID'));
+                for (let i = 0; i <= maxId; i++) {
+                    let item = localStorage.getItem(String(i));
+                    if (item !== null) {
+                        localStorage.removeItem(String(i));
+                    }
+                }
+                appBasket.productItems = appBasket.productItems.splice(0, 0);
+                appSelector.totalProductPrice = 0;
+                localStorage.removeItem('ID');
+                localStorage.removeItem('TotalAmount');
+                this.flagForBasketMaker = false;
+            }
+
+        },
+
         hiddenFlag: function () {
             if (this.show === false) {
-                this.show = true
+                this.show = true;
             } else {
-                this.show = false
+                this.show = false;
             }
         },
         hiddenFlagDetails: function () {
-            if (!(this.showDetails === true) && (this.showDetailsButton === true)) {
+            if ((this.showDetails === false) && (this.showDetailsButton === true)) {
                 this.showDetails = true;
                 this.showDetailsButton = false;
             } else {
@@ -392,48 +468,96 @@ Vue.component('newBooking-row', {
         },
 
         editBooking: function () {
-            let formData = new FormData();
-            formData.append('id', this.id);
-            formData.append('productCategory', this.productCategory);
-            formData.append('productSubCategory', this.productSubCategory);
-            formData.append('productBrand', this.productBrand);
-            formData.append('typeOfPurpose', this.typeOfPurpose);
-            formData.append('description', this.description);
-            formData.append('specification', this.specification);
-            formData.append('totalAmount', this.totalAmount);
-            formData.append('productPrice', this.productPrice);
-            formData.append('file', this.file);
-            formData.append('fileRightSide', this.fileRightSide);
-            formData.append('fileLeftSide', this.fileLeftSide);
-            formData.append('fileBackSide', this.fileBackSide);
-
-
-            axios.post('/guest/booking/edit',
-                formData,
-                {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
+            if ((this.firstName !== '') || (this.middleName !== '') || (this.lastName !== '')
+                || (this.email !== '') || (this.contact !== '') || (this.paymentType !== '')
+                || (this.deliveryType !== '') || (this.region !== '') || (this.city !== '')
+                || (this.address !== '') || (this.bookingItemsForEdit !== '')) {
+                let maxValue = Number(localStorage.getItem('ID'));
+                let totalItemsAmount = Number(localStorage.getItem('TotalAmount'));
+                if (maxValue !== null) {
+                    let itemId = 0;
+                    for (let i = 0; i <= maxValue; i++) {
+                        let item = localStorage.getItem(String(i));
+                        if (item !== null) {
+                            let items = new Set(JSON.parse(localStorage.getItem(String(i))));
+                            localStorage.removeItem(String(i));
+                            localStorage.removeItem('TotalAmount');
+                            for (let productFromBasket of items) {
+                                let bookingItem = {
+                                    id: itemId,
+                                    key: i,
+                                    description: productFromBasket.description,
+                                    productPrice: productFromBasket.productPrice,
+                                    totalAmount: productFromBasket.totalAmount,
+                                    itemAmount: productFromBasket.itemAmount,
+                                    productImageName: productFromBasket.productImageName
+                                };
+                                this.bookingItemsForEdit.push(bookingItem);
+                                itemId++;
+                            }
+                        }
                     }
                 }
-            ).then(response => (this.editStatus = response.data.status));
+                if ((appSelector.totalProductPrice === 0) && (totalItemsAmount === 0)) {
+                    appSelector.totalProductPrice = '';
+                    totalItemsAmount = '';
+                }
+                let bookingBody = {
+                    id: this.id,
+                    firstName: this.firstName,
+                    middleName: this.middleName,
+                    lastName: this.lastName,
+                    email: this.email,
+                    contact: this.contact,
+                    totalPrice: appSelector.totalProductPrice,
+                    totalAmount: totalItemsAmount,
+                    paymentType: this.paymentType,
+                    deliveryType: this.deliveryType,
+                    region: this.region,
+                    city: this.city,
+                    address: this.address,
+                    bookingItems: this.bookingItemsForEdit
+                }
 
-            this.productCategory = ''
-            this.productSubCategory = ''
-            this.productBrand = ''
-            this.description = ''
-            this.specification = ''
-            this.productPrice = ''
-            this.file = null
-            this.fileRightSide = null
-            this.fileLeftSide = null
-            this.fileBackSide = null
+                bookingAPIEdit.save({}, bookingBody).then(response => (this.editStatus = response.data.status));
+                this.firstnameUser = ''
+                this.middleNameUser = ''
+                this.lastNameUser = ''
+                this.emailNameUser = ''
+                this.phoneNameUser = ''
+                this.totalProductPrice = ''
+                this.totalItemsAmount = ''
+                this.paymentType = ''
+                this.deliveryType = ''
+                this.regionUser = ''
+                this.cityUser = ''
+                this.addressUser = ''
+                this.bookingItems = []
 
-            let sortingTag = {
-                key: 'sorting tag',
-                communicationKey: this.productSubCategoryForRequest
+                for (let i = 0; i <= maxValue; i++) {
+                    let item = localStorage.getItem(String(i));
+                    if (item !== null) {
+                        localStorage.removeItem(String(i));
+                    }
+                }
+                appBasket.productItems = appBasket.productItems.splice(0, 0);
+                appSelector.totalProductPrice = 0;
+                localStorage.removeItem('ID');
+                localStorage.removeItem('TotalAmount');
+                appBookingManager.newBookings = appBookingManager.newBookings.splice(0, 0);
+
+                setTimeout(function () {
+                    bookingAPI.get().then(result =>
+                        result.json().then(data =>
+                            data.forEach(newBooking => appBookingManager.newBookings.push(newBooking))
+                        )
+                    );
+                }, 700);
+            } else {
+                alert('Заказ невозможно изменить, нет информации об изменениях');
             }
-
         }
+
     }
 });
 
@@ -443,11 +567,16 @@ Vue.component('newBookings-list', {
         '<newBooking-row v-for="newBooking in newBookings" :key="newBooking.id" :newBooking="newBooking"/>' +
         '</div>',
     created: function () {
-        bookingAPI.get().then(result =>
-            result.json().then(data =>
-                data.forEach(newBooking => this.newBookings.push(newBooking))
-            )
-        );
+        let auth = localStorage.getItem('CustomHeader');
+        if (auth !== null) {
+            bookingAPI.get().then(result =>
+                result.json().then(data =>
+                    data.forEach(newBooking => this.newBookings.push(newBooking))
+                )
+            );
+        } else {
+            window.location = 'authorize.html';
+        }
     }
 });
 
@@ -488,14 +617,14 @@ let appLogoutButtons = new Vue({
             if (auth == null) {
                 setTimeout(function () {
                     alert('Завершение работы администратора');
-                    window.location = 'http://91.235.128.12:8081/admin/authorize.html';
+                    window.location = 'authorize.html';
                 }, 500);
             } else {
                 alert('Некоректное завершение работы, попробуйте еще раз или обратитесь к супер админу');
             }
         },
         registrationUserAction: function () {
-            window.location = 'http://91.235.128.12:8081/admin/registration.html';
+            window.location = 'registration.html';
         }
     }
 })

@@ -1,15 +1,19 @@
-package com.cubafish.dto;
+package com.cubafish.utils;
 
+import com.cubafish.dto.BookingItemDto;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-public class BookingDataBaseDto {
+@AllArgsConstructor
+public class BookingListResponseBody {
     private Long id;
     private String dateOfBooking;
     private String firstName;
@@ -25,5 +29,6 @@ public class BookingDataBaseDto {
     private String region;
     private String city;
     private String address;
-    private String bookingItems;
+    private String bookingComments;
+    private List<BookingItemDto> bookingItems;
 }

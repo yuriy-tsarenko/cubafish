@@ -47,41 +47,55 @@
             <div id="content">
                 <div id="textForm">Оформление заказа:</div>
                 <div id="appSelectorText">Способ оплаты:</div>
-
+                <div id="selectorStyleMove">
                 <select v-model="paymentType" id="selectorStyle">
                     <option disabled value="">Выберите один из вариантов</option>
                     <option>Наличными</option>
                     <option>Оплата при получении</option>
                     <option>ПриватБанк</option>
                 </select>
-
+                <p id="necessaryFieldSelectorStyle">*</p>
+            </div>
                 <div id="typeDelivery">Способ доставки:</div>
+                <div id="selectorStyle2Move">
                 <select v-model="deliveryType" id="selectorStyle2">
                     <option disabled value="">Выберите один из вариантов</option>
                     <option>Новая Почта</option>
                     <option>Укр Почта</option>
                     <option>Курьером</option>
                 </select>
-
+                    <p id="necessaryFieldSelectorStyle2">*</p>
+                </div>
                 <div id="aboutRecipient">Информация о получателе:</div>
-
+               <div id="regionUserMove">
                 <input v-model="regionUser" name="regionUser" type="text" id="regionUser"
                        placeholder="Введите область"/>
-
+                   <p id="necessaryField">*</p>
+               </div>
+                <div id="cityUserMove">
                 <input v-model="cityUser" name="cityUser" type="text" id="cityUser"
                        placeholder="Введите город"/>
-
+                <p id="necessaryFieldCityUser">*</p>
+            </div>
+                <div id="addressUserMove">
                 <input v-model="addressUser" name="addressUser" type="text" id="addressUser"
                        placeholder="Введите адрес доставки"/>
-
+                <p id="necessaryFieldAddressUser">*</p>
+            </div>
+                <div id="firstnameUserMove">
                 <input v-model="firstnameUser" name="firstnameUser" type="text" id="firstnameUser"
-                       placeholder="Введите ваше имя"/>
+                       placeholder="Введите имя"/>
+                    <p id="necessaryFieldFirstnameUser">*</p>
+                </div>
 
                 <input v-model="middleNameUser" name="lastnameUser" type="text" id="lastnameUser"
-                       placeholder="Введите вашу фамилию"/>
+                       placeholder="Введите отчество"/>
 
+                <div id="lastNameUserMove">
                 <input v-model="lastNameUser" name="surnameUser" type="text" id="surnameUser"
-                       placeholder="Введите ваше отчество"/>
+                       placeholder="Введите фамилию"/>
+                    <p id="necessaryFieldLastNameUser">*</p>
+                </div>
 
                 <div id="aboutEmail">Email:</div>
 
@@ -90,12 +104,20 @@
 
                 <div id="aboutPhoneNumber">Номер телефона:</div>
 
+                <div id="phoneNameUserMove">
                 <input v-model="phoneNameUser" name="phoneNameUser" type="text" id="PhoneNameUser"
                        placeholder="Введите ваш номер телефона"/>
+                    <p id="necessaryFieldPhoneNameUser">*</p>
+                </div>
 
+                <div id="aboutBookingComment">Комментарий к заказу:</div>
+                <div id="bookingCommentMove">
+                    <textarea v-model="bookingComments" name="bookingComments"  id="bookingComments"
+                              placeholder="Хочу отправить Укрпочтой, например "></textarea>
+                </div>
                 <label class="container"><p>Я подтверждаю заказ и согласен с условиями <a href="#">пользовательского соглашения</a>.</p>
                     <input v-model="confirmBooking" type="checkbox" id="confirmBooking"
-                           value="Користувач підтвердив замовлення">
+                           value="Пользователь подтвердил заказ">
                     <span class="checkmark"></span>
                 </label>
 
