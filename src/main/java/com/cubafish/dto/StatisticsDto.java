@@ -5,14 +5,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class StatisticsDto {
     private Long id;
-    private Date updateDate;
+    private String updateDate;
+    private String reportingPeriod;
     private BigDecimal totalPrice;
     private Long totalAmount;
+    private Long bookingAmount;
+    private Long canceledBookingAmount;
+    private BigDecimal canceledBookingPrice;
 }

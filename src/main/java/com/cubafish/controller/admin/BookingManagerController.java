@@ -1,11 +1,16 @@
 package com.cubafish.controller.admin;
 
+import com.cubafish.dto.BookingDataBaseDto;
 import com.cubafish.dto.BookingListDto;
+import com.cubafish.dto.StatisticsDto;
 import com.cubafish.entity.BookingList;
 import com.cubafish.repository.BookingListRepository;
+import com.cubafish.service.BookingDataBaseService;
 import com.cubafish.service.BookingListService;
+import com.cubafish.service.StatisticsService;
 import com.cubafish.utils.BookingBodyUpdate;
 import com.cubafish.utils.BookingListResponseBody;
+import com.cubafish.utils.CustomRequestBody;
 import com.cubafish.utils.CustomResponseBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -26,10 +31,22 @@ public class BookingManagerController {
     public static final String BASE_PATH = "/admin_auth/booking";
     private final BookingListService bookingListService;
     private final BookingListRepository bookingListRepository;
+    private final BookingDataBaseService bookingDataBaseService;
+    private final StatisticsService statisticsService;
 
     @GetMapping("/all")
     public List<BookingListResponseBody> findAll() {
         return bookingListService.findAll();
+    }
+
+    @GetMapping("/all_from_booking_db")
+    public List<BookingDataBaseDto> findAllFromBookingDataBase() {
+        return bookingDataBaseService.findAll();
+    }
+
+    @GetMapping("/all_statistics")
+    public List<StatisticsDto> findAllStatistics() {
+        return statisticsService.findAll();
     }
 
     @PostMapping("update")
@@ -85,5 +102,19 @@ public class BookingManagerController {
         }
         return new CustomResponseBody(1L, "update status", status, "no data",
                 "update step", updateStep);
+    }
+
+    @PostMapping("approve")
+    public CustomResponseBody approveBookingByAdmin(@RequestBody CustomRequestBody customRequestBody) {
+        CustomResponseBody responseFromApproveOrCancelBookingOperation =
+                bookingDataBaseService.approveOrCancelBookingOperation(customRequestBody);
+        return responseFromApproveOrCancelBookingOperation;
+    }
+
+    @PostMapping("cancel")
+    public CustomResponseBody cancelBookingByAdmin(@RequestBody CustomRequestBody customRequestBody) {
+        CustomResponseBody responseFromApproveOrCancelBookingOperation =
+                bookingDataBaseService.approveOrCancelBookingOperation(customRequestBody);
+        return responseFromApproveOrCancelBookingOperation;
     }
 }

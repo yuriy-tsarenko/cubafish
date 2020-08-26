@@ -7,7 +7,6 @@ import com.cubafish.mapper.BookingListMapper;
 import com.cubafish.repository.BookingListRepository;
 import com.cubafish.utils.BookingListResponseBody;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -21,12 +20,6 @@ import java.util.Map;
 @Service
 @Data
 public class BookingListService {
-
-    @Value("${product.currency}")
-    private String currency;
-
-    @Value("${product.value-type}")
-    private String valueType;
 
     private final BookingListRepository bookingListRepository;
     private final BookingListMapper bookingListMapper;
@@ -208,8 +201,10 @@ public class BookingListService {
         }
 
 
-        if (totalAmount.isEmpty()) {
-            bookingListDto.setTotalAmount(Integer.valueOf("0"));
+        if (totalAmount == null) {
+            bookingListDto.setTotalAmount(bookingItems.size());
+        } else if (totalAmount.isEmpty()) {
+            bookingListDto.setTotalAmount(bookingItems.size());
         } else {
             try {
                 Integer totalAmountConverted = Integer.valueOf(totalAmount.trim());
