@@ -7,7 +7,6 @@ import com.cubafish.mapper.BookingListMapper;
 import com.cubafish.repository.BookingListRepository;
 import com.cubafish.utils.BookingListResponseBody;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
