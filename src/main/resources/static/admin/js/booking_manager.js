@@ -1,4 +1,8 @@
 const bookingAPI = Vue.resource('/admin_auth/booking/all');
+const bookingAPIBookingDb = Vue.resource('/admin_auth/booking/all_from_booking_db');
+const bookingAPIStatistics = Vue.resource('/admin_auth/booking/all_statistics');
+const bookingAPIApprove = Vue.resource('/admin_auth/booking/approve');
+const bookingAPICancel = Vue.resource('/admin_auth/booking/cancel');
 const bookingAPIEdit = Vue.resource('/admin_auth/booking/update');
 Vue.http.headers.common['Authorization'] = localStorage.getItem('CustomHeader');
 axios.defaults.headers.common['Authorization'] = localStorage.getItem('CustomHeader');
@@ -276,6 +280,7 @@ Vue.component('newBooking-row', {
             city: '',
             address: '',
             editStatus: '',
+            approveStatus: '',
             bookingItemsForEdit: [],
             bookingItemsFromDb: []
         }
@@ -296,8 +301,8 @@ Vue.component('newBooking-row', {
 
         '    <td rowspan="7" style="width:70px;height:auto">' +
         '        <input class="adminButtonTemplate" type="button" value="Изменить" v-on:click="hiddenFlag">' +
-        '        <input class="adminButtonTemplate" type="button" value="Подтвердить">' +
-        '        <input class="adminButtonTemplate" type="button" value="Отменить">' +
+        '        <input class="adminButtonTemplate" type="button" value="Подтвердить" v-on:click="approveBooking">' +
+        '        <input class="adminButtonTemplate" type="button" value="Отменить" v-on:click="cancelBooking">' +
         '    </td>' +
         '</tr>' +
 
@@ -556,6 +561,39 @@ Vue.component('newBooking-row', {
             } else {
                 alert('Заказ невозможно изменить, нет информации об изменениях');
             }
+        },
+        approveBooking: function () {
+            let sortingTag = {
+                key: this.id,
+                communicationKey: 'approve booking',
+            };
+            bookingAPIApprove.save({}, sortingTag)
+                .then(response => (this.approveStatus = response.data.status));
+
+            appBookingManager.newBookings = appBookingManager.newBookings.splice(0, 0);
+            setTimeout(function () {
+                bookingAPI.get().then(result =>
+                    result.json().then(data =>
+                        data.forEach(newBooking => appBookingManager.newBookings.push(newBooking))
+                    )
+                );
+            }, 700);
+        },
+        cancelBooking: function () {
+            let sortingTag = {
+                key: this.id,
+                communicationKey: 'cancel booking',
+            };
+            bookingAPICancel.save({}, sortingTag)
+                .then(response => (this.approveStatus = response.data.status));
+            appBookingManager.newBookings = appBookingManager.newBookings.splice(0, 0);
+            setTimeout(function () {
+                bookingAPI.get().then(result =>
+                    result.json().then(data =>
+                        data.forEach(newBooking => appBookingManager.newBookings.push(newBooking))
+                    )
+                );
+            }, 700);
         }
 
     }
@@ -589,24 +627,238 @@ let appBookingManager = new Vue({
 });
 
 
-let appHeaderButtons = new Vue({
-    el: '#appHeaderButtons',
-    props: ['newBookings'],
+Vue.component('newBookingDb-row', {
+    props: ['newBookingDb'],
+    data: function () {
+        return {
+            showDetails: false,
+            showDetailsButton: true,
+            flagForBasketMaker: false,
+        }
+    },
+    template:
+        '<div>' +
+        '<table id="fromDb" style="width:1000px; height: 300px">' +
+        '<tr>' +
+        '    <td style="height: 30px"><p>заказ поступил дата/время:</p></td>' +
+        '    <td style="height: 30px"><p>Имя:</p></td>' +
+        '    <td style="height: 30px"><p>Отчество:</p></td>' +
+        '    <td style="height: 30px"><p>Фамилия:</p></td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBookingDb.dateOfBooking}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBookingDb.firstName}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBookingDb.middleName}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBookingDb.lastName}}</p></td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '    <td style="height: 30px"><p>заказ обработан дата/время:</p></td>' +
+        '    <td style="height: 30px"><p>E-mail:</p></td>' +
+        '    <td style="height: 30px"><p>Номер телефона:</p></td>' +
+        '    <td style="height: 30px"><p>Общая сума:</p></td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBookingDb.dateOfSavingToDb}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBookingDb.email}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBookingDb.contact}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBookingDb.totalPrice}} грн</p></td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '    <td style="height: 30px"><p>Способ доставки:</p></td>' +
+        '    <td style="height: 30px"><p>Статус заказа:</p></td>' +
+        '    <td style="height: 30px"><p>Область:</p></td>' +
+        '    <td style="height: 30px"><p>Адрес:</p></td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBookingDb.deliveryType}}</p></td>' +
+        '    <td rowspan="3" style="height: auto"><p class="managerTextStyle">{{newBookingDb.userConfirmation}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBookingDb.region}}</p></td>' +
+        '    <td rowspan="3" style="height: auto; width: 220px"><p class="managerTextStyle">{{newBookingDb.address}}</p></td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '    <td style="height: 30px"><p>Способ оплаты:</p></td>' +
+        '    <td style="height: 30px"><p>Город:</p></td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBookingDb.paymentType}}</p></td>' +
+        '    <td style="height: auto"><p class="managerTextStyle">{{newBookingDb.city}}</p></td>' +
+        '</tr>' +
+        '<tr>' +
+        '    <td colspan="5" id="cellStyle" style="width:1000px; height: 25px">' +
+        '        <div class="detailsBtnColor" v-if="showDetailsButton" v-on:click="hiddenFlagDetails">' +
+        '<button class="btn" type="button"></button>' +
+        '        </div>' +
+        '    </td>' +
+        '</tr>' +
+        '</table>' +
+
+        '<transition name="fade">' +
+        '<table v-if="showDetails" id="detailsTable" style="width:1000px; height: 270px">' +
+        '<tr>' +
+        '<td id="cellStyle" style="height: 30px; width: 900px"><p>Наименование товаров:</p>' +
+        '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>' +
+        '<div id="productValue2"><br/><p>{{newBookingDb.bookingItems}}</p></div>' +
+        '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td style="height: 30px">' +
+        '<div class="detailsBtnColor" v-on:click="hiddenFlagDetails"><button class="btnUp" type="button"></button></div>' +
+        '</td>' +
+        '</tr>' +
+        '</table>' +
+        '</transition>' +
+        '</div>',
     methods: {
-        getSortedProductsByTypeOfPurpose: function (message) {
-            app.newBookings = app.newBookings.splice(0, 0);
-            let sortingTag = {
-                key: 'sorting tag',
-                communicationKey: message,
+
+        hiddenFlagDetails: function () {
+            if ((this.showDetails === false) && (this.showDetailsButton === true)) {
+                this.showDetails = true;
+                this.showDetailsButton = false;
+            } else {
+                this.showDetails = false;
+                this.showDetailsButton = true;
             }
-            productAPISortedByTypeOfPurpose.save({}, sortingTag).then(result =>
-                result.json().then(data =>
-                    data.forEach(productBrand => app.newBookings.push(productBrand))
-                )
-            );
+        },
+    }
+});
+
+Vue.component('newBookingDbs-list', {
+    props: ['newBookingDbs'],
+    template: '<div>' +
+        '<newBookingDb-row v-for="newBookingDb in newBookingDbs" :key="newBookingDb.id" :newBookingDb="newBookingDb"/>' +
+        '</div>',
+    created: function () {
+        let auth = localStorage.getItem('CustomHeader');
+        if (auth == null) {
+            window.location = 'authorize.html';
         }
     }
-})
+});
+
+let appBookingDb = new Vue({
+    el: '#appBookingDb',
+    template: '<newBookingDbs-list :newBookingDbs="newBookingDbs" />',
+    data: {
+        newBookingDbs: []
+    }
+});
+
+
+Vue.component('newStatistic-row', {
+    props: ['newStatistic'],
+    data: function () {
+        return {
+            flagForBasketMaker: false,
+        }
+    },
+    template:
+        '<div>' +
+        '<table id="fromDb" style="width:1000px; height: 300px">' +
+        '<tr>' +
+        '    <td style="height: 30px"><p>последнее обновление дата:</p></td>' +
+        '    <td style="height: 30px"><p>Общая сумма заказов:</p></td>' +
+        '    <td style="height: 30px"><p>Общее количество товаров:</p></td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '    <td style="height: auto; width: 330px"><p class="managerTextStyle">{{newStatistic.updateDate}}</p></td>' +
+        '    <td style="height: auto; width: 330px"><p class="managerTextStyle">{{newStatistic.totalPrice}}</p></td>' +
+        '    <td style="height: auto; width: 340px"><p class="managerTextStyle">{{newStatistic.totalAmount}}</p></td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '    <td style="height: 30px"><p>Общее количество заказов:</p></td>' +
+        '    <td style="height: 30px"><p>Общее количество отмененных:</p></td>' +
+        '    <td style="height: 30px"><p>Общая сумма отмененных:</p></td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '    <td style="height: auto; width: 330px"><p class="managerTextStyle">{{newStatistic.bookingAmount}}</p></td>' +
+        '    <td style="height: auto; width: 330px"><p class="managerTextStyle">{{newStatistic.canceledBookingAmount}}</p></td>' +
+        '    <td style="height: auto; width: 340px"><p class="managerTextStyle">{{newStatistic.canceledBookingPrice}}</p></td>' +
+        '</tr>' +
+        '</table>' +
+        '</div>'
+});
+
+Vue.component('newStatistics-list', {
+    props: ['newStatistics'],
+    template: '<div>' +
+        '<newStatistic-row v-for="newStatistic in newStatistics" :key="newStatistic.id" :newStatistic="newStatistic"/>' +
+        '</div>',
+    created: function () {
+        let auth = localStorage.getItem('CustomHeader');
+        if (auth == null) {
+            window.location = 'authorize.html';
+        }
+    }
+});
+
+let appStatistics = new Vue({
+    el: '#appStatistics',
+    template: '<newStatistics-list :newStatistics="newStatistics" />',
+    data: {
+        newStatistics: []
+    }
+});
+
+
+let appHeaderButtons = new Vue({
+    el: '#appHeaderButtons',
+    methods: {
+        getBookingList: function () {
+            appBookingManager.newBookings = appBookingManager.newBookings.splice(0, 0);
+            appBookingDb.newBookingDbs = appBookingDb.newBookingDbs.splice(0, 0);
+            appStatistics.newStatistics = appStatistics.newStatistics.splice(0, 0);
+            setTimeout(function () {
+                bookingAPI.get().then(result =>
+                    result.json().then(data =>
+                        data.forEach(newBooking => appBookingManager.newBookings.push(newBooking))
+                    )
+                );
+                basketBar.showBasketBar = true;
+            }, 700);
+        },
+
+        getBookingDb: function () {
+            appBookingManager.newBookings = appBookingManager.newBookings.splice(0, 0);
+            appBookingDb.newBookingDbs = appBookingDb.newBookingDbs.splice(0, 0);
+            appStatistics.newStatistics = appStatistics.newStatistics.splice(0, 0);
+            setTimeout(function () {
+                bookingAPIBookingDb.get().then(result =>
+                    result.json().then(data =>
+                        data.forEach(newStatistic => appBookingDb.newBookingDbs.push(newStatistic))
+                    )
+                );
+                basketBar.showBasketBar = false;
+            }, 700);
+        },
+
+        getStatistics: function () {
+            appBookingManager.newBookings = appBookingManager.newBookings.splice(0, 0);
+            appBookingDb.newBookingDbs = appBookingDb.newBookingDbs.splice(0, 0);
+            appStatistics.newStatistics = appStatistics.newStatistics.splice(0, 0);
+            setTimeout(function () {
+                bookingAPIStatistics.get().then(result =>
+                    result.json().then(data =>
+                        data.forEach(newStatistic => appStatistics.newStatistics.push(newStatistic))
+                    )
+                );
+                basketBar.showBasketBar = false;
+            }, 700);
+        }
+    }
+});
 
 let appLogoutButtons = new Vue({
     el: '#appLogoutButtons',
@@ -627,5 +879,5 @@ let appLogoutButtons = new Vue({
             window.location = 'registration.html';
         }
     }
-})
+});
 

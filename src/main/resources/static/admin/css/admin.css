@@ -383,7 +383,7 @@ header {
     position: relative;
     top: 20px;
     left: 50px;
-    width: 370px;
+    width: 440px;
     height: 99%;
     overflow: auto;
 }
@@ -1140,7 +1140,7 @@ input:hover {
 
 .catalogBtn {
     position: relative;
-    width: 345px;
+    width: 425px;
     height: auto;
     font-family: Arial, sans, serif;
     font-size: 22px;

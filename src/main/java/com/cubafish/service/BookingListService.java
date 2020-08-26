@@ -22,12 +22,6 @@ import java.util.Map;
 @Data
 public class BookingListService {
 
-    @Value("${product.currency}")
-    private String currency;
-
-    @Value("${product.value-type}")
-    private String valueType;
-
     private final BookingListRepository bookingListRepository;
     private final BookingListMapper bookingListMapper;
     private final BookingItemService bookingItemService;
@@ -208,8 +202,10 @@ public class BookingListService {
         }
 
 
-        if (totalAmount.isEmpty()) {
-            bookingListDto.setTotalAmount(Integer.valueOf("0"));
+        if (totalAmount == null) {
+            bookingListDto.setTotalAmount(bookingItems.size());
+        } else if (totalAmount.isEmpty()) {
+            bookingListDto.setTotalAmount(bookingItems.size());
         } else {
             try {
                 Integer totalAmountConverted = Integer.valueOf(totalAmount.trim());
