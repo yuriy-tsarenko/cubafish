@@ -54,20 +54,20 @@
         <table id="horizontalButton">
             <tr>
                 <td>
-                    <button type="submit"
-                            class="headerButtonManager" >
+                    <button type="submit" class="headerButtonManager"
+                    v-on:click="getBookingList">
                         ЗАКАЗЫ В ОЖИДАНИИ
                     </button>
                 </td>
                 <td>
-                    <button type="submit"
-                            class="headerButtonManager" >
+                    <button type="submit" class="headerButtonManager"
+                    v-on:click="getBookingDb">
                         БАЗА ВСЕХ ЗАКАЗОВ
                     </button>
                 </td>
                 <td>
-                    <button type="submit"
-                            class="headerButtonManager">
+                    <button type="submit" class="headerButtonManager"
+                    v-on:click="getStatistics">
                         СТАТИСТИКА
                     </button>
                 </td>
@@ -93,8 +93,13 @@
         <div id="content">
             <div id="appBookingManager">
             </div>
+            <div id="appBookingDb">
+            </div>
+            <div id="appStatistics">
+            </div>
         </div>
         <!--start div#sidebar-->
+<!--        <div id="basketBarHide" v-if="showBasketBar">-->
         <div id="basketBar">
             <div id="appSelector">
             <div id="sideText">Заказ:</div>
@@ -105,6 +110,7 @@
             <div id="summaryText">Всего: {{totalProductPrice}} грн</div>
             </div>
         </div>
+<!--        </div>-->
       <script src="js/booking_manager.js"></script>
         <!-- end div#content -->
         <!-- end div#sidebar -->

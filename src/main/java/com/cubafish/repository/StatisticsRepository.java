@@ -6,5 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StatisticsRepository extends JpaRepository<Statistics, Long> {
+    Boolean existsStatisticsByReportingPeriod(String period);
 
+    Statistics findStatisticsByReportingPeriod(String period);
 }

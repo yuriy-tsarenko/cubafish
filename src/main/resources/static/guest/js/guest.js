@@ -293,12 +293,12 @@ Vue.component('newProductCategory-row', {
     },
     template:
         '<div>' +
-        '<table style="width:350px; height: 80px" >' +
+        '<table style="width:425px; height: 80px" >' +
         '<tr>' +
         '<td hidden><h3>{{this.categoryNameForRequest=newProductCategory.communicationData}}</h3>' +
         '</td>' +
         '</tr>' +
-        '<td style="width:350px; height: auto">' +
+        '<td style="width:425px; height: auto">' +
         ' <div class="catalogBtn" v-on:click="getSortedProducts">'+
         '<img src="css/images/catalogButton.png" style="width: 30px; height: 24px; vertical-align: middle;'+
         'margin-left: 10px; margin-right: 10px;margin-bottom: 7px" alt="catalogIcon">'+
@@ -364,12 +364,12 @@ Vue.component('newProductSubCategory-row', {
     },
     template:
         '<div>' +
-        '<table style="width:320px; height: 80px; position: relative; top: 10px" >' +
+        '<table style="width:425px; height: 80px; position: relative; top: 10px" >' +
         '<tr>' +
         '<td hidden><h3>{{this.subCategoryNameForRequest=newProductSubCategory.communicationData}}</h3></td>' +
         '</tr>' +
         '<tr>' +
-        '<td style="width:350px; height: auto">' +
+        '<td style="width:425px; height: auto">' +
         ' <div class="catalogBtn" v-on:click="getSortedProducts">'+
         '<img src="css/images/catalogButton.png" style="width: 30px; height: 24px; vertical-align: middle;'+
         'margin-left: 10px; margin-right: 10px;margin-bottom: 7px" alt="catalogIcon">'+
@@ -428,12 +428,12 @@ Vue.component('productBrand-row', {
     },
     template:
         '<div>' +
-        '<table style="width:350px; height: 70px; position: relative; top: 10px" >' +
+        '<table style="width:425px; height: 70px; position: relative; top: 10px" >' +
         '<tr>' +
         '<td hidden><h3>{{this.productBrandForRequest=productBrand.communicationData}}</h3></td>' +
         '</tr>' +
         '<tr>' +
-        '<td style="width:350px; height: auto">' +
+        '<td style="width:425px; height: auto">' +
         ' <div class="catalogBtn" v-on:click="getSortedProducts">'+
         '<img src="css/images/catalogButton2.png" style="width: 30px; height: 24px; vertical-align: middle;'+
         'margin-left: 10px; margin-right: 10px;margin-bottom: 7px" alt="catalogIcon">'+

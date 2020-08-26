@@ -21,6 +21,9 @@ public class BookingDataBase {
     @Column(name = "date_of_booking")
     private String dateOfBooking;
 
+    @Column(name = "date_of_saving_to_db")
+    private String dateOfSavingToDb;
+
     @Column(name = "first_name")
     private String firstName;
 

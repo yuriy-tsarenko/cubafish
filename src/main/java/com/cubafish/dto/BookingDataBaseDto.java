@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 public class BookingDataBaseDto {
     private Long id;
     private String dateOfBooking;
+    private String dateOfSavingToDb;
     private String firstName;
     private String middleName;
     private String lastName;
