@@ -30,6 +30,7 @@ public class CubafishBot extends TelegramLongPollingBot {
     private final BookingResolver bookingResolver;
     private Long chatId;
     private Integer totalAmount = 0;
+    private Integer itemsAmount = 0;
     private SendMessage uploadMessage = new SendMessage();
     private String customMessage;
 
@@ -37,21 +38,27 @@ public class CubafishBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         Map<String, Object> responseFromGetChatId = getOneChatIdForAdmin(update);
         Runnable informer = () -> {
-            Map<String, Object> responseFromBookingResolver = bookingResolver.getMessageForAdmin();
+            Map<String, Object> responseFromBookingResolver = bookingResolver.getMessageForAdmin(itemsAmount);
             Long id = (Long) responseFromGetChatId.get("chatId");
             String securityMessage = (String) responseFromGetChatId.get("customMessage");
             if ((!totalAmount.equals(responseFromBookingResolver.get("totalAmount")))) {
+                itemsAmount = totalAmount;
                 totalAmount = (Integer) responseFromBookingResolver.get("totalAmount");
-                String bookingMessage = (String) responseFromBookingResolver.get("bookingMessage");
-                if ((bookingMessage != null) && (securityMessage.equals("admin"))) {
-                    uploadMessage.setText(bookingMessage);
-                    uploadMessage.setChatId(id);
-                    try {
-                        execute(uploadMessage);
-                    } catch (TelegramApiException e) {
-                        e.printStackTrace();
+                itemsAmount = totalAmount - itemsAmount;
+                for (int i = itemsAmount; i > 0; i--) {
+                    Map<String, Object> responseFromBookingResolverNextStep = bookingResolver.getMessageForAdmin(i);
+                    String bookingMessage = (String) responseFromBookingResolverNextStep.get("bookingMessage");
+                    if ((bookingMessage != null) && (securityMessage.equals("admin"))) {
+                        uploadMessage.setText(bookingMessage);
+                        uploadMessage.setChatId(id);
+                        try {
+                            execute(uploadMessage);
+                        } catch (TelegramApiException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
+
             }
 
         };

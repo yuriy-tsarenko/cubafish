@@ -14,13 +14,14 @@ import java.util.Map;
 public class BookingResolver {
     private final BookingListService bookingListService;
 
-    public Map<String, Object> getMessageForAdmin() {
+    public Map<String, Object> getMessageForAdmin(Integer howManyBookings) {
         StringBuilder messageBuilder = new StringBuilder();
         List<BookingListResponseBody> bookingListResponseBodies = bookingListService.findAll();
         int totalAmount = bookingListResponseBodies.size();
         int id = 1;
-        if (totalAmount > 0) {
-            BookingListResponseBody bookingListResponseBody = bookingListResponseBodies.get(totalAmount - 1);
+        if ((totalAmount > 0) & (howManyBookings > 0)) {
+            BookingListResponseBody bookingListResponseBody = bookingListResponseBodies
+                    .get(totalAmount - howManyBookings);
             messageBuilder.append("заказ #");
             messageBuilder.append(bookingListResponseBody.getId());
             messageBuilder.append("\n");

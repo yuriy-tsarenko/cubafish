@@ -64,7 +64,7 @@ let basketImage = new Vue({
     },
     methods: {
         activeImageAction: function () {
-            window.location = 'card.html';
+            window.location = 'guest/card.html';
         }
     }
 });
@@ -300,7 +300,7 @@ Vue.component('newProductCategory-row', {
         '</tr>' +
         '<td style="width:425px; height: auto">' +
         ' <div class="catalogBtn" v-on:click="getSortedProducts">'+
-        '<img src="css/images/catalogButton.png" style="width: 30px; height: 24px; vertical-align: middle;'+
+        '<img src="guest/css/images/catalogButton.png" style="width: 30px; height: 24px; vertical-align: middle;'+
         'margin-left: 10px; margin-right: 10px;margin-bottom: 7px" alt="catalogIcon">'+
         ' {{newProductCategory.communicationData}}'+
         '</div>'+
@@ -371,7 +371,7 @@ Vue.component('newProductSubCategory-row', {
         '<tr>' +
         '<td style="width:425px; height: auto">' +
         ' <div class="catalogBtn" v-on:click="getSortedProducts">'+
-        '<img src="css/images/catalogButton.png" style="width: 30px; height: 24px; vertical-align: middle;'+
+        '<img src="guest/css/images/catalogButton.png" style="width: 30px; height: 24px; vertical-align: middle;'+
         'margin-left: 10px; margin-right: 10px;margin-bottom: 7px" alt="catalogIcon">'+
         ' {{newProductSubCategory.communicationData}}'+
         '</div>'+
@@ -435,7 +435,7 @@ Vue.component('productBrand-row', {
         '<tr>' +
         '<td style="width:425px; height: auto">' +
         ' <div class="catalogBtn" v-on:click="getSortedProducts">'+
-        '<img src="css/images/catalogButton2.png" style="width: 30px; height: 24px; vertical-align: middle;'+
+        '<img src="guest/css/images/catalogButton2.png" style="width: 30px; height: 24px; vertical-align: middle;'+
         'margin-left: 10px; margin-right: 10px;margin-bottom: 7px" alt="catalogIcon">'+
         ' {{productBrand.communicationData}}'+
         '</div>'+
@@ -497,10 +497,15 @@ let appLogoutButtons = new Vue({
     el: '#appLogoutButtons',
     methods: {
         loginUserAction: function () {
-            window.location = 'authorize.html';
+            alert('Просим извинения, но эта функция сайта еще в разработке')
+            // window.location = 'authorize.html';
         },
         registrationUserAction: function () {
-            window.location = 'registration.html';
+            alert('Просим извинения, но эта функция сайта еще в разработке')
+            // window.location = 'registration.html';
+        },
+        anotherAction: function () {
+            alert('Просим извинения, но эта функция сайта еще в разработке')
         }
     }
 });
