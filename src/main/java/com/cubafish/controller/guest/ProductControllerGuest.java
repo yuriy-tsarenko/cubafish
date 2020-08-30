@@ -26,7 +26,7 @@ public class ProductControllerGuest {
 
     @GetMapping()
     public ModelAndView method() {
-        return new ModelAndView("redirect:" + "guest.html");
+        return new ModelAndView("redirect:" + "index.html");
     }
 
     @GetMapping("/all")

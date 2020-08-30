@@ -1,60 +1,192 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<html lang="en">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>Index Page</title>
-    <style type="text/css">
-        body {
-            margin: 0px;
-            background: #0F0A1D;
-        }
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CUBAFISH</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="guest/js/google-translate.js"></script>
+    <script src="//translate.google.com/translate_a/element.js?cb=TranslateInit"></script>
+    <link href="guest/css/guest.css" rel="stylesheet" type="text/css"/>
+    <link rel="icon" type="image/png" href="guest/css/images/siteIcon.png">
 
-        button {
-            width: 100px;
-            height: 70px;
-        }
-
-        table {
-            border: 1px solid #000000;
-            background: #808000;
-            width: 450px;
-            height: 320px;
-            alignment: center;
-        }
-
-        td {
-            text-align: center;
-        }
-
-        div {
-            margin: 200px auto 0;
-            width: 500px;
-            height: 350px;
-            top: 100px;
-        }
-    </style>
 </head>
-<body>
-<div>
-    <table>
-        <tr>
-            <td colspan="2"><h1>Get started</h1></td>
-        </tr>
-        <tr>
-            <td>
-                <form action="guest/authorize.html">
-                    <button>Login</button>
-                </form>
-            </td>
-            <td>
-                <form action="guest/registration.html">
-                    <button>Registration</button>
-                </form>
-            </td>
-        </tr>
 
-    </table>
+<body>
+<header>
+    <div class="wrapper">
+        <div class="logo">
+            <img style="width: 400px; height:auto"
+                 src="guest/css/images/logo777.png" alt="Logo"
+                 class="logo__pic">
+        </div>
+        <div id="appLogoutButtons">
+            <nav class="menu">
+                <a v-on:click="anotherAction" class="menu__item">Программа лояльности</a>
+                <a href="#" class="menu__item">Отзывы</a>
+                <a href="#" class="menu__item">Контакты</a>
+                <a v-on:click="registrationUserAction" class="menu__item">Регистрация</a>
+                <!-- change address-->
+                <a v-on:click="loginUserAction" class="menu__item">Войти</a>
+            </nav>
+        </div>
+        <div class="search-box">
+            <input type="text" class="search-txt" placeholder="Напишите фразу затем нажмите на кнопку поиска"/>
+            <div id="searchImage"><img style="width: 40px; height: auto" src="guest/css/images/lupa.png"></div>
+        </div>
+        <a id="adminNumber" href="tel:+380989900429">
+            <img style="width: 170px; height: auto" src="guest/css/images/phoneNumber.png" alt="number">
+        </a>
+        <div class="languageKit">
+            <img style="width: 40px; height: auto" src="guest/css/images/uaLanguage.png" alt="uk" data-google-lang="uk" class="language__img">
+            <img style="width: 40px; height: auto" src="guest/css/images/enLanguage.png" alt="en" data-google-lang="en" class="language__img">
+            <img style="width: 40px; height: auto" src="guest/css/images/rusLanguage.png" alt="ru" data-google-lang="ru" class="language__img">
+        </div>
+        <div id="basketImage">
+            <table style="width: auto; height: auto">
+                <tr>
+                    <td>
+                        <div v-if="basketItemsCount===false"><img v-on:click="activeImageAction"
+                                                                  style="width: 75px; height: 65px; border-radius:5%"
+                                                                  src="guest/css/images/shopping-cart.png"
+                                                                  alt="basketImage"/>
+                        </div>
+                        <div v-if="basketItemsCount===true"><img v-on:click="activeImageAction"
+                                                                 style="width: 75px; height: 65px; border-radius:5%"
+                                                                 src="guest/css/images/shopping-cart2.png"
+                                                                 alt="basketImage"/>
+                            <div id="basketCount" style="position: relative; bottom: 65px; left: 27px"><h5>
+                                {{basketItemsAmount}}</h5></div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</header>
+
+<div id="moveBackground">
+    <div id="appHeaderButtons">
+        <table id="horizontalButton">
+            <tr>
+                <td>
+                    <button type="submit"
+                            class="headerButton" v-on:click="getSortedProductsByTypeOfPurpose('Карповая ловля')">
+                        карповая ловля
+                    </button>
+                </td>
+                <td>
+                    <button type="submit"
+                            class="headerButton" v-on:click="getSortedProductsByTypeOfPurpose('Фидерная ловля')">
+                        спининговая ловля
+                    </button>
+                </td>
+                <td>
+                    <button type="submit"
+                            class="headerButton"
+                            v-on:click="getSortedProductsByTypeOfPurpose('Спиннинговая ловля')">
+                        фидерная ловля
+                    </button>
+                </td>
+                <td>
+                    <button type="submit"
+                            class="headerButton" v-on:click="getSortedProductsByTypeOfPurpose('Поплавочная ловля')">
+                        поплавочная ловля
+                    </button>
+                </td>
+                <td>
+                    <button type="submit"
+                            class="headerButton" v-on:click="getSortedProductsByTypeOfPurpose('Зимняя ловля')">
+                       зимняя ловля
+                    </button>
+                </td>
+                <td>
+                    <button type="submit"
+                            class="headerButton" v-on:click="getSortedProductsByTypeOfPurpose('Туризм')">
+                        туризм
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
+<!-- end div#header -->
+<div id="pageWrapper">
+    <div id="page">
+        <div id="content">
+            <div id="app">
+            </div>
+            <transition name="fade">
+                <div v-if="show" id="appShowBasket" v-on:click="show=false">
+                    <div id="insideWindowBasket" v-on:click="show=false">
+                        <div id="summaryDiv" v-on:click="show=false">
+                            <table id="summaryTable">
+                                <tr>
+                                    <td style="border-collapse: collapse;border: 1px none black;border-bottom-style: solid; width: 800px; height: auto">
+                                        <p>Товар добавлен в корзину</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </transition>
+
+        </div>
+        <!--start div#sidebar-->
+        <div id="sidebar">
+            <div id="appCatalog">
+                <div v-if="hamburgerBtn" class="hamburgerBtn" v-on:click="createCategories">
+                    <img src="guest/css/images/hamburgerButton.png" style="width: 30px; height: 24px; vertical-align: middle;
+                    margin-left: 10px; margin-right: 10px;margin-bottom: 7px">
+                    Каталог
+                </div>
+                <div v-if="hamburgerBtnActive" class="hamburgerBtn" v-on:click="hamburgerBtnHiddenFlag">
+                    <img src="guest/css/images/hamburgerButton.png" style="width: 30px; height: 24px; vertical-align: middle;
+                    margin-left: 10px; margin-right: 10px;margin-bottom: 7px">
+                    Назад
+                </div>
+            </div>
+            <hr id="menuLine">
+            <div id="appCategory">
+            </div>
+            <div id="appSubCategory">
+            </div>
+            <div id="appProductBrand">
+            </div>
+            <script src="guest/js/guest.js"></script>
+        </div>
+        <!-- end div#content -->
+        <!-- end div#sidebar -->
+    </div>
+</div>
+<!-- end div#page -->
+<!-- end div#wrapper -->
+<footer>
+    <div id="wrapperFooter">
+        <nav>
+            <a href="#">Программа лояльности</a>
+            <a href="#">Отзывы</a>
+            <a href="#"> Контакты</a>
+            <a href="#">Найти на карте</a>
+            <a href="#">О нас</a>
+        </nav>
+        <div id="logoFooter">
+            <a href="index.html"><img style="width: 700px; height: auto" src="guest/css/images/logo6.png" alt=""></a>
+
+        </div>
+        <div class="social">
+            <a href="#"><img src="guest/css/images/Facebook.png" alt=""></a>
+            <a href="#"><img src="guest/css/images/Instagram.png" alt=""></a>
+            <a href="#"><img src="guest/css/images/Twitter.png" alt=""></a>
+        </div>
+        <p>CUBAFISH. 2020</p>
+    </div>
+</footer>
 </body>
 </html>

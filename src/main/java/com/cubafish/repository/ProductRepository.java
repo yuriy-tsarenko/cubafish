@@ -24,5 +24,4 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByTypeOfPurpose(String typeOfPurpose);
 
     List<Product> findByDescription(String description);
-
 }
