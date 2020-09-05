@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=0.7">
+    <title>CUBAFISH-Feedback</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="js/google-translate.js"></script>
+    <script src="//translate.google.com/translate_a/element.js?cb=TranslateInit"></script>
+    <link href="css/card.css" rel="stylesheet" type="text/css"/>
+    <link rel="icon" type="image/png" href="css/images/siteIcon.png">
+</head>
+
+<body>
+<header>
+    <div class="wrapper">
+        <div class="logo">
+            <a href="https://cubafish.com.ua">
+                <img style="width: 450px; height: auto;"
+                     src="css/images/logo777.png" alt="Logo"
+                     class="logo__pic"></a>
+
+        </div>
+    </div>
+
+</header>
+<hr id="headerLine"/>
+
+<!-- end div#header -->
+<div id="pageWrapper">
+
+    <div id="page">
+        <div id="contactArea">
+            <div id="appFeedback"></div>
+
+        </div>
+    </div>
+</div>
+<!-- end div#content -->
+
+</div>
+<!-- end div#page -->
+<!-- end div#wrapper -->
+<footer>
+    <div id="wrapperFooter">
+        <nav>
+            <a v-on:click="anotherAction">Программа лояльности</a>
+            <a href="#">Отзывы</a>
+            <a href="guest/contact.html"> Контакты</a>
+            <a href="https://goo.gl/maps/MLskzawkCtqhW2mr9">Найти на карте</a>
+            <a v-on:click="anotherAction">О нас</a>
+        </nav>
+        <div id="logoFooter">
+            <a href="index.html"><img style="width: 700px; height: auto; margin: 0 auto; position: relative"
+                                      src="css/images/logo6.png" alt=""></a>
+
+        </div>
+        <div class="social">
+            <a href="#"><img src="css/images/Facebook.png" alt=""></a>
+            <a href="#"><img src="css/images/Instagram.png" alt=""></a>
+            <a href="#"><img src="css/images/Twitter.png" alt=""></a>
+
+        </div>
+        <p>CUBAFISH. 2020</p>
+    </div>
+</footer>
+<script src="js/guest.js"></script>
+</body>
+</html>

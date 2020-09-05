@@ -8,7 +8,7 @@ body {
     background: #ffffff;
     text-align: justify;
     font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 13px;
+    /*mso-page-scale: 0.5;*/
     /*font-style: italic;*/
 }
 
@@ -42,198 +42,30 @@ p, blockquote, ul, ol {
 
 
 header {
-    border: 1px solid #154a00;
     min-width: 2500px;
     max-width: 100%;
     height: 200px;
+
+}
+
+#headerLine {
     background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Параметры тени */
-    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    min-width: 2500px;
+    max-width: 100%;
 }
 
 .logo {
     position: relative;
+    width: 400px;
     top: 20px;
-    left: 680px;
+    left: 720px;
 }
 
 .wrapper {
     width: 1900px;
     margin: 0 auto;
     background-color: #ffffff;
-}
-
-/*.row {*/
-/*    !*display: flex;*!*/
-/*    flex-wrap: wrap;*/
-/*}*/
-
-
-#appLogoutButtons {
-    position: relative;
-    bottom: 100px;
-    left: 370px;
-}
-
-.menu {
-    width: 1100px;
-    align-self: center;
-    text-align: center;
-}
-
-.menu__item {
-    color: #393900;
-    font-family: Arial;
-    font-size: 25px;
-    line-height: 1;
-    font-weight: 820;
-    display: inline-block;
-    margin-right: 20px;
-    text-decoration: none;
-    text-transform: uppercase;
-}
-
-.menu__item:last-child {
-    margin-right: 0;
-}
-
-.search-box {
-    position: relative;
-    background-color: #585801;
-    width: 300px;
-    height: 20px;
-    border-radius: 40px;
-    padding: 10px;
-    left: 1450px;
-    bottom: 135px;
-}
-
-.search-btn {
-    position: relative;
-    left: 245px;
-    top: 0;
-    bottom: 50px;
-    justify-content: center;
-    align-items: center;
-    color: #000000;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: rgb(0, 0, 0);
-    text-decoration: none;
-}
-
-.search-txt {
-    border: none;
-    outline: none;
-    background: none;
-    padding: 0;
-    color: #fff;
-    font-size: 16px;
-    /*transition: .4s;*/
-    /*line-height: 40px;*/
-    width: 240px;
-}
-
-.search-box:hover .search-txt {
-    width: 240px;
-    padding: 0px;
-}
-
-.search-box:hover .search-btn {
-    background-color: #3e3e00;
-}
-
-.placeholder {
-    background-color: white;
-}
-
-#searchImage {
-    position: relative;
-    right: 0;
-    left: 270px;
-    bottom: 15px;
-}
-
-/* Logo */
-
-
-#basketImage {
-    position: relative;
-    top: auto;
-    bottom: 185px;
-    right: auto;
-    left: 1800px;
-    width: 75px;
-    height: 65px;
-}
-
-/* Menu */
-
-#appHeaderButtons {
-    margin: 0 auto;
-    padding: 0px 0px 0px 0px;
-    background: white;
-}
-
-/*#moveBackground {*/
-/*    position: relative;*/
-/*    min-width: 2500px;*/
-/*    max-width: 100%;*/
-/*    height: 41px;*/
-/*    background-color: #585801;*/
-/*}*/
-
-.headerButton {
-    width: 378px;
-    height: 40px;
-    z-index: 1;
-    background: #585801;
-    font-family: Geneva, Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    font-size: 15px;
-    font-style: italic;
-    color: #FFFFFF;
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 0;
-    border-color: #585801;
-    border-radius: 4px;
-}
-
-.headerButton:hover {
-    background: #8c8c01;
-    tansition: all .3s linear;
-    -webkit-transition: all .3s linear;
-    -moz-transition: all .3s linear;
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 12px;
-    font-style: italic;
-    color: #000000;
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 0;
-    border-color: #585801;
-    border-radius: 4px;
-}
-
-.headerButton:active {
-    background: #585801;
-    tansition: all .1s linear;
-    -webkit-transition: all .1s linear;
-    -moz-transition: all .1s linear;
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 14px;
-    font-style: italic;
-    color: #FFFFFF;
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 0;
-    border-color: #585801;
-    border-radius: 4px;
 }
 
 /* Page */
@@ -1574,4 +1406,39 @@ select {
     width: 800px;
     height: 300px;
     top: 20%;
+}
+
+#contactArea {
+    position: relative;
+    top: 10px;
+    bottom: 5px;
+    width: 1300px;
+    height: 2680px;
+    margin: 0 auto;
+    background-color: transparent;
+    border: none;
+}
+
+#contactTable {
+    position: relative;
+    top: 10px;
+    width: 1300px;
+    height: 2700px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border: 1px solid #d0d0d0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    color: #000000;
+}
+
+.labelContact {
+    position: relative;
+    width: 1250px;
+    font-size: 28px;
+    font-weight: 500;
+    margin-left: 50px;
+    margin-right: 50px;
 }

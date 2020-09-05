@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CUBAFISH</title>
+    <meta name="viewport" content="initial-scale=0.7">
+    <title>CUBAFISH-Card</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -19,15 +19,17 @@
 <header>
     <div class="wrapper">
         <div class="logo">
+            <a href="https://cubafish.com.ua">
             <img style="width: 450px; height: auto;"
                  src="css/images/logo777.png" alt="Logo"
                  class="logo__pic">
+            </a>
 
         </div>
     </div>
 
 </header>
-
+<hr id="headerLine"/>
 <div id="moveBackground">
 </div>
 <!-- end div#header -->
@@ -150,11 +152,11 @@
 <footer>
     <div id="wrapperFooter">
         <nav>
-            <a href="#">Программа лояльности</a>
+            <a v-on:click="anotherAction">Программа лояльности</a>
             <a href="#">Отзывы</a>
-            <a href="#"> Контакты</a>
-            <a href="#">Найти на карте</a>
-            <a href="#">О нас</a>
+            <a href="guest/contact.html"> Контакты</a>
+            <a href="https://goo.gl/maps/MLskzawkCtqhW2mr9">Найти на карте</a>
+            <a v-on:click="anotherAction">О нас</a>
         </nav>
         <div id="logoFooter">
             <a href="index.html"><img style="width: 700px; height: auto; margin: 0 auto; position: relative"

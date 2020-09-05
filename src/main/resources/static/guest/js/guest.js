@@ -8,8 +8,7 @@ const productAPISortedBySubCategory = Vue.resource('/guest/products/sorted_by_su
 const productAPISortedByBrand = Vue.resource('/guest/products/sorted_by_brand');
 const productAPISortedByTypeOfPurpose = Vue.resource('/guest/products/sorted_by_type_of_purpose');
 const productAPISortedByDescription = Vue.resource('/guest/products/sorted_by_description');
-Vue.http.headers.common['Authorization'] = localStorage.getItem('CustomHeader');
-axios.defaults.headers.common['Authorization'] = localStorage.getItem('CustomHeader');
+const productAPISearchRequest = Vue.resource('/guest/products/search');
 
 let appShowBasket = new Vue({
     el: '#appShowBasket',
@@ -178,7 +177,7 @@ Vue.component('newProduct-row', {
         '</tr>' +
         '<tr>' +
         '<td>' +
-        '<div id="productValue2"><br/><p>{{newProduct.specification}}</p></div>' +
+        '<div id="productValue2"><p>{{newProduct.specification}}</p></div>' +
         '</td>' +
         '</tr>' +
         '<tr>' +
@@ -299,11 +298,11 @@ Vue.component('newProductCategory-row', {
         '</td>' +
         '</tr>' +
         '<td style="width:425px; height: auto">' +
-        ' <div class="catalogBtn" v-on:click="getSortedProducts">'+
-        '<img src="guest/css/images/catalogButton.png" style="width: 30px; height: 24px; vertical-align: middle;'+
-        'margin-left: 10px; margin-right: 10px;margin-bottom: 7px" alt="catalogIcon">'+
-        ' {{newProductCategory.communicationData}}'+
-        '</div>'+
+        ' <div class="catalogBtn" v-on:click="getSortedProducts">' +
+        '<img src="guest/css/images/catalogButton.png" style="width: 30px; height: 24px; vertical-align: middle;' +
+        'margin-left: 10px; margin-right: 10px;margin-bottom: 7px" alt="catalogIcon">' +
+        ' {{newProductCategory.communicationData}}' +
+        '</div>' +
         '</td>' +
         '</tr>' +
         '</table>' +
@@ -333,6 +332,7 @@ Vue.component('newProductCategory-row', {
 
                 appCatalog.hamburgerBtn = false;
                 appCatalog.hamburgerBtnActive = true;
+                appSearchResult.searchResult = false;
 
             }, 400);
         },
@@ -344,7 +344,16 @@ Vue.component('newProductCategories-list', {
     template: '<div>' +
         '<newProductCategory-row v-for="newProductCategory in newProductCategories" ' +
         ':key="newProductCategory.id" :newProductCategory="newProductCategory"/>' +
-        '</div>'
+        '</div>',
+    created: function () {
+        setTimeout(function () {
+            appCategory.newProductCategories = appCategory.newProductCategories.splice(0, 0);
+            productCategoryApi.get().then(result =>
+                result.json().then(data =>
+                    data.forEach(newProductCategory => appCategory.newProductCategories.push(newProductCategory))
+                ));
+        }, 100);
+    }
 });
 
 let appCategory = new Vue({
@@ -370,11 +379,11 @@ Vue.component('newProductSubCategory-row', {
         '</tr>' +
         '<tr>' +
         '<td style="width:425px; height: auto">' +
-        ' <div class="catalogBtn" v-on:click="getSortedProducts">'+
-        '<img src="guest/css/images/catalogButton.png" style="width: 30px; height: 24px; vertical-align: middle;'+
-        'margin-left: 10px; margin-right: 10px;margin-bottom: 7px" alt="catalogIcon">'+
-        ' {{newProductSubCategory.communicationData}}'+
-        '</div>'+
+        ' <div class="catalogBtn" v-on:click="getSortedProducts">' +
+        '<img src="guest/css/images/catalogButton.png" style="width: 30px; height: 24px; vertical-align: middle;' +
+        'margin-left: 10px; margin-right: 10px;margin-bottom: 7px" alt="catalogIcon">' +
+        ' {{newProductSubCategory.communicationData}}' +
+        '</div>' +
         '</td>' +
         '</tr>' +
         '</table>' +
@@ -399,6 +408,7 @@ Vue.component('newProductSubCategory-row', {
                     )
                 );
             }, 400);
+            appSearchResult.searchResult = false;
         }
     }
 });
@@ -434,11 +444,11 @@ Vue.component('productBrand-row', {
         '</tr>' +
         '<tr>' +
         '<td style="width:425px; height: auto">' +
-        ' <div class="catalogBtn" v-on:click="getSortedProducts">'+
-        '<img src="guest/css/images/catalogButton2.png" style="width: 30px; height: 24px; vertical-align: middle;'+
-        'margin-left: 10px; margin-right: 10px;margin-bottom: 7px" alt="catalogIcon">'+
-        ' {{productBrand.communicationData}}'+
-        '</div>'+
+        ' <div class="catalogBtn" v-on:click="getSortedProducts">' +
+        '<img src="guest/css/images/catalogButton2.png" style="width: 30px; height: 24px; vertical-align: middle;' +
+        'margin-left: 10px; margin-right: 10px;margin-bottom: 7px" alt="catalogIcon">' +
+        ' {{productBrand.communicationData}}' +
+        '</div>' +
         '</td>' +
         '</tr>' +
         '</table>' +
@@ -455,6 +465,7 @@ Vue.component('productBrand-row', {
                     data.forEach(productBrand => app.newProducts.push(productBrand))
                 )
             );
+            appSearchResult.searchResult = false;
         }
     }
 });
@@ -463,7 +474,7 @@ Vue.component('productBrands-list', {
     props: ['productBrands'],
     template: '<div>' +
         '<productBrand-row v-for="productBrand in productBrands" :key="productBrand.id" :productBrand="productBrand"/>' +
-        '</div>',
+        '</div>'
 });
 
 let appProductBrand = new Vue({
@@ -489,6 +500,7 @@ let appHeaderButtons = new Vue({
                     data.forEach(productBrand => app.newProducts.push(productBrand))
                 )
             );
+            appSearchResult.searchResult = false;
         }
     }
 });
@@ -527,6 +539,7 @@ let appCatalog = new Vue({
                         data.forEach(newProductCategory => appCategory.newProductCategories.push(newProductCategory))
                     ));
             }, 400);
+            appSearchResult.searchResult = false;
         },
         hamburgerBtnHiddenFlag: function () {
             if (this.hamburgerBtn === true) {
@@ -541,6 +554,267 @@ let appCatalog = new Vue({
     }
 });
 
+let appSearchResult = new Vue({
+    el: '#appSearchResult',
+    data: {
+        searchResult: false
+    }
+});
+
+let appSearchForm = new Vue({
+    el: '#appSearchForm',
+    data: {
+        searchTag: ''
+    },
+    methods: {
+        searchRequest: function () {
+            app.newProducts = app.newProducts.splice(0, 0);
+            appSearchResult.searchResult = false;
+
+            let sortingTag = {
+                key: 'sorting tag',
+                communicationKey: this.searchTag,
+            }
+            productAPISearchRequest.save({}, sortingTag).then(result =>
+                result.json().then(data =>
+                    data.forEach(searchResponse => app.newProducts.push(searchResponse))
+                )
+            ).then(function () {
+                let amount = 0;
+                for (let product of app.newProducts) {
+                    amount++;
+                }
+                if (amount === 0) {
+                    appSearchResult.searchResult = true;
+                }
+            });
+        }
+    }
+});
+
+let wrapperFooter = new Vue({
+    el: '#wrapperFooter',
+    methods: {
+        anotherAction: function () {
+            alert('Просим извинения, но эта функция сайта еще в разработке')
+        }
+    }
+});
+
+Vue.component('newFeedback-row', {
+    props: ['newFeedback'],
+    data: function () {
+        return {
+            show: false,
+            showDetails: false,
+            showDetailsButton: true,
+            showImage: false,
+            showRightSide: false,
+            showLeftSide: false,
+            showBackSide: false,
+            id: '',
+            productCategory: '',
+            productSubCategory: '',
+            productBrand: '',
+            totalAmount: '',
+            itemAmount: 1,
+            descriptionForRequest: '',
+            specification: '',
+            typeOfPurpose: '',
+            productPrice: '',
+            productImageName: '',
+            productImageRightName: '',
+            productImageLeftName: '',
+            productImageBackName: '',
+            productPriceForBasket: ''
+        }
+    },
+    template:
+        '<div>' +
+        '<table id="fromDb" style="width:1000px; height: 250px" >' +
+        '<tr>' +
+        '<td hidden><p>{{this.id=newFeedback.id}}</p></td>' +
+        '<td hidden><p>{{this.totalAmount=newFeedback.totalAmount}}</p></td>' +
+        '<td hidden><p>{{this.descriptionForRequest=newFeedback.description}}</p></td>' +
+        '<td hidden><p>{{this.productImageRightName=newFeedback.productImageRightName}}</p></td>' +
+        '<td hidden><p>{{this.productImageLeftName=newFeedback.productImageLeftName}}</p></td>' +
+        '<td hidden><p>{{this.productImageBackName=newFeedback.productImageBackName}}</p></td>' +
+        '<td hidden><p>{{this.productPriceForBasket=newFeedback.productPrice}}</p></td>' +
+        '<td hidden><p>{{this.productImageName=newFeedback.productImageName}}</p></td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td rowspan="2" style="alignment:center;vertical-align:center;width:250px">' +
+        '<img v-on:click="hiddenFlag" style="width: 250px; height: 250px; border-radius:15%" :src="newFeedback.productImageName" alt="photo"/>' +
+        '</td>' +
+        '<td rowspan="3" id="cellStyleDescription" style="width:450px; height:auto">' +
+        '<div class="productValue" id="productValue1"><br/><p>{{newFeedback.description}}</p></div>' +
+        '</td>' +
+        '<td id="cellStyle" style="width:300px; height:auto">' +
+        '<div v-if="this.totalAmount>0" id="available"><p>Есть в наличии</p></div>' +
+        '<div v-if="this.totalAmount==0" id="notAvailable"><p>Нет в наличии</p></div>' +
+        '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td id="cellStyle" style="width:300px; height: auto">' +
+        '<div class="productValue" id="productValue3"><p>{{newFeedback.productPrice}} грн</p></br></div></td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td id="cellStyle" style="width:249px; height: auto">' +
+        '<img v-if="productImageRightName!=null" v-on:click="hiddenFlagRightSide" style="width: 83px;height: 83px; border-radius:5%" :src="newFeedback.productImageRightName" alt="photo"/>' +
+        '<img v-if="productImageLeftName!=null" v-on:click="hiddenFlagLeftSide" style="width: 83px;height: 83px; border-radius:5%" :src="newFeedback.productImageLeftName" alt="photo"/>' +
+        '<img v-if="productImageBackName!=null" v-on:click="hiddenFlagBackSide" style="width: 83px;height: 83px; border-radius:5%" :src="newFeedback.productImageBackName" alt="photo"/>' +
+        '</td>' +
+
+        '<td id="cellStyle" style="width:300px; height: auto" >' +
+        '<input class="bueButton" type="button" value="Купить" v-on:click="hiddenFlagForBasket">' +
+        '</td>' +
+        '</tr>' +
+
+        '<tr>' +
+        '<td colspan="4" id="cellStyle" style="width:1000px; height: 25px" >' +
+        '<div class="detailsBtnColor" v-if="showDetailsButton" v-on:click="hiddenFlagDetails"><input class="btn" type="button"></div>' +
+        '</td>' +
+        '</tr>' +
+        '</table>' +
+
+        '<transition name="fade">' +
+        '<div v-if="show" id="window" v-on:click="hiddenFlag">' +
+        '<div id="insideWindow">' +
+        '<table id="bigPhoto">' +
+        '<tr>' +
+        '<td style="width: 900px; height: 30px">' +
+        '<div id="bigPhotoButtonMove"><input class="bigPhotoButton" type="button" v-on:click="this.show=!this.show"></div>' +
+        '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>' +
+        '<img v-if="showImage" style="width: 900px;height: 900px; border-radius:0" :src="newFeedback.productImageName" alt="photo"/>' +
+        '<img v-if="showRightSide" style="width: 900px;height: 900px; border-radius:0" :src="newFeedback.productImageRightName" alt="photo"/>' +
+        '<img v-if="showLeftSide" style="width: 900px;height: 900px; border-radius:0" :src="newFeedback.productImageLeftName" alt="photo"/>' +
+        '<img v-if="showBackSide" style="width: 900px;height: 900px; border-radius:0" :src="newFeedback.productImageBackName" alt="photo"/>' +
+        '</td>' +
+        '</tr>' +
+        '</table>' +
+        '</div>' +
+        '</div>' +
+        '</transition>' +
+
+        '<transition name="fade">' +
+        '<table v-if="showDetails" id="detailsTable" style="width:1000px; height: 270px">' +
+        '<tr>' +
+        '<td id="cellStyle" style="height: 30px; width: 900px"><p>Описание</p>' +
+        '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>' +
+        '<div id="productValue2"><p>{{newFeedback.specification}}</p></div>' +
+        '</td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td style="height: 30px">' +
+        '<div class="detailsBtnColor" v-on:click="hiddenFlagDetails"><input class="btnUp" type="button"></div>' +
+        '</td>' +
+        '</tr>' +
+        '</table>' +
+        '</transition>' +
+        '</div>',
+    methods: {
+        hiddenFlag: function () {
+            if (!(this.show === true) && !(this.showImage === true)) {
+                this.show = true;
+                this.showImage = true;
+            } else {
+                this.show = false;
+                this.showImage = false;
+                this.showRightSide = false;
+                this.showLeftSide = false;
+                this.showBackSide = false;
+            }
+        },
+        hiddenFlagRightSide: function () {
+            if (!(this.show === true) && !(this.showRightSide === true)) {
+                this.show = true;
+                this.showRightSide = true;
+            } else {
+                this.show = false;
+                this.showRightSide = false;
+            }
+        },
+        hiddenFlagLeftSide: function () {
+            if (!(this.show === true) && !(this.showLeftSide === true)) {
+                this.show = true;
+                this.showLeftSide = true;
+            } else {
+                this.show = false;
+                this.showLeftSide = false;
+            }
+        },
+        hiddenFlagBackSide: function () {
+            if (!(this.show === true) && !(this.showBackSide === true)) {
+                this.show = true;
+                this.showBackSide = true;
+            } else {
+                this.show = false;
+                this.showRightSide = false;
+            }
+        },
+        hiddenFlagDetails: function () {
+            if (!(this.showDetails === true) && (this.showDetailsButton === true)) {
+                this.showDetails = true;
+                this.showDetailsButton = false;
+            } else {
+                this.showDetails = false;
+                this.showDetailsButton = true;
+            }
+        },
+        hiddenFlagForBasket: function () {
+            let key = this.id;
+            let productItem = {
+                description: this.descriptionForRequest,
+                productPrice: this.productPriceForBasket,
+                totalAmount: this.totalAmount,
+                itemAmount: this.itemAmount,
+                productImageName: this.productImageName
+            }
+            let basketItems = [];
+            if ((this.totalAmount !== 0) && (localStorage.getItem(key) === null)) {
+                basketItems.push(productItem);
+                localStorage.setItem(key, JSON.stringify(basketItems));
+                appShowBasket.hiddenFlagForBasketReceiver();
+            } else if (localStorage.getItem(key) !== null) {
+                alert('Товар уже в корзине');
+            } else {
+                alert('Товара нет в наличии');
+            }
+
+        }
+    }
+});
+
+Vue.component('newFeedbacks-list', {
+    props: ['newFeedbacks'],
+    template: '<div>' +
+        '<newFeedback-row v-for="newFeedback in newFeedbacks" :key="newFeedback.id" :newFeedback="newFeedback"/>' +
+        '</div>'
+    // created: function () {
+    //     productAPI.get().then(result =>
+    //         result.json().then(data =>
+    //             data.forEach(newFeedback => this.newFeedbacks.push(newFeedback))
+    //         )
+    //     );
+    // }
+});
+
+let appFeedback = new Vue({
+    el: '#appFeedback',
+    template: '<newFeedbacks-list :newFeedbacks="newFeedbacks" />',
+    data: {
+        newFeedbacks: []
+    }
+});
 
 
 

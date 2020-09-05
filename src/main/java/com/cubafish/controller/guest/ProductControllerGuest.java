@@ -1,8 +1,9 @@
 package com.cubafish.controller.guest;
 
 import com.cubafish.dto.ProductDto;
-import com.cubafish.repository.ProductRepository;
+import com.cubafish.mapper.ProductMapper;
 import com.cubafish.service.ProductService;
+import com.cubafish.service.SearchService;
 import com.cubafish.utils.CustomRequestBody;
 import com.cubafish.utils.CustomResponseBody;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,8 @@ public class ProductControllerGuest {
 
     public static final String BASE_PATH = "/guest/products";
     private final ProductService productService;
-    private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
+    private final SearchService searchService;
 
     @GetMapping()
     public ModelAndView method() {
@@ -37,6 +39,11 @@ public class ProductControllerGuest {
     @GetMapping("/get_menu_categories")
     public List<CustomResponseBody> getUniqueFromService() {
         return productService.findUniqueCategories();
+    }
+
+    @PostMapping("/search")
+    public List<ProductDto> searchProduct(@RequestBody CustomRequestBody customRequestBody) {
+        return productMapper.mapEntitiesToDtos(searchService.searchEngine(customRequestBody.getCommunicationKey()));
     }
 
     @PostMapping("/get_id")

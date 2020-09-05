@@ -69,6 +69,7 @@ header {
 
 #appLogoutButtons {
     position: relative;
+    width: 1100px;
     bottom: 100px;
     left: 370px;
 }
@@ -81,7 +82,7 @@ header {
 
 .menu__item {
     color: #393900;
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     font-size: 25px;
     line-height: 1;
     font-weight: 820;
@@ -448,7 +449,7 @@ td {
     height: 240px;
     word-wrap: break-word;
     font-family: Gill Sans, sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-style: normal;
     text-align: left;
     color: #000000;
@@ -906,11 +907,31 @@ footer {
 
 .languageKit {
     position: relative;
-    z-index: 10;
+    width: 200px;
     left: 1480px;
     bottom: 190px;
 }
 
-.language__img:hover{
+.language__img:hover {
     cursor: pointer;
+}
+
+#searchInformation {
+    position: relative;
+    width: 1000px;
+    height: 100px;
+    float: left;
+    top: 50px;
+    border-bottom: 3px solid #393900;
+}
+
+#textInformation {
+    position: relative;
+    left: 385px;
+    bottom: 59px;
+    font-family: Arial, sans, serif;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    color: #393900;
 }

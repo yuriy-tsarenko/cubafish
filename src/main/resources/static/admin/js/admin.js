@@ -232,7 +232,7 @@ Vue.component('newProduct-row', {
         '</tr>' +
         '<tr>' +
         '<td>' +
-        '<div id="productValue2"><br/><p>{{newProduct.specification}}</p></div>' +
+        '<div id="productValue2"><p>{{newProduct.specification}}</p></div>' +
         '</td>' +
         '</tr>' +
         '<tr>' +
@@ -729,7 +729,16 @@ Vue.component('newProductCategories-list', {
     template: '<div>' +
         '<newProductCategory-row v-for="newProductCategory in newProductCategories" ' +
         ':key="newProductCategory.id" :newProductCategory="newProductCategory"/>' +
-        '</div>'
+        '</div>',
+    created: function () {
+        setTimeout(function () {
+            appCategory.newProductCategories = appCategory.newProductCategories.splice(0, 0);
+            productCategoryApi.get().then(result =>
+                result.json().then(data =>
+                    data.forEach(newProductCategory => appCategory.newProductCategories.push(newProductCategory))
+                ));
+        }, 100);
+    }
 });
 
 let appCategory = new Vue({
