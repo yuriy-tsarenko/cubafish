@@ -65,6 +65,7 @@ header {
 
 #appLogoutButtons {
     position: relative;
+    width: 1100px;
     bottom: 100px;
     left: 370px;
 }
@@ -1196,7 +1197,7 @@ input:hover {
 
 .languageKit {
     position: relative;
-    z-index: 10;
+    width: 200px;
     left: 1480px;
     bottom: 190px;
 }

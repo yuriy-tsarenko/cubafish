@@ -2,7 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=0.7">
+    <meta name="keywords" content="Интернет-магазин Cubafish">
+    <meta name="description" content="cubafish.com.ua - Рыболовный интернет магазин | Все для максимального улова.">
+    <meta property="og:site_name" content="www.cubafish.com.ua">
     <title>CUBAFISH</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
@@ -28,23 +31,27 @@
             <nav class="menu">
                 <a v-on:click="anotherAction" class="menu__item">Программа лояльности</a>
                 <a href="#" class="menu__item">Отзывы</a>
-                <a href="#" class="menu__item">Контакты</a>
+                <a href="guest/contact.html" class="menu__item">Контакты</a>
                 <a v-on:click="registrationUserAction" class="menu__item">Регистрация</a>
-                <!-- change address-->
                 <a v-on:click="loginUserAction" class="menu__item">Войти</a>
             </nav>
         </div>
-        <div class="search-box">
-            <input type="text" class="search-txt" placeholder="Напишите фразу затем нажмите на кнопку поиска"/>
-            <div id="searchImage"><img style="width: 40px; height: auto" src="guest/css/images/lupa.png"></div>
+        <div id="appSearchForm">
+        <div class="search-box" >
+            <input type="text" class="search-txt" placeholder="Напишите фразу затем нажмите на кнопку поиска" v-model="searchTag"/>
+            <div id="searchImage" v-on:click="searchRequest"><img style="width: 40px; height: auto" src="guest/css/images/lupa.png"></div>
+        </div>
         </div>
         <a id="adminNumber" href="tel:+380989900429">
             <img style="width: 170px; height: auto" src="guest/css/images/phoneNumber.png" alt="number">
         </a>
         <div class="languageKit">
-            <img style="width: 40px; height: auto" src="guest/css/images/uaLanguage.png" alt="uk" data-google-lang="uk" class="language__img">
-            <img style="width: 40px; height: auto" src="guest/css/images/enLanguage.png" alt="en" data-google-lang="en" class="language__img">
-            <img style="width: 40px; height: auto" src="guest/css/images/rusLanguage.png" alt="ru" data-google-lang="ru" class="language__img">
+            <img style="width: 40px; height: auto" src="guest/css/images/uaLanguage.png" alt="uk" data-google-lang="uk"
+                 class="language__img">
+            <img style="width: 40px; height: auto" src="guest/css/images/enLanguage.png" alt="en" data-google-lang="en"
+                 class="language__img">
+            <img style="width: 40px; height: auto" src="guest/css/images/rusLanguage.png" alt="ru" data-google-lang="ru"
+                 class="language__img">
         </div>
         <div id="basketImage">
             <table style="width: auto; height: auto">
@@ -102,7 +109,7 @@
                 <td>
                     <button type="submit"
                             class="headerButton" v-on:click="getSortedProductsByTypeOfPurpose('Зимняя ловля')">
-                       зимняя ловля
+                        зимняя ловля
                     </button>
                 </td>
                 <td>
@@ -136,14 +143,20 @@
                     </div>
                 </div>
             </transition>
-
+            <div id="appSearchResult">
+                <div id="searchInformation" v-if="searchResult">
+                    <img src="guest/css/images/information.png"
+                         style="position: relative; width: 70px; height: auto; left: 300px">
+                    <p id="textInformation"> - Ничего не найдено</p>
+                </div>
+            </div>
         </div>
         <!--start div#sidebar-->
         <div id="sidebar">
             <div id="appCatalog">
                 <div v-if="hamburgerBtn" class="hamburgerBtn" v-on:click="createCategories">
                     <img src="guest/css/images/hamburgerButton.png" style="width: 30px; height: 24px; vertical-align: middle;
-                    margin-left: 10px; margin-right: 10px;margin-bottom: 7px">
+                    margin-left: 10px; margin-right: 10px; margin-bottom: 7px">
                     Каталог
                 </div>
                 <div v-if="hamburgerBtnActive" class="hamburgerBtn" v-on:click="hamburgerBtnHiddenFlag">
@@ -159,7 +172,6 @@
             </div>
             <div id="appProductBrand">
             </div>
-            <script src="guest/js/guest.js"></script>
         </div>
         <!-- end div#content -->
         <!-- end div#sidebar -->
@@ -170,11 +182,11 @@
 <footer>
     <div id="wrapperFooter">
         <nav>
-            <a href="#">Программа лояльности</a>
+            <a v-on:click="anotherAction">Программа лояльности</a>
             <a href="#">Отзывы</a>
-            <a href="#"> Контакты</a>
-            <a href="#">Найти на карте</a>
-            <a href="#">О нас</a>
+            <a href="guest/contact.html"> Контакты</a>
+            <a href="https://goo.gl/maps/MLskzawkCtqhW2mr9">Найти на карте</a>
+            <a v-on:click="anotherAction">О нас</a>
         </nav>
         <div id="logoFooter">
             <a href="index.html"><img style="width: 700px; height: auto" src="guest/css/images/logo6.png" alt=""></a>
@@ -188,5 +200,6 @@
         <p>CUBAFISH. 2020</p>
     </div>
 </footer>
+<script src="guest/js/guest.js"></script>
 </body>
 </html>
