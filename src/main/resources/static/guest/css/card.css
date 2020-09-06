@@ -97,7 +97,7 @@ header {
     float: right;
     width: 750px;
     height: 1240px;
-    overflow: auto;
+    overflow-y: auto;
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.5); /* Параметры тени */
     padding: 10px;
 }
@@ -781,12 +781,6 @@ td {
 
 /*footer*/
 
-
-footer p {
-    color: white;
-    font-size: small;
-}
-
 footer a {
     color: white;
     font-size: 14px;
@@ -796,6 +790,14 @@ footer a {
 
 nav {
     font-size: 30px;
+    border: none;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    line-height: 1;
+    font-weight: 500;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
 }
 
 footer nav a:hover {
@@ -803,7 +805,10 @@ footer nav a:hover {
 }
 
 .social {
+    position: relative;
+    left: 200px;
     height: 30px;
+    width: 230px;
 }
 
 .social img {
@@ -820,8 +825,6 @@ footer {
     max-width: 100%;
     height: auto;
     background-color: #585801;
-    text-align: center;
-
 }
 
 #wrapperFooter {
@@ -829,12 +832,18 @@ footer {
     width: 1900px;
     height: 300px;
     margin: 0 auto;
-
 }
 
 #logoFooter {
     position: relative;
     margin: 0 auto;
+}
+
+#footerContent {
+    position: relative;
+    width: 530px;
+    margin: 0 auto;
+    top: 10px;
 }
 
 
@@ -1424,7 +1433,6 @@ select {
     top: 10px;
     width: 1300px;
     height: 2700px;
-    margin: 0 auto;
     background-color: #ffffff;
     border: 1px solid #d0d0d0;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -1436,9 +1444,151 @@ select {
 
 .labelContact {
     position: relative;
-    width: 1250px;
+    width: 1200px;
+    height: 60px;
     font-size: 28px;
     font-weight: 500;
-    margin-left: 50px;
-    margin-right: 50px;
+    left: 50px;
+    right: 50px;
+}
+
+#footerSignature {
+    position: relative;
+    left: 185px;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    color: #ffffff;
+}
+
+#feedBackArea {
+    position: relative;
+    top: 10px;
+    bottom: 5px;
+    width: 1300px;
+    height: 2680px;
+    margin: 0 auto;
+    background-color: white;
+    border: 1px solid #d0d0d0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+}
+
+#addFeedback {
+    position: relative;
+    width: 1100px;
+    height: 320px;
+    margin: 0 auto;
+    background-color: #d0d0d0;
+    border-radius: 10px;
+    border: 1px solid #d0d0d0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#feedBackTracker {
+    position: relative;
+    margin: 15px auto 0;
+    width: 1100px;
+    height: 200px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #d0d0d0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    color: #000000;
+    word-wrap: break-word;
+}
+
+#selectorFeedback {
+    width: 320px;
+    height: 50px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 10px;
+    border-bottom: 3px solid #393900;
+}
+
+.nameLastNameFeedback {
+    width: 300px;
+    height: 50px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 10px;
+    border-bottom: 3px solid #393900;
+}
+
+#selectorMarkFeedback {
+    width: 320px;
+    height: 50px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 10px;
+    border-bottom: 3px solid #393900;
+}
+
+#commentFeedback {
+    width: 550px;
+    height: 240px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 10px;
+    border-bottom: 3px solid #393900;
+    resize: none;
+}
+
+/*#sendFeedBackBtnMove {*/
+/*    position: relative;*/
+/*    left: 430px;*/
+/*    bottom: 0;*/
+/*    top: auto;*/
+/*    right: auto;*/
+/*}*/
+
+.sendFeedBackBtn {
+    position: relative;
+    background-color: #8c8c01;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 800;
+    width: 570px;
+    height: 50px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 10px;
+}
+
+.sendFeedBackBtn:hover {
+    background-color: #4c4c00;
+    tansition: all .3s linear;
+    -webkit-transition: all .3s linear;
+    -moz-transition: all .3s linear;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 10px;
+}
+
+.sendFeedBackBtn:active {
+    font-size: 15px;
+    tansition: all .1s linear;
+    -webkit-transition: all .1s linear;
+    -moz-transition: all .1s linear;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 10px;
 }

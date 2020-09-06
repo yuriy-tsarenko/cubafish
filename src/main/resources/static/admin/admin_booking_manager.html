@@ -21,12 +21,11 @@
         </div>
         <div id="appLogoutButtons">
             <nav class="menu">
-                <a href="#" class="menu__item">Программа лояльности</a>
-                <a href="#" class="menu__item">Отзывы</a>
-                <a href="#" class="menu__item">Контакты</a>
-                <a href="http://91.235.128.12:8081/admin/registration.html" class="menu__item">Регистрация</a>
-                <!-- change address-->
-                <a href="#" v-on:click="logoutUserAction" class="menu__item">Завершить работу</a>
+                <a v-on:click="anotherAction" class="menu__item">Программа лояльности</a>
+                <a href="../guest/feedback.html" class="menu__item">Отзывы</a>
+                <a href="../guest/contact.html" class="menu__item">Контакты</a>
+                <a v-on:click="registrationUserAction" class="menu__item">Регистрация</a>
+                <a v-on:click="logoutUserAction" class="menu__item">Завершить работу</a>
             </nav>
         </div>
 
@@ -129,24 +128,26 @@
 <!-- end div#wrapper -->
 <footer>
     <div id="wrapperFooter">
-        <nav>
-            <a href="#">Программа лояльности</a>
-            <a href="#">Отзывы</a>
-            <a href="#"> Контакты</a>
-            <a href="#">Найти на карте</a>
-            <a href="#">О нас</a>
-        </nav>
-        <div id="logoFooter">
-            <a href="#"><img style="width: 700px; height: auto" src="css/images/logo6.png" alt=""></a>
+        <div id="footerContent">
+            <nav>
+                <a style="text-decoration: none;" v-on:click="anotherAction">Программа лояльности</a>
+                <a style="text-decoration: none;" href="guest/feedback.html">Отзывы</a>
+                <a style="text-decoration: none;" href="guest/contact.html"> Контакты</a>
+                <a style="text-decoration: none;" href="https://goo.gl/maps/MLskzawkCtqhW2mr9">Найти на карте</a>
+                <a style="text-decoration: none;" v-on:click="anotherAction">О нас</a>
+            </nav>
+            <div id="logoFooter">
+                <a href="index.html"><img style="width: 500px; height: auto;"
+                                          src="guest/css/images/logo6.png" alt="logo"></a>
 
+            </div>
+            <div class="social">
+                <a href="#"><img src="guest/css/images/Facebook.png" alt="logo"></a>
+                <a href="#"><img src="guest/css/images/Instagram.png" alt="logo"></a>
+                <a href="#"><img src="guest/css/images/Twitter.png" alt="logo"></a>
+            </div>
+            <p id="footerSignature">CUBAFISH 2020 &copy;</p>
         </div>
-        <div class="social">
-            <a href="#"><img src="css/images/Facebook.png" alt=""></a>
-            <a href="#"><img src="css/images/Instagram.png" alt=""></a>
-            <a href="#"><img src="css/images/Twitter.png" alt=""></a>
-
-        </div>
-        <p>CUBAFISH. 2020</p>
     </div>
 </footer>
 </body>

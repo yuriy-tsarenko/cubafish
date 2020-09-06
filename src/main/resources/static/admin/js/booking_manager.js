@@ -877,6 +877,18 @@ let appLogoutButtons = new Vue({
         },
         registrationUserAction: function () {
             window.location = 'registration.html';
+        },
+        anotherAction: function () {
+            alert('Просим извинения, но эта функция сайта еще в разработке')
+        }
+    }
+});
+
+let wrapperFooter = new Vue({
+    el: '#wrapperFooter',
+    methods: {
+        anotherAction: function () {
+            alert('Просим извинения, но эта функция сайта еще в разработке')
         }
     }
 });
