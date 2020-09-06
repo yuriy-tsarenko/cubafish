@@ -144,6 +144,15 @@ search-txt:hover {
     cursor: pointer;
 }
 
+#searchInformation {
+    position: relative;
+    width: 1000px;
+    height: 100px;
+    float: left;
+    top: 50px;
+    border-bottom: 3px solid #393900;
+}
+
 /* Logo */
 
 
@@ -390,7 +399,7 @@ search-txt:hover {
     left: 50px;
     width: 440px;
     height: 99%;
-    overflow: auto;
+    overflow-y: auto;
 }
 
 #sidebar::-webkit-scrollbar {
@@ -890,6 +899,14 @@ footer a {
 
 nav {
     font-size: 30px;
+    border: none;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    line-height: 1;
+    font-weight: 500;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
 }
 
 footer nav a:hover {
@@ -897,7 +914,10 @@ footer nav a:hover {
 }
 
 .social {
+    position: relative;
+    left: 200px;
     height: 30px;
+    width: 230px;
 }
 
 .social img {
@@ -917,6 +937,23 @@ footer {
     text-align: center;
 
 }
+
+#footerSignature {
+    position: relative;
+    left: 185px;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    color: #ffffff;
+}
+
+#footerContent {
+    position: relative;
+    width: 530px;
+    margin: 0 auto;
+    top: 10px;
+}
+
 
 #wrapperFooter {
     position: relative;

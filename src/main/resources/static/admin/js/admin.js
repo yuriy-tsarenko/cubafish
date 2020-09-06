@@ -8,6 +8,7 @@ const productAPISorted = Vue.resource('/admin_auth/products/sorted_by_category')
 const productAPISortedBySubCategory = Vue.resource('/admin_auth/products/sorted_by_sub_category');
 const productAPISortedByBrand = Vue.resource('/admin_auth/products/sorted_by_brand');
 const productAPISortedByTypeOfPurpose = Vue.resource('/admin_auth/products/sorted_by_type_of_purpose');
+const productAPISearchRequest = Vue.resource('/guest/products/search');
 Vue.http.headers.common['Authorization'] = localStorage.getItem('CustomHeader');
 axios.defaults.headers.common['Authorization'] = localStorage.getItem('CustomHeader');
 
@@ -904,6 +905,9 @@ let appLogoutButtons = new Vue({
         },
         registrationUserAction: function () {
             window.location = 'registration.html';
+        },
+        anotherAction: function () {
+            alert('Просим извинения, но эта функция сайта еще в разработке')
         }
     }
 });
@@ -935,6 +939,53 @@ let appCatalog = new Vue({
                 this.hamburgerBtn = true;
             }
             this.createCategories();
+        }
+    }
+});
+
+let appSearchResult = new Vue({
+    el: '#appSearchResult',
+    data: {
+        searchResult: false
+    }
+});
+
+let appSearchForm = new Vue({
+    el: '#appSearchForm',
+    data: {
+        searchTag: ''
+    },
+    methods: {
+        searchRequest: function () {
+            app.newProducts = app.newProducts.splice(0, 0);
+            appSearchResult.searchResult = false;
+
+            let sortingTag = {
+                key: 'sorting tag',
+                communicationKey: this.searchTag,
+            }
+            productAPISearchRequest.save({}, sortingTag).then(result =>
+                result.json().then(data =>
+                    data.forEach(searchResponse => app.newProducts.push(searchResponse))
+                )
+            ).then(function () {
+                let amount = 0;
+                for (let product of app.newProducts) {
+                    amount++;
+                }
+                if (amount === 0) {
+                    appSearchResult.searchResult = true;
+                }
+            });
+        }
+    }
+});
+
+let wrapperFooter = new Vue({
+    el: '#wrapperFooter',
+    methods: {
+        anotherAction: function () {
+            alert('Просим извинения, но эта функция сайта еще в разработке')
         }
     }
 });
