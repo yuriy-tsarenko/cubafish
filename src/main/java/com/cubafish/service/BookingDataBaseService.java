@@ -1,10 +1,13 @@
 package com.cubafish.service;
 
+import com.cubafish.bot.BookingResolver;
+import com.cubafish.bot.CubafishBot;
 import com.cubafish.dto.BookingDataBaseDto;
 import com.cubafish.dto.BookingItemDto;
 import com.cubafish.dto.BookingListDto;
 import com.cubafish.dto.ProductDto;
 import com.cubafish.dto.StatisticsDto;
+import com.cubafish.entity.BookingItem;
 import com.cubafish.entity.BookingList;
 import com.cubafish.entity.Product;
 import com.cubafish.entity.Statistics;
@@ -13,6 +16,7 @@ import com.cubafish.mapper.BookingListMapper;
 import com.cubafish.mapper.ProductMapper;
 import com.cubafish.mapper.StatisticsMapper;
 import com.cubafish.repository.BookingDataBaseRepository;
+import com.cubafish.repository.BookingItemRepository;
 import com.cubafish.repository.BookingListRepository;
 import com.cubafish.repository.ProductRepository;
 import com.cubafish.repository.StatisticsRepository;
@@ -48,6 +52,7 @@ public class BookingDataBaseService {
     private final BookingListMapper bookingListMapper;
     private final BookingListRepository bookingListRepository;
     private final BookingItemService bookingItemService;
+    private final BookingItemRepository bookingItemRepository;
     private final ProductMapper productMapper;
     private final ProductRepository productRepository;
     private final StatisticsRepository statisticsRepository;
@@ -81,7 +86,11 @@ public class BookingDataBaseService {
                     step++;
                     if (productDto != null) {
                         Product product = productRepository.getOne(productDto.getId());
-                        productDto.setTotalAmount(productDto.getTotalAmount() - bookingItemDto.getItemAmount());
+                        if ((productDto.getTotalAmount() - bookingItemDto.getItemAmount()) < 0) {
+                            productDto.setTotalAmount(0);
+                        } else {
+                            productDto.setTotalAmount(productDto.getTotalAmount() - bookingItemDto.getItemAmount());
+                        }
                         BeanUtils.copyProperties(productDto, product);
                         productRepository.save(product);
                         builderForItems.append(bookingItemDto.getDescription());
@@ -122,8 +131,20 @@ public class BookingDataBaseService {
                     }
                     BookingList bookingList =
                             bookingListRepository.findBookingListById(Long.valueOf(customRequestBody.getKey()));
-                    bookingListRepository.delete(bookingList);
-                    step++;
+                    String[] bookingItemKeys = bookingList.getBookingItems().split("-");
+                    for (String key : bookingItemKeys) {
+                        Map<String, Object> responseFromFindById = bookingItemService.findById(Long.valueOf(key));
+                        status = (String) responseFromFindById.get("status");
+                        BookingItem bookingItem = (BookingItem) responseFromFindById.get("bookingItem");
+                        if (status.equals("success")) {
+                            bookingItemRepository.delete(bookingItem);
+                        }
+                    }
+                    if (status.equals("success")) {
+                        bookingListRepository.delete(bookingList);
+
+                        step++;
+                    }
                 }
             }
         } else {

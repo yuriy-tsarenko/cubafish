@@ -16,7 +16,6 @@
     <script src="//translate.google.com/translate_a/element.js?cb=TranslateInit"></script>
     <link href="guest/css/guest.css" rel="stylesheet" type="text/css"/>
     <link rel="icon" type="image/png" href="guest/css/images/siteIcon.png">
-
 </head>
 
 <body>
@@ -30,8 +29,9 @@
         <div id="appLogoutButtons">
             <nav class="menu">
                 <a v-on:click="anotherAction" class="menu__item">Программа лояльности</a>
-                <a href="guest/feedback.html" class="menu__item">Отзывы</a>
-                <a href="guest/contact.html" class="menu__item">Контакты</a>
+                <a href="guest/feedback.html#send_feedback" class="menu__item">Отзывы</a>
+                <a href="guest/contact.html#contact" class="menu__item">Контакты</a>
+                <a name="top"></a>
                 <a v-on:click="registrationUserAction" class="menu__item">Регистрация</a>
                 <a v-on:click="loginUserAction" class="menu__item">Войти</a>
             </nav>
@@ -84,32 +84,32 @@
                 <td>
                     <button type="submit"
                             class="headerButton" v-on:click="getSortedProductsByTypeOfPurpose('Карповая ловля')">
-                        карповая ловля
+                        карп
                     </button>
                 </td>
                 <td>
                     <button type="submit"
                             class="headerButton" v-on:click="getSortedProductsByTypeOfPurpose('Фидерная ловля')">
-                        спининговая ловля
+                        спининг
                     </button>
                 </td>
                 <td>
                     <button type="submit"
                             class="headerButton"
                             v-on:click="getSortedProductsByTypeOfPurpose('Спиннинговая ловля')">
-                        фидерная ловля
+                        фидер
                     </button>
                 </td>
                 <td>
                     <button type="submit"
                             class="headerButton" v-on:click="getSortedProductsByTypeOfPurpose('Поплавочная ловля')">
-                        поплавочная ловля
+                        поплавок
                     </button>
                 </td>
                 <td>
                     <button type="submit"
                             class="headerButton" v-on:click="getSortedProductsByTypeOfPurpose('Зимняя ловля')">
-                        зимняя ловля
+                        зима
                     </button>
                 </td>
                 <td>

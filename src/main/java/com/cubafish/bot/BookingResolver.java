@@ -1,11 +1,14 @@
 package com.cubafish.bot;
 
 import com.cubafish.dto.BookingItemDto;
+import com.cubafish.dto.BookingListDto;
 import com.cubafish.service.BookingListService;
 import com.cubafish.utils.BookingListResponseBody;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +20,7 @@ public class BookingResolver {
     public Map<String, Object> getMessageForAdmin(Integer howManyBookings) {
         StringBuilder messageBuilder = new StringBuilder();
         List<BookingListResponseBody> bookingListResponseBodies = bookingListService.findAll();
+        bookingListResponseBodies.sort(new SortBookingListResponseBodyById());
         int totalAmount = bookingListResponseBodies.size();
         int id = 1;
         if ((totalAmount > 0) & (howManyBookings > 0)) {
@@ -60,5 +64,24 @@ public class BookingResolver {
             messageBuilder.append("грн. ");
         }
         return Map.of("bookingMessage", messageBuilder.toString(), "totalAmount", totalAmount);
+    }
+
+    public List<Long> keyExtractor() {
+        List<BookingListResponseBody> bookingListResponseBodies = bookingListService.findAll();
+        bookingListResponseBodies.sort(new SortBookingListResponseBodyById());
+        List<Long> keys = new ArrayList<>(bookingListResponseBodies.size());
+        if (bookingListResponseBodies.size() > 0) {
+            for (BookingListResponseBody body : bookingListResponseBodies) {
+                keys.add(body.getId());
+            }
+        }
+        return keys;
+    }
+
+    static class SortBookingListResponseBodyById implements Comparator<BookingListResponseBody> {
+        @Override
+        public int compare(BookingListResponseBody body, BookingListResponseBody body1) {
+            return body.getId().compareTo(body1.getId());
+        }
     }
 }

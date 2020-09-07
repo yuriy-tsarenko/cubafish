@@ -18,12 +18,20 @@
 <body>
 <header>
     <div class="wrapper">
-        <div class="logo">
+        <div class="logo"><a name="send_feedback"></a>
             <a href="https://cubafish.com.ua">
                 <img style="width: 450px; height: auto;"
                      src="css/images/logo777.png" alt="Logo"
                      class="logo__pic"></a>
 
+        </div>
+        <div class="languageKit">
+            <img style="width: 40px; height: auto" src="css/images/uaLanguage.png" alt="uk" data-google-lang="uk"
+                 class="language__img">
+            <img style="width: 40px; height: auto" src="css/images/enLanguage.png" alt="en" data-google-lang="en"
+                 class="language__img">
+            <img style="width: 40px; height: auto" src="css/images/rusLanguage.png" alt="ru" data-google-lang="ru"
+                 class="language__img">
         </div>
     </div>
 
@@ -35,11 +43,12 @@
 
     <div id="page">
         <div id="feedBackArea">
-            <table>
+            <table style="width: 1300px; height: 35px">
                 <tr>
-                    <td>
-                        <p class="labelContact" style="top: 30px">
-                            Здесь Вы можете оставить свой отзыв. Нам важно знать Ваше мнение о сервисе.</p>
+                    <td style="font-family: Arial, sans-serif; font-size: 24px; font-style: normal; color: #ffffff">
+                        <div style="position: relative; width: 950px; height: 30px; left: 200px; top: 10px;">
+                            Здесь Вы можете оставить свой отзыв. Нам важно знать Ваше мнение о сервисе.
+                        </div>
                     </td>
                 </tr>
             </table>
@@ -47,40 +56,43 @@
                 <table id="addFeedback">
                     <tr>
                         <td style="height: 60px">
-                            <input class="nameLastNameFeedback" type="text" v-model="userName" placeholder="Введите имя"/>
+                            <input class="nameLastNameFeedback" type="text" v-model="userName"
+                                   placeholder="Введите имя"/>
                         </td>
                         <td style="width: 600px" rowspan="3">
-                            <textarea id="commentFeedback" v-model="comment" placeholder="Введите комментарий до 1000 символов (с пробелами)"></textarea>
+                            <textarea id="commentFeedback" v-model="comment"
+                                      placeholder="Введите комментарий до 1000 символов (с пробелами)"></textarea>
                         </td>
                     </tr>
                     <tr>
                         <td style="height: 60px">
-                            <input class="nameLastNameFeedback" type="text" v-model="userLastName" placeholder="Введите фамилию"/></td>
+                            <input class="nameLastNameFeedback" type="text" v-model="userLastName"
+                                   placeholder="Введите фамилию"/></td>
                     </tr>
                     <tr>
                         <td style="height: 60px">
                             <select v-model="recommendation" id="selectorFeedback">
-                            <option disabled value="">Выберите один из вариантов</option>
-                            <option>Рекомендую</option>
-                            <option>Не рекомендую</option>
-                        </select>
+                                <option disabled value="">Выберите один из вариантов</option>
+                                <option>Рекомендую</option>
+                                <option>Не рекомендую</option>
+                            </select>
                         </td>
                     </tr>
                     <tr>
                         <td style="height: 60px">
-                            <select v-model="mark" id="selectorMarkFeedback" >
-                            <option disabled value="">Выберите оценку</option>
-                            <option>10</option>
-                            <option>9</option>
-                            <option>8</option>
-                            <option>7</option>
-                            <option>6</option>
-                            <option>5</option>
-                            <option>4</option>
-                            <option>3</option>
-                            <option>2</option>
-                            <option>1</option>
-                        </select>
+                            <select v-model="mark" id="selectorMarkFeedback">
+                                <option disabled value="">Выберите оценку</option>
+                                <option>10</option>
+                                <option>9</option>
+                                <option>8</option>
+                                <option>7</option>
+                                <option>6</option>
+                                <option>5</option>
+                                <option>4</option>
+                                <option>3</option>
+                                <option>2</option>
+                                <option>1</option>
+                            </select>
                         </td>
                         <td>
                             <input class="sendFeedBackBtn" type="button" value="Отправить" v-on:click="leaveFeedback">

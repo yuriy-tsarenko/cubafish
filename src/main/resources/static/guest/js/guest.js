@@ -63,7 +63,7 @@ let basketImage = new Vue({
     },
     methods: {
         activeImageAction: function () {
-            window.location = 'guest/card.html';
+            window.location = 'guest/card.html#card';
         }
     }
 });
@@ -267,11 +267,13 @@ Vue.component('newProducts-list', {
         '<newProduct-row v-for="newProduct in newProducts" :key="newProduct.id" :newProduct="newProduct"/>' +
         '</div>',
     created: function () {
+        window.location = 'https://cubafish.com.ua#top';
         productAPI.get().then(result =>
             result.json().then(data =>
                 data.forEach(newProduct => this.newProducts.push(newProduct))
             )
         );
+
     }
 });
 

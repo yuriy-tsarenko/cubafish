@@ -654,8 +654,9 @@ Vue.component('newProducts-list', {
                     data.forEach(newProduct => this.newProducts.push(newProduct))
                 )
             );
+            window.location = 'https://cubafish.com.ua/admin/admin.html#top';
         } else {
-            window.location = 'authorize.html';
+            // window.location = 'authorize.html';
         }
 
     }
@@ -719,6 +720,7 @@ Vue.component('newProductCategory-row', {
 
                 appCatalog.hamburgerBtn = false;
                 appCatalog.hamburgerBtnActive = true;
+                appSearchResult.searchResult = false;
 
             }, 400);
         },
@@ -794,6 +796,7 @@ Vue.component('newProductSubCategory-row', {
                     )
                 );
             }, 400);
+            appSearchResult.searchResult = false;
         }
     }
 });
@@ -850,6 +853,7 @@ Vue.component('productBrand-row', {
                     data.forEach(productBrand => app.newProducts.push(productBrand))
                 )
             );
+            appSearchResult.searchResult = false;
         }
     }
 });
@@ -884,6 +888,7 @@ let appHeaderButtons = new Vue({
                     data.forEach(productBrand => app.newProducts.push(productBrand))
                 )
             );
+            appSearchResult.searchResult = false;
         }
     }
 })
@@ -929,6 +934,7 @@ let appCatalog = new Vue({
                         data.forEach(newProductCategory => appCategory.newProductCategories.push(newProductCategory))
                     ));
             }, 400);
+            appSearchResult.searchResult = false;
         },
         hamburgerBtnHiddenFlag: function () {
             if (this.hamburgerBtn === true) {

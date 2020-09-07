@@ -6,7 +6,6 @@
 
 body {
     background: #ffffff;
-    text-align: justify;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     /*mso-page-scale: 0.5;*/
     /*font-style: italic;*/
@@ -221,10 +220,6 @@ header {
 
 .fade-enter, .fade-leave-to {
     opacity: 0;
-}
-
-td {
-    text-align: center;
 }
 
 .menuButton {
@@ -612,6 +607,50 @@ td {
     background-color: rgba(26, 26, 26, 0.5);
 }
 
+#appShowAgreement {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 900;
+    background-color: rgba(26, 26, 26, 0.5);
+}
+
+#insideWindowBasketAgreement{
+    position: relative;
+    margin: 0 auto;
+    width: 700px;
+    height: 700px;
+    top: 10%;
+}
+
+#summaryDivAgreement {
+    position: inherit;
+    margin: 0 auto;
+    width: 700px;
+    height: 700px;
+    top: 10%;
+}
+
+#getAgree {
+    position: relative;
+    background-color: transparent;
+    width: 300px;
+    height: 30px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+    font-style: inherit;
+    user-select: none;
+    color: #006bff;
+}
+
 #insideWindowBasket {
     position: relative;
     margin: 0 auto;
@@ -674,6 +713,23 @@ td {
     position: relative;
     width: 400px;
     height: 100px;
+}
+
+#summaryTableAgreement{
+    background-color: #ffffff;
+    border: 1px solid #d0d0d0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    color: #000000;
+    border-collapse: collapse;
+    word-wrap: break-word;
+    text-align: justify;
+    position: relative;
+    width: 700px;
+    height: 520px;
 }
 
 #productBasketValue1 {
@@ -1204,7 +1260,7 @@ select {
 
 .checkmark {
     position: absolute;
-    bottom: 20px;
+    bottom: 100px;
     left: 0;
     height: 25px;
     width: 25px;
@@ -1357,8 +1413,8 @@ select {
 
 .bookingMakerBtn {
     position: relative;
-    top: 45px;
-    left: 120px;
+    top: 5px;
+    left: 70px;
     right: auto;
     bottom: 10px;
     width: 500px;
@@ -1468,7 +1524,7 @@ select {
     width: 1300px;
     height: 2680px;
     margin: 0 auto;
-    background-color: white;
+    background-color: #798186;
     border: 1px solid #d0d0d0;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     overflow-y: auto;
@@ -1503,6 +1559,8 @@ select {
 }
 
 #selectorFeedback {
+    position: relative;
+    left: 30px;
     width: 320px;
     height: 50px;
     border-top: none;
@@ -1513,8 +1571,10 @@ select {
 }
 
 .nameLastNameFeedback {
+    position: relative;
     width: 300px;
     height: 50px;
+    left: 30px;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -1523,6 +1583,8 @@ select {
 }
 
 #selectorMarkFeedback {
+    position: relative;
+    left: 30px;
     width: 320px;
     height: 50px;
     border-top: none;
@@ -1591,4 +1653,11 @@ select {
     border-right: 0;
     border-bottom: 0;
     border-radius: 10px;
+}
+
+.languageKit {
+    position: relative;
+    width: 200px;
+    left: 1480px;
+    bottom: 110px;
 }

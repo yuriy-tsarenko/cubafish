@@ -5,7 +5,14 @@ axios.defaults.headers.common['Authorization'] = localStorage.getItem('CustomHea
 let appShowStatus = new Vue({
     el: '#appShowStatus',
     data: {
-        show: false,
+        show: false
+    }
+});
+
+let appShowAgreement = new Vue({
+    el: '#appShowAgreement',
+    data: {
+        showAgreement: false
     }
 });
 
@@ -114,6 +121,9 @@ let appSelector = new Vue({
                 alert('Для завершения оформления заказа подтвердите его пожалуйста')
             }
 
+        },
+        getAgreement: function () {
+            appShowAgreement.showAgreement = true;
         }
     }
 });
