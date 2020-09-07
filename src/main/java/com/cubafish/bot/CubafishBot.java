@@ -10,6 +10,8 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -33,32 +35,56 @@ public class CubafishBot extends TelegramLongPollingBot {
     private Integer itemsAmount = 0;
     private SendMessage uploadMessage = new SendMessage();
     private String customMessage;
+    private Long[] oldKeys = new Long[1];
 
     @Override
     public void onUpdateReceived(Update update) {
         Map<String, Object> responseFromGetChatId = getOneChatIdForAdmin(update);
         Runnable informer = () -> {
-            Map<String, Object> responseFromBookingResolver = bookingResolver.getMessageForAdmin(itemsAmount);
+            List<Long> keys = bookingResolver.keyExtractor();
             Long id = (Long) responseFromGetChatId.get("chatId");
             String securityMessage = (String) responseFromGetChatId.get("customMessage");
-            if ((!totalAmount.equals(responseFromBookingResolver.get("totalAmount")))) {
-                itemsAmount = totalAmount;
-                totalAmount = (Integer) responseFromBookingResolver.get("totalAmount");
+            itemsAmount = totalAmount;
+            totalAmount = keys.size();
+            if (totalAmount > itemsAmount) {
                 itemsAmount = totalAmount - itemsAmount;
-                for (int i = itemsAmount; i > 0; i--) {
-                    Map<String, Object> responseFromBookingResolverNextStep = bookingResolver.getMessageForAdmin(i);
-                    String bookingMessage = (String) responseFromBookingResolverNextStep.get("bookingMessage");
-                    if ((bookingMessage != null) && (securityMessage.equals("admin"))) {
-                        uploadMessage.setText(bookingMessage);
-                        uploadMessage.setChatId(id);
-                        try {
-                            execute(uploadMessage);
-                        } catch (TelegramApiException e) {
-                            e.printStackTrace();
-                        }
+                
+                if (keys.size() > 0) {
+                    oldKeys = new Long[keys.size()];
+                    for (int p = 0; p < keys.size(); p++) {
+                        Long key = keys.get(p);
+                        oldKeys[p] = key;
                     }
                 }
 
+            } else {
+                itemsAmount = totalAmount;
+                for (int y = 0; y < keys.size(); y++) {
+                    for (int b = 0; b < oldKeys.length; b++) {
+                        if (keys.get(y).equals(oldKeys[b])) {
+                            itemsAmount--;
+                        }
+                    }
+                }
+                oldKeys = new Long[keys.size()];
+                for (int u = 0; u < keys.size(); u++) {
+                    oldKeys[u] = keys.get(u);
+                }
+
+            }
+
+            for (int i = itemsAmount; i > 0; i--) {
+                Map<String, Object> responseFromBookingResolverNextStep = bookingResolver.getMessageForAdmin(i);
+                String bookingMessage = (String) responseFromBookingResolverNextStep.get("bookingMessage");
+                if ((bookingMessage != null) && (securityMessage.equals("admin"))) {
+                    uploadMessage.setText(bookingMessage);
+                    uploadMessage.setChatId(id);
+                    try {
+                        execute(uploadMessage);
+                    } catch (TelegramApiException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
 
         };

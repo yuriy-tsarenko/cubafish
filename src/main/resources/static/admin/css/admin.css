@@ -201,8 +201,9 @@ search-txt:hover {
     background: #585801;
     font-family: Geneva, Arial, Helvetica, sans-serif;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 22px;
     font-style: italic;
+    text-transform: uppercase;
     color: #FFFFFF;
     border-top: 0;
     border-left: 0;
@@ -218,7 +219,7 @@ search-txt:hover {
     -webkit-transition: all .3s linear;
     -moz-transition: all .3s linear;
     font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 12px;
+    font-size: 22px;
     font-style: italic;
     color: #000000;
     border-top: 0;
@@ -235,7 +236,7 @@ search-txt:hover {
     -webkit-transition: all .1s linear;
     -moz-transition: all .1s linear;
     font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 14px;
+    font-size: 22px;
     font-style: italic;
     color: #FFFFFF;
     border-top: 0;
@@ -940,7 +941,7 @@ footer {
 
 #footerSignature {
     position: relative;
-    left: 185px;
+    left: 50px;
     font-family: Arial, sans-serif;
     font-size: 18px;
     font-style: normal;
