@@ -656,7 +656,7 @@ Vue.component('newProducts-list', {
             );
             window.location = 'https://cubafish.com.ua/admin/admin.html#top';
         } else {
-            // window.location = 'authorize.html';
+            window.location = 'authorize.html';
         }
 
     }
