@@ -10,7 +10,6 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
@@ -48,7 +47,7 @@ public class CubafishBot extends TelegramLongPollingBot {
             totalAmount = keys.size();
             if (totalAmount > itemsAmount) {
                 itemsAmount = totalAmount - itemsAmount;
-                
+
                 if (keys.size() > 0) {
                     oldKeys = new Long[keys.size()];
                     for (int p = 0; p < keys.size(); p++) {
