@@ -956,13 +956,21 @@ footer {
 
 #proposition {
     position: relative;
-    width: 795px;
+    width: 1000px;
     bottom: 240px;
-    left: 540px;
+    margin: 0 auto;
+
+}
+
+#propositionText {
+    position: relative;
+    height: 30px;
+    left: 65px;
+    bottom: 30px;
     font-family: Arial, sans-serif;
     font-size: 22px;
     font-style: normal;
     font-weight: 600;
     color: #393900;
-    border-bottom: 3px solid #393900;
+    text-decoration: underline;
 }

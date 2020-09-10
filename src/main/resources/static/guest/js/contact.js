@@ -1,3 +1,5 @@
+window.location = 'https://cubafish.com.ua/guest/contact.html#contact'
+
 let wrapperFooter = new Vue({
     el: '#wrapperFooter',
     methods: {
