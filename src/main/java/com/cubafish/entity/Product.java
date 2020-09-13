@@ -42,6 +42,9 @@ public class Product {
     @Column(name = "product_price")
     private BigDecimal productPrice;
 
+    @Column(name = "old_product_price")
+    private BigDecimal oldProductPrice;
+
     @Column(name = "product_image_name")
     private  String productImageName;
 

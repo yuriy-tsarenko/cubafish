@@ -29,11 +29,14 @@ public class CubafishBot extends TelegramLongPollingBot {
     private String botUserName;
 
     private final BookingResolver bookingResolver;
-    private Long chatId;
+    private Long chatId = 0L;
+    private Long chatIdSuperAdmin = 0L;
     private Integer totalAmount = 0;
     private Integer itemsAmount = 0;
     private SendMessage uploadMessage = new SendMessage();
     private String customMessage;
+    private String superAdminMessage;
+    private String bookingMessage;
     private Long[] oldKeys = new Long[1];
 
     @Override
@@ -45,6 +48,7 @@ public class CubafishBot extends TelegramLongPollingBot {
             String securityMessage = (String) responseFromGetChatId.get("customMessage");
             itemsAmount = totalAmount;
             totalAmount = keys.size();
+            Long idSuperAdmin = (Long) responseFromGetChatId.get("chatIdSuperAdmin");
             if (totalAmount > itemsAmount) {
                 itemsAmount = totalAmount - itemsAmount;
 
@@ -74,7 +78,7 @@ public class CubafishBot extends TelegramLongPollingBot {
 
             for (int i = itemsAmount; i > 0; i--) {
                 Map<String, Object> responseFromBookingResolverNextStep = bookingResolver.getMessageForAdmin(i);
-                String bookingMessage = (String) responseFromBookingResolverNextStep.get("bookingMessage");
+                bookingMessage = (String) responseFromBookingResolverNextStep.get("bookingMessage");
                 if ((bookingMessage != null) && (securityMessage.equals("admin"))) {
                     uploadMessage.setText(bookingMessage);
                     uploadMessage.setChatId(id);
@@ -83,7 +87,21 @@ public class CubafishBot extends TelegramLongPollingBot {
                     } catch (TelegramApiException e) {
                         e.printStackTrace();
                     }
+
                 }
+            }
+            if ((idSuperAdmin != 0L) && (bookingMessage != null)) {
+                if (!bookingMessage.equals(superAdminMessage)) {
+                    uploadMessage.setText(bookingMessage);
+                    uploadMessage.setChatId(idSuperAdmin);
+                    superAdminMessage = bookingMessage;
+                    try {
+                        execute(uploadMessage);
+                    } catch (TelegramApiException e) {
+                        e.printStackTrace();
+                    }
+                }
+
             }
 
         };
@@ -128,14 +146,24 @@ public class CubafishBot extends TelegramLongPollingBot {
 
     public Map<String, Object> getOneChatIdForAdmin(Update update) {
         String message = "";
-        if ((chatId == null) || (chatId.equals(update.getMessage().getChatId()))) {
+        if (chatId.equals(update.getMessage().getChatId())) {
+            message = "admin";
+
+        } else if (chatIdSuperAdmin.equals(update.getMessage().getChatId())) {
+            message = "admin";
+
+        } else if ((chatId == 0L) || (chatIdSuperAdmin == 0L)) {
+            if (chatId != 0L) {
+                chatIdSuperAdmin = update.getMessage().getChatId();
+            }
             chatId = update.getMessage().getChatId();
             message = "admin";
+
         } else if (!chatId.equals(update.getMessage().getChatId())) {
             String userName = update.getMessage().getFrom().getFirstName();
             message = "Привет!!! " + userName + " я CUBAFISH_BOT." + "\n" + " К сожалению у меня уже есть хозяин."
                     + "Может в далеком будущем я тебе помогу. " + "\n" + "До встречи!!!";
         }
-        return Map.of("chatId", chatId, "customMessage", message);
+        return Map.of("chatId", chatId, "chatIdSuperAdmin", chatIdSuperAdmin, "customMessage", message);
     }
 }

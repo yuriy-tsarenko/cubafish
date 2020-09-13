@@ -19,6 +19,7 @@ public class ProductDto {
     private String specification;
     private Integer totalAmount;
     private BigDecimal productPrice;
+    private BigDecimal oldProductPrice;
     private String productImageName;
     private String productImageRightName;
     private String productImageLeftName;

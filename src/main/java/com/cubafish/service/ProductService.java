@@ -44,7 +44,7 @@ public class ProductService {
 
     public List<ProductDto> findAll() {
         List<ProductDto> productDtos = productMapper.mapEntitiesToDtos(productRepository.findAll());
-        productDtos.sort(new SortProductsById());
+        productDtos.sort(new SortProductsByTotalAmount());
         return productDtos;
     }
 
@@ -58,7 +58,7 @@ public class ProductService {
     public List<ProductDto> findByProductCategory(CustomRequestBody customRequestBody) {
         List<ProductDto> productDto = productMapper.mapEntitiesToDtos(productRepository
                 .findByProductCategory(customRequestBody.getCommunicationKey()));
-        productDto.sort(new SortProductsById());
+        productDto.sort(new SortProductsByTotalAmount());
         return productDto;
     }
 
@@ -66,28 +66,28 @@ public class ProductService {
         productSubCategory = customRequestBody.getCommunicationKey();
         List<ProductDto> productDto = productMapper.mapEntitiesToDtos(productRepository
                 .findByProductSubCategory(productSubCategory));
-        productDto.sort(new SortProductsById());
+        productDto.sort(new SortProductsByTotalAmount());
         return productDto;
     }
 
     public List<ProductDto> findByProductBrandAndProductSubCategory(CustomRequestBody customRequestBody) {
         List<ProductDto> productDto = productMapper.mapEntitiesToDtos(productRepository
                 .findByProductBrandAndProductSubCategory(customRequestBody.getCommunicationKey(), productSubCategory));
-        productDto.sort(new SortProductsById());
+        productDto.sort(new SortProductsByTotalAmount());
         return productDto;
     }
 
     public List<ProductDto> findProductsByTypeOfPurpose(CustomRequestBody customRequestBody) {
         List<ProductDto> productDto = productMapper.mapEntitiesToDtos(productRepository
                 .findByTypeOfPurpose(customRequestBody.getCommunicationKey()));
-        productDto.sort(new SortProductsById());
+        productDto.sort(new SortProductsByTotalAmount());
         return productDto;
     }
 
     public List<ProductDto> findByProductBrandAll(CustomRequestBody customRequestBody) {
         List<ProductDto> productDto = productMapper.mapEntitiesToDtos(productRepository
                 .findByProductBrand(customRequestBody.getCommunicationKey()));
-        productDto.sort(new SortProductsById());
+        productDto.sort(new SortProductsByTotalAmount());
         return productDto;
     }
 
@@ -363,6 +363,12 @@ public class ProductService {
                     return Map.of("productDto", productDto, "status", "product price should have a numeric value");
                 }
             }
+
+            if (productDto.getProductPrice().doubleValue() < exiting.getProductPrice().doubleValue()) {
+                productDto.setOldProductPrice(exiting.getProductPrice());
+            } else {
+                productDto.setOldProductPrice(BigDecimal.ZERO);
+            }
             return Map.of("productDto", productDto, "status", "success");
         } else {
             return Map.of("productDto", productDto, "status", "ID of edited product not received!");
@@ -489,6 +495,13 @@ public class ProductService {
         @Override
         public int compare(ProductDto productDto, ProductDto productDto2) {
             return productDto.getId().compareTo(productDto2.getId());
+        }
+    }
+
+    static class SortProductsByTotalAmount implements Comparator<ProductDto> {
+        @Override
+        public int compare(ProductDto productDto, ProductDto productDto2) {
+            return productDto2.getTotalAmount().compareTo(productDto.getTotalAmount());
         }
     }
 }

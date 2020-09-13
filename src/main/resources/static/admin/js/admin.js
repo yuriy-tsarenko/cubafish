@@ -66,6 +66,7 @@ Vue.component('newProduct-row', {
             specificationForCreate: '',
             typeOfPurposeForCreate: '',
             productPriceForCreate: '',
+            oldProductPrice: '',
             dataLoadStatus: ''
         }
     },
@@ -73,13 +74,14 @@ Vue.component('newProduct-row', {
         '<div>' +
         '<table id="fromDb" style="width:1000px; height: 270px" >' +
         '<tr>' +
-        '<td id="cellStyle" hidden><p>{{this.id=newProduct.id}}</p></td>' +
-        '<td id="cellStyle" hidden><p>{{this.productImageName=newProduct.productImageName}}</p></td>' +
-        '<td id="cellStyle" hidden><p>{{this.productImageRightName=newProduct.productImageRightName}}</p></td>' +
-        '<td id="cellStyle" hidden><p>{{this.productImageLeftName=newProduct.productImageLeftName}}</p></td>' +
-        '<td id="cellStyle" hidden><p>{{this.productImageBackName=newProduct.productImageBackName}}</p></td>' +
-        '<td id="cellStyle" hidden><p>{{this.productSubCategoryForRequest=newProduct.productSubCategory}}</p></td>' +
-        '<td colspan="3" id="cellStyle" hidden><p>{{this.productBrandForRequest=newProduct.productBrand}}</p></td>' +
+        '<td hidden><p>{{this.id=newProduct.id}}</p></td>' +
+        '<td hidden><p>{{this.productImageName=newProduct.productImageName}}</p></td>' +
+        '<td hidden><p>{{this.productImageRightName=newProduct.productImageRightName}}</p></td>' +
+        '<td hidden><p>{{this.productImageLeftName=newProduct.productImageLeftName}}</p></td>' +
+        '<td hidden><p>{{this.productImageBackName=newProduct.productImageBackName}}</p></td>' +
+        '<td hidden><p>{{this.productSubCategoryForRequest=newProduct.productSubCategory}}</p></td>' +
+        '<td hidden><p>{{this.productBrandForRequest=newProduct.productBrand}}</p></td>' +
+        '<td hidden><p>{{this.oldProductPrice=newProduct.oldProductPrice}}</p></td>' +
         '</tr>' +
 
         '<tr>' +
@@ -124,8 +126,9 @@ Vue.component('newProduct-row', {
         '<div class="productValue" id="productValue3"><p>{{newProduct.productSubCategory}}</p></div>' +
         '</td>' +
         '<td rowspan="2" id="cellStyle" style="width:220px; height: auto">' +
-        '<div class="productValue" id="productValue3"><p>В наличии: {{newProduct.totalAmount}} ед.</p>' +
-        '</br><p>{{newProduct.productPrice}} грн</p></div>' +
+        '<div class="productValue"><p>В наличии: {{newProduct.totalAmount}} ед.</p></div>' +
+        '<div class="productValue"><p>{{newProduct.productPrice}} грн</p></div>' +
+        '<div v-if="Number(this.productPrice)<Number(this.oldProductPrice)" class="productValue" id="oldPrice"><p>{{newProduct.oldProductPrice}} грн</p></div>' +
         '</td>' +
         '</tr>' +
 

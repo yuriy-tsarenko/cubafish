@@ -456,11 +456,23 @@ td {
 #productValue3 {
     position: relative;
     width: 300px;
-    height: 50px;
+    height: 25px;
     word-wrap: break-word;
     font-family: Gill Sans, sans-serif;
-    font-size: 26px;
+    font-size: 25px;
     font-style: normal;
+    color: #000000;
+}
+
+#productOldValue {
+    position: relative;
+    width: 300px;
+    height: 25px;
+    word-wrap: break-word;
+    font-family: Gill Sans, sans-serif;
+    font-size: 25px;
+    font-style: normal;
+    text-decoration: line-through;
     color: #000000;
 }
 
@@ -956,13 +968,21 @@ footer {
 
 #proposition {
     position: relative;
-    width: 795px;
+    width: 1000px;
     bottom: 240px;
-    left: 540px;
+    margin: 0 auto;
+
+}
+
+#propositionText {
+    position: relative;
+    height: 30px;
+    left: 65px;
+    bottom: 30px;
     font-family: Arial, sans-serif;
     font-size: 22px;
     font-style: normal;
     font-weight: 600;
     color: #393900;
-    border-bottom: 3px solid #393900;
+    text-decoration: underline;
 }
