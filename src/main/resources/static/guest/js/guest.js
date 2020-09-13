@@ -86,8 +86,6 @@ Vue.component('newProduct-row', {
             totalAmount: '',
             itemAmount: 1,
             descriptionForRequest: '',
-            specification: '',
-            typeOfPurpose: '',
             productPrice: '',
             productImageName: '',
             productImageRightName: '',
@@ -108,6 +106,7 @@ Vue.component('newProduct-row', {
         '<td hidden><p>{{this.productImageBackName=newProduct.productImageBackName}}</p></td>' +
         '<td hidden><p>{{this.productPriceForBasket=newProduct.productPrice}}</p></td>' +
         '<td hidden><p>{{this.productImageName=newProduct.productImageName}}</p></td>' +
+        '<td hidden><p>{{this.oldProductPrice=newProduct.oldProductPrice}}</p></td>' +
         '</tr>' +
 
         '<tr>' +
@@ -125,7 +124,9 @@ Vue.component('newProduct-row', {
 
         '<tr>' +
         '<td id="cellStyle" style="width:300px; height: auto">' +
-        '<div class="productValue" id="productValue3"><p>{{newProduct.productPrice}} грн</p></br></div></td>' +
+        '<div class="productValue" id="productValue3"><p>{{newProduct.productPrice}} грн</p></div>' +
+        '<div v-if="Number(this.productPrice)<Number(this.oldProductPrice)" class="productValue" id="productOldValue"><p>{{newProduct.oldProductPrice}} грн</p></div>' +
+        '</td>' +
         '</tr>' +
 
         '<tr>' +
