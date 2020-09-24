@@ -188,6 +188,38 @@ Vue.component('newProduct-row', {
         '</tr>' +
         '</table>' +
         '</transition>' +
+        '<table id="fromDb">'+
+        '    <tr>'+
+        '        <td id="fromDbTd1" colspan="2">'+
+        '            <img id="fromDbImg" v-on:click="hiddenFlag" src="1.jpg" alt="photo"/>'+
+        '        </td>'+
+        '    </tr>'+
+        '    <tr>'+
+        '        <td id="fromDbTd2" colspan="2">'+
+        '           <img v-if="productImageRightName!=null" v-on:click="hiddenFlagRightSide"'+
+        '                 class="fromDbSmallImg" src="2.jpg" alt="photo"/>'+
+        '           <img v-if="productImageLeftName!=null" v-on:click="hiddenFlagLeftSide"'+
+        '                 class="fromDbSmallImg" src="3.jpg" alt="photo"/>'+
+        '           <img v-if="productImageBackName!=null" v-on:click="hiddenFlagBackSide"'+
+        '                 class="fromDbSmallImg" src="4.jpg" alt="photo"/>'+
+        '        </td>'+
+        '        <tr>'+
+        '            <td id="fromDbTd3" colspan="2">'+
+        '                Катушка с байтраннером Feima KF-6000'+
+        '                (9bb) конусообразная шпуля'+
+        '            </td>'+
+        '        </tr>'+
+        '        <tr>'+
+        '            <td id="fromDbTd4">'+
+        '               <div v-if="Number(this.productPrice)<Number(this.oldProductPrice)"'+
+        '                     id="productOldValue"><p>500 грн</p></div>'+
+        '                <div id="productValue3"><p>300 грн</p></div>'+
+        '            </td>'+
+        '            <td id="fromDbTd5">'+
+        '                <img src="shopping-cart.png" id="shoppingCart2">'+
+        '            </td>'+
+        '        </tr>'+
+        '</table>'+
         '</div>',
     methods: {
         hiddenFlag: function () {

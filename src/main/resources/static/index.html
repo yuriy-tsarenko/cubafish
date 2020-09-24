@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="initial-scale=0.7">
+    <meta name="viewport" content="width=device-width">
     <meta name="keywords" content="Интернет-магазин Cubafish">
     <meta name="description" content="cubafish.com.ua - Рыболовный интернет магазин | Все для максимального улова.">
     <meta property="og:site_name" content="www.cubafish.com.ua">
@@ -21,8 +21,11 @@
 <body>
 <header>
     <div class="wrapper">
+        <div class="mobileHamburgerBtn">
+            <img src="guest/css/images/mobileHamburgerButton5.png" id="mobileHamburger">
+        </div>
         <div class="logo">
-            <img style="width: 400px; height:auto"
+            <img id="logoImageStyle"
                  src="guest/css/images/logo777.png" alt="Logo"
                  class="logo__pic">
         </div>
@@ -37,36 +40,52 @@
             </nav>
         </div>
         <div id="appSearchForm">
-        <div class="search-box" >
-            <input type="text" class="search-txt" placeholder="Напишите фразу затем нажмите на кнопку поиска" v-model="searchTag"/>
-            <div id="searchImage" v-on:click="searchRequest"><img style="width: 40px; height: auto" src="guest/css/images/lupa.png"></div>
-        </div>
+            <div class="search-box">
+                <input type="text" class="search-txt" placeholder="Я ищу..." v-model="searchTag"/>
+                <div id="searchImage" v-on:click="searchRequest"><img id="lupaImage" src="guest/css/images/lupa.png">
+                </div>
+            </div>
         </div>
         <a id="adminNumber" href="tel:+380989900429">
-            <img style="width: 170px; height: auto" src="guest/css/images/phoneNumber.png" alt="number">
+            <img id="phoneNumberImage" src="guest/css/images/phoneNumber.png" alt="number">
         </a>
         <div class="languageKit">
-            <img style="width: 40px; height: auto" src="guest/css/images/uaLanguage.png" alt="uk" data-google-lang="uk"
-                 class="language__img">
-            <img style="width: 40px; height: auto" src="guest/css/images/enLanguage.png" alt="en" data-google-lang="en"
-                 class="language__img">
-            <img style="width: 40px; height: auto" src="guest/css/images/rusLanguage.png" alt="ru" data-google-lang="ru"
-                 class="language__img">
+            <img class="translateImage" src="guest/css/images/uaLanguage.png" alt="uk" data-google-lang="uk">
+            <img class="translateImage" src="guest/css/images/enLanguage.png" alt="en" data-google-lang="en">
+            <img class="translateImage" src="guest/css/images/rusLanguage.png" alt="ru" data-google-lang="ru">
         </div>
         <div id="basketImage">
-            <table style="width: auto; height: auto">
+            <table id="basketImageTable">
                 <tr>
                     <td>
                         <div v-if="basketItemsCount===false"><img v-on:click="activeImageAction"
-                                                                  style="width: 75px; height: 65px; border-radius:5%"
-                                                                  src="guest/css/images/shopping-cart.png"
+                                                                  class="basketPng"
+                                                                  src="guest/css/images/mobile-shopping-cart.png"
                                                                   alt="basketImage"/>
                         </div>
                         <div v-if="basketItemsCount===true"><img v-on:click="activeImageAction"
-                                                                 style="width: 75px; height: 65px; border-radius:5%"
-                                                                 src="guest/css/images/shopping-cart2.png"
+                                                                 class="basketPng"
+                                                                 src="guest/css/images/mobile-shopping-cart2.png"
                                                                  alt="basketImage"/>
-                            <div id="basketCount" style="position: relative; bottom: 65px; left: 27px"><h5>
+                            <div class="basketCount"><h5>
+                                {{basketItemsAmount}}</h5></div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table id="mobileBasketImageTable">
+                <tr>
+                    <td>
+                        <div v-if="basketItemsCount===false"><img v-on:click="activeImageAction"
+                                                                  class="basketPng"
+                                                                  src="guest/css/images/mobile-shopping-cart.png"
+                                                                  alt="basketImage"/>
+                        </div>
+                        <div v-if="basketItemsCount===true"><img v-on:click="activeImageAction"
+                                                                 class="basketPng"
+                                                                 src="guest/css/images/mobile-shopping-cart2.png"
+                                                                 alt="basketImage"/>
+                            <div class="basketCount"><h5>
                                 {{basketItemsAmount}}</h5></div>
                         </div>
                     </td>
@@ -74,7 +93,7 @@
             </table>
         </div>
         <div id="proposition">
-            <img src="guest/css/images/proposition.png" style="width: 50px; vertical-align: middle">
+            <img src="guest/css/images/proposition.png" id="propositionImage">
             <div id="propositionText">При заказе на суму от 1000грн - ДОСТАВКА ТОВАРА БЕСПЛАТНО!!!</div>
         </div>
     </div>
@@ -129,6 +148,9 @@
 <!-- end div#header -->
 <div id="pageWrapper">
     <div id="page">
+        <div id="mobilePage">
+
+        </div>
         <div id="content">
             <div id="app">
             </div>
