@@ -327,6 +327,205 @@ let appBasket = new Vue({
     }
 });
 
+Vue.component('productMobileItem-row', {
+    props: ['productMobileItem'],
+    data: function () {
+        return {
+            id: '',
+            key: '',
+            productCategory: '',
+            productSubCategory: '',
+            productBrand: '',
+            productSubCategoryForRequest: '',
+            productBrandForRequest: '',
+            totalAmount: '',
+            description: '',
+            specification: '',
+            typeOfPurpose: '',
+            productPrice: '',
+            summaryPrice: 0,
+            productImageName: '',
+            count: 1
+        }
+    },
+    template:
+        '<div>' +
+        '<table id="basketTable" style="width:85vw; height: 15vw; font-size: 3vw;' +
+        'font-family: Arial, sans-serif;font-style: normal;color: black;">' +
+        '<tr>' +
+        '<td hidden><h3>{{this.totalAmount=productMobileItem.totalAmount}}</h3></td>' +
+        '<td hidden><h3>{{this.productPrice=productMobileItem.productPrice}}</h3></td>' +
+        '<td hidden><h3>{{this.id=productMobileItem.id}}</h3></td>' +
+        '<td hidden><h3>{{this.key=productMobileItem.key}}</h3></td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td  style="alignment:center;vertical-align:center;width:10vw">' +
+        '<img style="width: 10vw; height: 10vw; border-radius:20%" :src="productMobileItem.productImageName" alt="photo"/>' +
+        '</td>' +
+        '<td  id="cellStyleDescription" style="width:35vw; height:auto">' +
+        '<div class="productValue" id="productBasketValue1"><p>{{productMobileItem.description}}</p></div>' +
+        '</td>' +
+        '<td id="cellStyle" style="width:5vw; height:auto">' +
+        '<div v-if="this.totalAmount>0" id="availableInBasket"><p>{{count}}</p></div>' +
+        '<div v-if="this.totalAmount==0" id="notAvailableInBasket"><p>Нет в наличии</p></div>' +
+        '<td id="cellStyle" style="width:10vw; height: auto">' +
+        '<input class="counterButton" type="button" v-on:click="counterPlus" >' +
+        '<input class="counterButtonMinus" type="button" v-on:click="counterMinus" >' +
+        '</td>' +
+        '<td id="cellStyle" style="width:15vw; height: auto">' +
+        '<div class="productValue" id="productBasketValue3"><p v-if="summaryPrice!==0">{{summaryPrice}} грн</p>' +
+        '<p v-if="summaryPrice===0">{{productMobileItem.productPrice}} грн</p>' +
+        '</div>' +
+        '</td>' +
+        '<td style="width:10vw; height: auto">' +
+        '<input class="deleteButton" type="button" v-on:click="deleteItem" >' +
+        '</td>' +
+        '</tr>' +
+        '</table>' +
+        '</div>',
+    methods: {
+        deleteItem: function () {
+            let idForDelete = this.id;
+            let newSet = new Set();
+            let fixedValue = this.productPrice;
+            if (this.summaryPrice === 0) {
+                this.summaryPrice = Number(fixedValue);
+            }
+            let temporaryValue = this.summaryPrice;
+
+            appBasketMobile.productMobileItems.forEach(function (item) {
+                if (item.id !== idForDelete) {
+                    newSet.add(item);
+                }
+            })
+            appBasketMobile.productMobileItems = appBasketMobile.productMobileItems.splice(0, 0);
+            for (let productFromNewSet of newSet) {
+                appBasketMobile.productMobileItems.push(productFromNewSet);
+            }
+            localStorage.removeItem(String(this.key));
+            let basketTotalAmount = (Number(localStorage.getItem('TotalAmount'))) - 1;
+            localStorage.setItem('TotalAmount', String(basketTotalAmount));
+            appSelector.totalProductPrice = appSelector.totalProductPrice - temporaryValue;
+        },
+        counterPlus: function () {
+            if ((this.count >= 1) && (this.totalAmount > 0)) {
+                let productMobileItem = {
+                    description: '',
+                    productPrice: '',
+                    totalAmount: '',
+                    productImageName: ''
+                };
+                let items = new Set(JSON.parse(localStorage.getItem(String(this.key))));
+                for (let productFromBasket of items) {
+                    if (Number(productFromBasket.totalAmount) > Number('0')) {
+                        let fixedValue = this.productPrice;
+                        if (this.summaryPrice === 0) {
+                            this.summaryPrice = Number(fixedValue);
+                        }
+                        let temporaryValue = this.summaryPrice;
+                        this.summaryPrice = (Number(fixedValue) + temporaryValue);
+
+                        productMobileItem = {
+                            description: productFromBasket.description,
+                            productPrice: this.summaryPrice,
+                            totalAmount: Number(productFromBasket.totalAmount) - Number('1'),
+                            itemAmount: Number(productFromBasket.itemAmount) + Number('1'),
+                            productImageName: productFromBasket.productImageName
+                        };
+                        this.count++;
+                        let basketItems = [];
+                        basketItems.push(productMobileItem);
+
+                        localStorage.setItem(String(this.key), JSON.stringify(basketItems));
+                        appSelector.totalProductPrice = Number(appSelector.totalProductPrice) + Number(fixedValue);
+                    }
+                }
+            }
+        },
+        counterMinus: function () {
+            if ((this.count > 1)) {
+                this.count--;
+
+                let productMobileItem = {
+                    description: '',
+                    productPrice: '',
+                    totalAmount: '',
+                    productImageName: ''
+                };
+                let items = new Set(JSON.parse(localStorage.getItem(String(this.key))));
+                for (let productFromBasket of items) {
+                    let fixedValue = this.productPrice;
+
+                    let temporaryValue = this.summaryPrice;
+                    this.summaryPrice = (Number(temporaryValue) - fixedValue);
+                    productMobileItem = {
+                        description: productFromBasket.description,
+                        productPrice: this.summaryPrice,
+                        totalAmount: Number(productFromBasket.totalAmount) + Number('1'),
+                        itemAmount: Number(productFromBasket.itemAmount) - Number('1'),
+                        productImageName: productFromBasket.productImageName
+                    };
+                    let basketItems = [];
+                    basketItems.push(productMobileItem);
+                    localStorage.setItem(String(this.key), JSON.stringify(basketItems));
+                    appSelector.totalProductPrice = Number(appSelector.totalProductPrice) - Number(fixedValue);
+                }
+
+            }
+        }
+    }
+});
+
+Vue.component('productMobileItems-list', {
+    props: ['productMobileItems'],
+    data: function () {
+        return {
+            maxId: ''
+        }
+    },
+    template: '<div>' +
+        '<productMobileItem-row v-for="productMobileItem in productMobileItems" :key="productMobileItem.id" :productMobileItem="productMobileItem"/>' +
+        '</div>',
+    created: function () {
+
+        this.maxId = localStorage.getItem('ID');
+        if (this.maxId !== null) {
+            let maxValue = Number(this.maxId)
+            let itemId = 0;
+            for (let i = 0; i <= maxValue; i++) {
+                let item = localStorage.getItem(String(i));
+                if (item !== null) {
+                    let items = new Set(JSON.parse(localStorage.getItem(String(i))));
+                    for (let productFromBasket of items) {
+                        let productMobileItem = {
+                            id: itemId,
+                            key: i,
+                            description: productFromBasket.description,
+                            productPrice: productFromBasket.productPrice,
+                            totalAmount: productFromBasket.totalAmount,
+                            productImageName: productFromBasket.productImageName
+                        };
+                        this.productMobileItems.push(productMobileItem);
+                        itemId++;
+                        appSelector.totalProductPrice = (Number(appSelector.totalProductPrice))
+                            + (Number(productMobileItem.productPrice));
+                    }
+                }
+            }
+        }
+    }
+
+
+});
+
+let appBasketMobile = new Vue({
+    el: '#appBasketMobile',
+    template: '<productMobileItems-list :productMobileItems="productMobileItems"/>',
+    data: {
+        productMobileItems: []
+    }
+});
+
 let wrapperFooter = new Vue({
     el: '#wrapperFooter',
     methods: {

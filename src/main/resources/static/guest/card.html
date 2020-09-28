@@ -20,7 +20,8 @@
     <div class="wrapper">
         <div class="mobileBasketText">Корзина</div>
         <div class="mobileCloseBtn">
-            <img src="css/images/close.png" class="mobileCloseBtnImg"></div>
+            <a href="https://cubafish.com.ua"><img src="css/images/close.png" class="mobileCloseBtnImg"></a>
+        </div>
         <div class="logo"><a name="card"></a>
             <a href="https://cubafish.com.ua">
                 <img style="width: 450px; height: auto;"
@@ -66,7 +67,7 @@
                 <div id="summaryDivAgreement" v-on:click="showAgreement=false">
                     <table id="summaryTableAgreement">
                         <tr>
-                            <td >
+                            <td>
                                 <div class="closeAgreement">
                                     <img src="css/images/close.png" style="height: 15px"></div>
                                 <p style="margin-left: 10px; margin-right: 10px">&ensp;&ensp;&ensp;Оформляя заказ
@@ -105,7 +106,9 @@
                 <div id="sidebarMobile">
                     <div class="sideText">Ваш заказ:</div>
                     <div class="basketItems">
-                        <div id="appBasketMobile"></div>
+                        <div id="appBasketMobile">
+
+                        </div>
                     </div>
                     <hr class="line">
                     <div class="summaryText">Всего: {{totalProductPrice}} грн</div>

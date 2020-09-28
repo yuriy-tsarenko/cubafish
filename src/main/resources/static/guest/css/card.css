@@ -1,4 +1,4 @@
-@media only screen and (min-device-width: 501px) {
+@media only screen and (min-device-width: 601px) {
     * {
         margin: 0;
         padding: 0;
@@ -1664,7 +1664,8 @@
     }
 }
 
-@media only screen and (max-device-width: 500px) {
+@media (max-device-width: 600px) and (orientation: portrait) {
+
     * {
         margin: 0;
         padding: 0;
@@ -2285,10 +2286,6 @@
         height: 80vh;
     }
 
-    /*style="border-collapse: */
-    /*collapse;border: 1px none black; */
-    /*border-bottom-style: solid; */
-    /*width: 800px; height: auto"*/
     .closeAgreement {
         position: relative;
         margin-bottom: 4vw;
@@ -2347,6 +2344,107 @@
         text-align: center;
     }
 
+
+    .productValue {
+        margin: auto 1vw;
+    }
+
+    #productValue1 {
+        position: relative;
+        width: 35vw;
+        height: 15vw;
+        word-wrap: break-word;
+        font-family: Gill Sans, sans-serif;
+        font-size: 4vw;
+        font-style: normal;
+        color: #000000;
+    }
+
+    #productValue3 {
+        position: relative;
+        width: 15vw;
+        height: 10vw;
+        word-wrap: break-word;
+        font-family: Gill Sans, sans-serif;
+        font-size: 5vw;
+        font-style: normal;
+        color: #000000;
+    }
+
+    #availableInBasket {
+        position: relative;
+        font-size: 5vw;
+        width: 5vw
+    }
+
+    #notAvailableInBasket {
+        position: relative;
+        font-size: 4vw;
+        width: 5vw
+    }
+
+    .counterButton {
+        position: relative;
+        margin: 2.5vw 1vw;
+        width: 5vw;
+        height: 5vw;
+        background-image: url(images/plus.png);
+        background-size: 5vw 5vw;
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 0;
+        border-radius: 10px;
+    }
+
+    .counterButtonMinus {
+        position: relative;
+        margin: 2.5vw 1vw;
+        width: 5vw;
+        height: 5vw;
+        background-image: url(images/minus.png);
+        background-size: 5vw 5vw;
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 0;
+        border-radius: 10px;
+    }
+
+    .deleteButton {
+        position: relative;
+        margin-top: 2vw;
+        margin-bottom: 2vw;
+        width: 5vw;
+        height: 5vw;
+        background-image: url(images/close.png);
+        background-size: 5vw 5vw;
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 0;
+        border-radius: 10px;
+    }
+
+    .deleteButton:hover {
+        background: url(images/close2.png);
+        tansition: all .3s linear;
+        -webkit-transition: all .3s linear;
+        -moz-transition: all .3s linear;
+    }
+
+    .deleteButton:active {
+        background: url(images/close.png);
+        tansition: all .1s linear;
+        -webkit-transition: all .1s linear;
+        -moz-transition: all .1s linear;
+    }
+
+    #cellStyleDescription {
+        text-align: left;
+        vertical-align: center;
+    }
+
     .fade-enter-active, .fade-leave-active {
         transition: opacity .5s;
     }
@@ -2358,12 +2456,6 @@
 
 
 @media only screen and (max-device-width: 360px) {
-    .mobileHamburgerBtn {
-        position: relative;
-        left: 1%;
-        top: 3.6vh;
-        width: 12%;
-    }
 
     .closeAgreement {
         left: 79vw;
@@ -2371,11 +2463,8 @@
 }
 
 @media only screen and (max-device-width: 280px) {
-    .mobileHamburgerBtn {
-        position: relative;
-        left: 1%;
-        top: 3vh;
-        width: 12%;
+    #summaryTableAgreement {
+        font-size: 1.8vh;
     }
 
     .closeAgreement {

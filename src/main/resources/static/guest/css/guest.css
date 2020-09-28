@@ -1,4 +1,4 @@
-@media only screen and (min-device-width: 501px) {
+@media (min-device-width: 601px) {
     * {
         margin: 0;
         padding: 0;
@@ -91,6 +91,10 @@
     }
 
     /*check it*/
+    #appSearchFormMobile {
+        display: none;
+    }
+
     .search-box {
         position: relative;
         background-color: white;
@@ -123,7 +127,7 @@
 
     }
 
-    #searchImage {
+    .searchImage {
         position: relative;
         right: 0;
         left: 930px;
@@ -132,7 +136,7 @@
         height: auto;
     }
 
-    #searchImage:hover {
+    .searchImage:hover {
         background: #d0d0d0;
         border-radius: 10px;
         cursor: pointer;
@@ -264,6 +268,10 @@
 
     /* Sidebar */
     /*getFromDb*/
+    #mobilePage {
+        display: none;
+    }
+
     #fromDb {
         border-collapse: collapse;
         border: 1px solid #949393;
@@ -449,18 +457,19 @@
         color: #000000;
     }
 
-    /*#productValue3 {*/
-    /*    position: relative;*/
-    /*    bottom: 10px;*/
-    /*    right: 80px;*/
-    /*    width: 300px;*/
-    /*    height: 25px;*/
-    /*    word-wrap: break-word;*/
-    /*    font-family: Gill Sans, sans-serif;*/
-    /*    font-size: 23px;*/
-    /*    font-style: normal;*/
-    /*    color: #797979;*/
-    /*}*/
+    #productValue3 {
+        position: relative;
+        bottom: 10px;
+        right: 80px;
+        width: 300px;
+        height: 25px;
+        word-wrap: break-word;
+        font-family: Gill Sans, sans-serif;
+        font-size: 23px;
+        font-style: normal;
+        color: #797979;
+    }
+
     #productOldValue {
         position: relative;
         right: 105px;
@@ -802,7 +811,7 @@
     }
 
 
-/*check it*/
+    /*check it*/
     #horizontalButton {
         position: relative;
         left: 2px;
@@ -929,7 +938,7 @@
     }
 
 
-    #searchInformation {
+    .searchInformation {
         position: relative;
         width: 1000px;
         height: 100px;
@@ -938,7 +947,14 @@
         border-bottom: 3px solid #393900;
     }
 
-    #textInformation {
+    .searchResultImage {
+        position: relative;
+        width: 70px;
+        height: auto;
+        left: 300px
+    }
+
+    .textInformation {
         position: relative;
         left: 385px;
         bottom: 59px;
@@ -991,7 +1007,7 @@
         height: auto;
     }
 
-    #lupaImage {
+    .lupaImage {
         width: 40px;
         height: auto
     }
@@ -1034,8 +1050,7 @@
     }
 }
 
-
-@media only screen and (max-device-width: 500px) {
+@media (max-device-width: 600px) and (orientation: portrait) {
 
     * {
         margin: 0;
@@ -1051,17 +1066,17 @@
     }
 
     header {
-       position: relative;
-        width: 100%;
-        height: 80px;
+        position: relative;
+        width: 100.4vw;
+        height: 11.9vh;
         background-color: transparent;
     }
 
     .wrapper {
         width: 100%;
-        height: 80px;
+        height: 100%;
         margin: 0 auto;
-        background-color: #585801;;
+        background-color: #585801;
     }
 
     #mobileHamburger {
@@ -1070,54 +1085,43 @@
         cursor: pointer;
     }
 
+    /*check it*/
     .mobileHamburgerBtn {
         position: relative;
         left: 1%;
-        top: 2.5vh;
+        top: 27%;
         width: 12%;
     }
 
+    /*check it*/
     .logo {
         display: none;
     }
 
     #appLogoutButtons {
         display: none;
+    }
+
+    #appSearchFormMobile {
         position: relative;
-        width: 1100px;
-        bottom: 100px;
-        left: 370px;
+        width: 65%;
+        height: 43%;
+        left: 16%;
+        bottom: 18%;
     }
 
     #appSearchForm {
-        position: relative;
-        width: 60%;
-        height: 2vh;
-        left: 16vw;
-        bottom: 2vh;
+        display: none;
     }
 
     .search-box {
         position: relative;
         background-color: white;
         width: 100%;
-        height: 2vh;
+        height: 100%;
         border-radius: 50px;
-        padding: 10px;
         border: 1px solid #d0d0d0;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    }
-
-    .search-txt {
-        position: relative;
-        width: 90%;
-        height: 2vh;
-        outline: none;
-        background: none;
-        padding: 0;
-        font-size: 1.5vh;
-        border: none;
-        bottom: 2px;
     }
 
     .search-box:hover {
@@ -1125,25 +1129,35 @@
         border: 1px solid #404040;
     }
 
-    #searchImage {
+    .search-txt {
         position: relative;
-        margin: 3% 1%;
+        padding-left: 3%;
+        width: 85%;
+        height: 100%;
+        outline: none;
+        background: none;
+        font-size: 100%;
+        border: none;
+    }
+
+    .searchImage {
+        position: relative;
         right: 0;
-        left: 90%;
-        bottom: 3.4vh;
-        width: 7vw;
+        left: 87%;
+        bottom: 93%;
+        width: 12%;
         height: auto;
     }
 
-    #searchImage:hover {
-        background: #d0d0d0;
+    .searchImage:hover {
+        background: transparent;
         border-radius: 10px;
         cursor: pointer;
     }
 
-    #lupaImage {
+    .lupaImage {
         position: relative;
-        width: 7vw;
+        width: 100%;
         height: auto
     }
 
@@ -1152,35 +1166,41 @@
     }
 
     #mobileBasketImageTable {
-        width: auto;
+        width: 100%;
         height: auto;
     }
 
     .basketCount {
         position: relative;
-        bottom: 65px;
-        left: 27px;
+        width: 25%;
+        height: 100%;
+        font-family: Arial, sans-serif;
+        font-size: 2.5vw;
+        font-style: normal;
+        color: #ffffff;
+        left: 77%;
+        bottom: -1.8vh;
     }
 
     .basketPng {
-        width: 15vw;
-        border-radius: 5%
+        width: 100%;
+        border-radius: 5%;
+    }
+
+    #basketPngContainer {
+        /*width: 35%;*/
     }
 
     #basketImage {
         position: relative;
-        top: auto;
-        bottom: 5vh;
-        right: auto;
-        left: 81.5vw;
-        width: 15vw;
+        bottom: 83%;
+        left: 81.3%;
+        width: 15%;
+        height: 15%;
     }
 
     #adminNumber {
         display: none;
-        position: relative;
-        left: 1470px;
-        bottom: 200px;
     }
 
     .languageKit {
@@ -1211,7 +1231,7 @@
     #pageWrapper {
         position: relative;
         width: 100vw;
-        height: 90.1vh;
+        height: 87.5vh;
         background-color: #514242;
     }
 
@@ -1231,7 +1251,7 @@
         overflow-y: auto;
     }
 
-    #fromDb {
+    #fromDbMobile {
         position: relative;
         width: 90%;
         margin: 0.5vw auto;
@@ -1271,11 +1291,6 @@
         width: 50%;
     }
 
-    #shoppingCart2 {
-        position: relative;
-        width: 25%;
-    }
-
     #fromDbImg {
         position: relative;
         width: 60%;
@@ -1312,7 +1327,199 @@
         color: #797979;
     }
 
-    #content {
+    #window {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 900;
+        background-color: rgba(26, 26, 26, 0.5);
+    }
+
+    #insideWindow {
+        position: relative;
+        margin: 0 auto;
+        width: 85vw;
+        height: 45vh;
+        top: 10%;
+    }
+
+    #bigPhoto {
+        position: relative;
+        width: 85vw;
+        height: 45vh;
+        border: none;
+    }
+
+    .bueButtonMobile {
+        position: relative;
+        width: 13vw;
+        height: 6vh;
+        background-image: url(images/shopping-cart.png);
+        background-size: 13vw 6vh;
+        background-color: transparent;
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 0;
+    }
+
+    #appShowBasket {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 900;
+        background-color: rgba(26, 26, 26, 0.5);
+    }
+
+    .insideWindowBasket {
+        position: relative;
+        margin: 0 auto;
+        width: 85vw;
+        height: 15vh;
+        top: 25%;
+    }
+
+    .summaryDiv {
+        position: inherit;
+        margin: 0 auto;
+        width: 85vw;
+        height: 15vh;
+        top: 25%;
+    }
+
+    .summaryTable {
+        background-color: #585801;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        font-size: 2vh;
+        font-style: normal;
+        color: #ffffff;
+        border-collapse: collapse;
+        border: 1px none black;
+        border-bottom-style: solid;
+        position: relative;
+        width: 85vw;
+        height: 15vh;
+    }
+
+    .summaryTableTd {
+        border-collapse: collapse;
+        border: 1px none black;
+        border-bottom-style: solid;
+        width: 85vw;
+        height: 15vh;
+        text-align: center;
+    }
+
+    .searchInformation {
+        position: relative;
+        margin: 10vh auto;
+        width: 90%;
+        height: 20%;
+        border-bottom: 3px solid #393900;
+    }
+
+    .searchResultImage {
+        position: relative;
+        width: 10vw;
+        height: auto;
+        left: 12vw;
+        top: 2vh;
+    }
+
+    .textInformation {
+        position: relative;
+        height: 2vh;
+        width: 50vw;
+        left: 30vw;
+        bottom: 1.5vh;
+        font-family: Arial, sans, serif;
+        font-size: 2vh;
+        font-style: normal;
+        font-weight: 600;
+        color: #393900;
+    }
+
+    .catalogBtn {
+        position: relative;
+        width: 100%;
+        margin-top: 2vw;
+        height: auto;
+        font-family: Arial, sans, serif;
+        font-size: 4vw;
+        font-style: normal;
+        font-weight: 600;
+        color: #393900;
+        line-height: 1;
+        word-wrap: break-word;
+        text-align: left;
+        user-select: none;
+        cursor: pointer;
+    }
+
+    .catalogBtn:hover {
+        border-bottom: #393900 2px solid;
+    }
+
+    .menuKitMobile {
+        position: relative;
+        width: 35vw;
+        float: right;
+        margin-right: 2vw;
+        cursor: pointer;
+    }
+
+    .languageKitMobile {
+        position: relative;
+        float: right;
+        width: 35vw;
+        left: 3vw;
+    }
+
+    .translateImage {
+        width: 10vw;
+        height: auto;
+        cursor: pointer;
+        border-collapse: collapse;
+        border: 0 solid;
+        border-radius: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    #menuKitTable {
+        width: 100%;
+        border-collapse: collapse;
+        border-bottom: 1px solid #393900;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        background-color: white;
+    }
+
+    #navigationMenuKit {
+        position: relative;
+        margin-left: 2vw;
+        font-family: Arial, sans, serif;
+        font-size: 5vw;
+        font-style: normal;
+        font-weight: 600;
+        color: #393900;
+        line-height: 1;
+        word-wrap: break-word;
+        text-align: left;
+        cursor: pointer;
+    }
+
+    #appSearchResult {
+        display: none;
+    }
+
+    #fromDb {
+        display: none;
+    }
+
+    #app {
         display: none;
     }
 
@@ -1325,51 +1532,98 @@
     }
 }
 
-
-@media only screen and (max-device-width: 360px) {
-    .mobileHamburgerBtn {
-        position: relative;
-        left: 1%;
-        top: 3.6vh;
-        width: 12%;
+@media (max-device-width: 320px) {
+    header {
+        width: 100.1vw;
+        height: 13.5vh;
     }
 
-    #searchImage {
-        bottom: 4vh;
-    }
-
-    .search-txt {
-        bottom: 1vh;
+    #pageWrapper {
+        width: 100vw;
+        height: 85.8vh;
     }
 }
 
-@media only screen and (max-device-width: 280px) {
-    .mobileHamburgerBtn {
-        position: relative;
-        left: 1%;
-        top: 3vh;
-        width: 12%;
+@media (max-device-width: 360px) {
+    header {
+        width: 100.1vw;
+        height: 12vh;
     }
 
-    #searchImage {
-        bottom: 3vh;
+    #pageWrapper {
+        width: 100vw;
+        height: 87.4vh;
+    }
+}
+
+@media (max-device-width: 375px) {
+    header {
+        width: 100.1vw;
+        height: 10vh;
     }
 
-    .search-txt {
-        bottom: 0.7vh;
+    #pageWrapper {
+        width: 100vw;
+        height: 87.4vh;
+    }
+}
+
+@media (max-device-width: 384px) {
+    header {
+        width: 100.1vw;
+        height: 12vh;
     }
 
-    .search-box {
-        height: 1.5vh;
+    #pageWrapper {
+        width: 100vw;
+        height: 87.4vh;
+    }
+}
+
+@media (max-device-width: 393px) {
+    header {
+        width: 100.1vw;
+        height: 10vh;
     }
 
-    #appSearchForm {
-        bottom: 1.5vh;
+    #pageWrapper {
+        width: 100vw;
+        height: 89.5vh;
+    }
+}
+
+@media (max-device-width: 411px) {
+    header {
+        width: 100.1vw;
+        height: 10vh;
     }
 
-    #basketImage {
-        bottom: 4vh;
-        left: 82vw;
+    #pageWrapper {
+        width: 100vw;
+        height: 89.5vh;
+    }
+}
+
+@media (max-device-height: 732px) and (orientation: portrait) {
+    header {
+        width: 100.1vw;
+        height: 12.5vh;
     }
 
+    #pageWrapper {
+        width: 100vw;
+        height: 86.8vh;
+    }
+}
+
+@media (max-device-width: 280px) {
+    header {
+        width: 100.1vw;
+        height: 10.5vh;
+    }
+
+    #pageWrapper {
+        width: 100vw;
+        height: 89.1vh;
+    }
 }

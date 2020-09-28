@@ -21,7 +21,7 @@
 <body>
 <header>
     <div class="wrapper">
-        <div class="mobileHamburgerBtn">
+        <div id="appMobileCatalog" class="mobileHamburgerBtn" v-on:click="hamburgerBtnHiddenFlag">
             <img src="guest/css/images/mobileHamburgerButton5.png" id="mobileHamburger">
         </div>
         <div class="logo">
@@ -42,7 +42,16 @@
         <div id="appSearchForm">
             <div class="search-box">
                 <input type="text" class="search-txt" placeholder="Я ищу..." v-model="searchTag"/>
-                <div id="searchImage" v-on:click="searchRequest"><img id="lupaImage" src="guest/css/images/lupa.png">
+                <div class="searchImage" v-on:click="searchRequest"><img class="lupaImage"
+                                                                         src="guest/css/images/lupa.png">
+                </div>
+            </div>
+        </div>
+        <div id="appSearchFormMobile">
+            <div class="search-box">
+                <input type="text" class="search-txt" placeholder="Я ищу..." v-model="searchTag"/>
+                <div class="searchImage" v-on:click="searchRequest"><img class="lupaImage"
+                                                                         src="guest/css/images/lupa.png">
                 </div>
             </div>
         </div>
@@ -60,12 +69,12 @@
                     <td>
                         <div v-if="basketItemsCount===false"><img v-on:click="activeImageAction"
                                                                   class="basketPng"
-                                                                  src="guest/css/images/mobile-shopping-cart.png"
+                                                                  src="guest/css/images/shopping-cart.png"
                                                                   alt="basketImage"/>
                         </div>
                         <div v-if="basketItemsCount===true"><img v-on:click="activeImageAction"
                                                                  class="basketPng"
-                                                                 src="guest/css/images/mobile-shopping-cart2.png"
+                                                                 src="guest/css/images/shopping-cart2.png"
                                                                  alt="basketImage"/>
                             <div class="basketCount"><h5>
                                 {{basketItemsAmount}}</h5></div>
@@ -75,18 +84,22 @@
             </table>
             <table id="mobileBasketImageTable">
                 <tr>
+                    <td style="height: 2.5vw">
+                        <div class="basketCount"><h5>
+                            {{basketItemsAmount}}</h5></div>
+                    </td>
+                </tr>
+                <tr>
                     <td>
-                        <div v-if="basketItemsCount===false"><img v-on:click="activeImageAction"
-                                                                  class="basketPng"
-                                                                  src="guest/css/images/mobile-shopping-cart.png"
-                                                                  alt="basketImage"/>
+                        <div id="basketPngContainer" v-if="basketItemsCount===false"><img v-on:click="activeImageAction"
+                                                                                          class="basketPng"
+                                                                                          src="guest/css/images/mobile-shopping-cart.png"
+                                                                                          alt="basketImage"/>
                         </div>
                         <div v-if="basketItemsCount===true"><img v-on:click="activeImageAction"
                                                                  class="basketPng"
                                                                  src="guest/css/images/mobile-shopping-cart2.png"
                                                                  alt="basketImage"/>
-                            <div class="basketCount"><h5>
-                                {{basketItemsAmount}}</h5></div>
                         </div>
                     </td>
                 </tr>
@@ -149,59 +162,93 @@
 <div id="pageWrapper">
     <div id="page">
         <div id="mobilePage">
-
-        </div>
-        <div id="content">
-            <div id="app">
-            </div>
-            <transition name="fade">
-                <div v-if="show" id="appShowBasket" v-on:click="show=false">
-                    <div id="insideWindowBasket" v-on:click="show=false">
-                        <div id="summaryDiv" v-on:click="show=false">
-                            <table id="summaryTable">
-                                <tr>
-                                    <td style="border-collapse: collapse;border: 1px none black;border-bottom-style: solid; width: 800px; height: auto">
-                                        <p>Товар добавлен в корзину</p>
-                                    </td>
-                                </tr>
-                            </table>
+            <table id="menuKitTable">
+                <tr>
+                    <td>
+                        <div id="navigationMenuKit" v-if="showNavigation">
+                            <div v-on:click="hamburgerBtnHiddenFlag">
+                                <p v-if="menuMobileBtn">Главная</p>
+                                <p v-if="menuMobileBtnActive"><<-Назад</p>
+                            </div>
                         </div>
+                    </td>
+                    <td>
+                        <div id="flagMenuKit" v-show="flagShowKit">
+                            <div id="appMenuKitMobile">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <div id="appSearchResultMobile">
+                <div class="searchInformation" v-if="searchResult">
+                    <img src="guest/css/images/information.png"
+                         class="searchResultImage">
+                    <p class="textInformation"> - Ничего не найдено</p>
+                </div>
+            </div>
+            <div id="appMobileCategory">
+            </div>
+            <div id="appMobileSubCategory">
+            </div>
+            <div id="appProductBrandMobile">
+            </div>
+            <div id="appMobile">
+            </div>
+        </div>
+    </div>
+    <div id="content">
+        <div id="app">
+        </div>
+        <transition name="fade">
+            <div v-if="show" id="appShowBasket" v-on:click="show=false">
+                <div class="insideWindowBasket" v-on:click="show=false">
+                    <div class="summaryDiv" v-on:click="show=false">
+                        <table class="summaryTable">
+                            <tr>
+                                <td class="summaryTableTd">
+                                    <p>Товар добавлен в корзину</p>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
-            </transition>
-            <div id="appSearchResult">
-                <div id="searchInformation" v-if="searchResult">
-                    <img src="guest/css/images/information.png"
-                         style="position: relative; width: 70px; height: auto; left: 300px">
-                    <p id="textInformation"> - Ничего не найдено</p>
-                </div>
+            </div>
+        </transition>
+        <div id="appSearchResult">
+            <div class="searchInformation" v-if="searchResult">
+                <img src="guest/css/images/information.png"
+                     class="searchResultImage">
+                <p class="textInformation"> - Ничего не найдено</p>
             </div>
         </div>
-        <!--start div#sidebar-->
-        <div id="sidebar">
-            <div id="appCatalog">
-                <div v-if="hamburgerBtn" class="hamburgerBtn" v-on:click="createCategories">
-                    <img src="guest/css/images/hamburgerButton.png" style="width: 30px; height: 24px; vertical-align: middle;
-                    margin-left: 10px; margin-right: 10px; margin-bottom: 7px">
-                    Каталог
-                </div>
-                <div v-if="hamburgerBtnActive" class="hamburgerBtn" v-on:click="hamburgerBtnHiddenFlag">
-                    <img src="guest/css/images/hamburgerButton.png" style="width: 30px; height: 24px; vertical-align: middle;
-                    margin-left: 10px; margin-right: 10px;margin-bottom: 7px">
-                    Назад
-                </div>
-            </div>
-            <hr id="menuLine">
-            <div id="appCategory">
-            </div>
-            <div id="appSubCategory">
-            </div>
-            <div id="appProductBrand">
-            </div>
-        </div>
-        <!-- end div#content -->
-        <!-- end div#sidebar -->
     </div>
+    <!--start div#sidebar-->
+    <div id="sidebar">
+        <div id="appCatalog">
+            <div v-if="hamburgerBtn" class="hamburgerBtn" v-on:click="createCategories">
+                <img src="guest/css/images/hamburgerButton.png" style="width: 30px; height: 24px; vertical-align: middle;
+                    margin-left: 10px; margin-right: 10px; margin-bottom: 7px">
+                Каталог
+            </div>
+            <div v-if="hamburgerBtnActive" class="hamburgerBtn" v-on:click="hamburgerBtnHiddenFlag">
+                <img src="guest/css/images/hamburgerButton.png" style="width: 30px; height: 24px; vertical-align: middle;
+                    margin-left: 10px; margin-right: 10px;margin-bottom: 7px">
+                Назад
+            </div>
+        </div>
+        <hr id="menuLine">
+        <div id="appCategory">
+        </div>
+        <div id="appSubCategory">
+        </div>
+        <div id="appProductBrand">
+        </div>
+    </div>
+    <!-- end div#content -->
+    <!-- end div#sidebar -->
+</div>
 </div>
 <!-- end div#page -->
 <!-- end div#wrapper -->
