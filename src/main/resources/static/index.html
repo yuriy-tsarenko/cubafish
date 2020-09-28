@@ -197,58 +197,59 @@
             <div id="appMobile">
             </div>
         </div>
-    </div>
-    <div id="content">
-        <div id="app">
-        </div>
-        <transition name="fade">
-            <div v-if="show" id="appShowBasket" v-on:click="show=false">
-                <div class="insideWindowBasket" v-on:click="show=false">
-                    <div class="summaryDiv" v-on:click="show=false">
-                        <table class="summaryTable">
-                            <tr>
-                                <td class="summaryTableTd">
-                                    <p>Товар добавлен в корзину</p>
-                                </td>
-                            </tr>
-                        </table>
+
+        <div id="content">
+            <div id="app">
+            </div>
+            <transition name="fade">
+                <div v-if="show" id="appShowBasket" v-on:click="show=false">
+                    <div class="insideWindowBasket" v-on:click="show=false">
+                        <div class="summaryDiv" v-on:click="show=false">
+                            <table class="summaryTable">
+                                <tr>
+                                    <td class="summaryTableTd">
+                                        <p>Товар добавлен в корзину</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </transition>
-        <div id="appSearchResult">
-            <div class="searchInformation" v-if="searchResult">
-                <img src="guest/css/images/information.png"
-                     class="searchResultImage">
-                <p class="textInformation"> - Ничего не найдено</p>
+            </transition>
+            <div id="appSearchResult">
+                <div class="searchInformation" v-if="searchResult">
+                    <img src="guest/css/images/information.png"
+                         class="searchResultImage">
+                    <p class="textInformation"> - Ничего не найдено</p>
+                </div>
             </div>
         </div>
-    </div>
-    <!--start div#sidebar-->
-    <div id="sidebar">
-        <div id="appCatalog">
-            <div v-if="hamburgerBtn" class="hamburgerBtn" v-on:click="createCategories">
-                <img src="guest/css/images/hamburgerButton.png" style="width: 30px; height: 24px; vertical-align: middle;
+        <!--start div#sidebar-->
+        <div id="sidebar">
+            <div id="appCatalog">
+                <div v-if="hamburgerBtn" class="hamburgerBtn" v-on:click="createCategories">
+                    <img src="guest/css/images/hamburgerButton.png" style="width: 30px; height: 24px; vertical-align: middle;
                     margin-left: 10px; margin-right: 10px; margin-bottom: 7px">
-                Каталог
-            </div>
-            <div v-if="hamburgerBtnActive" class="hamburgerBtn" v-on:click="hamburgerBtnHiddenFlag">
-                <img src="guest/css/images/hamburgerButton.png" style="width: 30px; height: 24px; vertical-align: middle;
+                    Каталог
+                </div>
+                <div v-if="hamburgerBtnActive" class="hamburgerBtn" v-on:click="hamburgerBtnHiddenFlag">
+                    <img src="guest/css/images/hamburgerButton.png" style="width: 30px; height: 24px; vertical-align: middle;
                     margin-left: 10px; margin-right: 10px;margin-bottom: 7px">
-                Назад
+                    Назад
+                </div>
+            </div>
+            <hr id="menuLine">
+            <div id="appCategory">
+            </div>
+            <div id="appSubCategory">
+            </div>
+            <div id="appProductBrand">
             </div>
         </div>
-        <hr id="menuLine">
-        <div id="appCategory">
-        </div>
-        <div id="appSubCategory">
-        </div>
-        <div id="appProductBrand">
-        </div>
+
+        <!-- end div#content -->
+        <!-- end div#sidebar -->
     </div>
-    <!-- end div#content -->
-    <!-- end div#sidebar -->
-</div>
 </div>
 <!-- end div#page -->
 <!-- end div#wrapper -->
