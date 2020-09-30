@@ -251,6 +251,10 @@
         display: none;
     }
 
+    .mobileHeader {
+        display: none;
+    }
+
     /* Content */
     #content {
         position: relative;
@@ -1050,7 +1054,7 @@
     }
 }
 
-@media (max-device-width: 600px) and (orientation: portrait) {
+@media (max-device-width: 600px) {
 
     * {
         margin: 0;
@@ -1068,7 +1072,7 @@
     header {
         position: relative;
         width: 100.4vw;
-        height: 11.9vh;
+        height: 120px;
         background-color: transparent;
     }
 
@@ -1079,18 +1083,26 @@
         background-color: #585801;
     }
 
+    #appMobileCatalog {
+        position: relative;
+        margin: 0 auto;
+    }
+
     #mobileHamburger {
         position: relative;
         width: 100%;
         cursor: pointer;
     }
 
-    /*check it*/
+    .mobileHeader {
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+    }
+
     .mobileHamburgerBtn {
         position: relative;
-        left: 1%;
-        top: 27%;
-        width: 12%;
+        width: 75%;
     }
 
     /*check it*/
@@ -1104,10 +1116,8 @@
 
     #appSearchFormMobile {
         position: relative;
-        width: 65%;
-        height: 43%;
-        left: 16%;
-        bottom: 18%;
+        width: 100%;
+        height: 50%;
     }
 
     #appSearchForm {
@@ -1132,7 +1142,7 @@
     .search-txt {
         position: relative;
         padding-left: 3%;
-        width: 85%;
+        width: 80%;
         height: 100%;
         outline: none;
         background: none;
@@ -1143,9 +1153,9 @@
     .searchImage {
         position: relative;
         right: 0;
-        left: 87%;
-        bottom: 93%;
-        width: 12%;
+        left: 82%;
+        bottom: 90%;
+        width: 18%;
         height: auto;
     }
 
@@ -1166,8 +1176,8 @@
     }
 
     #mobileBasketImageTable {
-        width: 100%;
-        height: auto;
+        width: 90%;
+        height: 90%;
     }
 
     .basketCount {
@@ -1177,9 +1187,16 @@
         font-family: Arial, sans-serif;
         font-size: 2.5vw;
         font-style: normal;
+        text-align: center;
         color: #ffffff;
-        left: 77%;
-        bottom: -1.8vh;
+        left: 12.8vw;
+        bottom: -4vw;
+    }
+
+    .basketCountNumberMobile {
+        position: relative;
+        width: 75%;
+        margin: 0 auto;
     }
 
     .basketPng {
@@ -1187,16 +1204,11 @@
         border-radius: 5%;
     }
 
-    #basketPngContainer {
-        /*width: 35%;*/
-    }
-
-    #basketImage {
+    #basketImageMobile {
         position: relative;
-        bottom: 83%;
-        left: 81.3%;
-        width: 15%;
-        height: 15%;
+        margin: auto;
+        width: 100%;
+        height: 100%;
     }
 
     #adminNumber {
@@ -1211,17 +1223,12 @@
         bottom: 190px;
     }
 
-    #basketImage:hover {
+    #basketImageMobile:hover {
         cursor: pointer;
     }
 
     #proposition {
         display: none;
-        position: relative;
-        width: 1000px;
-        bottom: 240px;
-        margin: 0 auto;
-
     }
 
     #moveBackground {
@@ -1532,94 +1539,160 @@
     }
 }
 
-@media (max-device-width: 320px) {
-    header {
-        width: 100.1vw;
-        height: 13.5vh;
-    }
-
-    #pageWrapper {
-        width: 100vw;
-        height: 85.8vh;
+@media (max-device-width: 500px) {
+    .basketCount {
+        left: 12.5vw;
+        bottom: -5.5vw;
     }
 }
 
-@media (max-device-width: 360px) {
+@media (max-device-width: 414px) {
     header {
-        width: 100.1vw;
-        height: 12vh;
+        width: 100.9vw;
+        height: 85px;
+    }
+
+    .basketCount {
+        left: 12.5vw;
+        bottom: -4vw;
+    }
+
+    .searchImage {
+        width: 18%;
+        bottom: 8.8vw;
     }
 
     #pageWrapper {
         width: 100vw;
-        height: 87.4vh;
-    }
-}
-
-@media (max-device-width: 375px) {
-    header {
-        width: 100.1vw;
-        height: 10vh;
-    }
-
-    #pageWrapper {
-        width: 100vw;
-        height: 87.4vh;
-    }
-}
-
-@media (max-device-width: 384px) {
-    header {
-        width: 100.1vw;
-        height: 12vh;
-    }
-
-    #pageWrapper {
-        width: 100vw;
-        height: 87.4vh;
+        height: 89.1vh;
     }
 }
 
 @media (max-device-width: 393px) {
     header {
-        width: 100.1vw;
-        height: 10vh;
+        width: 100.9vw;
+        height: 85px;
+    }
+
+    .searchImage {
+        width: 18%;
+        bottom: 8.8vw;
+    }
+
+    .basketCount {
+        left: 12.5vw;
+        bottom: -4vw;
     }
 
     #pageWrapper {
         width: 100vw;
-        height: 89.5vh;
+        height: 89.1vh;
     }
 }
 
-@media (max-device-width: 411px) {
+@media (max-device-width: 384px) {
     header {
-        width: 100.1vw;
-        height: 10vh;
+        width: 100.9vw;
+        height: 80px;
+    }
+
+    .searchImage {
+        width: 18%;
+        bottom: 8.8vw;
+    }
+
+    .basketCount {
+        left: 12.5vw;
+        bottom: -4vw;
     }
 
     #pageWrapper {
         width: 100vw;
-        height: 89.5vh;
+        height: 89.1vh;
     }
 }
 
-@media (max-device-height: 732px) and (orientation: portrait) {
+
+@media (max-device-width: 375px) {
     header {
-        width: 100.1vw;
-        height: 12.5vh;
+        width: 100.9vw;
+        height: 80px;
+    }
+
+    .searchImage {
+        width: 18%;
+        bottom: 8.8vw;
+    }
+
+    .basketCount {
+        left: 12.5vw;
+        bottom: -4vw;
     }
 
     #pageWrapper {
         width: 100vw;
-        height: 86.8vh;
+        height: 89.1vh;
+    }
+}
+
+@media (max-device-width: 360px) {
+    header {
+        width: 100.9vw;
+        height: 75px;
+    }
+
+    .searchImage {
+        width: 18%;
+        bottom: 8.8vw;
+    }
+
+    .basketCount {
+        left: 12.5vw;
+        bottom: -4vw;
+    }
+
+    #pageWrapper {
+        width: 100vw;
+        height: 89.1vh;
+    }
+}
+
+@media (max-device-width: 320px) {
+    header {
+        width: 100.9vw;
+        height: 71px;
+    }
+
+    .searchImage {
+        width: 18%;
+        bottom: 8.8vw;
+    }
+
+    .basketCount {
+        left: 12.5vw;
+        bottom: -4vw;
+    }
+
+    #pageWrapper {
+        width: 100vw;
+        height: 89.1vh;
     }
 }
 
 @media (max-device-width: 280px) {
     header {
         width: 100.1vw;
-        height: 10.5vh;
+        height: 75px;
+    }
+
+    .basketCount {
+        left: 12vw;
+        bottom: -5.9vw;
+    }
+
+    .searchImage {
+        width: 20%;
+        bottom: 11vw;
     }
 
     #pageWrapper {

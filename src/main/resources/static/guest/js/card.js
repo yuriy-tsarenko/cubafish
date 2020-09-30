@@ -20,6 +20,7 @@ let appSelector = new Vue({
     el: '#appSelector',
     data: {
         totalProductPrice: 0,
+        totalProductMobile: 0,
         dataLoadStatus: '',
         firstnameUser: '',
         middleNameUser: '',
@@ -69,6 +70,9 @@ let appSelector = new Vue({
 
             if (this.confirmBooking === true) {
                 this.confirmBooking = 'Пользователь подтвердил заказ';
+                if (this.totalProductPrice === 0) {
+                    this.totalProductPrice = this.totalProductMobile;
+                }
                 let bookingBody = {
                     firstName: this.firstnameUser,
                     middleName: this.middleNameUser,
@@ -405,7 +409,7 @@ Vue.component('productMobileItem-row', {
             localStorage.removeItem(String(this.key));
             let basketTotalAmount = (Number(localStorage.getItem('TotalAmount'))) - 1;
             localStorage.setItem('TotalAmount', String(basketTotalAmount));
-            appSelector.totalProductPrice = appSelector.totalProductPrice - temporaryValue;
+            appSelector.totalProductMobile = appSelector.totalProductMobile - temporaryValue;
         },
         counterPlus: function () {
             if ((this.count >= 1) && (this.totalAmount > 0)) {
@@ -437,7 +441,7 @@ Vue.component('productMobileItem-row', {
                         basketItems.push(productMobileItem);
 
                         localStorage.setItem(String(this.key), JSON.stringify(basketItems));
-                        appSelector.totalProductPrice = Number(appSelector.totalProductPrice) + Number(fixedValue);
+                        appSelector.totalProductMobile = Number(appSelector.totalProductMobile) + Number(fixedValue);
                     }
                 }
             }
@@ -468,7 +472,7 @@ Vue.component('productMobileItem-row', {
                     let basketItems = [];
                     basketItems.push(productMobileItem);
                     localStorage.setItem(String(this.key), JSON.stringify(basketItems));
-                    appSelector.totalProductPrice = Number(appSelector.totalProductPrice) - Number(fixedValue);
+                    appSelector.totalProductMobile = Number(appSelector.totalProductMobile) - Number(fixedValue);
                 }
 
             }
@@ -507,7 +511,7 @@ Vue.component('productMobileItems-list', {
                         };
                         this.productMobileItems.push(productMobileItem);
                         itemId++;
-                        appSelector.totalProductPrice = (Number(appSelector.totalProductPrice))
+                        appSelector.totalProductMobile = (Number(appSelector.totalProductMobile))
                             + (Number(productMobileItem.productPrice));
                     }
                 }
