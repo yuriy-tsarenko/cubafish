@@ -36,7 +36,9 @@ let appShowBasket = new Vue({
                     amount++;
                     localStorage.setItem('TotalAmount', String(amount));
                     basketImage.basketItemsAmount = localStorage.getItem('TotalAmount');
+                    basketImageMobile.basketItemsAmount = localStorage.getItem('TotalAmount');
                     basketImage.basketItemsCount = true;
+                    basketImageMobile.basketItemsCount = true;
                 }
             } else {
                 this.show = false;
@@ -57,6 +59,19 @@ let appShowBasket = new Vue({
 
 let basketImage = new Vue({
     el: '#basketImage',
+    data: {
+        basketItemsAmount: '',
+        basketItemsCount: false
+    },
+    methods: {
+        activeImageAction: function () {
+            window.location = 'guest/card.html#card';
+        }
+    }
+});
+
+let basketImageMobile = new Vue({
+    el: '#basketImageMobile',
     data: {
         basketItemsAmount: '',
         basketItemsCount: false

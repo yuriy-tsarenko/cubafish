@@ -2,8 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width">
-    <meta name="keywords" content="Интернет-магазин Cubafish">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="keywords" content="Интернет-магазин Cubafish, Кубафиш, Кубафіш, рыболовля, рибальство,
+     рыболовецкие снасти, рыбалка, удилища, котушки, приманки">
     <meta name="description" content="cubafish.com.ua - Рыболовный интернет магазин | Все для максимального улова.">
     <meta property="og:site_name" content="www.cubafish.com.ua">
     <title>CUBAFISH</title>
@@ -21,9 +22,7 @@
 <body>
 <header>
     <div class="wrapper">
-        <div id="appMobileCatalog" class="mobileHamburgerBtn" v-on:click="hamburgerBtnHiddenFlag">
-            <img src="guest/css/images/mobileHamburgerButton5.png" id="mobileHamburger">
-        </div>
+
         <div class="logo">
             <img id="logoImageStyle"
                  src="guest/css/images/logo777.png" alt="Logo"
@@ -47,14 +46,7 @@
                 </div>
             </div>
         </div>
-        <div id="appSearchFormMobile">
-            <div class="search-box">
-                <input type="text" class="search-txt" placeholder="Я ищу..." v-model="searchTag"/>
-                <div class="searchImage" v-on:click="searchRequest"><img class="lupaImage"
-                                                                         src="guest/css/images/lupa.png">
-                </div>
-            </div>
-        </div>
+
         <a id="adminNumber" href="tel:+380989900429">
             <img id="phoneNumberImage" src="guest/css/images/phoneNumber.png" alt="number">
         </a>
@@ -63,6 +55,53 @@
             <img class="translateImage" src="guest/css/images/enLanguage.png" alt="en" data-google-lang="en">
             <img class="translateImage" src="guest/css/images/rusLanguage.png" alt="ru" data-google-lang="ru">
         </div>
+        <table class="mobileHeader">
+            <tr>
+                <td style="width: 20%">
+                    <div id="appMobileCatalog" class="mobileHamburgerBtn" v-on:click="hamburgerBtnHiddenFlag">
+                        <img src="guest/css/images/mobileHamburgerButton5.png" id="mobileHamburger">
+                    </div>
+                </td>
+                <td style="width: 60%">
+                    <div id="appSearchFormMobile">
+                        <div class="search-box">
+                            <input type="text" class="search-txt" placeholder="Я ищу..." v-model="searchTag"/>
+                            <div class="searchImage" v-on:click="searchRequest"><img class="lupaImage"
+                                                                                     src="guest/css/images/lupa.png">
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td style="width: 20%">
+                    <div id="basketImageMobile">
+                    <table id="mobileBasketImageTable">
+                        <tr>
+                            <td style="height: 2.5vw">
+                                <div class="basketCount"><p class="basketCountNumberMobile">
+                                    {{basketItemsAmount}}</p></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div id="basketPngContainer" v-if="basketItemsCount===false"><img v-on:click="activeImageAction"
+                                                                                                  class="basketPng"
+                                                                                                  src="guest/css/images/mobile-shopping-cart.png"
+                                                                                                  alt="basketImage"/>
+                                </div>
+                                <div v-if="basketItemsCount===true"><img v-on:click="activeImageAction"
+                                                                         class="basketPng"
+                                                                         src="guest/css/images/mobile-shopping-cart2.png"
+                                                                         alt="basketImage"/>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+
         <div id="basketImage">
             <table id="basketImageTable">
                 <tr>
@@ -82,28 +121,7 @@
                     </td>
                 </tr>
             </table>
-            <table id="mobileBasketImageTable">
-                <tr>
-                    <td style="height: 2.5vw">
-                        <div class="basketCount"><h5>
-                            {{basketItemsAmount}}</h5></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div id="basketPngContainer" v-if="basketItemsCount===false"><img v-on:click="activeImageAction"
-                                                                                          class="basketPng"
-                                                                                          src="guest/css/images/mobile-shopping-cart.png"
-                                                                                          alt="basketImage"/>
-                        </div>
-                        <div v-if="basketItemsCount===true"><img v-on:click="activeImageAction"
-                                                                 class="basketPng"
-                                                                 src="guest/css/images/mobile-shopping-cart2.png"
-                                                                 alt="basketImage"/>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+
         </div>
         <div id="proposition">
             <img src="guest/css/images/proposition.png" id="propositionImage">
