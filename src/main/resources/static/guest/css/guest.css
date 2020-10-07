@@ -463,26 +463,27 @@
 
     #productValue3 {
         position: relative;
-        bottom: 10px;
-        right: 80px;
-        width: 300px;
+        top: 20px;
+        width: 280px;
         height: 25px;
         word-wrap: break-word;
         font-family: Gill Sans, sans-serif;
-        font-size: 23px;
+        font-size: 30px;
         font-style: normal;
-        color: #797979;
+        text-align: center;
+        color: #000000;
     }
 
     #productOldValue {
         position: relative;
-        right: 105px;
+        top: 5px;
         width: 300px;
         height: 25px;
         word-wrap: break-word;
         font-family: Gill Sans, sans-serif;
-        font-size: 15px;
+        font-size: 20px;
         font-style: normal;
+        text-align: center;
         text-decoration: line-through;
         color: #797979;
     }
@@ -515,7 +516,6 @@
         position: relative;
         top: auto;
         left: auto;
-        right: 7px;
         bottom: 10px;
         width: 200px;
         height: 70px;
@@ -1516,6 +1516,20 @@
         word-wrap: break-word;
         text-align: left;
         cursor: pointer;
+    }
+
+    #flagMenuKit {
+        position: relative;
+        margin:  0 auto;
+    }
+
+    #adminNumberMobile {
+        position: relative;
+    }
+
+    #phoneNumberImage {
+        width: 30vw;
+        height: auto;
     }
 
     #appSearchResult {

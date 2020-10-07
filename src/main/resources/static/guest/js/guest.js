@@ -1,4 +1,4 @@
-const productAPI = Vue.resource('/guest/products/all');
+const productAPI = Vue.resource('/guest/products/recent');
 const productAPIId = Vue.resource('/guest/products/get_id');
 const productCategoryApi = Vue.resource('/guest/products/get_menu_categories');
 const productCategoryApiGetSubCategories = Vue.resource('/guest/products/get_sub_categories');
@@ -131,7 +131,7 @@ Vue.component('newProduct-row', {
         '<td rowspan="3" id="cellStyleDescription" style="width:450px; height:auto">' +
         '<div class="productValue" id="productValue1"><br/><p>{{newProduct.description}}</p></div>' +
         '</td>' +
-        '<td id="cellStyle" style="width:300px; height:auto">' +
+        '<td id="cellStyle" style="width:300px; height:100px">' +
         '<div v-if="this.totalAmount>0" id="available"><p>Есть в наличии</p></div>' +
         '<div v-if="this.totalAmount==0" id="notAvailable"><p>Нет в наличии</p></div>' +
         '</td>' +
@@ -139,9 +139,10 @@ Vue.component('newProduct-row', {
 
         '<tr>' +
         '<td id="cellStyle" style="width:300px; height: auto">' +
-        '<div class="productValue" id="productValue3"><p>{{newProduct.productPrice}} грн</p></div>' +
+        '<div class="productValue" id="productValue3">{{newProduct.productPrice}} грн</div>' +
         '<div v-if="Number(this.productPrice)<Number(this.oldProductPrice)" class="productValue" id="productOldValue">' +
-        '<p>{{newProduct.oldProductPrice}} грн</p></div>' +
+        '{{newProduct.oldProductPrice}} грн' +
+        '</div>' +
         '</td>' +
         '</tr>' +
 
@@ -152,7 +153,7 @@ Vue.component('newProduct-row', {
         '<img v-if="productImageBackName!=null" v-on:click="hiddenFlagBackSide" style="width: 83px;height: 83px; border-radius:5%" :src="newProduct.productImageBackName" alt="photo"/>' +
         '</td>' +
 
-        '<td id="cellStyle" style="width:300px; height: auto" >' +
+        '<td id="cellStyle" style="width:300px; height: 80px" >' +
         '<input class="bueButton" type="button" value="Купить" v-on:click="hiddenFlagForBasket">' +
         '</td>' +
         '</tr>' +
@@ -842,6 +843,7 @@ Vue.component('newMobileCategory-row', {
                 flagMenuKit.flagShowKit = false;
                 navigationMenuKit.showNavigation = false;
                 appSearchResultMobile.searchResult = false;
+                flagAdminNumber.flagShowNumber = false;
             }, 400);
         },
     }
@@ -906,7 +908,7 @@ Vue.component('newMobileSubCategory-row', {
             flagMenuKit.flagShowKit = false;
             navigationMenuKit.showNavigation = false;
             appSearchResultMobile.searchResult = false;
-
+            flagAdminNumber.flagShowNumber = false;
         }
     }
 });
@@ -969,7 +971,7 @@ Vue.component('productBrandMobile-row', {
             flagMenuKit.flagShowKit = false;
             navigationMenuKit.showNavigation = false;
             appSearchResultMobile.searchResult = false;
-
+            flagAdminNumber.flagShowNumber = false;
         }
     }
 });
@@ -1044,11 +1046,13 @@ let appMobileCatalog = new Vue({
             if ((flagMenuKit.flagShowKit === false) || (navigationMenuKit.showNavigation === false)) {
                 flagMenuKit.flagShowKit = true;
                 navigationMenuKit.showNavigation = true;
+                flagAdminNumber.flagShowNumber = true;
                 appSearchResultMobile.searchResult = false;
                 this.createCategories();
             } else {
                 flagMenuKit.flagShowKit = false;
                 navigationMenuKit.showNavigation = false;
+                flagAdminNumber.flagShowNumber = false;
                 appMobileCategory.newMobileCategories = appMobileCategory.newMobileCategories.splice(0, 0);
                 appMobileSubCategory.newMobileSubCategories = appMobileSubCategory.newMobileSubCategories.splice(0, 0);
                 appProductBrandMobile.productMobileBrands = appProductBrandMobile.productMobileBrands.splice(0, 0);
@@ -1172,6 +1176,7 @@ let appSearchFormMobile = new Vue({
             flagMenuKit.flagShowKit = false;
             navigationMenuKit.showNavigation = false;
             appSearchResultMobile.searchResult = false;
+            flagAdminNumber.flagShowNumber = false;
 
             let sortingTag = {
                 key: 'sorting tag',
@@ -1183,7 +1188,7 @@ let appSearchFormMobile = new Vue({
                 )
             ).then(function () {
                 let amount = 0;
-                for (let product of appMobile.newProductsMobile ) {
+                for (let product of appMobile.newProductsMobile) {
                     amount++;
                 }
                 if (amount === 0) {
@@ -1205,5 +1210,12 @@ let flagMenuKit = new Vue({
     el: '#flagMenuKit',
     data: {
         flagShowKit: false
+    }
+});
+
+let flagAdminNumber = new Vue({
+    el: '#flagAdminNumber',
+    data: {
+        flagShowNumber: false
     }
 });

@@ -74,28 +74,29 @@
                 </td>
                 <td style="width: 20%">
                     <div id="basketImageMobile">
-                    <table id="mobileBasketImageTable">
-                        <tr>
-                            <td style="height: 2.5vw">
-                                <div class="basketCount"><p class="basketCountNumberMobile">
-                                    {{basketItemsAmount}}</p></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div id="basketPngContainer" v-if="basketItemsCount===false"><img v-on:click="activeImageAction"
-                                                                                                  class="basketPng"
-                                                                                                  src="guest/css/images/mobile-shopping-cart.png"
-                                                                                                  alt="basketImage"/>
-                                </div>
-                                <div v-if="basketItemsCount===true"><img v-on:click="activeImageAction"
-                                                                         class="basketPng"
-                                                                         src="guest/css/images/mobile-shopping-cart2.png"
-                                                                         alt="basketImage"/>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
+                        <table id="mobileBasketImageTable">
+                            <tr>
+                                <td style="height: 2.5vw">
+                                    <div class="basketCount"><p class="basketCountNumberMobile">
+                                        {{basketItemsAmount}}</p></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div id="basketPngContainer" v-if="basketItemsCount===false"><img
+                                            v-on:click="activeImageAction"
+                                            class="basketPng"
+                                            src="guest/css/images/mobile-shopping-cart.png"
+                                            alt="basketImage"/>
+                                    </div>
+                                    <div v-if="basketItemsCount===true"><img v-on:click="activeImageAction"
+                                                                             class="basketPng"
+                                                                             src="guest/css/images/mobile-shopping-cart2.png"
+                                                                             alt="basketImage"/>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </td>
             </tr>
@@ -185,8 +186,9 @@
                     <td>
                         <div id="navigationMenuKit" v-if="showNavigation">
                             <div v-on:click="hamburgerBtnHiddenFlag">
-                                <p v-if="menuMobileBtn">Главная</p>
-                                <p v-if="menuMobileBtnActive"><<-Назад</p>
+                                <p v-if="menuMobileBtn" style="margin-top: 3vw; margin-bottom: 3vw">Главная</p>
+                                <p v-if="menuMobileBtnActive" style="margin-top: 3vw; margin-bottom: 3vw"><<-Назад</p>
+
                             </div>
                         </div>
                     </td>
@@ -194,6 +196,15 @@
                         <div id="flagMenuKit" v-show="flagShowKit">
                             <div id="appMenuKitMobile">
                             </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div id="flagAdminNumber" v-if="flagShowNumber">
+                        <a id="adminNumberMobile" href="tel:+380989900429" >
+                        <img id="phoneNumberImage" src="guest/css/images/phoneNumber.png" alt="number">
+                        </a>
                         </div>
                     </td>
                 </tr>
