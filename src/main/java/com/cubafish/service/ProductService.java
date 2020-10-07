@@ -25,9 +25,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @Data
@@ -48,11 +48,18 @@ public class ProductService {
         return productDtos;
     }
 
+    public List<ProductDto> getRecentAdded() {
+        List<ProductDto> productDtos = productMapper.mapEntitiesToDtos(productRepository.findAll());
+        return getLastTenProducts(productDtos);
+    }
+
     public Map<String, Object> findById(Long id) {
-        Optional<Product> product = productRepository.findById(id);
-        Product exiting = new Product();
-        return product.map(value -> Map.of("product", value, "status", "success")).orElseGet(() ->
-                Map.of("object", exiting, "status", "No value found for editing"));
+        Product product = productRepository.findProductById(id);
+        if (product != null) {
+            return Map.of("product", product, "status", "success");
+        } else {
+            return Map.of("product", new Product(), "status", "No value found for editing");
+        }
     }
 
     public List<ProductDto> findByProductCategory(CustomRequestBody customRequestBody) {
@@ -491,10 +498,24 @@ public class ProductService {
         return list;
     }
 
+    public List<ProductDto> getLastTenProducts(List<ProductDto> productList) {
+        productList.sort(new SortProductsByIdReverseSequence());
+        return productList.stream()
+                .limit(10)
+                .collect(Collectors.toList());
+    }
+
     static class SortProductsById implements Comparator<ProductDto> {
         @Override
         public int compare(ProductDto productDto, ProductDto productDto2) {
             return productDto.getId().compareTo(productDto2.getId());
+        }
+    }
+
+    static class SortProductsByIdReverseSequence implements Comparator<ProductDto> {
+        @Override
+        public int compare(ProductDto productDto, ProductDto productDto2) {
+            return productDto2.getId().compareTo(productDto.getId());
         }
     }
 
