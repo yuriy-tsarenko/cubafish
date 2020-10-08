@@ -31,9 +31,9 @@ public class ProductControllerGuest {
         return new ModelAndView("redirect:" + "index.html");
     }
 
-    @GetMapping("/all")
-    public List<ProductDto> findAll() {
-        return productService.findAll();
+    @GetMapping("/recent")
+    public List<ProductDto> findRecent() {
+        return productService.getRecentAdded();
     }
 
     @GetMapping("/get_menu_categories")
