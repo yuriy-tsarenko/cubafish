@@ -1477,9 +1477,146 @@
         border: 1px solid #d0d0d0;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         font-family: Arial, sans-serif;
-        font-size: 24px;
+        font-size: 32px;
         font-style: normal;
         color: #000000;
+    }
+
+    .contactTableTd {
+        width: 1300px;
+        height: 50px;
+    }
+
+    .contactTableTd1 {
+        width: 1300px;
+        height: 50px;
+    }
+
+    #contactTableTd2 {
+        width: 1300px;
+        height: 100px;
+    }
+
+    .contactTableTd3 {
+        width: 540px;
+        height: 70px;
+    }
+
+    .contactTableTd4 {
+        width: auto;
+        height: 70px;
+        text-align: left;
+    }
+
+    .contactTableTd5 {
+        width: auto;
+        height: 50px;
+        text-align: center;
+    }
+
+    #contactTableSlogan {
+        position: relative;
+        width: 1250px;
+        height: 50px;
+        left: 20px;
+    }
+
+    #contactIcon {
+        position: relative;
+        width: 260px;
+        left: 510px;
+    }
+
+    #contactIconImage {
+        height: 95px;
+        width: auto;
+    }
+
+    #contactTelephoneImage {
+        position: relative;
+        left: 450px;
+        height: 70px;
+        width: auto;
+    }
+
+    #telephoneHref {
+        position: relative;
+        left: 20px;
+        bottom: 17px;
+    }
+
+    #telegramViberImage {
+        position: relative;
+        left: 40px;
+        height: 50px;
+        width: auto;
+    }
+
+    #emailImage {
+        position: relative;
+        left: 450px;
+        height: 70px;
+        width: auto;
+    }
+
+    #mailHref {
+        position: relative;
+        left: 20px;
+        bottom: 10px;
+    }
+
+    #scheduleImage {
+        position: relative;
+        left: 450px;
+        height: 70px;
+        width: auto;
+    }
+
+    #scheduleText {
+        position: relative;
+        width: 320px;
+        height: auto;
+        left: 20px;
+        word-wrap: break-word;
+    }
+
+    #locationImage {
+        position: relative;
+        left: 450px;
+        height: 70px;
+        width: auto;
+    }
+
+    #addressText {
+        position: relative;
+        width: 320px;
+        height: auto;
+        left: 20px;
+        word-wrap: break-word;
+    }
+
+    #mapLabel {
+        position: relative;
+        width: 200px;
+        left: 570px;
+    }
+
+    #mapHolder {
+        width: 1300px;
+        height: 1600px;
+    }
+
+    #mapWindow {
+        position: relative;
+        width: 1050px;
+        left: 140px;
+    }
+
+    #googleMap {
+        border: 4px solid #d0d0d0;
+        width: 1000px;
+        height: 1600px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
 
     .labelContact {
@@ -1664,7 +1801,7 @@
     }
 }
 
-@media (max-device-width: 600px) and (orientation: portrait) {
+@media (max-device-width: 600px) {
 
     * {
         margin: 0;
@@ -1688,7 +1825,7 @@
     }
 
     .wrapper {
-        width: 100.5%;
+        width: 100%;
         height: 100%;
         margin: 0 auto;
         background-color: #eaeaea;
@@ -1756,6 +1893,13 @@
         position: relative;
         width: 100%;
         height: 91vh;
+        overflow-y: auto;
+    }
+
+    #contactArea {
+        position: relative;
+        width: 100%;
+        height: 90.5vh;
         overflow-y: auto;
     }
 
@@ -2140,7 +2284,7 @@
     .bookingMakerBtnMove {
         position: relative;
         margin: 3vh auto;
-        height: 5vh;
+        height: 7vh;
         width: 90%;
     }
 
@@ -2452,8 +2596,158 @@
     .fade-enter, .fade-leave-to {
         opacity: 0;
     }
-}
 
+    #contactTable {
+        position: relative;
+        width: 100%;
+        height: 160vh;
+        background-color: #ffffff;
+        border: 1px solid #d0d0d0;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        font-family: Arial, sans-serif;
+        font-size: 3.5vw;
+        font-style: normal;
+        color: #000000;
+    }
+
+    .contactTableTd {
+        width: 100%;
+        height: 2vh;
+    }
+
+    .contactTableTd1 {
+        width: 100%;
+        height: 5vh;
+    }
+
+    #contactTableTd2 {
+        width: 100%;
+        height: 7vh;
+    }
+
+    .contactTableTd3 {
+        width: 35%;
+        height: 7vh;
+    }
+
+    .contactTableTd4 {
+        width: auto;
+        height: 7vh;
+        text-align: left;
+    }
+
+    .contactTableTd5 {
+        width: 100%;
+        height: 3vh;
+        text-align: center;
+    }
+
+    #contactTableSlogan {
+        position: relative;
+        width: 100%;
+        height: 5vh;
+    }
+
+    #sloganText {
+        padding: 2vw;
+    }
+
+    #contactIcon {
+        position: relative;
+        margin: 0 auto;
+        width: 55vw;
+        height: 15vw;
+    }
+
+    #contactIconImage {
+        height: 100%;
+        width: 100%;
+    }
+
+    #contactTelephoneImage {
+        position: relative;
+        left: 15vw;
+        width: 13vw;
+        height: 13vw;
+    }
+
+    #telephoneHref {
+        position: relative;
+
+    }
+
+    #telegramViberImage {
+        position: relative;
+        vertical-align: middle;
+        height: 70%;
+        width: auto;
+    }
+
+    #emailImage {
+        position: relative;
+        left: 15vw;
+        width: 13vw;
+        height: 13vw;
+    }
+
+    #mailHref {
+        position: relative;
+    }
+
+    #scheduleImage {
+        position: relative;
+        left: 15vw;
+        width: 13vw;
+        height: 13vw;
+    }
+
+    #scheduleText {
+        position: relative;
+        width: 70%;
+        height: auto;
+        word-wrap: break-word;
+    }
+
+    #locationImage {
+        position: relative;
+        left: 15vw;
+        width: 13vw;
+        height: 13vw;
+    }
+
+    #addressText {
+        position: relative;
+        width: 100%;
+        height: auto;
+        word-wrap: break-word;
+    }
+
+    #mapLabel {
+        position: relative;
+        width: 100%;
+        height: 3vh;
+    }
+
+    #mapHolder {
+        width: 100%;
+        height: 70vh;
+    }
+
+    #mapWindow {
+        position: relative;
+        left: 4.3vw;
+        width: 90%;
+        height: 100%;
+    }
+
+    #googleMap {
+        border: 4px solid #d0d0d0;
+        width: 100%;
+        height: 100%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+}
 
 @media only screen and (max-device-width: 360px) {
 

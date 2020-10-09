@@ -17,6 +17,15 @@
     <script src="//translate.google.com/translate_a/element.js?cb=TranslateInit"></script>
     <link href="guest/css/guest.css" rel="stylesheet" type="text/css"/>
     <link rel="icon" type="image/png" href="guest/css/images/siteIcon.png">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180166026-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-180166026-1');
+    </script>
 </head>
 
 <body>
@@ -185,10 +194,13 @@
                 <tr>
                     <td>
                         <div id="navigationMenuKit" v-if="showNavigation">
-                            <div v-on:click="hamburgerBtnHiddenFlag">
+                            <div class="navigationBtn" v-on:click="hamburgerBtnHiddenFlag">
                                 <p v-if="menuMobileBtn" style="margin-top: 3vw; margin-bottom: 3vw">Главная</p>
                                 <p v-if="menuMobileBtnActive" style="margin-top: 3vw; margin-bottom: 3vw"><<-Назад</p>
 
+                            </div>
+                            <div class="navigationBtn" v-on:click="getContactsAction">
+                                <p style="margin-top: 3vw; margin-bottom: 3vw">Контакты</p>
                             </div>
                         </div>
                     </td>

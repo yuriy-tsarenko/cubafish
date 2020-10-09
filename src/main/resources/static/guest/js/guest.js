@@ -285,7 +285,7 @@ Vue.component('newProducts-list', {
         '<newProduct-row v-for="newProduct in newProducts" :key="newProduct.id" :newProduct="newProduct"/>' +
         '</div>',
     created: function () {
-        // window.location = 'https://cubafish.com.ua#top';
+        window.location = 'https://cubafish.com.ua#top';
         productAPI.get().then(result =>
             result.json().then(data =>
                 data.forEach(newProduct => this.newProducts.push(newProduct))
@@ -1158,6 +1158,9 @@ let navigationMenuKit = new Vue({
                 this.menuMobileBtn = true;
             }
 
+        },
+        getContactsAction: function () {
+            window.location = 'guest/contact.html';
         }
     }
 });

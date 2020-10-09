@@ -13,11 +13,24 @@
     <script src="//translate.google.com/translate_a/element.js?cb=TranslateInit"></script>
     <link href="css/card.css" rel="stylesheet" type="text/css"/>
     <link rel="icon" type="image/png" href="css/images/siteIcon.png">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180166026-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-180166026-1');
+    </script>
 </head>
 
 <body>
 <header>
     <div class="wrapper">
+        <div class="mobileBasketText">Контакты</div>
+        <div class="mobileCloseBtn">
+            <a href="https://cubafish.com.ua"><img src="css/images/close.png" class="mobileCloseBtnImg"></a>
+        </div>
         <div class="logo"><a name="contact"></a>
             <a href="https://cubafish.com.ua">
                 <img style="width: 450px; height: auto;"
@@ -45,111 +58,110 @@
 
             <table id="contactTable">
                 <tr>
-                    <td style="width: 1300px; height: 50px" colspan="2">
+                    <td class="contactTableTd" colspan="2">
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 1300px; height: 100px" colspan="2">
-                        <div style="position: relative; width: 260px; left: 510px">
+                    <td id="contactTableTd2" colspan="2">
+                        <div id="contactIcon">
                             <img src="css/images/contactIcon.png"
-                                 style="height: 95px; width: auto" alt="photo">
+                                 id="contactIconImage" alt="photo">
                         </div>
                         <hr style="background-color: #393900; border: 2px solid #393900"/>
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 1300px; height: 50px" colspan="2">
-                        <div style="position: relative; width: 1250px; height: 50px; left: 20px">
-                            <p>Мы всегда на связи и готовы дать вам
+                    <td class="contactTableTd1" colspan="2">
+                        <div id="contactTableSlogan">
+                            <p id="sloganText">Мы всегда на связи и готовы дать вам
                             квалифицированный совет с выбором того, что вам нужно из
                                 многообразного ассортимента нашего магазина.</p>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: auto; height: 50px" colspan="2">
+                    <td class="contactTableTd1" colspan="2">
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 540px; height: 70px">
+                    <td class="contactTableTd3" >
                         <img src="css/images/contactTelephone.png"
-                             style="position: relative; left: 450px; height: 70px; width: auto" alt="photo">
+                             id="contactTelephoneImage" alt="telephone">
                     </td>
-                    <td style="width: auto; height: 70px; text-align: left">
-                        <a style="position: relative; left: 20px; bottom: 17px"
+                    <td class="contactTableTd4">
+                        <a id="telephoneHref"
                            href="tel:+380989900429">+380989900429</a>
                         <img src="css/images/telegram_viber.png"
-                             style="position: relative; left: 40px; height: 50px; width: auto" alt="photo">
+                              alt="photo" id="telegramViberImage">
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: auto; height: 30px; text-align: center" colspan="2">
+                    <td class="contactTableTd5" colspan="2">
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 540px; height: 70px">
+                    <td class="contactTableTd3">
                         <img src="css/images/email.png"
-                             style="position: relative; left: 450px; height: 70px; width: auto" alt="photo">
+                              alt="photo" id="emailImage">
                     </td>
-                    <td style="width: auto; height: 70px; text-align: left">
-                        <a style="position: relative; left: 20px; bottom: 10px" href="mailto:admin@cubafish.com.ua">admin@cubafish.com.ua</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width: auto; height: 30px; text-align: center" colspan="2">
+                    <td class="contactTableTd4">
+                        <a id="mailHref" href="mailto:admin@cubafish.com.ua">admin@cubafish.com.ua</a>
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 540px; height: 70px;">
-                        <img src="css/images/schedule.png" style="position: relative; left: 450px; height: 70px; width: auto" alt="photo">
+                    <td class="contactTableTd5" colspan="2">
                     </td>
-                    <td style="width: auto; height: 70px; text-align: left">
-                        <p style="position: relative; width: 320px; height: auto; left: 20px;word-wrap: break-word">Пн.
+                </tr>
+                <tr>
+                    <td class="contactTableTd3">
+                        <img src="css/images/schedule.png" id="scheduleImage" alt="photo">
+                    </td>
+                    <td class="contactTableTd4">
+                        <p id="scheduleText">Пн.
                             — Пт.: с 9:00 до 18:00 Сб.: с 9:00 до 17:00</p>
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: auto; height: 30px" colspan="2">
+                    <td class="contactTableTd5" colspan="2">
                     </td>
                 </tr>
 
                 <tr>
-                    <td style="width: 540px; height: 70px">
+                    <td class="contactTableTd3">
                         <img src="css/images/location.png"
-                             style="position: relative; left: 450px; height: 70px; width: auto" alt="photo">
+                             id="locationImage" alt="photo">
                     </td>
-                    <td style="width: auto; height: 70px; text-align: left">
-                        <p style="position: relative; width: 320px; height: auto; left: 20px;word-wrap: break-word">
+                    <td class="contactTableTd4">
+                        <p id="addressText">
                             г. Киев, ул. Тополева 4, 03049.
                         </p>
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: auto; height: 30px" colspan="2">
+                    <td class="contactTableTd5" colspan="2">
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: auto; height: 30px" colspan="2">
+                    <td class="contactTableTd5" colspan="2">
                         <hr style="background-color: #393900; border: 2px solid #393900"/>
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: auto; height: 30px" colspan="2">
+                    <td class="contactTableTd5" colspan="2">
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: auto; height: 30px" colspan="2">
-                        <div style="position: relative; width: 200px; left: 570px">Мы на карте:</div>
+                    <td class="contactTableTd5" colspan="2">
+                        <div id="mapLabel">Мы на карте:</div>
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 1300px; height: 1300px" colspan="2">
-                        <div style="position: relative; width: 1050px; left: 140px">
+                    <td id="mapHolder" colspan="2">
+                        <div id="mapWindow">
                             <iframe
                                     src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d16057.133908025951!2d30
                                     .470016953149436!3d50.4402877291373!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x430220c68a49de38!2sCUBAFISH!5e0!3m2!1sru!2sua!4v1599472805332!5m2!1sru!2sua"
-                                    width="1000" height="1200" frameborder="0" style="border: 4px solid #d0d0d0;
-                                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5)" allowfullscreen="" aria-hidden="false"
+                                    frameborder="0" id="googleMap" allowfullscreen="" aria-hidden="false"
                                     tabindex="0">
                             </iframe>
                         </div>
