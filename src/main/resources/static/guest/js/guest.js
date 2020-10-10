@@ -780,7 +780,7 @@ Vue.component('newProductsMobile-list', {
         '<newProductMobile-row v-for="newProductMobile in newProductsMobile" :key="newProductMobile.id" :newProductMobile="newProductMobile"/>' +
         '</div>',
     created: function () {
-        // window.location = 'https://cubafish.com.ua#top';
+        window.location = 'https://cubafish.com.ua#top';
 
         productAPI.get().then(result =>
             result.json().then(data =>
