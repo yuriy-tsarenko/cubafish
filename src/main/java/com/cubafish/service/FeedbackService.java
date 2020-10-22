@@ -4,6 +4,7 @@ import com.cubafish.dto.FeedbackDto;
 import com.cubafish.mapper.FeedbackMapper;
 import com.cubafish.repository.FeedbackRepository;
 import lombok.Data;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
@@ -17,7 +18,10 @@ import java.util.Map;
 @Data
 public class FeedbackService {
 
+    private static final Logger log = Logger.getLogger(FeedbackService.class);
+
     private final FeedbackRepository feedbackRepository;
+
     private final FeedbackMapper feedbackMapper;
 
     public List<FeedbackDto> findAll() {
@@ -29,33 +33,43 @@ public class FeedbackService {
 
     public Map<String, Object> feedbackDataValidation(FeedbackDto feedbackDto) {
         if (feedbackDto.getUserName() == null) {
+            log.error("status: the application did not accept user name");
             return Map.of("feedbackDto", feedbackDto,
                     "status", "the application did not accept user name");
         } else if (feedbackDto.getUserName().length() > 100) {
+            log.error("status: the user name have more than 100 characters " + feedbackDto.getUserName());
             return Map.of("feedbackDto", feedbackDto,
                     "status", "the user name have more than 100 characters");
         } else if (feedbackDto.getUserLastName() == null) {
+            log.error("status: the application did not accept user's last name");
             return Map.of("feedbackDto", feedbackDto,
                     "status", "the application did not accept user's last name");
         } else if (feedbackDto.getUserLastName().length() > 100) {
+            log.error("status: the user's last name have more than 100 characters");
             return Map.of("feedbackDto", feedbackDto,
                     "status", "the user's last name have more than 100 characters");
         } else if (feedbackDto.getRecommendation() == null) {
+            log.error("status: the application did not accept user's recommendation");
             return Map.of("feedbackDto", feedbackDto,
                     "status", "the application did not accept user's recommendation");
         } else if (feedbackDto.getComment() == null) {
+            log.error("status: the application did not accept user's comment");
             return Map.of("feedbackDto", feedbackDto,
                     "status", "the application did not accept user's comment");
         } else if (feedbackDto.getComment().length() > 1000) {
+            log.error("status: the user's comment have more than 1000 characters");
             return Map.of("feedbackDto", feedbackDto,
                     "status", "the user's comment have more than 1000 characters");
         } else if (feedbackDto.getMark() == null) {
+            log.error("status: the application did not accept user's mark");
             return Map.of("feedbackDto", feedbackDto,
                     "status", "the application did not accept user's mark");
         } else if ((feedbackDto.getMark() > 10) || (feedbackDto.getMark() < 0)) {
+            log.error("status: the user's mark  more than 10 or less then 0");
             return Map.of("feedbackDto", feedbackDto,
-                    "status", "the user's mark  more than 10 or less then 0");
+                    "status", "the user's mark more than 10 or less then 0");
         }
+        log.info("status: success");
         return Map.of("feedbackDto", feedbackDto, "status", "success");
     }
 
@@ -64,6 +78,7 @@ public class FeedbackService {
         Date currentDate = new Date();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         feedbackDto.setDateOfComment(dateFormat.format(currentDate));
+        log.info("status: success");
         return Map.of("feedbackDto", feedbackDto,
                 "status", "success");
     }

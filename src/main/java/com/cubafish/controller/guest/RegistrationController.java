@@ -40,7 +40,7 @@ public class RegistrationController {
         } else {
             log.error("user: " + userDto.getUsername() + " could not to register " + "status: " + status);
         }
-        return new CustomResponseBody(1L, "registration status:", status, "no data", "step", 1);
+        return new CustomResponseBody(1L, "registration status:", status, "no data");
     }
 }
 

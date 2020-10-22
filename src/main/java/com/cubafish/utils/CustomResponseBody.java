@@ -12,6 +12,4 @@ public class CustomResponseBody {
     private String key;
     private String status;
     private String communicationData;
-    private String updateStep;
-    private Integer step;
 }

@@ -8,6 +8,7 @@ import com.cubafish.utils.CustomRequestBody;
 import com.cubafish.utils.CustomResponseBody;
 import com.cubafish.utils.PathFinder;
 import lombok.Data;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,11 +37,15 @@ public class ProductService {
     @Value("${file.size}")
     private Integer fileSize;
 
-    private final ProductRepository productRepository;
-    private final ProductMapper productMapper;
-    private final PathFinder pathFinder;
-    private String productSubCategory;
+    private static final Logger log = Logger.getLogger(ProductService.class);
 
+    private final ProductRepository productRepository;
+
+    private final ProductMapper productMapper;
+
+    private final PathFinder pathFinder;
+
+    private String productSubCategory;
 
     public List<ProductDto> findAll() {
         List<ProductDto> productDtos = productMapper.mapEntitiesToDtos(productRepository.findAll());
@@ -56,8 +61,10 @@ public class ProductService {
     public Map<String, Object> findById(Long id) {
         Product product = productRepository.findProductById(id);
         if (product != null) {
+            log.info("status: " + "success");
             return Map.of("product", product, "status", "success");
         } else {
+            log.error("status: " + "no value found for editing");
             return Map.of("product", new Product(), "status", "No value found for editing");
         }
     }
@@ -91,13 +98,6 @@ public class ProductService {
         return productDto;
     }
 
-    public List<ProductDto> findByProductBrandAll(CustomRequestBody customRequestBody) {
-        List<ProductDto> productDto = productMapper.mapEntitiesToDtos(productRepository
-                .findByProductBrand(customRequestBody.getCommunicationKey()));
-        productDto.sort(new SortProductsByTotalAmount());
-        return productDto;
-    }
-
     public List<ProductDto> findByProductDescription(CustomRequestBody customRequestBody) {
         List<ProductDto> productDto = productMapper.mapEntitiesToDtos(productRepository
                 .findByDescription(customRequestBody.getCommunicationKey()));
@@ -112,12 +112,14 @@ public class ProductService {
             try {
                 maxIdValue = productDtos.get(productDtos.size() - 1).getId();
             } catch (NullPointerException | IndexOutOfBoundsException e) {
-                e.printStackTrace();
+                log.error(e);
             }
-            return new CustomResponseBody(1L, "required argument", "success", String.valueOf(maxIdValue), "step", 1);
+            log.info("status: " + "success");
+            return new CustomResponseBody(1L, "required argument", "success", String.valueOf(maxIdValue));
         }
+        log.error("status: " + "did not accept the correct key");
         return new CustomResponseBody(1L, "required argument",
-                "did not accept the correct key", null, "step", 1);
+                "did not accept the correct key", null);
     }
 
 
@@ -148,50 +150,69 @@ public class ProductService {
                                                      MultipartFile fileLeftSide, MultipartFile fileBackSide) {
         ProductDto productDto = new ProductDto();
         if ((file == null) || (fileRightSide == null) || (fileLeftSide == null) || (fileBackSide == null)) {
+            log.error("status" + "the application did not accept any product files");
             return Map.of("productDto", productDto, "status", "the application did not accept any product files");
         } else if ((file.getSize() > fileSize) || (fileRightSide.getSize() > fileSize)
                 || (fileLeftSide.getSize() > fileSize) || (fileBackSide.getSize() > fileSize)) {
+            log.error("status: " + "the file does not meet the requirements: "
+                    + " size: less then 3.5MB, type: jpg/jpeg/png");
             return Map.of("productDto", productDto, "status", "the file does not meet the requirements:"
                     + " size: less then 3.5MB, type: jpg/jpeg/png");
         } else if (productCategory == null) {
+            log.error("status" + "the application did not accept any product category");
             return Map.of("productDto", productDto, "status", "the application did not accept any product category");
         } else if (productCategory.length() > 50) {
+            log.error("status" + "the category have more than 50 characters");
             return Map.of("productDto", productDto, "status", "the category have more than 50 characters");
         } else if (productSubCategory == null) {
+            log.error("status" + "the application did not accept any product subcategory");
             return Map.of("productDto", productDto, "status", "the application did not accept any product subcategory");
         } else if (productSubCategory.length() > 50) {
+            log.error("status" + "the subcategory have more than 50 characters");
             return Map.of("productDto", productDto, "status", "the subcategory have more than 50 characters");
         } else if (productBrand == null) {
+            log.error("status" + "the application did not accept any product brand");
             return Map.of("productDto", productDto, "status", "the application did not accept any product brand");
         } else if (productBrand.length() > 50) {
+            log.error("status" + "the product brand have more than 50 characters");
             return Map.of("productDto", productDto, "status", "the product brand have more than 50 characters");
         } else if (typeOfPurpose == null) {
+            log.error("status" + "the application did not accept any type of purpose");
             return Map.of("productDto", productDto, "status", "the application did not accept any type of purpose");
         } else if (typeOfPurpose.length() > 50) {
+            log.error("status" + "the type of purpose have more than 50 characters");
             return Map.of("productDto", productDto, "status", "the type of purpose have more than 50 characters");
         } else if (description == null) {
+            log.error("status" + "the application did not accept any product description");
             return Map.of("productDto", productDto, "status", "the application did not accept any product description");
         } else if (description.length() > 200) {
+            log.error("status" + "the description have more than 200 characters");
             return Map.of("productDto", productDto, "status", "the description have more than 200 characters");
         } else if (specification == null) {
+            log.error("status" + "the application did not accept any product specification");
             return Map.of("productDto", productDto, "status",
                     "the application did not accept any product specification");
         } else if (specification.length() > 1000) {
+            log.error("status" + "the specification have more than 1000 characters");
             return Map.of("productDto", productDto, "status", "the specification have more than 1000 characters");
         } else if (totalAmount == null) {
+            log.error("status" + "the application did not accept any amount of products");
             return Map.of("productDto", productDto, "status", "the application did not accept any amount of products");
         } else if (!totalAmount.isEmpty()) {
             if (totalAmount.contains(",") || totalAmount.contains(".")) {
+                log.error("status" + "the amount of products can not have <<,>> or <<.>>");
                 return Map.of("productDto", productDto, "status", "the amount of products can not have <<,>> or <<.>>");
             } else {
                 try {
                     Integer.valueOf(totalAmount);
                 } catch (NumberFormatException e) {
+                    log.error(e);
                     return Map.of("productDto", productDto, "status",
                             "the amount of products should have a numeric value");
                 }
             }
         } else if (productPrice == null) {
+            log.error("status" + "the application did not accept any product price");
             return Map.of("productDto", productDto, "status", "the application did not accept any product price");
         } else if (!productPrice.isEmpty()) {
             if (productPrice.contains(",")) {
@@ -200,16 +221,19 @@ public class ProductService {
                 try {
                     new BigDecimal(validPrice);
                 } catch (NumberFormatException e) {
+                    log.error(e);
                     return Map.of("productDto", productDto, "status", "product price should have a numeric value");
                 }
             } else {
                 try {
                     new BigDecimal(productPrice);
                 } catch (NumberFormatException e) {
+                    log.error(e);
                     return Map.of("productDto", productDto, "status", "product price should have a numeric value");
                 }
             }
         }
+        log.info("status" + "success");
         return Map.of("productDto", productDto, "status", "success");
     }
 
@@ -229,6 +253,7 @@ public class ProductService {
                 try {
                     Files.createDirectories(Paths.get(String.valueOf(finalUploadPath)));
                 } catch (IOException e) {
+                    log.error("status: " + e);
                     return Map.of("productDto", productDto, "status",
                             "IOException, can not create the directory", "update step", updateStep);
                 }
@@ -237,12 +262,14 @@ public class ProductService {
             try {
                 file.transferTo(new File(String.valueOf(finalUploadPath).concat(File.separator).concat(fileName)));
             } catch (IOException e) {
+                log.error("status: " + e);
                 return Map.of("productDto", productDto, "status",
                         "IOException, can not transfer file to the directory", "update step", updateStep);
             }
             String imageName = downloadPath.toString().concat(File.separator).concat(fileName);
             if (imageName.length() > 255) {
                 deleteFileIfExists(pathFromHttpContext, imageName);
+                log.error("status: " + "the length of the file name more then expected");
                 return Map.of("productDto", productDto, "fileName", fileName, "status",
                         "please reduce the length of the file name", "update step", updateStep);
             } else {
@@ -259,7 +286,7 @@ public class ProductService {
                     productDto.setProductImageBackName(imageName);
                 }
             }
-
+            log.info("status" + "success");
             return Map.of("productDto", productDto, "fileName", fileName,
                     "status", "success", "update step", updateStep);
         } else if (Objects.requireNonNull(file.getOriginalFilename()).equals("no_image")) {
@@ -286,6 +313,8 @@ public class ProductService {
             }
 
         } else {
+            log.error("status" + "the file does not meet the requirements:"
+                    + " size: less then 3.5MB, type: jpg/jpeg/png");
             return Map.of("productDto", productDto, "status", "the file does not meet the requirements:"
                     + " size: less then 3.5MB, type: jpg/jpeg/png", "update step", updateStep);
         }
@@ -335,6 +364,7 @@ public class ProductService {
                     Integer totalAmountConverted = Integer.valueOf(totalAmount.trim());
                     productDto.setTotalAmount(totalAmountConverted);
                 } catch (NumberFormatException e) {
+                    log.error(e);
                     return Map.of("productDto", productDto, "status",
                             "the amount of products should have a numeric value");
                 }
@@ -361,12 +391,14 @@ public class ProductService {
                 try {
                     productDto.setProductPrice(convertToBigDecimal);
                 } catch (NumberFormatException e) {
+                    log.error(e);
                     return Map.of("productDto", productDto, "status", "product price should have a numeric value");
                 }
             } else {
                 try {
                     productDto.setProductPrice(new BigDecimal(productPrice));
                 } catch (NumberFormatException e) {
+                    log.error(e);
                     return Map.of("productDto", productDto, "status", "product price should have a numeric value");
                 }
             }
@@ -376,8 +408,10 @@ public class ProductService {
             } else {
                 productDto.setOldProductPrice(BigDecimal.ZERO);
             }
+            log.info("status" + "success");
             return Map.of("productDto", productDto, "status", "success");
         } else {
+            log.error("status" + "ID of edited product not received!");
             return Map.of("productDto", productDto, "status", "ID of edited product not received!");
         }
     }
@@ -398,6 +432,7 @@ public class ProductService {
                 Integer totalAmountConverted = Integer.valueOf(totalAmount.trim());
                 productDto.setTotalAmount(totalAmountConverted);
             } catch (NumberFormatException e) {
+                log.error(e);
                 return Map.of("productDto", productDto,
                         "status", "the amount of products should have a numeric value");
             }
@@ -412,6 +447,7 @@ public class ProductService {
                 BigDecimal convertToBigDecimal = new BigDecimal(validPrice);
                 productDto.setProductPrice(convertToBigDecimal);
             } catch (NumberFormatException e) {
+                log.error(e);
                 return Map.of("productDto", productDto, "status",
                         "product price should have a numeric value");
             }
@@ -420,9 +456,11 @@ public class ProductService {
                 BigDecimal convertToBigDecimal = new BigDecimal(productPrice);
                 productDto.setProductPrice(convertToBigDecimal);
             } catch (NumberFormatException e) {
+                log.error(e);
                 return Map.of("productDto", productDto, "status", "product price should have a numeric value");
             }
         }
+        log.info("status" + "success");
         return Map.of("productDto", productDto, "status", "success");
     }
 
@@ -436,19 +474,22 @@ public class ProductService {
                     Files.deleteIfExists(Paths.get(pathFinder
                             .getPathBeforeDelete(pathFromHttpContext, path).toString()));
                 } else {
+                    log.warn("status: " + "file is not find " + "path: " + path);
                     return "File is not find";
                 }
                 return "success";
             } catch (IOException e) {
+                log.error(e);
                 return "IOException";
             }
         } else {
+            log.error("status: " + "file not deleted, no path to file");
             return "File not deleted, no path to file";
         }
     }
 
     public List<CustomResponseBody> getUniqueCategories(List<ProductDto> productDtoFromDb) {
-        if (productDtoFromDb == null) {
+        if (productDtoFromDb.size() == 0) {
             return null;
         }
         Long id = 0L;
@@ -459,13 +500,13 @@ public class ProductService {
         List<CustomResponseBody> list = new ArrayList<>(uniqueItems.size());
         for (String item : uniqueItems) {
             id += 1L;
-            list.add(new CustomResponseBody(id, "productCategoriesForMenu", "success", item, "step", 1));
+            list.add(new CustomResponseBody(id, "productCategoriesForMenu", "success", item));
         }
         return list;
     }
 
     public List<CustomResponseBody> getUniqueSubCategories(List<ProductDto> productDtoFromDb) {
-        if (productDtoFromDb == null) {
+        if (productDtoFromDb.size() == 0) {
             return null;
         }
         Long id = 0L;
@@ -476,7 +517,7 @@ public class ProductService {
         List<CustomResponseBody> list = new ArrayList<>(uniqueItems.size());
         for (String item : uniqueItems) {
             id += 1L;
-            list.add(new CustomResponseBody(id, "productSubCategoriesForMenu", "success", item, "step", 1));
+            list.add(new CustomResponseBody(id, "productSubCategoriesForMenu", "success", item));
         }
         return list;
     }
@@ -493,7 +534,7 @@ public class ProductService {
         List<CustomResponseBody> list = new ArrayList<>(uniqueItems.size());
         for (String item : uniqueItems) {
             id += 1L;
-            list.add(new CustomResponseBody(id, "productBrandsForMenu", "success", item, "step", 1));
+            list.add(new CustomResponseBody(id, "productBrandsForMenu", "success", item));
         }
         return list;
     }

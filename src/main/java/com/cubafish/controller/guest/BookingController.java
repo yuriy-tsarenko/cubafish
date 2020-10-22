@@ -37,7 +37,6 @@ public class BookingController {
                 bookingBody.getBookingComments(), bookingBody.getBookingItems());
         String status = (String) responseFromDataValidation.get("status");
         BookingListDto bookingListDto = (BookingListDto) responseFromDataValidation.get("bookingListDto");
-        int step = 0;
         if (status.equals("success")) {
             Map<String, Object> responseFromSetTextAndNumericData =
                     bookingListService.setTextAndNumericDataBeforeCreate(
@@ -50,13 +49,10 @@ public class BookingController {
             status = (String) responseFromSetTextAndNumericData.get("status");
             BookingListDto bookingListDtoWithReceivedData =
                     (BookingListDto) responseFromSetTextAndNumericData.get("bookingListDto");
-            step++;
             if (status.equals("success")) {
                 bookingListRepository.save(bookingListMapper.mapDtoToEntity(bookingListDtoWithReceivedData));
-                step++;
             }
         }
-        return new CustomResponseBody(1L, "data load", status,
-                "no data", "create step", step);
+        return new CustomResponseBody(1L, "data load", status, "no data");
     }
 }

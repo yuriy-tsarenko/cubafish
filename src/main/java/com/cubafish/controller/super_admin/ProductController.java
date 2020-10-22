@@ -154,7 +154,7 @@ public class ProductController {
                 }
             }
         }
-        return new CustomResponseBody(1L, "data load", status, "no data", "create step", updateStepForImageLoader);
+        return new CustomResponseBody(1L, "data load", status, "no data");
     }
 
     @PostMapping("/delete_product_image")
@@ -179,7 +179,7 @@ public class ProductController {
         if (!pathImageBack.equals("no_path")) {
             status = productService.deleteFileIfExists(absolutePathToUploadDir, pathImageBack);
         }
-        return new CustomResponseBody(1L, "image deleting status", status, "no data", "step", 1);
+        return new CustomResponseBody(1L, "image deleting status", status, "no data");
     }
 
     @DeleteMapping("{id}")
@@ -294,11 +294,9 @@ public class ProductController {
                         }
                     }
                 }
-                return new CustomResponseBody(1L, "update status", status, "no data",
-                        "update step", updateStepForImageLoader);
+                return new CustomResponseBody(1L, "update status", status, "no data");
             }
         }
-        return new CustomResponseBody(1L, "update status", status, "no data",
-                "update step",  updateStepForImageLoader);
+        return new CustomResponseBody(1L, "update status", status, "no data");
     }
 }

@@ -13,6 +13,7 @@ import com.cubafish.utils.BookingListResponseBody;
 import com.cubafish.utils.CustomRequestBody;
 import com.cubafish.utils.CustomResponseBody;
 import lombok.RequiredArgsConstructor;
+import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,10 +29,15 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class BookingManagerController {
 
+    private static final Logger log = Logger.getLogger(BookingManagerController.class);
     public static final String BASE_PATH = "/admin_auth/booking";
+
     private final BookingListService bookingListService;
+
     private final BookingListRepository bookingListRepository;
+
     private final BookingDataBaseService bookingDataBaseService;
+
     private final StatisticsService statisticsService;
 
     @GetMapping("/all")
@@ -51,7 +57,6 @@ public class BookingManagerController {
 
     @PostMapping("update")
     public CustomResponseBody editBookingByAdmin(@RequestBody BookingBodyUpdate bookingBodyUpdate) {
-        int updateStep = 0;
         String userConfirmation = "";
         String userComments = "";
         String status = "";
@@ -66,12 +71,12 @@ public class BookingManagerController {
             status = (String) responseFromDataValidation.get("status");
             BookingListDto bookingListDtoFromDataValidation =
                     (BookingListDto) responseFromDataValidation.get("bookingListDto");
-            updateStep++;
+
             if (status.equals("success")) {
                 Map<String, Object> responseFromDb = bookingListService.findById(bookingBodyUpdate.getId());
                 BookingList bookingListFromDb = (BookingList) responseFromDb.get("bookingList");
                 status = (String) responseFromDb.get("status");
-                updateStep++;
+
                 if (status.equals("success")) {
                     Map<String, Object> responseFromUpdateExitingProduct = bookingListService
                             .compensationOfMissingData(bookingBodyUpdate.getId(), bookingBodyUpdate.getFirstName(),
@@ -86,22 +91,21 @@ public class BookingManagerController {
                     BookingListDto dtoWithAllData =
                             (BookingListDto) responseFromUpdateExitingProduct.get("bookingListDto");
                     status = (String) responseFromUpdateExitingProduct.get("status");
-                    updateStep++;
+
                     if (status.equals("success")) {
                         BeanUtils.copyProperties(bookingListService.create(dtoWithAllData),
                                 bookingListFromDb, "bookingComments", "dateOfBooking", "userConfirmation");
                         bookingListRepository.save(bookingListFromDb);
                         status = "success";
-                        updateStep++;
                     }
                 }
             }
         } else {
-            return new CustomResponseBody(1L, "update status", status, "no data",
-                    "update step", updateStep);
+            log.error("app couldn't receive ID");
+            return new CustomResponseBody(1L, "update status", "app couldn't receive ID", "no data");
         }
-        return new CustomResponseBody(1L, "update status", status, "no data",
-                "update step", updateStep);
+        log.info("status: " + status);
+        return new CustomResponseBody(1L, "update status", status, "no data");
     }
 
     @PostMapping("approve")

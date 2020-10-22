@@ -1,7 +1,5 @@
 package com.cubafish.service;
 
-import com.cubafish.bot.BookingResolver;
-import com.cubafish.bot.CubafishBot;
 import com.cubafish.dto.BookingDataBaseDto;
 import com.cubafish.dto.BookingItemDto;
 import com.cubafish.dto.BookingListDto;
@@ -25,6 +23,7 @@ import com.cubafish.utils.CustomRequestBody;
 
 import com.cubafish.utils.CustomResponseBody;
 import lombok.Data;
+import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -40,6 +39,8 @@ import java.util.Map;
 @Service
 @Data
 public class BookingDataBaseService {
+
+    private static final Logger log = Logger.getLogger(BookingDataBaseService.class);
 
     @Value("${product.currency}")
     private String currency;
@@ -68,11 +69,10 @@ public class BookingDataBaseService {
 
     public CustomResponseBody approveOrCancelBookingOperation(CustomRequestBody customRequestBody) {
         String status = "null";
-        int step = 0;
         StringBuilder builderForItems = new StringBuilder();
         List<BookingListDto> bookingListDtos = new ArrayList<>(1);
-        BookingListDto bookingListDto = bookingListMapper
-                .mapEntityToDto(bookingListRepository.findBookingListById(Long.valueOf(customRequestBody.getKey())));
+        BookingListDto bookingListDto = bookingListMapper.mapEntityToDto(bookingListRepository.findBookingListById(Long
+                .valueOf(customRequestBody.getKey())));
         bookingListDtos.add(bookingListDto);
         List<BookingListResponseBody> bookingListResponseBody =
                 bookingItemService.mapBookingListDtosToBookingListResponseBodies(bookingListDtos);
@@ -83,7 +83,6 @@ public class BookingDataBaseService {
                     ProductDto productDto =
                             productMapper.mapEntityToDto(productRepository
                                     .getOne(Long.valueOf(bookingItemDto.getKey())));
-                    step++;
                     if (productDto != null) {
                         Product product = productRepository.getOne(productDto.getId());
                         if ((productDto.getTotalAmount() - bookingItemDto.getItemAmount()) < 0) {
@@ -102,7 +101,6 @@ public class BookingDataBaseService {
                         builderForItems.append(currency);
                         builderForItems.append(" *** ");
                         status = "success";
-                        step++;
                     }
                 }
                 if (status.equals("success")) {
@@ -113,7 +111,6 @@ public class BookingDataBaseService {
                         bookingDataBaseRepository.save(bookingDataBaseMapper.mapDtoToEntity(bookingDataBaseDto));
                         status = "success";
                     }
-                    step++;
                 }
                 if (status.equals("success")) {
 
@@ -142,17 +139,14 @@ public class BookingDataBaseService {
                     }
                     if (status.equals("success")) {
                         bookingListRepository.delete(bookingList);
-
-                        step++;
                     }
                 }
             }
         } else {
             status = "can not map booking list dto to booking list response body";
         }
-
-        return new CustomResponseBody(1L, "approve status", status, "no data",
-                "approving step", step);
+        log.info("status: " + status);
+        return new CustomResponseBody(1L, "approve status", status, "no data");
     }
 
     public BookingDataBaseDto mapBookingListResponseBodyToBookingDataBaseDto(

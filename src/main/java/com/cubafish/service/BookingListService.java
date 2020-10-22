@@ -58,15 +58,18 @@ public class BookingListService {
             return Map.of("bookingListDto", bookingListDto,
                     "status", "the application did not accept first name");
         } else if (firstName.length() > 100) {
-            log.error("user: " + firstName + " " + lastName + " " + contact + " status: the first name have more than 100 characters");
+            log.error("user: " + firstName + " " + lastName + " " + contact
+                    + " status: the first name have more than 100 characters");
             return Map.of("bookingListDto", bookingListDto,
                     "status", "the first name have more than 100 characters");
         } else if (middleName == null) {
-            log.error("user: " + firstName + " " + lastName + " " + contact + " status: the application did not accept middle name");
+            log.error("user: " + firstName + " " + lastName + " " + contact
+                    + " status: the application did not accept middle name");
             return Map.of("bookingListDto", bookingListDto,
                     "status", "the application did not accept middle name");
         } else if (middleName.length() > 100) {
-            log.error("user: " + firstName + " " + lastName + " " + contact + " status: the middle name have more than 100 characters");
+            log.error("user: " + firstName + " " + lastName + " " + contact
+                    + " status: the middle name have more than 100 characters");
             return Map.of("bookingListDto", bookingListDto,
                     "status", "the middle name have more than 100 characters");
         } else if (lastName == null) {
@@ -74,91 +77,112 @@ public class BookingListService {
             return Map.of("bookingListDto", bookingListDto,
                     "status", "the application did not accept last name");
         } else if (lastName.length() > 100) {
-            log.error(firstName + " " + lastName + " " + contact + " status: the last name have more than 100 characters");
+            log.error(firstName + " " + lastName + " " + contact
+                    + " status: the last name have more than 100 characters");
             return Map.of("bookingListDto", bookingListDto,
                     "status", "the last name have more than 100 characters");
         } else if (email == null) {
-            log.error(firstName + " " + lastName + " " + contact + " status: the application did not accept user email");
+            log.error(firstName + " " + lastName + " " + contact
+                    + " status: the application did not accept user email");
             return Map.of("bookingListDto", bookingListDto,
                     "status", "the application did not accept user email");
         } else if (email.length() > 100) {
-            log.error(firstName + " " + lastName + " " + contact + " status: the field email have more than 100 characters");
+            log.error(firstName + " " + lastName + " " + contact
+                    + " status: the field email have more than 100 characters");
             return Map.of("bookingListDto", bookingListDto,
                     "status", "the field email have more than 100 characters");
         } else if (contact == null) {
-            log.error(firstName + " " + lastName + " " + contact + " status: the application did not accept user contact");
+            log.error(firstName + " " + lastName + " status: the application did not accept user contact");
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the application did not accept user contact");
         } else if (contact.length() > 50) {
-            log.error(firstName + " " + lastName + " " + contact + " status: the field contact have more than 50 characters " + contact);
+            log.error(firstName + " " + lastName + " " + contact
+                    + " status: the field contact have more than 50 characters");
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the field contact have more than 50 characters");
         } else if (userConfirmation == null) {
-            log.error(firstName + " " + lastName + " " + contact + " status: the application did not accept user confirmation");
+            log.error(firstName + " " + lastName + " " + contact
+                    + " status: the application did not accept user confirmation");
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the application did not accept user confirmation");
         } else if (userConfirmation.length() > 250) {
-            log.error(firstName + " " + lastName + " " + contact + " status: the field user confirmation have more than 250 characters");
+            log.error(firstName + " " + lastName + " " + contact
+                    + " status: the field user confirmation have more than 250 characters");
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the field user confirmation have more than 250 characters");
         } else if (paymentType == null) {
-            log.error(firstName + " " + lastName + " " + contact + " status: the application did not accept payment type" + contact);
+            log.error(firstName + " " + lastName + " " + contact
+                    + " status: the application did not accept payment type");
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the application did not accept payment type");
         } else if (paymentType.length() > 100) {
-            log.error(firstName + " " + lastName + " " + contact + " status: the field payment type have more than 100 characters");
+            log.error(firstName + " " + lastName + " " + contact
+                    + " status: the field payment type have more than 100 characters");
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the field payment type have more than 100 characters");
         } else if (deliveryType == null) {
-            log.error(firstName + " " + lastName + " " + contact + " status: the application did not accept delivery type");
+            log.error(firstName + " " + lastName + " " + contact
+                    + " status: the application did not accept delivery type");
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the application did not accept delivery type");
         } else if (deliveryType.length() > 100) {
-            log.error(firstName + " " + lastName + " " + contact + " status: the field delivery type have more than 100 characters");
+            log.error(firstName + " " + lastName + " " + contact
+                    + " status: the field delivery type have more than 100 characters");
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the field delivery type have more than 100 characters");
         } else if (region == null) {
-            log.error(firstName + " " + lastName + " " + contact + " status: the application did not accept field region");
+            log.error(firstName + " " + lastName + " " + contact
+                    + " status: the application did not accept field region");
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the application did not accept field region");
         } else if (region.length() > 250) {
-            log.error(firstName + " " + lastName + " " + contact + " status: the field region have more than 250 characters");
+            log.error(firstName + " " + lastName + " " + contact
+                    + " status: the field region have more than 250 characters");
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the field region have more than 250 characters");
         } else if (city == null) {
-            log.error(firstName + " " + lastName + " " + contact + " status: the application did not accept field city");
+            log.error(firstName + " " + lastName + " " + contact
+                    + " status: the application did not accept field city");
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the application did not accept field city");
         } else if (city.length() > 250) {
-            log.error(firstName + " " + lastName + " " + contact + " status: the field city have more than 250 characters");
+            log.error(firstName + " " + lastName + " " + contact
+                    + " status: the field city have more than 250 characters");
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the field city have more than 250 characters");
         } else if (address == null) {
-            log.error(firstName + " " + lastName + " " + contact + " status: the application did not accept field address");
+            log.error(firstName + " " + lastName + " " + contact
+                    + " status: the application did not accept field address");
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the application did not accept field address");
         } else if (address.length() > 250) {
-            log.error(firstName + " " + lastName + " " + contact + " status: the field address have more than 250 characters");
+            log.error(firstName + " " + lastName + " " + contact
+                    + " status: the field address have more than 250 characters");
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the field address have more than 250 characters");
         } else if (bookingComments == null) {
-            log.error(firstName + " " + lastName + " " + contact + " status: the application did not accept field booking comments");
+            log.error(firstName + " " + lastName + " " + contact
+                    + " status: the application did not accept field booking comments");
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the application did not accept field booking comments");
         } else if (bookingComments.length() > 400) {
-            log.error(firstName + " " + lastName + " " + contact + " status: the field booking comments have more than 400 characters");
+            log.error(firstName + " " + lastName + " " + contact
+                    + " status: the field booking comments have more than 400 characters");
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the field booking comments have more than 400 characters");
         } else if (bookingItems == null) {
-            log.error(firstName + " " + lastName + " " + contact + " status: the application did not accept booking items");
+            log.error(firstName + " " + lastName + " " + contact
+                    + " status: the application did not accept booking items");
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the application did not accept booking items");
         } else if (bookingItems.size() > 200) {
-            log.error(firstName + " " + lastName + " " + contact + " status: the booking items have more than 200 elements");
+            log.error(firstName + " " + lastName + " " + contact
+                    + " status: the booking items have more than 200 elements");
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the booking items have more than 200 elements");
         } else if (totalPrice == null) {
-            log.error(firstName + " " + lastName + " " + contact + " status: the application did not accept total price");
+            log.error(firstName + " " + lastName + " " + contact
+                    + " status: the application did not accept total price");
             return Map.of("bookingListDto", bookingListDto, "status",
                     "the application did not accept total price");
         } else if (!totalPrice.isEmpty()) {
@@ -182,12 +206,14 @@ public class BookingListService {
                 }
             }
         } else if (totalAmount == null) {
-            log.error(firstName + " " + lastName + " " + contact + " the application did not accept any amount of products");
+            log.error(firstName + " " + lastName + " " + contact
+                    + " the application did not accept any amount of products");
             return Map.of("bookingListDto", bookingListDto,
                     "status", "the application did not accept any amount of products");
         } else if (!totalAmount.isEmpty()) {
             if (totalAmount.contains(",") || totalAmount.contains(".")) {
-                log.error(firstName + " " + lastName + " " + contact + " the amount of products can not have <<,>> or <<.>>");
+                log.error(firstName + " " + lastName + " " + contact
+                        + " the amount of products can not have <<,>> or <<.>>");
                 return Map.of("bookingListDto", bookingListDto,
                         "status", "the amount of products can not have <<,>> or <<.>>");
             } else {
