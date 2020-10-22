@@ -20,8 +20,11 @@ import java.util.Map;
 public class BookingController {
 
     public static final String BASE_PATH = "/guest/booking";
+
     private final BookingListService bookingListService;
+
     private final BookingListRepository bookingListRepository;
+
     private final BookingListMapper bookingListMapper;
 
     @PostMapping("/create")
