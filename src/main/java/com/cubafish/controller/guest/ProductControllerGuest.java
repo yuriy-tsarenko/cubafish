@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -22,14 +21,10 @@ import java.util.List;
 public class ProductControllerGuest {
 
     public static final String BASE_PATH = "/guest/products";
+
     private final ProductService productService;
     private final ProductMapper productMapper;
     private final SearchService searchService;
-
-    @GetMapping()
-    public ModelAndView method() {
-        return new ModelAndView("redirect:" + "index.html");
-    }
 
     @GetMapping("/recent")
     public List<ProductDto> findRecent() {
@@ -52,7 +47,7 @@ public class ProductControllerGuest {
     }
 
     @PostMapping("/get_sub_categories")
-    public List<CustomResponseBody> getProductCategoriesByCategoryNameFromService(
+    public List<CustomResponseBody> getProductSubCategoriesByCategoryNameFromService(
             @RequestBody CustomRequestBody customRequestBody) {
         List<CustomResponseBody> subCategoriesFromCategories =
                 productService.findUniqueSubCategoriesFromCategories(customRequestBody);

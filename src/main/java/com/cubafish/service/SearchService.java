@@ -26,28 +26,34 @@ public class SearchService {
         int lengthOfSearchTag = splitTag.length;
         int dictionaryStep = 1;
         int wordSelectStep = 0;
+
         for (Product product : all) {
             for (int i = 0; i < 1; i++) {
                 String description = product.getDescription();
                 if (description.toLowerCase().contains(searchTag.trim().toLowerCase())) {
                     searchResponse.add(product);
-                } else if (!searchResponse.contains(product)) {
+                }
+                if (!searchResponse.contains(product)) {
                     String category = product.getProductCategory();
                     if (category.toLowerCase().contains(searchTag.trim().toLowerCase())) {
                         searchResponse.add(product);
-                    } else if (!searchResponse.contains(product)) {
+                    }
+                    if (!searchResponse.contains(product)) {
                         String subCategory = product.getProductSubCategory();
                         if (subCategory.toLowerCase().contains(searchTag.trim().toLowerCase())) {
                             searchResponse.add(product);
-                        } else if (!searchResponse.contains(product)) {
+                        }
+                        if (!searchResponse.contains(product)) {
                             String brand = product.getProductBrand();
                             if (brand.toLowerCase().contains(searchTag.trim().toLowerCase())) {
                                 searchResponse.add(product);
-                            } else if (!searchResponse.contains(product)) {
+                            }
+                            if (!searchResponse.contains(product)) {
                                 String typeOfPurpose = product.getTypeOfPurpose();
                                 if (typeOfPurpose.toLowerCase().contains(searchTag.trim().toLowerCase())) {
                                     searchResponse.add(product);
-                                } else if (!searchResponse.contains(product)) {
+                                }
+                                if (!searchResponse.contains(product)) {
                                     String specification = product.getSpecification();
                                     if (specification.toLowerCase().contains(searchTag.trim().toLowerCase())) {
                                         searchResponse.add(product);
