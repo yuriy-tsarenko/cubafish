@@ -7,6 +7,7 @@ import com.cubafish.service.BookingListService;
 import com.cubafish.utils.BookingBody;
 import com.cubafish.utils.CustomResponseBody;
 import lombok.RequiredArgsConstructor;
+import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,9 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class BookingController {
 
+    private static final Logger log = Logger.getLogger(BookingController.class);
     public static final String BASE_PATH = "/guest/booking";
+
     private final BookingListService bookingListService;
     private final BookingListRepository bookingListRepository;
     private final BookingListMapper bookingListMapper;
@@ -34,7 +37,6 @@ public class BookingController {
                 bookingBody.getBookingComments(), bookingBody.getBookingItems());
         String status = (String) responseFromDataValidation.get("status");
         BookingListDto bookingListDto = (BookingListDto) responseFromDataValidation.get("bookingListDto");
-        int step = 0;
         if (status.equals("success")) {
             Map<String, Object> responseFromSetTextAndNumericData =
                     bookingListService.setTextAndNumericDataBeforeCreate(
@@ -47,13 +49,11 @@ public class BookingController {
             status = (String) responseFromSetTextAndNumericData.get("status");
             BookingListDto bookingListDtoWithReceivedData =
                     (BookingListDto) responseFromSetTextAndNumericData.get("bookingListDto");
-            step++;
             if (status.equals("success")) {
                 bookingListRepository.save(bookingListMapper.mapDtoToEntity(bookingListDtoWithReceivedData));
-                step++;
             }
         }
-        return new CustomResponseBody(1L, "data load", status,
-                "no data", "create step", step);
+        log.info("data load: " + status);
+        return new CustomResponseBody("data load", status, "no data");
     }
 }

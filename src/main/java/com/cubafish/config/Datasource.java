@@ -1,5 +1,6 @@
 package com.cubafish.config;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,8 @@ import javax.sql.DataSource;
 @PropertySource("classpath:application.properties")
 public class Datasource {
 
+    private static final Logger log = Logger.getLogger(Datasource.class);
+
     @Value("${db.driverClassName}")
     private String driverClass;
     @Value("${db.url}")
@@ -24,12 +27,18 @@ public class Datasource {
 
     @Bean
     public DataSource dataSource() {
-        System.out.println(driverClass + " " + url + " " + username + " " + password);
         DriverManagerDataSource source = new DriverManagerDataSource();
         source.setDriverClassName(driverClass);
         source.setUrl(url);
         source.setUsername(username);
         source.setPassword(password);
+        log.info("data source created: "
+                + "driver: "
+                + driverClass
+                + "URL: "
+                + url
+                + "username: "
+                + username);
         return source;
     }
 

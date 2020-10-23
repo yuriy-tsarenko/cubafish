@@ -185,7 +185,6 @@ public class BookingItemService {
                 bookingItemRepository.delete(bookingItems.get(lastIndex));
             }
         }
-
         return Map.of("status", "success", "result", itemsIdBuilder.toString());
     }
 

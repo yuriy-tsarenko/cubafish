@@ -782,6 +782,7 @@ Vue.component('newProductSubCategory-row', {
     methods: {
         getSortedProducts: function () {
             app.newProducts = app.newProducts.splice(0, 0);
+            localStorage.setItem("SubCategory", this.subCategoryNameForRequest);
             let sortingTag = {
                 key: 'sorting tag',
                 communicationKey: this.subCategoryNameForRequest,
@@ -848,8 +849,8 @@ Vue.component('productBrand-row', {
         getSortedProducts: function () {
             app.newProducts = app.newProducts.splice(0, 0);
             let sortingTag = {
-                key: 'sorting tag',
-                communicationKey: this.productBrandForRequest,
+                key: localStorage.getItem("SubCategory"),
+                communicationKey: this.productBrandForRequest
             }
             productAPISortedByBrand.save({}, sortingTag).then(result =>
                 result.json().then(data =>
