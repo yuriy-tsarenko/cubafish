@@ -8,7 +8,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class CustomResponseBody {
-    private Long id;
     private String key;
     private String status;
     private String communicationData;

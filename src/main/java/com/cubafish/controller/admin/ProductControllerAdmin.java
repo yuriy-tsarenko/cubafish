@@ -7,6 +7,7 @@ import com.cubafish.service.ProductService;
 import com.cubafish.utils.CustomRequestBody;
 import com.cubafish.utils.CustomResponseBody;
 import lombok.RequiredArgsConstructor;
+import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -30,14 +30,11 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class ProductControllerAdmin {
 
+    private static final Logger log = Logger.getLogger(ProductControllerAdmin.class);
     public static final String BASE_PATH = "/admin_auth/products";
+
     private final ProductService productService;
     private final ProductRepository productRepository;
-
-    @GetMapping()
-    public ModelAndView method() {
-        return new ModelAndView("redirect:" + "admin.html");
-    }
 
     @GetMapping("/all")
     public List<ProductDto> findAll() {
@@ -153,7 +150,8 @@ public class ProductControllerAdmin {
                 }
             }
         }
-        return new CustomResponseBody(1L, "data load", status, "no data");
+        log.info("created product status: " + status);
+        return new CustomResponseBody("data load", status, "no data");
     }
 
     @PostMapping("/delete_product_image")
@@ -183,7 +181,8 @@ public class ProductControllerAdmin {
             status = productService.deleteFileIfExists(absolutePathToUploadDir, pathImageBack);
             step++;
         }
-        return new CustomResponseBody(1L, "image deleting status", status, "no data");
+        log.info("image deleting status: " + status + " step: " + step);
+        return new CustomResponseBody("image deleting status", status, "no data");
     }
 
     @DeleteMapping("{id}")
@@ -298,9 +297,9 @@ public class ProductControllerAdmin {
                         }
                     }
                 }
-                return new CustomResponseBody(1L, "update status", status, "no data");
             }
         }
-        return new CustomResponseBody(1L, "update status", status, "no data");
+        log.info("update status: " + status + " updateStepForImageLoader: " + updateStepForImageLoader);
+        return new CustomResponseBody("update status", status, "no data");
     }
 }

@@ -146,7 +146,7 @@ public class BookingDataBaseService {
             status = "can not map booking list dto to booking list response body";
         }
         log.info("status: " + status);
-        return new CustomResponseBody(1L, "approve status", status, "no data");
+        return new CustomResponseBody("approve status", status, "no data");
     }
 
     public BookingDataBaseDto mapBookingListResponseBodyToBookingDataBaseDto(

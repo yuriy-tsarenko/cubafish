@@ -25,9 +25,7 @@ public class FeedbackController {
     public static final String BASE_PATH = "/guest/feedback";
 
     private final FeedbackService feedbackService;
-
     private final FeedbackRepository feedbackRepository;
-
     private final FeedbackMapper feedbackMapper;
 
     @PostMapping("/create")
@@ -46,7 +44,7 @@ public class FeedbackController {
             }
         }
         log.info("status: " + status);
-        return new CustomResponseBody(1L, "data load", status, "no data");
+        return new CustomResponseBody("data load", status, "no data");
     }
 
     @GetMapping("/all")

@@ -22,9 +22,7 @@ public class RegistrationController {
     public static final String REGISTRATION_PATH = "/guest/registration";
 
     private final UserRepository userRepository;
-
     private final UserService userService;
-
     private final PasswordEncoder passwordEncoder;
 
     @PostMapping()
@@ -40,7 +38,7 @@ public class RegistrationController {
         } else {
             log.error("user: " + userDto.getUsername() + " could not to register " + "status: " + status);
         }
-        return new CustomResponseBody(1L, "registration status:", status, "no data");
+        return new CustomResponseBody("registration status:", status, "no data");
     }
 }
 

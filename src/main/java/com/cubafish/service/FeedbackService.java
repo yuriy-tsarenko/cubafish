@@ -79,8 +79,7 @@ public class FeedbackService {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         feedbackDto.setDateOfComment(dateFormat.format(currentDate));
         log.info("status: success");
-        return Map.of("feedbackDto", feedbackDto,
-                "status", "success");
+        return Map.of("feedbackDto", feedbackDto, "status", "success");
     }
 
     static class SortFeedbackDtoById implements Comparator<FeedbackDto> {

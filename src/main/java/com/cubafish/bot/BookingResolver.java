@@ -1,7 +1,6 @@
 package com.cubafish.bot;
 
 import com.cubafish.dto.BookingItemDto;
-import com.cubafish.dto.BookingListDto;
 import com.cubafish.service.BookingListService;
 import com.cubafish.utils.BookingListResponseBody;
 import lombok.Data;

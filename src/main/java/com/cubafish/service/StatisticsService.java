@@ -21,6 +21,7 @@ import java.util.Map;
 @Service
 @Data
 public class StatisticsService {
+
     private final StatisticsRepository statisticsRepository;
     private final StatisticsMapper statisticsMapper;
 
@@ -33,7 +34,6 @@ public class StatisticsService {
 
     public Map<String, Object> updateOrSaveStatistics(BookingListResponseBody bookingListResponseBody,
                                                       CustomRequestBody customRequestBody) {
-
 
         StatisticsDto statisticsDto = new StatisticsDto();
         Statistics statisticsFromDb = new Statistics();

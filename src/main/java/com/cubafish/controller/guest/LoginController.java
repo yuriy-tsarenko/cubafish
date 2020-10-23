@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.crypto.SecretKey;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 import java.util.Date;
@@ -28,15 +27,13 @@ public class LoginController {
     public static final String LOGIN_PATH = "/guest/login";
 
     private final AuthenticationManager authenticationManager;
-
     private final JwtConfig jwtConfig;
-
     private final SecretKey secretKey;
 
     @PostMapping()
     public void getAuthorize(
             @RequestBody UsernameAndPasswordAuthenticationRequest usernameAndPasswordAuthenticationRequest,
-            HttpServletRequest request, HttpServletResponse response) {
+            HttpServletResponse response) {
         Authentication authentication = new UsernamePasswordAuthenticationToken(
                 usernameAndPasswordAuthenticationRequest.getUsername(),
                 usernameAndPasswordAuthenticationRequest.getPassword()
@@ -52,9 +49,10 @@ public class LoginController {
                     .signWith(secretKey)
                     .compact();
             response.addHeader(jwtConfig.getAuthorizationHeader(), jwtConfig.getTokenPrefix() + token);
-            log.info("user: " + usernameAndPasswordAuthenticationRequest.getUsername() + "is successfully authorized!");
+            log.info("user: " + usernameAndPasswordAuthenticationRequest.getUsername()
+                    + " is successfully authorized!");
         } else {
-            log.error("user: " + usernameAndPasswordAuthenticationRequest.getUsername() + "could not to log in");
+            log.error("user: " + usernameAndPasswordAuthenticationRequest.getUsername() + " could not to log in");
         }
     }
 }

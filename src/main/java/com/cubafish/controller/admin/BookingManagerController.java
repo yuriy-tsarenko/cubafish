@@ -102,10 +102,10 @@ public class BookingManagerController {
             }
         } else {
             log.error("app couldn't receive ID");
-            return new CustomResponseBody(1L, "update status", "app couldn't receive ID", "no data");
+            return new CustomResponseBody("update status", "app couldn't receive ID", "no data");
         }
         log.info("status: " + status);
-        return new CustomResponseBody(1L, "update status", status, "no data");
+        return new CustomResponseBody("update status", status, "no data");
     }
 
     @PostMapping("approve")

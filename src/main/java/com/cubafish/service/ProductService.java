@@ -20,13 +20,10 @@ import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -40,12 +37,8 @@ public class ProductService {
     private static final Logger log = Logger.getLogger(ProductService.class);
 
     private final ProductRepository productRepository;
-
     private final ProductMapper productMapper;
-
     private final PathFinder pathFinder;
-
-    private String productSubCategory;
 
     public List<ProductDto> findAll() {
         List<ProductDto> productDtos = productMapper.mapEntitiesToDtos(productRepository.findAll());
@@ -77,16 +70,16 @@ public class ProductService {
     }
 
     public List<ProductDto> findByProductSubCategory(CustomRequestBody customRequestBody) {
-        productSubCategory = customRequestBody.getCommunicationKey();
         List<ProductDto> productDto = productMapper.mapEntitiesToDtos(productRepository
-                .findByProductSubCategory(productSubCategory));
+                .findByProductSubCategory(customRequestBody.getCommunicationKey()));
         productDto.sort(new SortProductsByTotalAmount());
         return productDto;
     }
 
     public List<ProductDto> findByProductBrandAndProductSubCategory(CustomRequestBody customRequestBody) {
         List<ProductDto> productDto = productMapper.mapEntitiesToDtos(productRepository
-                .findByProductBrandAndProductSubCategory(customRequestBody.getCommunicationKey(), productSubCategory));
+                .findByProductBrandAndProductSubCategory(customRequestBody.getCommunicationKey(),
+                        customRequestBody.getKey()));
         productDto.sort(new SortProductsByTotalAmount());
         return productDto;
     }
@@ -115,10 +108,10 @@ public class ProductService {
                 log.error(e);
             }
             log.info("status: " + "success");
-            return new CustomResponseBody(1L, "required argument", "success", String.valueOf(maxIdValue));
+            return new CustomResponseBody("required argument", "success", String.valueOf(maxIdValue));
         }
         log.error("status: " + "did not accept the correct key");
-        return new CustomResponseBody(1L, "required argument",
+        return new CustomResponseBody("required argument",
                 "did not accept the correct key", null);
     }
 
@@ -492,51 +485,33 @@ public class ProductService {
         if (productDtoFromDb.size() == 0) {
             return null;
         }
-        Long id = 0L;
-        Set<String> uniqueItems = new HashSet<>();
-        for (ProductDto productDto : productDtoFromDb) {
-            uniqueItems.add(productDto.getProductCategory());
-        }
-        List<CustomResponseBody> list = new ArrayList<>(uniqueItems.size());
-        for (String item : uniqueItems) {
-            id += 1L;
-            list.add(new CustomResponseBody(id, "productCategoriesForMenu", "success", item));
-        }
-        return list;
+        return productDtoFromDb.stream()
+                .map(ProductDto::getProductCategory)
+                .distinct()
+                .map(x -> new CustomResponseBody("productCategoriesForMenu", "success", x))
+                .collect(Collectors.toList());
     }
 
     public List<CustomResponseBody> getUniqueSubCategories(List<ProductDto> productDtoFromDb) {
         if (productDtoFromDb.size() == 0) {
             return null;
         }
-        Long id = 0L;
-        Set<String> uniqueItems = new HashSet<>();
-        for (ProductDto productDto : productDtoFromDb) {
-            uniqueItems.add(productDto.getProductSubCategory());
-        }
-        List<CustomResponseBody> list = new ArrayList<>(uniqueItems.size());
-        for (String item : uniqueItems) {
-            id += 1L;
-            list.add(new CustomResponseBody(id, "productSubCategoriesForMenu", "success", item));
-        }
-        return list;
+        return productDtoFromDb.stream()
+                .map(ProductDto::getProductSubCategory)
+                .distinct()
+                .map(x -> new CustomResponseBody("productCategoriesForMenu", "success", x))
+                .collect(Collectors.toList());
     }
 
     public List<CustomResponseBody> getUniqueProductBrands(List<ProductDto> productDtoFromDb) {
-        if (productDtoFromDb == null) {
+        if (productDtoFromDb.size() == 0) {
             return null;
         }
-        Long id = 0L;
-        Set<String> uniqueItems = new HashSet<>();
-        for (ProductDto productDto : productDtoFromDb) {
-            uniqueItems.add(productDto.getProductBrand());
-        }
-        List<CustomResponseBody> list = new ArrayList<>(uniqueItems.size());
-        for (String item : uniqueItems) {
-            id += 1L;
-            list.add(new CustomResponseBody(id, "productBrandsForMenu", "success", item));
-        }
-        return list;
+        return productDtoFromDb.stream()
+                .map(ProductDto::getProductBrand)
+                .distinct()
+                .map(x -> new CustomResponseBody("productCategoriesForMenu", "success", x))
+                .collect(Collectors.toList());
     }
 
     public List<ProductDto> getLastTenProducts(List<ProductDto> productList) {

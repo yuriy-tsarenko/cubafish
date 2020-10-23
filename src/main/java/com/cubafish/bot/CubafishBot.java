@@ -3,6 +3,7 @@ package com.cubafish.bot;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -27,6 +28,8 @@ public class CubafishBot extends TelegramLongPollingBot {
 
     @Value("${bot.username}")
     private String botUserName;
+
+    private static final Logger log = Logger.getLogger(CubafishBot.class);
 
     private final BookingResolver bookingResolver;
     private Long chatId = 0L;
@@ -73,7 +76,6 @@ public class CubafishBot extends TelegramLongPollingBot {
                 for (int u = 0; u < keys.size(); u++) {
                     oldKeys[u] = keys.get(u);
                 }
-
             }
 
             for (int i = itemsAmount; i > 0; i--) {
@@ -85,7 +87,7 @@ public class CubafishBot extends TelegramLongPollingBot {
                     try {
                         execute(uploadMessage);
                     } catch (TelegramApiException e) {
-                        e.printStackTrace();
+                        log.error(e);
                     }
 
                 }
@@ -98,7 +100,7 @@ public class CubafishBot extends TelegramLongPollingBot {
                     try {
                         execute(uploadMessage);
                     } catch (TelegramApiException e) {
-                        e.printStackTrace();
+                        log.error(e);
                     }
                 }
 
@@ -129,7 +131,7 @@ public class CubafishBot extends TelegramLongPollingBot {
             try {
                 execute(uploadMessage);
             } catch (TelegramApiException e) {
-                e.printStackTrace();
+                log.error(e);
             }
         }
     }
@@ -148,21 +150,23 @@ public class CubafishBot extends TelegramLongPollingBot {
         String message = "";
         if (chatId.equals(update.getMessage().getChatId())) {
             message = "admin";
-
         } else if (chatIdSuperAdmin.equals(update.getMessage().getChatId())) {
             message = "admin";
 
         } else if ((chatId == 0L) || (chatIdSuperAdmin == 0L)) {
             if (chatId != 0L) {
                 chatIdSuperAdmin = update.getMessage().getChatId();
+                log.info("admin was detected");
             }
             chatId = update.getMessage().getChatId();
+            log.info("super admin was detected");
             message = "admin";
 
         } else if (!chatId.equals(update.getMessage().getChatId())) {
             String userName = update.getMessage().getFrom().getFirstName();
             message = "Привет!!! " + userName + " я CUBAFISH_BOT." + "\n" + " К сожалению у меня уже есть хозяин."
                     + "Может в далеком будущем я тебе помогу. " + "\n" + "До встречи!!!";
+            log.warn("an attempt to obtain information was detected");
         }
         return Map.of("chatId", chatId, "chatIdSuperAdmin", chatIdSuperAdmin, "customMessage", message);
     }
