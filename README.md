@@ -22,6 +22,3 @@ Environment:
 Intellij IDEA, Jenkins, Tomcat, Maven, Git, Spring Framework,
 Spring Boot, Vue.js, PostgreSQL, Ubuntu OS, Telegram Bot API, JWTAPI, Servlet-API, MapStruct, HTML, CSS, Flyway-core, Java,
 JavaScript. 
-
-Link of working project:
-https://cubafish.com.ua
